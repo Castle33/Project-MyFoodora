@@ -12,15 +12,28 @@ import java.util.ArrayList;
  */
 public class Menu {
 	
-	List<Starter> starters = new ArrayList<Starter>();
-	List<MainDish> mainDishes= new ArrayList<MainDish>();
-	List<Dessert> desserts = new ArrayList<Dessert>();
+	private List<Starter> starters;
+	private List<MainDish> mainDishes;
+	private List<Dessert> desserts;
 	
+	
+	public Menu() {
+		super();
+		this.starters = new ArrayList<Starter>();
+		this.mainDishes = new ArrayList<MainDish>();
+		this.desserts = new ArrayList<Dessert>();
+	}
+
 	public Menu(List<Starter> starters, List<MainDish> mainDishes, List<Dessert> desserts){
 		this.starters = starters;
 		this.mainDishes = mainDishes;
 		this.desserts = desserts;
 	}
+	
+	/***************************************************************************************************/
+	/*
+	 * Add and remove methods
+	 */
 	
 	public void addStarter(Starter s){
 		starters.add(s);
@@ -60,5 +73,53 @@ public class Menu {
 		}
 		return res;
 	}
+	
+	/***************************************************************************************************/
+	/*
+	 * Getters and Setters: no setters for ID and Counter
+	 */
+	
+	/**
+	 * @return the starters
+	 */
+	public List<Starter> getStarters() {
+		return starters;
+	}
+
+	/**
+	 * @param starters the starters to set
+	 */
+	public void setStarters(List<Starter> starters) {
+		this.starters = starters;
+	}
+
+	/**
+	 * @return the mainDishes
+	 */
+	public List<MainDish> getMainDishes() {
+		return mainDishes;
+	}
+
+	/**
+	 * @param mainDishes the mainDishes to set
+	 */
+	public void setMainDishes(List<MainDish> mainDishes) {
+		this.mainDishes = mainDishes;
+	}
+
+	/**
+	 * @return the desserts
+	 */
+	public List<Dessert> getDesserts() {
+		return desserts;
+	}
+
+	/**
+	 * @param desserts the desserts to set
+	 */
+	public void setDesserts(List<Dessert> desserts) {
+		this.desserts = desserts;
+	}
+	
 	
 }
