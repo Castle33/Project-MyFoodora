@@ -38,39 +38,59 @@ public class Core {
 	}
 	
 	
+	/***************************************************************************************************/
 	/*
 	 * delivery policies related
 	 * behavioral pattern
 	 */
+	private String deliveryPolicy;
+	/*
+	 * to be used by the Manager
+	 */
+	public void setDeliveryPolicy(IDeliveryPolicy b){
+		deliveryPolicy = b.changeDeliveryPolicy();
+	}
+	/*
+	 * to be used by when searching for courier
+	 */
+	public String getDeliveryPolicy() {
+		return deliveryPolicy;
+	}
 	
 	
+	/***************************************************************************************************/
 	/*
 	 * target profit policies related
 	 * behavioral pattern
 	 */
 	// TO DO
 	
+	/***************************************************************************************************/
 	/*
 	 * shipped order sorting policies related
 	 * behavioral pattern
 	 */
 	// TO DO
 	
+	/***************************************************************************************************/
 	/*
 	 * computing the total income and profit
 	 */
 	// TO DO
 	
+	/***************************************************************************************************/
 	/*
 	 * special orders notifications related
 	 * observer pattern
 	 */
 	
+	/***************************************************************************************************/
 	/*
 	 * pricing and fidelity related
 	 */
 	// TO DO
 	
+	/***************************************************************************************************/
 	/*
 	 * manager related
 	 * -add/remove any kind of user
@@ -86,12 +106,14 @@ public class Core {
 	 */
 	// TO DO
 	
+	/***************************************************************************************************/
 	/* restaurant related
 	 * see restaurant class
 	 * -sorting of shipped orders with respect to different criteria
 	 */
 	// TO DO
 	
+	/***************************************************************************************************/
 	/* customers related
 	 * -place orders
 	 * -register/unregister to/from a fidelity card plan
@@ -100,6 +122,7 @@ public class Core {
 	 */
 	// TO DO
 	
+	/***************************************************************************************************/
 	/* couriers related
 	 * -register/unregister their account to the MyFoodora system
 	 * -state their state as on-duty or off-duty
