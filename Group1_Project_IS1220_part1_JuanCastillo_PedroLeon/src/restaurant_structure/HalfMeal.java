@@ -11,8 +11,8 @@ public class HalfMeal extends Meal {
 	
 	public static void main (String[] args){
 
-		Starter s = new Starter("s", 2);
-		MainDish md = new MainDish("md", 5);
+		Starter s = new Starter("s", 2, "Veg");
+		MainDish md = new MainDish("md", 5, "Veg");
 		
 		List<Item> items = new ArrayList<Item>();
 		
