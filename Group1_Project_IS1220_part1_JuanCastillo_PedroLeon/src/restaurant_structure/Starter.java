@@ -16,6 +16,7 @@ public class Starter extends Item {
 	}
 	public Starter(String name, double price){
 		super(name,price);
+		this.setFoodType("standard");
 	}
 
 	@Override

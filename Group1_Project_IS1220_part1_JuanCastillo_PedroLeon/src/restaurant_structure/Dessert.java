@@ -6,7 +6,7 @@ package restaurant_structure;
  *
  */
 
-public class Dessert extends Item{
+public class Dessert extends Item {
 	
 	/*
 	 * constructor indicating type and not indicating type
@@ -16,19 +16,15 @@ public class Dessert extends Item{
 	}
 	public Dessert(String name, double price){
 		super(name,price);
+		this.setFoodType("standard");
 	}
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
+		return "Dessert [toString()=" + super.toString() + "]";
 	}
 	
-	@Override
-	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		return super.equals(obj);
-	}
+	
 	
 
 }
