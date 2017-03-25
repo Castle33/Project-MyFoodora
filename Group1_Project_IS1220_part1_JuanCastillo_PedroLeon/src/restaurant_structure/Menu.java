@@ -59,6 +59,7 @@ public class Menu {
 		desserts.remove(d);
 	}
 	
+	
 	@Override
 	public String toString(){
 		String res = "";
@@ -78,7 +79,13 @@ public class Menu {
 	/*
 	 * Getters and Setters
 	 */
-	
+	/*
+	@Override
+	public String toString() {
+		return "Menu [starters=" + starters + ", mainDishes=" + mainDishes + ", desserts=" + desserts + "]";
+	}
+	*/
+
 	/**
 	 * @return the starters
 	 */
@@ -119,6 +126,16 @@ public class Menu {
 	 */
 	public void setDesserts(List<Dessert> desserts) {
 		this.desserts = desserts;
+	}
+	
+	public static void main (String [] args){
+		Menu m = new Menu();
+		
+		Starter s = new Starter("S", 1);
+		
+		m.addStarter(s);
+		
+		System.out.println(m);
 	}
 	
 	

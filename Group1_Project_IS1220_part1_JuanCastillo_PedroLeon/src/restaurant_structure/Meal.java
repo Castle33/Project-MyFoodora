@@ -55,7 +55,11 @@ public abstract class Meal {
 		}
 		return "Meal [name=" + name + ", mealItems" + items + ", fullPrice=" + fullPrice + ", type=" + type + "]";
 	}
-
+	
+	/***************************************************************************************************/
+	/*
+	 * Getter and setters
+	 */
 
 	public String getName() {
 		return name;

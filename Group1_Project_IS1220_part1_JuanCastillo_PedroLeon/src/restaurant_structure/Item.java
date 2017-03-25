@@ -32,6 +32,8 @@ public abstract class Item {
 	public String toString() {
 		return "Item [name=" + name + ", price=" + price + ", type=" + foodType + "]";
 	}
+	
+	/***************************************************************************************************/
 
 	@Override
 	public boolean equals(Object obj) {
@@ -56,6 +58,8 @@ public abstract class Item {
 			return false;
 		return true;
 	}
+	
+	/***************************************************************************************************/
 
 	public String getName() {
 		return name;
