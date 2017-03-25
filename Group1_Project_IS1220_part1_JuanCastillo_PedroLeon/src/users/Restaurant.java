@@ -70,11 +70,17 @@ public class Restaurant extends User{
 	
 	/***************************************************************************************************/
 	/*
-	 * Various methods: Get Price Meal, Get Meal/Item by name, Determine if Menu is Special
+	 * Various methods: Get Price Meal, Get Meal/Item by name, Determine if Menu is Special, Round Value to 2 decimals
 	 */
 	
 	public double getPriceMeal (Meal meal){
-		return ;
+		if(!listOfDiscountMeal.contains(meal) && !listOfMeal.contains(meal)){
+			System.out.println("This meal is not in the Restaurant menu");
+			throw new NullPointerException();
+		} else if(determineIfDiscountMeal(meal)){
+			return round2dec(meal.getFullPrice()*(1-getMealDiscount()));
+		}
+		return round2dec(meal.getFullPrice()*(1-getDiscountFactor()));
 	}
 	
 	public Meal getMealByName(String mealName){
@@ -112,6 +118,10 @@ public class Restaurant extends User{
 			return true;
 		}
 		return false;
+	}
+	
+	public double round2dec (double n){
+		return Math.round(n*100.0)/100.0;
 	}
 
 	/***************************************************************************************************/
