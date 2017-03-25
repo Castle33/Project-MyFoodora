@@ -7,20 +7,20 @@ import restaurant_structure.*;
 public class Restaurant extends User{
 	
 	private Address address;
-	private double mealDiscount;
 	private double discountFactor;
+	private double specialDiscountFactor;
 	private Menu menu;
-	private ArrayList<Meal> listOfDiscountMeal;
+	private ArrayList<Meal> listOfSpecialMeal;
 	private ArrayList<Meal> listOfMeal;
 	
 	public Restaurant(String name, String username, String password, Address address) {
 		super(name, username, password);
 		this.address = address;
-		this.mealDiscount = 0.05;
-		this.discountFactor = 0.1;
+		this.discountFactor = 0.05;
+		this.specialDiscountFactor = 0.1;
 		this.menu = new Menu();
 		this.listOfMeal = new ArrayList<Meal>();
-		this.listOfDiscountMeal = new ArrayList<Meal>();
+		this.listOfSpecialMeal = new ArrayList<Meal>();
 	}
 
 	@Override
@@ -61,11 +61,11 @@ public class Restaurant extends User{
 		listOfMeal.remove(meal);
 	}
 	
-	public void addDiscountMeal(Meal meal) {
-		listOfDiscountMeal.add(meal);
+	public void addSpecialMeal(Meal meal) {
+		listOfSpecialMeal.add(meal);
 	}
-	public void removeDiscountMeal(Meal meal) {
-		listOfDiscountMeal.remove(meal);
+	public void removeSpecialMeal(Meal meal) {
+		listOfSpecialMeal.remove(meal);
 	}
 	
 	/***************************************************************************************************/
@@ -74,13 +74,13 @@ public class Restaurant extends User{
 	 */
 	
 	public double getPriceMeal (Meal meal){
-		if(!listOfDiscountMeal.contains(meal) && !listOfMeal.contains(meal)){
+		if(!listOfSpecialMeal.contains(meal) && !listOfMeal.contains(meal)){
 			System.out.println("This meal is not in the Restaurant menu");
 			throw new NullPointerException();
 		} else if(determineIfDiscountMeal(meal)){
-			return round2dec(meal.getFullPrice()*(1-getMealDiscount()));
+			return round2dec(meal.getFullPrice()*(1-getDiscountFactor()));
 		}
-		return round2dec(meal.getFullPrice()*(1-getDiscountFactor()));
+		return round2dec(meal.getFullPrice()*(1-getSpecialDiscountFactor()));
 	}
 	
 	public Meal getMealByName(String mealName){
@@ -112,9 +112,9 @@ public class Restaurant extends User{
 	}
 	
 	public boolean determineIfDiscountMeal(Meal meal){
-		if(!listOfDiscountMeal.contains(meal) && !listOfMeal.contains(meal)){
+		if(!listOfSpecialMeal.contains(meal) && !listOfMeal.contains(meal)){
 			System.out.println("This meal is not in the Restaurant menu");
-		} else if(listOfDiscountMeal.contains(meal)){
+		} else if(listOfSpecialMeal.contains(meal)){
 			return true;
 		}
 		return false;
@@ -144,20 +144,6 @@ public class Restaurant extends User{
 	}
 
 	/**
-	 * @return the mealDiscount
-	 */
-	public double getMealDiscount() {
-		return mealDiscount;
-	}
-
-	/**
-	 * @param mealDiscount the mealDiscount to set
-	 */
-	public void setMealDiscount(double mealDiscount) {
-		this.mealDiscount = mealDiscount;
-	}
-
-	/**
 	 * @return the discountFactor
 	 */
 	public double getDiscountFactor() {
@@ -167,8 +153,22 @@ public class Restaurant extends User{
 	/**
 	 * @param discountFactor the discountFactor to set
 	 */
-	public void setDiscountFactor(double discountFactor) {
-		this.discountFactor = discountFactor;
+	public void setDiscountFactor(double mealDiscount) {
+		this.discountFactor = mealDiscount;
+	}
+
+	/**
+	 * @return the specialDiscountFactor
+	 */
+	public double getSpecialDiscountFactor() {
+		return specialDiscountFactor;
+	}
+
+	/**
+	 * @param specialDiscountFactor the specialDiscountFactor to set
+	 */
+	public void setSpecialDiscountFactor(double discountFactor) {
+		this.specialDiscountFactor = discountFactor;
 	}
 
 	/**
@@ -189,14 +189,14 @@ public class Restaurant extends User{
 	 * @return the listOfDiscountMeal
 	 */
 	public ArrayList<Meal> getListOfDiscountMeal() {
-		return listOfDiscountMeal;
+		return listOfSpecialMeal;
 	}
 
 	/**
 	 * @param listOfDiscountMeal the listOfDiscountMeal to set
 	 */
 	public void setListOfDiscountMeal(ArrayList<Meal> listOfDiscountMeal) {
-		this.listOfDiscountMeal = listOfDiscountMeal;
+		this.listOfSpecialMeal = listOfDiscountMeal;
 	}
 
 	/**
