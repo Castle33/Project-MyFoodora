@@ -6,32 +6,42 @@ import java.util.ArrayList;
 public abstract class Meal {
 	
 	private String name;
-	private List<Item> mealItems = new ArrayList<Item>();
+	private List<Item> mealItems;
 	private double fullPrice;
 	private String type;
 	
+	public Meal (String name){
+		this.name = name;
+		this.mealItems = new ArrayList<Item>();
+	}
 	
 	public Meal(String name, List<Item> mealItems){
 		this.name = name;
 		this.mealItems = mealItems;
 		
-		Item aux = mealItems.get(0);
+		/*
+		 * for getting the meal type we check by pairs of items if they have the same type
+		 * to check by pairs we need an auxiliary variable Item to take the values of the precedent item in the list
+		 */
+		
+		Item auxItem = mealItems.get(0);
 		boolean resFoodType = true;
 		
 		for(Item i : mealItems){
 			fullPrice += i.getPrice();
-			if(aux.getFoodType()==i.getFoodType()){
+			if(auxItem.getFoodType()==i.getFoodType()){
 				resFoodType = true;
 			}else{
 				resFoodType = false;
 			}
-			aux = i;
+			auxItem = i;
 		}
 		
+		// finally if the result is false then the food type is standard, for a true result we take the same as dish type
 		if(resFoodType == false){
 			this.type = "standard";
 		}else{
-			this.type = aux.getFoodType();
+			this.type = auxItem.getFoodType();
 		}
 		
 	}
