@@ -1,7 +1,10 @@
 package users;
 
 import java.util.ArrayList;
-import restaurant_structure.Menu;
+
+import restaurantSetUp.Meal;
+import restaurantSetUp.Starter;
+import restaurant_structure.*;
 
 public class Restaurant extends User{
 	
@@ -25,5 +28,37 @@ public class Restaurant extends User{
 		return "Restaurant [name=" + getName() + ", username=" + getUsername() + ", ID=" + getID() + "]";
 	}
 	
+	/***************************************************************************************************/
+	/*
+	 * Add and remove methods
+	 */
 	
+	public void addStarter (Starter starter){
+		menu.addStarter(starter);
+	}
+	public void removeStarter(Starter starter){
+		menu.removeStarter(starter);
+	}
+	
+	public void addMainDish (MainDish mainDish){
+		menu.addMainDish(mainDish);
+	}
+	public void removeMainDish(Starter mainDish){
+		menu.removeMainDish(mainDish);
+	}
+	
+	public void addDessert (Starter dessert){
+		menu.addDessert(dessert);
+	}
+	public void removeDessert(Starter dessert){
+		menu.removeDessert(dessert);
+	}
+	
+	public void addMeal(Meal meal) {
+		listOfMeal.add(meal);
+	}
+	
+	public void removeMeal(Meal meal) {
+		listOfMeal.remove(meal);
+	}
 }
