@@ -10,6 +10,7 @@ public class Restaurant extends User{
 	private double mealDiscount;
 	private double discountFactor;
 	private Menu menu;
+	private ArrayList<Meal> listOfDiscountMeal;
 	private ArrayList<Meal> listOfMeal;
 	
 	public Restaurant(String name, String username, String password, Address address) {
@@ -19,6 +20,7 @@ public class Restaurant extends User{
 		this.discountFactor = 0.1;
 		this.menu = new Menu();
 		this.listOfMeal = new ArrayList<Meal>();
+		this.listOfDiscountMeal = new ArrayList<Meal>();
 	}
 
 	@Override
@@ -55,8 +57,150 @@ public class Restaurant extends User{
 	public void addMeal(Meal meal) {
 		listOfMeal.add(meal);
 	}
-	
 	public void removeMeal(Meal meal) {
 		listOfMeal.remove(meal);
 	}
+	
+	public void addDiscountMeal(Meal meal) {
+		listOfDiscountMeal.add(meal);
+	}
+	public void removeDiscountMeal(Meal meal) {
+		listOfDiscountMeal.remove(meal);
+	}
+	
+	/***************************************************************************************************/
+	/*
+	 * Various methods: Get Price Meal, Get Meal/Item by name, Determine if Menu is Special
+	 */
+	
+	public double getPriceMeal (Meal meal){
+		return ;
+	}
+	
+	public Meal getMealByName(String mealName){
+		for(Meal m :listOfMeal){
+			if(m.getName().equalsIgnoreCase(mealName)){
+				return m;
+			}
+		}
+		return null;
+	}
+	
+	public Item getItemByName(String itemName){
+		for(Item i : menu.getStarters()){
+			if(i.getName().equalsIgnoreCase(itemName)){
+				return i;
+			}
+		}
+		for(Item i : menu.getMainDishes()){
+			if(i.getName().equalsIgnoreCase(itemName)){
+				return i;
+			}
+		}
+		for(Item i : menu.getDesserts()){
+			if(i.getName().equalsIgnoreCase(itemName)){
+				return i;
+			}
+		}
+		return null;
+	}
+	
+	public boolean determineIfDiscountMeal(Meal meal){
+		if(!listOfDiscountMeal.contains(meal) && !listOfMeal.contains(meal)){
+			System.out.println("This meal is not in the Restaurant menu");
+		} else if(listOfDiscountMeal.contains(meal)){
+			return true;
+		}
+		return false;
+	}
+
+	/***************************************************************************************************/
+	/*
+	 * Getters and Setters: no setters for ID and Counter
+	 */
+	
+	/**
+	 * @return the address
+	 */
+	public Address getAddress() {
+		return address;
+	}
+
+	/**
+	 * @param address the address to set
+	 */
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	/**
+	 * @return the mealDiscount
+	 */
+	public double getMealDiscount() {
+		return mealDiscount;
+	}
+
+	/**
+	 * @param mealDiscount the mealDiscount to set
+	 */
+	public void setMealDiscount(double mealDiscount) {
+		this.mealDiscount = mealDiscount;
+	}
+
+	/**
+	 * @return the discountFactor
+	 */
+	public double getDiscountFactor() {
+		return discountFactor;
+	}
+
+	/**
+	 * @param discountFactor the discountFactor to set
+	 */
+	public void setDiscountFactor(double discountFactor) {
+		this.discountFactor = discountFactor;
+	}
+
+	/**
+	 * @return the menu
+	 */
+	public Menu getMenu() {
+		return menu;
+	}
+
+	/**
+	 * @param menu the menu to set
+	 */
+	public void setMenu(Menu menu) {
+		this.menu = menu;
+	}
+
+	/**
+	 * @return the listOfDiscountMeal
+	 */
+	public ArrayList<Meal> getListOfDiscountMeal() {
+		return listOfDiscountMeal;
+	}
+
+	/**
+	 * @param listOfDiscountMeal the listOfDiscountMeal to set
+	 */
+	public void setListOfDiscountMeal(ArrayList<Meal> listOfDiscountMeal) {
+		this.listOfDiscountMeal = listOfDiscountMeal;
+	}
+
+	/**
+	 * @return the listOfMeal
+	 */
+	public ArrayList<Meal> getListOfMeal() {
+		return listOfMeal;
+	}
+
+	/**
+	 * @param listOfMeal the listOfMeal to set
+	 */
+	public void setListOfMeal(ArrayList<Meal> listOfMeal) {
+		this.listOfMeal = listOfMeal;
+	}
+	
 }
