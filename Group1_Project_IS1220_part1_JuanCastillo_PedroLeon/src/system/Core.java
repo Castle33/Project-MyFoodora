@@ -37,16 +37,12 @@ public class Core {
 		this.deliveryCost = deliveryCost;
 	}
 	
-	/*
-	 * user's specific operations related
-	 */
-	// TO DO
 	
 	/*
 	 * delivery policies related
 	 * behavioral pattern
 	 */
-	// TO DO
+	
 	
 	/*
 	 * target profit policies related
@@ -72,6 +68,43 @@ public class Core {
 	
 	/*
 	 * pricing and fidelity related
+	 */
+	// TO DO
+	
+	/*
+	 * manager related
+	 * -add/remove any kind of user
+	 * -activate/deactivate any kind of user
+	 * -changing the service fee/ markup-percentage / delivery cost
+	 * -compute total income/profit over a time period
+	 * -compute average income per customer
+	 * -determining SF/MP/DC for target profit policy
+	 * -determining most/least selling restaurant
+	 * -determining the most/least active courier
+	 * -setting delivery policy
+	 * 
+	 */
+	// TO DO
+	
+	/* restaurant related
+	 * see restaurant class
+	 * -sorting of shipped orders with respect to different criteria
+	 */
+	// TO DO
+	
+	/* customers related
+	 * -place orders
+	 * -register/unregister to/from a fidelity card plan
+	 * -access to information related to their account
+	 * -give/remove consensus to be notified whenever a new special offer
+	 */
+	// TO DO
+	
+	/* couriers related
+	 * -register/unregister their account to the MyFoodora system
+	 * -state their state as on-duty or off-duty
+	 * -change their position
+	 * -accept/refuse to a delivery call
 	 */
 	// TO DO
 
