@@ -76,7 +76,7 @@ public class Menu {
 	
 	/***************************************************************************************************/
 	/*
-	 * Getters and Setters: no setters for ID and Counter
+	 * Getters and Setters
 	 */
 	
 	/**
