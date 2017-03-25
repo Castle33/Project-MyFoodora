@@ -1,6 +1,7 @@
 package users;
 
 import java.util.ArrayList;
+import restaurant_structure.Menu;
 
 public class Restaurant extends User{
 	
@@ -15,7 +16,7 @@ public class Restaurant extends User{
 		this.address = address;
 		this.mealDiscount = 0.05;
 		this.discountFactor = 0.1;
-		this.Menu = new Menu();
+		this.menu = new Menu();
 		this.listOfMeal = new ArrayList<Meal>();
 	}
 
