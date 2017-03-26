@@ -16,7 +16,7 @@ public class Core {
 	 */
 	List<Manager> listOfManager;
 	List<Restaurant> listOfRestaurant;
-	List<Customers> listOfCustomers;
+	List<Customer> listOfCustomers;
 	List<Courier> listOfCourier;
 	
 	/*
