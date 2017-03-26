@@ -1,6 +1,6 @@
 package system;
 
-import java.util.List;
+import java.util.*;
 import users.*;
 
 /**
@@ -11,13 +11,13 @@ import users.*;
 
 public class Core {
 	
-	/*
-	 * lists of system's users
-	 */
-	List<Manager> listOfManager;
-	List<Restaurant> listOfRestaurant;
-	List<Customers> listOfCustomers;
-	List<Courier> listOfCourier;
+	/* lists of system's users */
+	private User currentUser;
+	private HashMap<String,User> listOfUsers;
+	
+	/* Policies strategies */
+	private IDeliveryPolicy deliveryPolicy;
+	private ITargetProfitPolicy targetProfit;
 	
 	/*
 	 * history of completed orders
@@ -37,25 +37,46 @@ public class Core {
 		this.deliveryCost = deliveryCost;
 	}
 	
+	/***************************************************************************************************/
+	/*
+	 * generic user's methods
+	 */
+	public void registerUser(User user){
+		if(currentUser == null){
+			if(listOfUsers.containsKey(user.getUsername())){
+				//throw exception
+			}else{
+				listOfUsers.put(user.getUsername(), user);
+			}
+		}else{
+			//throw exception if currentUser != null
+		}
+		
+	}
+	
+	public String userLogIn(User user){
+		if(listOfUsers.containsKey(user.getUsername())){
+			if(listOfUsers.get(user.getUsername()).getPassword().equals(user.getPassword())){
+				currentUser = user;
+			}else{
+				//throw exception
+			}
+		}else{
+			//throw exception
+		}
+		return "User not registered!";
+	}
+	
+	public void logOut(){
+		currentUser = null;
+	}
 	
 	/***************************************************************************************************/
 	/*
 	 * delivery policies related
 	 * behavioral pattern
 	 */
-	private String deliveryPolicy;
-	/*
-	 * to be used by the Manager
-	 */
-	public void setDeliveryPolicy(IDeliveryPolicy b){
-		deliveryPolicy = b.changeDeliveryPolicy();
-	}
-	/*
-	 * to be used by when searching for courier
-	 */
-	public String getDeliveryPolicy() {
-		return deliveryPolicy;
-	}
+	// TO DO
 	
 	
 	/***************************************************************************************************/
@@ -92,10 +113,9 @@ public class Core {
 	
 	/***************************************************************************************************/
 	/*
-	 * manager related
-	 * -add/remove any kind of user
-	 * -activate/deactivate any kind of user
-	 * -changing the service fee/ markup-percentage / delivery cost
+	 * Manager methods
+	 * - (DONE) add/remove any kind of user & activate/deactivate any kind of user
+	 * - (DONE) changing the service fee/ markup-percentage / delivery cost
 	 * -compute total income/profit over a time period
 	 * -compute average income per customer
 	 * -determining SF/MP/DC for target profit policy
@@ -104,7 +124,72 @@ public class Core {
 	 * -setting delivery policy
 	 * 
 	 */
-	// TO DO
+	
+	/* activate/deactivate & add/remove user */
+	public void activateUser(User user){
+		if(currentUser instanceof Manager){
+			listOfUsers.put(user.getUsername(), user);
+		}else{
+			//throw exception
+		}
+	}
+	
+	public void deactivateUser(User user){
+		if(currentUser instanceof Manager){
+			listOfUsers.remove(user.getUsername(), user);
+		}else{
+			//throw exception
+		}
+	}
+	
+	public void addUser(User user){
+		if(currentUser instanceof Manager){
+			if(listOfUsers.containsKey(user.getUsername())){
+				//throw exception
+			}else{
+				activateUser(user);
+			}
+		}else{
+			//throw exception
+		}
+	}
+	
+	public void removeUser(User user){
+		if(currentUser instanceof Manager){
+			if(listOfUsers.containsKey(user.getUsername())){
+				deactivateUser(user);
+			}else{
+				//throw exception
+			}
+		}else{
+			//throw exception
+		}
+	}
+	
+	/* changing SF &| MP &| DC */
+	public void changeServiceFee(double newServiceFee){
+		if(currentUser instanceof Manager){
+			serviceFee = newServiceFee;
+		}else{
+			//throw exception
+		}
+	}
+	
+	public void changeMatkupPercentage(double newMarkupPercentage){
+		if(currentUser instanceof Manager){
+			markupPercentage = newMarkupPercentage;
+		}else{
+			//throw exception
+		}
+	}
+	
+	public void changeDeliveryCost(double newDeliveryCost){
+		if(currentUser instanceof Manager){
+			deliveryCost = newDeliveryCost;
+		}else{
+			//throw exception
+		}
+	}
 	
 	/***************************************************************************************************/
 	/* restaurant related
