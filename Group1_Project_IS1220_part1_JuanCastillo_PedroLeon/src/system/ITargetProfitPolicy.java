@@ -1,6 +1,6 @@
 package system;
 
 public interface ITargetProfitPolicy {
-	double changeTargetProfit(double );
+	double computeProfitStrategyBased(double orderPrice, double markupPercentage, double serviceFee, double deliveryCost);
 
 }

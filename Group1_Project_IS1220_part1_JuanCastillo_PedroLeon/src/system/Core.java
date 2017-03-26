@@ -19,10 +19,8 @@ public class Core {
 	private IDeliveryPolicy deliveryPolicy;
 	private ITargetProfitPolicy targetProfit;
 	
-	/*
-	 * history of completed orders
-	 */
-	//TO DO
+	/* Orders */
+	private List<Order> listOfCompletedOrders;
 	
 	/*
 	 * profit-related information
@@ -189,6 +187,31 @@ public class Core {
 		}else{
 			//throw exception
 		}
+	}
+	
+	/* compute total income/profit */
+	public double computeTotalIncome(Calendar initDate, Calendar finDate){
+		double income;
+		if(currentUser instanceof Manager){
+			for(Order o : listOfCompletedOrders){
+				if(o.getDate() >= initDate && o.getDate() <= finDate){
+					income += o.orderPrice * markupPercentage;
+				}
+			}
+		}
+		
+		return income;
+	}
+	
+	public double computeTotalProfit(Calendar initDate, Calendar finDate){
+		double profit;
+		for(Order o : listOfCompletedOrders){
+			if(o.getDate() >= initDate && o.getDate() <= finDate){
+				profit += targetProfit.computeProfitStrategyBased(o.orderPrice, markupPercentage, serviceFee, deliveryCost);
+			}
+		}
+		
+		return profit;
 	}
 	
 	/***************************************************************************************************/
