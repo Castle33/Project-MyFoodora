@@ -6,6 +6,7 @@ import restaurant_structure.Meal;
 import restaurant_structure.Item;
 import users.Customer;
 import users.Restaurant;
+import users.Courier;
 
 public class Order {
 	
@@ -15,6 +16,9 @@ public class Order {
 	private Restaurant restaurant;
 	private HashMap<Meal,Integer> meals;
 	private HashMap<Item,Integer> items;
+	private Courier courier;
+	private double priceFood;
+	private double priceTotal;
 	private Calendar date;
 	
 	public Order(Customer customer, Restaurant restaurant) {
@@ -66,10 +70,110 @@ public class Order {
 	}
 	
 	public double calcPrice(){
-		double price;
+		double price = 0.0;
 		
 		if(isFidelityCardBasic()){
-			
+			for (Meal m : meals.keySet()){
+				price += meals.get(m)*restaurant.getPriceMeal(m);
+			}
+		} else {
+			for (Meal m : meals.keySet()){
+				price += meals.get(m)*m.getFullPrice();
+			}
 		}
+		for (Item i : items.keySet()){
+			price += items.get(i)*i.getPrice();
+		}
+		price *= customer.getFidelityCard().applyFidelityPlan();
+		price = restaurant.round2dec(price);
+		this.priceFood = price;
+		return price;
 	}
+
+	/***************************************************************************************************/
+	/* toString method */
+	
+	@Override
+	public String toString() {
+		return "Order [ID=" + ID + ", customer=" + customer + ", restaurant=" + restaurant + ", meals=" + meals
+				+ ", items=" + items + ", courier=" + courier + ", priceFood=" + priceFood + ", priceTotal="
+				+ priceTotal + ", date=" + date + "]";
+	}
+
+	/***************************************************************************************************/
+	/*
+	 * Getters and Setters: no setters for ID and Counter
+	 */
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
+
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
+	}
+
+	public HashMap<Meal, Integer> getMeals() {
+		return meals;
+	}
+
+	public void setMeals(HashMap<Meal, Integer> meals) {
+		this.meals = meals;
+	}
+
+	public HashMap<Item, Integer> getItems() {
+		return items;
+	}
+
+	public void setItems(HashMap<Item, Integer> items) {
+		this.items = items;
+	}
+
+	public Courier getCourier() {
+		return courier;
+	}
+
+	public void setCourier(Courier courier) {
+		this.courier = courier;
+	}
+
+	public double getPriceFood() {
+		return priceFood;
+	}
+
+	public void setPriceFood(double priceFood) {
+		this.priceFood = priceFood;
+	}
+
+	public double getPriceTotal() {
+		return priceTotal;
+	}
+
+	public void setPriceTotal(double priceTotal) {
+		this.priceTotal = priceTotal;
+	}
+
+	public Calendar getDate() {
+		return date;
+	}
+
+	public void setDate(Calendar date) {
+		this.date = date;
+	}
+
+	public int getID() {
+		return ID;
+	}
+
+	public static int getCounter() {
+		return counter;
+	}
+	
 }
