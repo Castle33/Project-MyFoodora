@@ -76,24 +76,10 @@ public class Core {
 	 */
 	// TO DO
 	
-	
-	/***************************************************************************************************/
-	/**
-	 * target profit policies related
-	 * behavioral pattern
-	 */
-	// TO DO
-	
 	/***************************************************************************************************/
 	/**
 	 * shipped order sorting policies related
 	 * behavioral pattern
-	 */
-	// TO DO
-	
-	/***************************************************************************************************/
-	/**
-	 * computing the total income and profit
 	 */
 	// TO DO
 	
@@ -195,7 +181,7 @@ public class Core {
 		if(currentUser instanceof Manager){
 			for(Order o : listOfCompletedOrders){
 				if(o.getDate() >= initDate && o.getDate() <= finDate){
-					income += o.orderPrice * markupPercentage;
+					income += o.calcPrice() * markupPercentage;
 				}
 			}
 		}
@@ -207,7 +193,7 @@ public class Core {
 		double profit;
 		for(Order o : listOfCompletedOrders){
 			if(o.getDate() >= initDate && o.getDate() <= finDate){
-				profit += targetProfit.computeProfitStrategyBased(o.orderPrice, markupPercentage, serviceFee, deliveryCost);
+				profit += targetProfit.computeProfitStrategyBased(o.calcPrice(), markupPercentage, serviceFee, deliveryCost);
 			}
 		}
 		
