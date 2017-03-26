@@ -5,6 +5,8 @@ public class Courier extends User {
 	private Address position;
 	private String phoneNumber;
 	private int numDeliveredOrders;
+	private boolean onDuty;
+	private int countOfOrdersCompleted;
 	
 	public Courier(String name, String username, String password, String surname, Address position, String phoneNumber,
 			int numDeliveredOrders) {
@@ -13,13 +15,14 @@ public class Courier extends User {
 		this.position = position;
 		this.phoneNumber = phoneNumber;
 		this.numDeliveredOrders = numDeliveredOrders;
+		this.onDuty = false;
 	}
 
 	@Override
 	public String toString() {
 		return "Courier [surname=" + surname + ", name=" + getName() + ", username=" + getUsername() 
 				+ ", position=" + position + ", phoneNumber=" + phoneNumber
-				+ ", ID=" + getID() + "]";
+				+ ", ID=" + getID() + ", onDuty=" + onDuty + "]";
 	}
 	
 	/***************************************************************************************************/
@@ -82,5 +85,35 @@ public class Courier extends User {
 	public void setNumDeliveredOrders(int numDeliveredOrders) {
 		this.numDeliveredOrders = numDeliveredOrders;
 	}
+
+	/**
+	 * @return the onDuty
+	 */
+	public boolean isOnDuty() {
+		return onDuty;
+	}
+
+	/**
+	 * @param onDuty the onDuty to set
+	 */
+	public void setOnDuty(boolean onDuty) {
+		this.onDuty = onDuty;
+	}
+
+	/**
+	 * @return the countOfOrdersCompleted
+	 */
+	public int getCountOfOrdersCompleted() {
+		return countOfOrdersCompleted;
+	}
+
+	/**
+	 * @param countOfOrdersCompleted the countOfOrdersCompleted to set
+	 */
+	public void setCountOfOrdersCompleted(int countOfOrdersCompleted) {
+		this.countOfOrdersCompleted = countOfOrdersCompleted;
+	}
+	
+	
 	
 }

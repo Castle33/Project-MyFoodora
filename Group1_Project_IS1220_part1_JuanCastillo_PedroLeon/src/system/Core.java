@@ -2,6 +2,7 @@ package system;
 
 import java.util.*;
 import users.*;
+import restaurant_structure.*;
 
 /**
  * 
@@ -106,7 +107,6 @@ public class Core {
 	 * -determining most/least selling restaurant
 	 * -determining the most/least active courier
 	 * -setting delivery policy
-	 * 
 	 */
 	
 	/* activate/deactivate & add/remove user */
@@ -177,35 +177,157 @@ public class Core {
 	
 	/* compute total income/profit */
 	public double computeTotalIncome(Calendar initDate, Calendar finDate){
-		double income;
+		double income = 0;
 		if(currentUser instanceof Manager){
 			for(Order o : listOfCompletedOrders){
-				if(o.getDate() >= initDate && o.getDate() <= finDate){
+				if(o.getDate().after(initDate) && o.getDate().before(finDate)){
 					income += o.calcPrice() * markupPercentage;
 				}
 			}
 		}
-		
+		if(income == 0){
+			//throw exception no order between dates
+		}
 		return income;
 	}
 	
 	public double computeTotalProfit(Calendar initDate, Calendar finDate){
-		double profit;
+		double profit = 0;
 		for(Order o : listOfCompletedOrders){
-			if(o.getDate() >= initDate && o.getDate() <= finDate){
+			if(o.getDate().after(initDate) && o.getDate().before(finDate)){
 				profit += targetProfit.computeProfitStrategyBased(o.calcPrice(), markupPercentage, serviceFee, deliveryCost);
 			}
 		}
-		
+		if(profit == 0){
+			//throw exception no order between dates
+		}
 		return profit;
+	}
+	
+	/* most/least active restaurant/courier*/
+	public Restaurant LeastActiveRestaurant(){
+		Restaurant leastRestaurant = null;
+		if(currentUser instanceof Manager){
+			Collection<User> collectionOfUsers = listOfUsers.values();
+			for(User user : collectionOfUsers){
+				if(user instanceof Restaurant){
+					if(leastRestaurant == null){
+						leastRestaurant = (Restaurant) user;
+					}else if(((Restaurant) user).getCountOfOrdersCompleted() < leastRestaurant.getCountOfOrdersCompleted()){
+						leastRestaurant = (Restaurant) user;
+					}
+				}
+			}
+			return leastRestaurant;
+		}else{
+			return null;
+		}
+	}
+	public Restaurant MostActiveRestaurant(){
+		Restaurant mostRestaurant = null;
+		if(currentUser instanceof Manager){
+			Collection<User> collectionOfUsers = listOfUsers.values();
+			for(User user : collectionOfUsers){
+				if(user instanceof Restaurant){
+					if(mostRestaurant == null){
+						mostRestaurant = (Restaurant) user;
+					}else if(((Restaurant) user).getCountOfOrdersCompleted() > mostRestaurant.getCountOfOrdersCompleted()){
+						mostRestaurant = (Restaurant) user;
+					}
+				}
+			}
+			return mostRestaurant;
+		}else{
+			return null;
+		}
+	}
+	
+	public Courier LeastActiveCourier(){
+		Courier leastCourier = null;
+		if(currentUser instanceof Manager){
+			Collection<User> collectionOfUsers = listOfUsers.values();
+			for(User user : collectionOfUsers){
+				if(user instanceof Courier){
+					if(leastCourier == null){
+						leastCourier = (Courier) user;
+					}else if(((Restaurant) user).getCountOfOrdersCompleted() < leastCourier.getCountOfOrdersCompleted()){
+						leastCourier = (Courier) user;
+					}
+				}
+			}
+			return leastCourier;
+		}else{
+			return null;
+		}
+	}
+	public Courier MostActiveCourier(){
+		Courier mostCourier = null;
+		if(currentUser instanceof Manager){
+			Collection<User> collectionOfUsers = listOfUsers.values();
+			for(User user : collectionOfUsers){
+				if(user instanceof Restaurant){
+					if(mostCourier == null){
+						mostCourier = (Courier) user;
+					}else if(((Restaurant) user).getCountOfOrdersCompleted() > mostCourier.getCountOfOrdersCompleted()){
+						mostCourier = (Courier) user;
+					}
+				}
+			}
+			return mostCourier;
+		}else{
+			return null;
+		}
 	}
 	
 	/***************************************************************************************************/
 	/** Restaurant related
-	 * see restaurant class
+	 * (DONE) see restaurant class
+	 * (DONE) set/remove special meal in the menu
 	 * -sorting of shipped orders with respect to different criteria
 	 */
-	// TO DO
+	
+	public void displayRestaurantInfo(){
+		if(currentUser instanceof Restaurant){
+			System.out.println("Restaurant information display:");
+			currentUser.toString();
+			System.out.println("Meal list display:");
+			for(Meal m : ((Restaurant) currentUser).getListOfMeal()){
+				m.toString();
+			}
+			System.out.println("Special meal list display:");
+			for(Meal dm : ((Restaurant) currentUser).getListOfDiscountMeal()){
+				dm.toString();
+			}
+		}else{
+			// throw exception
+		}
+	}
+	
+	public void setSpecialMeal(Meal meal){
+		if(currentUser instanceof Restaurant){
+			if(((Restaurant) currentUser).getListOfMeal().contains(meal)){
+				((Restaurant) currentUser).getListOfMeal().remove(meal);
+				((Restaurant) currentUser).getListOfDiscountMeal().add(meal);
+			}else if(((Restaurant) currentUser).getListOfDiscountMeal().contains(meal)){
+				//throw exception meal already an special meal
+			}else{
+				//throw exception meal not in the menu
+			}
+		}
+	}
+	
+	public void removeSpecialMeal(Meal meal){
+		if(currentUser instanceof Restaurant){
+			if(((Restaurant) currentUser).getListOfMeal().contains(meal)){
+				((Restaurant) currentUser).getListOfDiscountMeal().remove(meal);
+				((Restaurant) currentUser).getListOfMeal().add(meal);
+			}else if(((Restaurant) currentUser).getListOfMeal().contains(meal)){
+				//throw exception meal already not a special meal
+			}else{
+				//throw exception meal not in the menu
+			}
+		}
+	}
 	
 	/***************************************************************************************************/
 	/** Customers related
@@ -218,11 +340,39 @@ public class Core {
 	
 	/***************************************************************************************************/
 	/** Couriers related
-	 * -register/unregister their account to the MyFoodora system
-	 * -state their state as on-duty or off-duty
-	 * -change their position
+	 * (DONE) register/unregister their account to the MyFoodora system
+	 * (DONE) state their state as on-duty or off-duty
+	 * (DONE) change their position
 	 * -accept/refuse to a delivery call
 	 */
-	// TO DO
+	
+	/* Register/unregister method, for register use registerUser method*/
+	public void unregisterCourier(User user){
+		System.out.println("Unregister demand");
+		if(user instanceof Courier){
+			listOfUsers.remove(user);
+			System.out.println("Courier:" + user + "unregistered.");
+		}else{
+			//throw exception not a courier
+		}
+	}
+	
+	/* on-duty/off-duty update*/
+	public void updateCourierState(User user){
+		if(user instanceof Courier){
+			((Courier)user).setOnDuty(true);
+		}else{
+			//throw exception not a courier
+		}
+	}
+	
+	/* updating courier position*/
+	public void updateCourierPosition(User user, Address newPosition){
+		if(user instanceof Courier){
+			((Courier)user).setPosition(newPosition);
+		}else{
+			//throw exception not a courier
+		}
+	}
 
 }

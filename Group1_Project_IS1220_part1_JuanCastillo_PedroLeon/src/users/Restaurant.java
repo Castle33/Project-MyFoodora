@@ -12,6 +12,7 @@ public class Restaurant extends User{
 	private Menu menu;
 	private ArrayList<Meal> listOfSpecialMeal;
 	private ArrayList<Meal> listOfMeal;
+	private int countOfOrdersCompleted;
 	
 	public Restaurant(String name, String username, String password, Address address) {
 		super(name, username, password);
@@ -212,5 +213,21 @@ public class Restaurant extends User{
 	public void setListOfMeal(ArrayList<Meal> listOfMeal) {
 		this.listOfMeal = listOfMeal;
 	}
+
+	/**
+	 * @return the countOfOrdersCompleted
+	 */
+	public int getCountOfOrdersCompleted() {
+		return countOfOrdersCompleted;
+	}
+
+	/**
+	 * @param countOfOrdersCompleted the countOfOrdersCompleted to set
+	 */
+	public void setCountOfOrdersCompleted(int countOfOrdersCompleted) {
+		this.countOfOrdersCompleted = countOfOrdersCompleted;
+	}
+	
+	
 	
 }
