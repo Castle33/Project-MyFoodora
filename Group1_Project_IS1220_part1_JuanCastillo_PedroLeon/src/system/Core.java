@@ -336,7 +336,46 @@ public class Core {
 	 * -access to information related to their account
 	 * -give/remove consensus to be notified whenever a new special offer
 	 */
-	// TO DO
+	
+	public Order placeNewOrder(Restaurant restaurant){
+		if(currentUser instanceof Customer){
+			return new Order((Customer)currentUser,restaurant);
+		} else {
+			//throw exception Not A Customer
+			return null;
+		}
+	}
+	
+	public void registerFidelityCard(FidelityCard fidelityCard){
+		if(currentUser instanceof Customer){
+			((Customer) currentUser).setFidelityCard(fidelityCard);
+		} else {
+			//throw exception Not A Customer
+		}
+	}
+	
+	public void unregisterFidelityCard(){
+		if(currentUser instanceof Customer){
+			((Customer) currentUser).setFidelityCardtoBasic();
+		} else {
+			//throw exception Not A Customer
+		}
+	}
+	
+	public ArrayList<Order> getHistoryOrders(){
+		if(currentUser instanceof Customer){
+			ArrayList<Order> customerOrders = new ArrayList<Order>();
+			for(Order o : listOfCompletedOrders){
+				if(currentUser.getID() == o.getCustomer().getID()){
+					customerOrders.add(o);
+				}
+			}
+			return customerOrders;
+		} else {
+			//throw exception Not A Customer
+			return null;
+		}
+	}
 	
 	/***************************************************************************************************/
 	/** Couriers related
