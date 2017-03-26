@@ -1,6 +1,6 @@
 package system;
 
 public interface ITargetProfitPolicy {
-	double changeTargetProfit();
+	double changeTargetProfit(double );
 
 }
