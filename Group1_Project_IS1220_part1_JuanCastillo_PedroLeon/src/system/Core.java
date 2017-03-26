@@ -38,7 +38,7 @@ public class Core {
 	}
 	
 	/***************************************************************************************************/
-	/*
+	/**
 	 * generic user's methods
 	 */
 	public void registerUser(User user){
@@ -72,7 +72,7 @@ public class Core {
 	}
 	
 	/***************************************************************************************************/
-	/*
+	/**
 	 * delivery policies related
 	 * behavioral pattern
 	 */
@@ -80,39 +80,39 @@ public class Core {
 	
 	
 	/***************************************************************************************************/
-	/*
+	/**
 	 * target profit policies related
 	 * behavioral pattern
 	 */
 	// TO DO
 	
 	/***************************************************************************************************/
-	/*
+	/**
 	 * shipped order sorting policies related
 	 * behavioral pattern
 	 */
 	// TO DO
 	
 	/***************************************************************************************************/
-	/*
+	/**
 	 * computing the total income and profit
 	 */
 	// TO DO
 	
 	/***************************************************************************************************/
-	/*
+	/**
 	 * special orders notifications related
 	 * observer pattern
 	 */
 	
 	/***************************************************************************************************/
-	/*
+	/**
 	 * pricing and fidelity related
 	 */
 	// TO DO
 	
 	/***************************************************************************************************/
-	/*
+	/**
 	 * Manager methods
 	 * - (DONE) add/remove any kind of user & activate/deactivate any kind of user
 	 * - (DONE) changing the service fee/ markup-percentage / delivery cost
@@ -192,14 +192,14 @@ public class Core {
 	}
 	
 	/***************************************************************************************************/
-	/* restaurant related
+	/** Restaurant related
 	 * see restaurant class
 	 * -sorting of shipped orders with respect to different criteria
 	 */
 	// TO DO
 	
 	/***************************************************************************************************/
-	/* customers related
+	/** Customers related
 	 * -place orders
 	 * -register/unregister to/from a fidelity card plan
 	 * -access to information related to their account
@@ -208,7 +208,7 @@ public class Core {
 	// TO DO
 	
 	/***************************************************************************************************/
-	/* couriers related
+	/** Couriers related
 	 * -register/unregister their account to the MyFoodora system
 	 * -state their state as on-duty or off-duty
 	 * -change their position

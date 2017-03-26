@@ -1,13 +1,13 @@
 package users;
 
-public class Customers extends User{
+public class Customer extends User{
 	
 	private String surname;
 	private Address address;
 	private String email;
 	private String phoneNumber;
 	
-	public Customers(String name, String username, String surname, Address address, String email, 
+	public Customer(String name, String username, String surname, Address address, String email, 
 			String phoneNumber, String password) {
 		super(name, username, password);
 		this.surname = surname;
