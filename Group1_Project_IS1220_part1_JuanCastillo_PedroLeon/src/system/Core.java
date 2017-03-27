@@ -18,7 +18,7 @@ public class Core {
 	
 	/* Policies strategies */
 	private IDeliveryPolicy deliveryPolicy;
-	private ITargetProfitPolicy targetProfit;
+	private ITargetProfitPolicy tProfitPolicy;
 	
 	/* Orders */
 	private List<Order> listOfCompletedOrders;
@@ -99,13 +99,13 @@ public class Core {
 	/***************************************************************************************************/
 	/**
 	 * Manager methods
-	 * - (DONE) add/remove any kind of user & activate/deactivate any kind of user
-	 * - (DONE) changing the service fee/ markup-percentage / delivery cost
-	 * -compute total income/profit over a time period
+	 * (DONE) add/remove any kind of user & activate/deactivate any kind of user
+	 * (DONE) changing the service fee/ markup-percentage / delivery cost
+	 * (DONE) compute total income/profit over a time period
 	 * -compute average income per customer
-	 * -determining SF/MP/DC for target profit policy
-	 * -determining most/least selling restaurant
-	 * -determining the most/least active courier
+	 * (DONE) determining SF/MP/DC for target profit policy
+	 * (DONE) determining most/least selling restaurant
+	 * (DONE) determining the most/least active courier
 	 * -setting delivery policy
 	 */
 	
@@ -175,13 +175,37 @@ public class Core {
 		}
 	}
 	
+	public void setTargetProfitToDeliveryCost(){
+		if(currentUser instanceof Manager){
+			tProfitPolicy = new TargetProfitDeliveryCost();
+		}else{
+			//throw exception
+		}
+	}
+	
+	public void setTargetProfitToMarkup(){
+		if(currentUser instanceof Manager){
+			tProfitPolicy = new TargetProfitMarkup();
+		}else{
+			//throw exception
+		}
+	}
+	
+	public void setTargetProfitToServiceFee(){
+		if(currentUser instanceof Manager){
+			tProfitPolicy = new TargetProfitServiceFee();
+		}else{
+			//throw exception
+		}
+	}
+	
 	/* compute total income/profit */
 	public double computeTotalIncome(Calendar initDate, Calendar finDate){
 		double income = 0;
 		if(currentUser instanceof Manager){
 			for(Order o : listOfCompletedOrders){
 				if(o.getDate().after(initDate) && o.getDate().before(finDate)){
-					income += o.calcPrice() * markupPercentage;
+					income += o.calcPrice() * markupPercentage + serviceFee;
 				}
 			}
 		}
@@ -191,17 +215,8 @@ public class Core {
 		return income;
 	}
 	
-	public double computeTotalProfit(Calendar initDate, Calendar finDate){
-		double profit = 0;
-		for(Order o : listOfCompletedOrders){
-			if(o.getDate().after(initDate) && o.getDate().before(finDate)){
-				profit += targetProfit.computeProfitStrategyBased(o.calcPrice(), markupPercentage, serviceFee, deliveryCost);
-			}
-		}
-		if(profit == 0){
-			//throw exception no order between dates
-		}
-		return profit;
+	public double computeTotalProfit(double targetProfit, Calendar initDate, Calendar finDate){
+		return tProfitPolicy.computeProfitStrategyBased(serviceFee, markupPercentage, deliveryCost, targetProfit, listOfCompletedOrders, initDate, finDate);
 	}
 	
 	/* most/least active restaurant/courier*/
