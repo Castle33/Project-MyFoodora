@@ -102,7 +102,7 @@ public class Core {
 	 * (DONE) add/remove any kind of user & activate/deactivate any kind of user
 	 * (DONE) changing the service fee/ markup-percentage / delivery cost
 	 * (DONE) compute total income/profit over a time period
-	 * -compute average income per customer
+	 * (DONE) compute average income per customer
 	 * (DONE) determining SF/MP/DC for target profit policy
 	 * (DONE) determining most/least selling restaurant
 	 * (DONE) determining the most/least active courier
@@ -201,22 +201,40 @@ public class Core {
 	
 	/* compute total income/profit */
 	public double computeTotalIncome(Calendar initDate, Calendar finDate){
-		double income = 0;
+		double totalIncome = 0;
 		if(currentUser instanceof Manager){
 			for(Order o : listOfCompletedOrders){
 				if(o.getDate().after(initDate) && o.getDate().before(finDate)){
-					income += o.calcPrice() * markupPercentage + serviceFee;
+					totalIncome += o.calcPrice() * markupPercentage + serviceFee;
 				}
 			}
 		}
-		if(income == 0){
+		if(totalIncome == 0){
 			//throw exception no order between dates
 		}
-		return income;
+		return totalIncome;
 	}
 	
 	public double computeTotalProfit(double targetProfit, Calendar initDate, Calendar finDate){
 		return tProfitPolicy.computeProfitStrategyBased(serviceFee, markupPercentage, deliveryCost, targetProfit, listOfCompletedOrders, initDate, finDate);
+	}
+	
+	/* compute average income per customer */
+	public double computeAverageIncome(Calendar initDate, Calendar finDate){
+		double averageIncome = 0;
+		int numOfOrders = 0;
+		if(currentUser instanceof Manager){
+			for(Order o : listOfCompletedOrders){
+				if(o.getDate().after(initDate) && o.getDate().before(finDate)){
+					averageIncome += o.calcPrice() * markupPercentage + serviceFee;
+					numOfOrders += 1;
+				}
+			}
+		}
+		if(averageIncome == 0){
+			//throw exception no order between dates
+		}
+		return averageIncome/numOfOrders;
 	}
 	
 	/* most/least active restaurant/courier*/
@@ -291,6 +309,23 @@ public class Core {
 			return mostCourier;
 		}else{
 			return null;
+		}
+	}
+	
+	/* setting delivery policy */
+	public void setDeliveryToFastest(){
+		if(currentUser instanceof Manager){
+			deliveryPolicy = new DeliveryFastest();
+		}else{
+			//throw exception
+		}
+	}
+	
+	public void setDeliveryToFairOccupation(){
+		if(currentUser instanceof Manager){
+			deliveryPolicy = new DeliveryFairOccupation();
+		}else{
+			//throw exception
 		}
 	}
 	
