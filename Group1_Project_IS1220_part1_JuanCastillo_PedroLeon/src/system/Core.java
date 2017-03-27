@@ -106,7 +106,7 @@ public class Core {
 	 * (DONE) determining SF/MP/DC for target profit policy
 	 * (DONE) determining most/least selling restaurant
 	 * (DONE) determining the most/least active courier
-	 * -setting delivery policy
+	 * (DONE) setting delivery policy
 	 */
 	
 	/* activate/deactivate & add/remove user */
