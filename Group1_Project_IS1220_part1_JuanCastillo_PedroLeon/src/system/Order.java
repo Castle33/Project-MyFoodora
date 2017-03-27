@@ -20,6 +20,7 @@ public class Order {
 	private double priceFood;
 	private double priceTotal;
 	private Calendar date;
+	private Calendar deliveryDate;
 	
 	public Order(Customer customer, Restaurant restaurant) {
 		super();
@@ -27,6 +28,7 @@ public class Order {
 		this.customer = customer;
 		this.restaurant = restaurant;
 		this.date = Calendar.getInstance();
+		this.deliveryDate = null;
 		meals = new HashMap<Meal,Integer>();
 		items = new HashMap<Item,Integer>();
 	}
@@ -37,8 +39,22 @@ public class Order {
 		this.customer = customer;
 		this.restaurant = restaurant;
 		this.date = date;
+		this.deliveryDate = null;
 		meals = new HashMap<Meal,Integer>();
 		items = new HashMap<Item,Integer>();
+	}
+	
+	/***************************************************************************************************/
+	/* Calculate Delivery Time Method:
+	 * Considering the Coordinates in meters and the average speed of 50 km/h (13.9 m/s)
+	 * 
+	 */
+	
+	public Calendar calcDeliveryTime(){
+		int deliveryTime = (int) Math.round(customer.getAddress().calcDistance(restaurant.getAddress())/13.9);
+		deliveryDate = date;
+		deliveryDate.add(Calendar.SECOND, deliveryTime);
+		return deliveryDate;
 	}
 	
 	/***************************************************************************************************/
@@ -175,5 +191,14 @@ public class Order {
 	public static int getCounter() {
 		return counter;
 	}
+
+	public Calendar getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(Calendar deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+	
 	
 }

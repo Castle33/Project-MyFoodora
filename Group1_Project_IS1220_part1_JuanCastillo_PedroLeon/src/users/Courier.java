@@ -1,21 +1,27 @@
 package users;
 
+import java.util.*;
+import system.Order;
+
 public class Courier extends User {
 	private String surname;
 	private Address position;
 	private String phoneNumber;
-	private int numDeliveredOrders;
 	private boolean onDuty;
 	private int countOfOrdersCompleted;
+	private LinkedList<Order> listPendingOrders;
+	private Order currentOrder;
 	
 	public Courier(String name, String username, String password, String surname, Address position, String phoneNumber,
-			int numDeliveredOrders) {
+			int countOfOrdersCompleted) {
 		super(name, username, password);
 		this.surname = surname;
 		this.position = position;
 		this.phoneNumber = phoneNumber;
-		this.numDeliveredOrders = numDeliveredOrders;
+		this.countOfOrdersCompleted = countOfOrdersCompleted;
 		this.onDuty = false;
+		listPendingOrders = new LinkedList<Order>();
+		this.currentOrder = null;
 	}
 
 	@Override
@@ -23,6 +29,33 @@ public class Courier extends User {
 		return "Courier [surname=" + surname + ", name=" + getName() + ", username=" + getUsername() 
 				+ ", position=" + position + ", phoneNumber=" + phoneNumber
 				+ ", ID=" + getID() + ", onDuty=" + onDuty + "]";
+	}
+	
+	/***************************************************************************************************/
+	/* Methods for treating with Orders */
+	
+	public void addNewOrder(Order order){
+		this.listPendingOrders.add(order);
+	}
+	
+	public boolean acceptOrder(Order order){
+		this.currentOrder = order;
+		this.currentOrder.setCourier(this);
+		countOfOrdersCompleted++;
+		this.onDuty = true;
+		return true;
+	}
+	
+	public boolean refuseOrder(){
+		return false;
+	}
+	
+	public void decideTakingOrder(Order order){
+		if(Math.random() < 0.05){
+			refuseOrder();
+		} else {
+			acceptOrder(order);
+		}
 	}
 	
 	/***************************************************************************************************/
@@ -73,24 +106,15 @@ public class Courier extends User {
 	}
 
 	/**
-	 * @return the numDeliveredOrders
-	 */
-	public int getNumDeliveredOrders() {
-		return numDeliveredOrders;
-	}
-
-	/**
-	 * @param numDeliveredOrders the numDeliveredOrders to set
-	 */
-	public void setNumDeliveredOrders(int numDeliveredOrders) {
-		this.numDeliveredOrders = numDeliveredOrders;
-	}
-
-	/**
 	 * @return the onDuty
 	 */
-	public boolean isOnDuty() {
-		return onDuty;
+	public boolean isOnDuty(){
+		if(onDuty && currentOrder.getDeliveryDate().after(Calendar.getInstance())){
+			this.onDuty = false;
+			return onDuty;
+		} else {
+			return onDuty;
+		}
 	}
 
 	/**
