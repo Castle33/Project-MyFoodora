@@ -159,7 +159,7 @@ public class Core {
 		}
 	}
 	
-	public void changeMatkupPercentage(double newMarkupPercentage){
+	public void changeMarkup(double newMarkupPercentage){
 		if(currentUser instanceof Manager){
 			markupPercentage = newMarkupPercentage;
 		}else{
@@ -199,6 +199,23 @@ public class Core {
 		}
 	}
 	
+	public double getParameterToTargetProfit(double targetProfit, Calendar initDate, Calendar finDate){
+		/*
+		 * depending on the target profit strategy this method will return a different parameter to achieve a target profit
+		 * for TargetProfitDeliveryCost behavior, delivery cost will be returned
+		 * for TargetProfitMarkup behavior, markup percentage will be returned
+		 * for TargetProfitServiceFee behavior, service fee will be returned
+		 * 
+		 * later the manager will be able to change this parameters of the core with changeDeliveryCost/Markup/ServiceFee
+		 */
+		if(currentUser instanceof Manager){
+			return tProfitPolicy.computeProfitStrategyBased(serviceFee, markupPercentage, deliveryCost, targetProfit, listOfCompletedOrders, initDate, finDate);
+		}else{
+			// throw exception NO manager logged in
+			return 0.0;
+		}
+	}
+	
 	/* compute total income/profit */
 	public double computeTotalIncome(Calendar initDate, Calendar finDate){
 		double totalIncome = 0;
@@ -216,7 +233,19 @@ public class Core {
 	}
 	
 	public double computeTotalProfit(double targetProfit, Calendar initDate, Calendar finDate){
-		return tProfitPolicy.computeProfitStrategyBased(serviceFee, markupPercentage, deliveryCost, targetProfit, listOfCompletedOrders, initDate, finDate);
+		double totalProfit = 0;
+		if(currentUser instanceof Manager){
+			for(Order o : listOfCompletedOrders){
+				if(o.getDate().after(initDate) && o.getDate().before(finDate)){
+					totalProfit += o.calcPrice() * markupPercentage + serviceFee - deliveryCost;
+				}
+			}
+		}
+		
+		if(totalProfit == 0){
+			//throw exception no order between dates
+		}
+		return totalProfit;
 	}
 	
 	/* compute average income per customer */
@@ -381,9 +410,9 @@ public class Core {
 	
 	/***************************************************************************************************/
 	/** Customers related
-	 * -place orders
-	 * -register/unregister to/from a fidelity card plan
-	 * -access to information related to their account
+	 * (DONE) place orders
+	 * (DONE) register/unregister to/from a fidelity card plan
+	 * (DONE) access to information related to their account
 	 * -give/remove consensus to be notified whenever a new special offer
 	 */
 	
