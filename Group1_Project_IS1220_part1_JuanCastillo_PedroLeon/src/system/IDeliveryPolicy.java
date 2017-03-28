@@ -1,7 +1,10 @@
 package system;
 
+import users.Courier;
+import java.util.LinkedList;
+import users.Address;
 public interface IDeliveryPolicy {
 	
-	public String changeDeliveryPolicy();
+	public LinkedList<Courier> setDeliveryPolicy(LinkedList<Courier> listCouriers, Address address);
 
 }

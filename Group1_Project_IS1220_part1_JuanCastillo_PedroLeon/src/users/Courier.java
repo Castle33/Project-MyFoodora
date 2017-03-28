@@ -3,7 +3,7 @@ package users;
 import java.util.*;
 import system.Order;
 
-public class Courier extends User {
+public class Courier extends User{
 	private String surname;
 	private Address position;
 	private String phoneNumber;
@@ -11,17 +11,18 @@ public class Courier extends User {
 	private int countOfOrdersCompleted;
 	private LinkedList<Order> listPendingOrders;
 	private Order currentOrder;
+	private double distanceToRest;
 	
-	public Courier(String name, String username, String password, String surname, Address position, String phoneNumber,
-			int countOfOrdersCompleted) {
+	public Courier(String name, String username, String password, String surname, Address position, String phoneNumber) {
 		super(name, username, password);
 		this.surname = surname;
 		this.position = position;
 		this.phoneNumber = phoneNumber;
-		this.countOfOrdersCompleted = countOfOrdersCompleted;
+		this.countOfOrdersCompleted = 0;
 		this.onDuty = false;
 		listPendingOrders = new LinkedList<Order>();
 		this.currentOrder = null;
+		this.distanceToRest = 0.0;
 	}
 
 	@Override
@@ -29,6 +30,41 @@ public class Courier extends User {
 		return "Courier [surname=" + surname + ", name=" + getName() + ", username=" + getUsername() 
 				+ ", position=" + position + ", phoneNumber=" + phoneNumber
 				+ ", ID=" + getID() + ", onDuty=" + onDuty + "]";
+	}
+	
+	/***************************************************************************************************/
+	/* Two Comparators methods depending on distance to restaurant or number of orders of Class Courier */
+	
+	public static Comparator<Courier> compareDistance(){
+		return new Comparator<Courier>(){
+			@Override
+			public int compare(Courier arg0, Courier arg1) {
+				if(arg0.distanceToRest > arg1.distanceToRest){
+					return 1;
+				} else if(arg0.distanceToRest == arg1.distanceToRest){
+					return 0;
+				} else {
+					return -1;
+				}
+			}
+			
+		};
+	}
+	
+	public static Comparator<Courier> compareNumOrders(){
+		return new Comparator<Courier>(){
+			@Override
+			public int compare(Courier arg0, Courier arg1) {
+				if(arg0.countOfOrdersCompleted > arg1.countOfOrdersCompleted){
+					return 1;
+				} else if(arg0.countOfOrdersCompleted == arg1.countOfOrdersCompleted){
+					return 0;
+				} else {
+					return -1;
+				}
+			}
+			
+		};
 	}
 	
 	/***************************************************************************************************/
@@ -136,6 +172,30 @@ public class Courier extends User {
 	 */
 	public void setCountOfOrdersCompleted(int countOfOrdersCompleted) {
 		this.countOfOrdersCompleted = countOfOrdersCompleted;
+	}
+
+	public LinkedList<Order> getListPendingOrders() {
+		return listPendingOrders;
+	}
+
+	public void setListPendingOrders(LinkedList<Order> listPendingOrders) {
+		this.listPendingOrders = listPendingOrders;
+	}
+
+	public Order getCurrentOrder() {
+		return currentOrder;
+	}
+
+	public void setCurrentOrder(Order currentOrder) {
+		this.currentOrder = currentOrder;
+	}
+
+	public double getDistanceToRest() {
+		return distanceToRest;
+	}
+
+	public void setDistanceToRest(double distanceToRest) {
+		this.distanceToRest = distanceToRest;
 	}
 	
 	

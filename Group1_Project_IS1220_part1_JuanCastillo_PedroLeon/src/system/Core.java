@@ -22,6 +22,7 @@ public class Core {
 	
 	/* Orders */
 	private List<Order> listOfCompletedOrders;
+	private LinkedList<Order> listOfPendingOrders;
 	
 	/*
 	 * profit-related information
@@ -490,6 +491,22 @@ public class Core {
 			((Courier)user).setPosition(newPosition);
 		}else{
 			//throw exception not a courier
+		}
+	}
+	
+	public void processOrders(){
+		Courier courier = null;
+		LinkedList<User> currentUsers = new LinkedList<User>(listOfUsers.values());
+		LinkedList<Courier> listCouriers = new LinkedList<Courier>();
+		for (User u : currentUsers){
+			if(u instanceof Courier){
+				listCouriers.add((Courier)u);
+			}
+		}
+		Order order = this.listOfPendingOrders.removeFirst();
+		while(listOfPendingOrders.size()!=0){
+			LinkedList<Courier> currentSortedCouriers = this.deliveryPolicy.setDeliveryPolicy(listCouriers, order.getRestaurant().getAddress());
+			while(order.getCourier() == null && )
 		}
 	}
 
