@@ -66,17 +66,36 @@ public class Courier extends User{
 			
 		};
 	}
+	//Compares Couriers depending on the delivery Date of their current order
+	public static Comparator<Courier> compareDeliveyDate(){
+		return new Comparator<Courier>(){
+			@Override
+			public int compare(Courier arg0, Courier arg1) {
+				if(arg0.currentOrder.getDeliveryDate().after(arg1.currentOrder.getDeliveryDate())){
+					return 1;
+				} else if(arg0.currentOrder.getDeliveryDate().equals(arg1.currentOrder.getDeliveryDate())){
+					return 0;
+				} else {
+					return -1;
+				}
+			}
+			
+		};
+	}
 	
 	/***************************************************************************************************/
 	/* Methods for treating with Orders */
 	
 	public void addNewOrder(Order order){
-		this.listPendingOrders.add(order);
+		Order tempOrder = order;
+		tempOrder.setCourier(this);
+		this.listPendingOrders.add(tempOrder);
 	}
 	
 	public boolean acceptOrder(Order order){
 		this.currentOrder = order;
 		this.currentOrder.setCourier(this);
+		this.currentOrder.calcDeliveryTime();
 		countOfOrdersCompleted++;
 		this.onDuty = true;
 		return true;
@@ -86,11 +105,23 @@ public class Courier extends User{
 		return false;
 	}
 	
-	public void decideTakingOrder(Order order){
+	public boolean decideTakingOrder(Order order){	
 		if(Math.random() < 0.05){
-			refuseOrder();
+			return refuseOrder();
 		} else {
-			acceptOrder(order);
+			return acceptOrder(order);
+		}
+	}
+	public boolean decideAddOrder(Order order){
+		if(listPendingOrders.isEmpty()){
+			if(Math.random() < 0.1){
+				return false;
+			} else {
+				addNewOrder(order);
+				return true;
+			}
+		} else {
+			return false;
 		}
 	}
 	
@@ -145,12 +176,7 @@ public class Courier extends User{
 	 * @return the onDuty
 	 */
 	public boolean isOnDuty(){
-		if(onDuty && currentOrder.getDeliveryDate().after(Calendar.getInstance())){
-			this.onDuty = false;
-			return onDuty;
-		} else {
-			return onDuty;
-		}
+		return onDuty;
 	}
 
 	/**

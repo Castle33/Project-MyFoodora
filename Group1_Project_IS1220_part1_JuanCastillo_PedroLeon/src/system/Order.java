@@ -52,7 +52,7 @@ public class Order {
 	
 	public Calendar calcDeliveryTime(){
 		int deliveryTime = (int) Math.round(customer.getAddress().calcDistance(restaurant.getAddress())/13.9);
-		deliveryDate = date;
+		deliveryDate = Calendar.getInstance();
 		deliveryDate.add(Calendar.SECOND, deliveryTime);
 		return deliveryDate;
 	}

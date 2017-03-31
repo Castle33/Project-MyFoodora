@@ -477,9 +477,16 @@ public class Core {
 	}
 	
 	/* on-duty/off-duty update*/
-	public void updateCourierState(User user){
+	public void updateCourierState(User user, boolean newState){
 		if(user instanceof Courier){
-			((Courier)user).setOnDuty(true);
+			Courier courier = (Courier) user;
+			if(!courier.getListPendingOrders().isEmpty() && !newState){
+				// Courier still has pending orders
+				courier.acceptOrder(courier.getListPendingOrders().removeFirst());
+			} else {
+				courier.setOnDuty(newState);
+			}
+			listOfUsers.put(courier.getUsername(), courier);
 		}else{
 			//throw exception not a courier
 		}
@@ -496,6 +503,7 @@ public class Core {
 	
 	public void processOrders(){
 		Courier courier = null;
+		//Get all the users and put all Couriers to a LinkedList
 		LinkedList<User> currentUsers = new LinkedList<User>(listOfUsers.values());
 		LinkedList<Courier> listCouriers = new LinkedList<Courier>();
 		for (User u : currentUsers){
@@ -503,10 +511,42 @@ public class Core {
 				listCouriers.add((Courier)u);
 			}
 		}
-		Order order = this.listOfPendingOrders.removeFirst();
+		//List where all users on duty will be added
+		LinkedList<Courier> currentCouriersOnDuty = new LinkedList<Courier>();
 		while(listOfPendingOrders.size()!=0){
+			//Gets the first order of the list and sorts all couriers depending on the delivery policy
+			Order order = this.listOfPendingOrders.getFirst();
 			LinkedList<Courier> currentSortedCouriers = this.deliveryPolicy.setDeliveryPolicy(listCouriers, order.getRestaurant().getAddress());
-			while(order.getCourier() == null && )
+			//This while loop tries to address a Courier to an order until 
+			//it does it or no Courier is available or wants to take the order
+			while(order.getCourier() == null && !currentSortedCouriers.isEmpty()){
+				courier = currentSortedCouriers.getFirst();
+				if(!courier.isOnDuty()){
+					if(courier.decideTakingOrder(order)){
+						this.listOfCompletedOrders.add(courier.getCurrentOrder());
+						this.listOfPendingOrders.removeFirst();
+						currentCouriersOnDuty.add(currentSortedCouriers.removeFirst());
+					} else {
+						currentSortedCouriers.removeFirst();
+						this.listOfPendingOrders.add(this.listOfPendingOrders.removeFirst());
+					}
+				} else {
+					currentCouriersOnDuty.add(currentSortedCouriers.removeFirst());
+				}
+			}
+			//This while loop tries to add the order to the listPendingOrders of a Courier until
+			//it does it or no Courier wants to add the order
+			while(currentSortedCouriers.isEmpty() && !currentCouriersOnDuty.isEmpty() && order.getCourier() == null){
+				Collections.sort(currentCouriersOnDuty,Courier.compareDeliveyDate());
+				if(currentCouriersOnDuty.getFirst().decideAddOrder(order)){
+					this.listOfCompletedOrders.add(currentCouriersOnDuty.removeFirst().getCurrentOrder());
+					this.listOfPendingOrders.removeFirst();
+				}
+			}
+			this.listOfPendingOrders.removeFirst();
+			/*
+			 * NOTIFICATION TO CUSTOMER: NOT YET IMPLEMENTED
+			 */
 		}
 	}
 
