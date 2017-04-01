@@ -7,7 +7,12 @@ import restaurant_structure.Item;
 import users.Customer;
 import users.Restaurant;
 import users.Courier;
-
+/**
+ * 
+ * @author Juan Castillo (programmer)
+ * @author Pedro León (coder)
+ * tested: NO
+ */
 public class Order {
 	
 	private int ID;
@@ -21,7 +26,11 @@ public class Order {
 	private double priceTotal;
 	private Calendar date;
 	private Calendar deliveryDate;
-	
+	/**
+	 * tested: YES
+	 * @param customer
+	 * @param restaurant
+	 */
 	public Order(Customer customer, Restaurant restaurant) {
 		super();
 		this.ID = (++counter);
@@ -32,7 +41,12 @@ public class Order {
 		meals = new HashMap<Meal,Integer>();
 		items = new HashMap<Item,Integer>();
 	}
-
+	/**
+	 * tested: YES
+	 * @param customer
+	 * @param restaurant
+	 * @param date
+	 */
 	public Order(Customer customer, Restaurant restaurant, Calendar date) {
 		super();
 		this.ID = (++counter);
@@ -49,7 +63,11 @@ public class Order {
 	 * Considering the Coordinates in meters and the average speed of 50 km/h (13.9 m/s)
 	 * 
 	 */
-	
+	/**
+	 * tested: YES
+	 * the division of 5000 between 13.9 can give a range of values between [360000,360005] (ms)
+	 * @return
+	 */
 	public Calendar calcDeliveryTime(){
 		int deliveryTime = (int) Math.round(customer.getAddress().calcDistance(restaurant.getAddress())/13.9);
 		deliveryDate = Calendar.getInstance();
@@ -59,7 +77,17 @@ public class Order {
 	
 	/***************************************************************************************************/
 	/* Add Meals and Items to the order */
-	
+	/*
+	 * n refers to the quantity desired of meal m
+	 * example: I want two pizzas marguerita
+	 * - m = marguerita
+	 * - n = 2
+	 */
+	/**
+	 * tested: YES
+	 * @param m
+	 * @param n
+	 */
 	public void addMeal(Meal m, int n){
 		if(!meals.containsKey(m)){
 			meals.put(m, n);
@@ -68,7 +96,11 @@ public class Order {
 			meals.put(m, prevValue + n);
 		}
 	}
-	
+	/**
+	 * tested: YES
+	 * @param i
+	 * @param n
+	 */
 	public void addItem(Item i, int n){
 		if(!items.containsKey(i)){
 			items.put(i, n);
@@ -80,7 +112,10 @@ public class Order {
 	
 	/***************************************************************************************************/
 	/* Methods to check if Basic Fidelity Card and Calculate Order Price */
-	
+	/**
+	 * tested: YES
+	 * @return
+	 */
 	public boolean isFidelityCardBasic(){
 		return(customer.getFidelityCard() instanceof FidelityCardBasic);
 	}
