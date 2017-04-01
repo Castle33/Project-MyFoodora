@@ -1,20 +1,33 @@
 package users;
-/*
+/**
  * Class that represents the address as a 2 dimensional coordinates
+ * @author Juan Castillo (programer)
+ * @author Pedro León (tester)
+ * tested: YES
  */
 public class Address {
 	
 	private int x;
 	private int y;
-	
+	/**
+	 * tested: YES
+	 * @param x
+	 * @param y
+	 */
 	public Address(int x, int y) {
 		super();
 		this.x = x;
 		this.y = y;
 	}
-	
+	/**
+	 * tested: YES
+	 * -before: 		return Math.hypot(this.x-address.x, this.y-address.y);
+	 * -after: 		return Math.hypot(x-address.getX(),y-address.getY());
+	 * @param address
+	 * @return
+	 */
 	public double calcDistance(Address address){
-		return Math.hypot(this.x-address.x, this.y-address.y);
+		return Math.hypot(x-address.getX(),y-address.getY());
 	}
 	
 	/***************************************************************************************************/
