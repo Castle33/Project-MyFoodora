@@ -540,6 +540,7 @@ public class Core implements Observable {
 	public void updateCourierState(User user, boolean newState){
 		if(user instanceof Courier){
 			Courier courier = (Courier) user;
+			courier.setPosition(courier.getCurrentOrder().getCustomer().getAddress());
 			if(!courier.getListPendingOrders().isEmpty() && !newState){
 				// Courier still has pending orders
 				courier.acceptOrder(courier.getListPendingOrders().removeFirst());
