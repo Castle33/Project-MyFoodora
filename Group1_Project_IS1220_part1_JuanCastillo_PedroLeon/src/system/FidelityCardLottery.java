@@ -1,14 +1,23 @@
 package system;
-
+/**
+ * 
+ * @author Juan Castillo (programer)
+ * @author Pedro León (tester)
+ *
+ */
 public class FidelityCardLottery implements FidelityCard{
 
 	private double lotteryProba;
-	
+	/**
+	 * tested: YES
+	 */
 	public FidelityCardLottery() {
 		super();
 		this.lotteryProba = 0.1;
 	}
-
+	/**
+	 * tested: YES
+	 */
 	@Override
 	public double applyFidelityPlan() {
 		if(Math.random() >= lotteryProba){

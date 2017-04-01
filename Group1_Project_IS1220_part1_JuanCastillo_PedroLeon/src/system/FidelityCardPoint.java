@@ -1,18 +1,27 @@
 package system;
-
+/**
+ * 
+ * @author Juan Castillo (programer)
+ * @author Pedro León (tester)
+ *
+ */
 public class FidelityCardPoint implements FidelityCard{
 	
 	private int points;
 	private double discount;
 	private int discPoints;
-	
+	/**
+	 * tested: YES
+	 */
 	public FidelityCardPoint() {
 		super();
 		this.points = 0;
 		this.discount = 0.1;
 		this.discPoints = 100;
 	}
-
+	/**
+	 * tested: YES
+	 */
 	@Override
 	public double applyFidelityPlan() {
 		if(points >= discPoints){

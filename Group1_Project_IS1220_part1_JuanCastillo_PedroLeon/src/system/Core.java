@@ -2,6 +2,7 @@ package system;
 
 import java.util.*;
 import users.*;
+import users.Observer;
 import restaurant_structure.*;
 
 /**
@@ -10,11 +11,14 @@ import restaurant_structure.*;
  *
  */
 
-public class Core {
+public class Core implements Observable {
 	
 	/* lists of system's users */
 	private User currentUser;
 	private HashMap<String,User> listOfUsers;
+	
+	/* list of user to be notified */
+	private List<User> listOfToNotify;
 	
 	/* Policies strategies */
 	private IDeliveryPolicy deliveryPolicy;
@@ -99,6 +103,41 @@ public class Core {
 	
 	/***************************************************************************************************/
 	/**
+	 * notify special offers related
+	 * observer pattern
+	 */
+	/* (non-Javadoc)
+	 * @see system.Observable#registerObserver(users.Observer)
+	 */
+	@Override
+	public void registerObserver(Observer observer) {
+		Customer c = (Customer) observer;
+		listOfToNotify.add(c);
+	}
+
+	/* (non-Javadoc)
+	 * @see system.Observable#removeObserver(users.Observer)
+	 */
+	@Override
+	public void removeObserver(Observer observer) {
+		Customer c = (Customer) observer;
+		listOfToNotify.remove(c);
+	}
+
+	/* (non-Javadoc)
+	 * @see system.Observable#notifyObservers(users.Observer)
+	 */
+	@Override
+	public void notifyObservers(Restaurant r, Meal m) {
+		for(User u : listOfToNotify){
+			Customer c = (Customer) u;
+			c.update( r, m);
+		}
+	}
+	
+	
+	/***************************************************************************************************/
+	/**
 	 * Manager methods
 	 * (DONE) add/remove any kind of user & activate/deactivate any kind of user
 	 * (DONE) changing the service fee/ markup-percentage / delivery cost
@@ -118,7 +157,7 @@ public class Core {
 			//throw exception
 		}
 	}
-	
+
 	public void deactivateUser(User user){
 		if(currentUser instanceof Manager){
 			listOfUsers.remove(user.getUsername(), user);
@@ -382,12 +421,15 @@ public class Core {
 			// throw exception
 		}
 	}
-	
+	/*
+	 * call notify observers to send them the new special offer included in 'meal'
+	 */
 	public void setSpecialMeal(Meal meal){
 		if(currentUser instanceof Restaurant){
 			if(((Restaurant) currentUser).getListOfMeal().contains(meal)){
 				((Restaurant) currentUser).getListOfMeal().remove(meal);
 				((Restaurant) currentUser).getListOfDiscountMeal().add(meal);
+				notifyObservers((Restaurant) currentUser, meal);
 			}else if(((Restaurant) currentUser).getListOfDiscountMeal().contains(meal)){
 				//throw exception meal already an special meal
 			}else{
@@ -414,7 +456,7 @@ public class Core {
 	 * (DONE) place orders
 	 * (DONE) register/unregister to/from a fidelity card plan
 	 * (DONE) access to information related to their account
-	 * -give/remove consensus to be notified whenever a new special offer
+	 * (DONE) give/remove consensus to be notified whenever a new special offer
 	 */
 	
 	public Order placeNewOrder(Restaurant restaurant){
@@ -454,6 +496,24 @@ public class Core {
 		} else {
 			//throw exception Not A Customer
 			return null;
+		}
+	}
+	/*
+	 * boolean b
+	 * -b = true gives consensus
+	 * -b = false removes consensus
+	 */
+	public void giveRemoveConsensus(boolean b){
+		if(currentUser instanceof Customer){
+			((Customer) currentUser).changeBeNotifyed(b);
+			listOfUsers.put(currentUser.getUsername(), currentUser);
+			if(b){
+				registerObserver((Customer) currentUser);
+			}else{
+				removeObserver((Customer) currentUser);
+			}
+		}else{
+			//throw exception NOT a Customer
 		}
 	}
 	
@@ -549,5 +609,7 @@ public class Core {
 			 */
 		}
 	}
+	
+	
 
 }

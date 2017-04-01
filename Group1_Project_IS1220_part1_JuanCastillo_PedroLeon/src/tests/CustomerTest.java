@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import system.FidelityCardLottery;
 import system.FidelityCardBasic;
+import system.FidelityCardPoint;
 import users.Address;
 import users.Customer;
 
@@ -37,22 +38,40 @@ public class CustomerTest {
 
 	@Test
 	public void testSetFidelityCardtoPoints() {
-		fail("Not yet implemented");
+		Address a = new Address(3,4);
+		Customer c = new Customer("Juan", "jcastillo33", "Castillo", a, "jcastillo@gmail.com", "630285192", "newpassword");
+		c.setFidelityCardtoPoints();
+		assertTrue((c.getFidelityCard() instanceof FidelityCardPoint) == true) ;
 	}
 
 	@Test
 	public void testSetFidelityCardtoLottery() {
-		fail("Not yet implemented");
+		Address a = new Address(3,4);
+		Customer c = new Customer("Juan", "jcastillo33", "Castillo", a, "jcastillo@gmail.com", "630285192", "newpassword");
+		c.setFidelityCardtoLottery();
+		assertTrue((c.getFidelityCard() instanceof FidelityCardLottery) == true) ;
 	}
 
 	@Test
 	public void testGetNumberFidelityPoints() {
-		fail("Not yet implemented");
+		Address a1 = new Address(3,4);
+		Address a2 = new Address(6,8);
+		Customer c1 = new Customer("Juan", "jcastillo33", "Castillo", a1, "jcastillo@gmail.com", "630285192", "newpassword");
+		Customer c2 = new Customer("Pedro", "pleonpita", "Leon", a2, "pleonpita@gmail.com", "0695599143", "newpassword2");
+		c1.setFidelityCardtoPoints();
+		c2.setFidelityCardtoBasic();
+		assertTrue(c1.getNumberFidelityPoints() == 0 && c2.getNumberFidelityPoints() == 0) ;
 	}
 
 	@Test
 	public void testAddFidelityPoints() {
-		fail("Not yet implemented");
+		Address a1 = new Address(3,4);
+		Customer c1 = new Customer("Juan", "jcastillo33", "Castillo", a1, "jcastillo@gmail.com", "630285192", "newpassword");
+		c1.setFidelityCardtoPoints();
+		c1.addFidelityPoints(10);
+		FidelityCardPoint fcp = (FidelityCardPoint) c1.getFidelityCard();
+		System.out.println(fcp.getPoints() == 10);
+		
 	}
 
 	@Test
