@@ -88,13 +88,13 @@ public class Courier extends User{
 	
 	public void addNewOrder(Order order){
 		Order tempOrder = order;
-		tempOrder.setCourier(this);
+		tempOrder.setAssignedCourier(true);
 		this.listPendingOrders.add(tempOrder);
 	}
 	
 	public boolean acceptOrder(Order order){
 		this.currentOrder = order;
-		this.currentOrder.setCourier(this);
+		this.currentOrder.setAssignedCourier(true);
 		this.currentOrder.calcDeliveryTime();
 		countOfOrdersCompleted++;
 		this.onDuty = true;

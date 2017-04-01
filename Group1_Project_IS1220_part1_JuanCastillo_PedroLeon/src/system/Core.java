@@ -579,7 +579,7 @@ public class Core implements Observable {
 			LinkedList<Courier> currentSortedCouriers = this.deliveryPolicy.setDeliveryPolicy(listCouriers, order.getRestaurant().getAddress());
 			//This while loop tries to address a Courier to an order until 
 			//it does it or no Courier is available or wants to take the order
-			while(order.getCourier() == null && !currentSortedCouriers.isEmpty()){
+			while(!order.isAssignedCourier() && !currentSortedCouriers.isEmpty()){
 				courier = currentSortedCouriers.getFirst();
 				if(!courier.isOnDuty()){
 					if(courier.decideTakingOrder(order)){
@@ -596,7 +596,7 @@ public class Core implements Observable {
 			}
 			//This while loop tries to add the order to the listPendingOrders of a Courier until
 			//it does it or no Courier wants to add the order
-			while(currentSortedCouriers.isEmpty() && !currentCouriersOnDuty.isEmpty() && order.getCourier() == null){
+			while(currentSortedCouriers.isEmpty() && !currentCouriersOnDuty.isEmpty() && !order.isAssignedCourier()){
 				Collections.sort(currentCouriersOnDuty,Courier.compareDeliveyDate());
 				if(currentCouriersOnDuty.getFirst().decideAddOrder(order)){
 					this.listOfCompletedOrders.add(currentCouriersOnDuty.removeFirst().getCurrentOrder());

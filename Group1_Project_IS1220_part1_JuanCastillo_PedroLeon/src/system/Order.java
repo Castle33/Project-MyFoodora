@@ -16,7 +16,7 @@ public class Order {
 	private Restaurant restaurant;
 	private HashMap<Meal,Integer> meals;
 	private HashMap<Item,Integer> items;
-	private Courier courier;
+	private boolean assignedCourier;
 	private double priceFood;
 	private double priceTotal;
 	private Calendar date;
@@ -112,7 +112,7 @@ public class Order {
 	@Override
 	public String toString() {
 		return "Order [ID=" + ID + ", customer=" + customer + ", restaurant=" + restaurant + ", meals=" + meals
-				+ ", items=" + items + ", courier=" + courier + ", priceFood=" + priceFood + ", priceTotal="
+				+ ", items=" + items + ", assignedCourier=" + assignedCourier + ", priceFood=" + priceFood + ", priceTotal="
 				+ priceTotal + ", date=" + date + "]";
 	}
 
@@ -152,12 +152,12 @@ public class Order {
 		this.items = items;
 	}
 
-	public Courier getCourier() {
-		return courier;
+	public boolean isAssignedCourier() {
+		return assignedCourier;
 	}
 
-	public void setCourier(Courier courier) {
-		this.courier = courier;
+	public void setAssignedCourier(boolean assignedCourier) {
+		this.assignedCourier = assignedCourier;
 	}
 
 	public double getPriceFood() {
