@@ -5,7 +5,7 @@ import java.util.List;
 public class ItemFactory extends AbstractFactory{
 	
 	@Override
-	Item getItem(String itemType, String name, double price, String foodType) {
+	public Item getItem(String itemType, String name, double price, String foodType) {
 		if(itemType.equalsIgnoreCase("STARTER")){
 			return new Starter(name,price,foodType);
 		}else if(itemType.equalsIgnoreCase("MAINDISH")){
@@ -16,7 +16,7 @@ public class ItemFactory extends AbstractFactory{
 		return null;
 	}
 	
-	Item getItem(String itemType, String name, double price) {
+	public Item getItem(String itemType, String name, double price) {
 		if(itemType.equalsIgnoreCase("STARTER")){
 			return new Starter(name,price);
 		}else if(itemType.equalsIgnoreCase("MAINDISH")){
@@ -28,7 +28,7 @@ public class ItemFactory extends AbstractFactory{
 	}
 
 	@Override
-	Meal getMeal(String mealType, String name, List<Item> mealItems) {
+	public Meal getMeal(String mealType, String name, List<Item> mealItems) {
 		return null;
 	}
 	

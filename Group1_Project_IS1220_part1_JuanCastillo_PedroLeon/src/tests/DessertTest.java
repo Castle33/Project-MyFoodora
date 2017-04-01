@@ -1,6 +1,5 @@
 package tests;
 
-import static org.junit.Assert.*;
 import restaurant_structure.*;
 
 import org.junit.Test;

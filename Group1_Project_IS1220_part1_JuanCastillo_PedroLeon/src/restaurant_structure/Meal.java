@@ -76,7 +76,7 @@ public abstract class Meal {
 	}
 
 
-	public void setMealItems(List<Item> mealItems) {
+	public void setMealItems(List<Item> mealItems) throws Exception{
 		this.mealItems = mealItems;
 	}
 
