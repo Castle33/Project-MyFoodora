@@ -95,7 +95,7 @@ public class Courier extends User{
 	public boolean acceptOrder(Order order){
 		this.currentOrder = order;
 		this.currentOrder.setAssignedCourier(true);
-		this.currentOrder.calcDeliveryTime();
+		this.currentOrder.calcDeliveryTime(this.getPosition());
 		countOfOrdersCompleted++;
 		this.onDuty = true;
 		return true;

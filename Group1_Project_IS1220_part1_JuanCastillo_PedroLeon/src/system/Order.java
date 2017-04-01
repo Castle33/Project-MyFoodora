@@ -6,7 +6,7 @@ import restaurant_structure.Meal;
 import restaurant_structure.Item;
 import users.Customer;
 import users.Restaurant;
-import users.Courier;
+import users.Address;
 /**
  * 
  * @author Juan Castillo (programmer)
@@ -68,10 +68,11 @@ public class Order {
 	 * the division of 5000 between 13.9 can give a range of values between [360000,360005] (ms)
 	 * @return
 	 */
-	public Calendar calcDeliveryTime(){
+	public Calendar calcDeliveryTime(Address address){
 		int deliveryTime = (int) Math.round(customer.getAddress().calcDistance(restaurant.getAddress())/13.9);
+		int courierRestTime = (int) Math.round(address.calcDistance(restaurant.getAddress())/13.9);
 		deliveryDate = Calendar.getInstance();
-		deliveryDate.add(Calendar.SECOND, deliveryTime);
+		deliveryDate.add(Calendar.SECOND, deliveryTime + courierRestTime);
 		return deliveryDate;
 	}
 	
