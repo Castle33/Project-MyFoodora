@@ -414,7 +414,7 @@ public class Core implements Observable {
 				m.toString();
 			}
 			System.out.println("Special meal list display:");
-			for(Meal dm : ((Restaurant) currentUser).getListOfDiscountMeal()){
+			for(Meal dm : ((Restaurant) currentUser).getListOfSpecialMeal()){
 				dm.toString();
 			}
 		}else{
@@ -428,9 +428,9 @@ public class Core implements Observable {
 		if(currentUser instanceof Restaurant){
 			if(((Restaurant) currentUser).getListOfMeal().contains(meal)){
 				((Restaurant) currentUser).getListOfMeal().remove(meal);
-				((Restaurant) currentUser).getListOfDiscountMeal().add(meal);
+				((Restaurant) currentUser).getListOfSpecialMeal().add(meal);
 				notifyObservers((Restaurant) currentUser, meal);
-			}else if(((Restaurant) currentUser).getListOfDiscountMeal().contains(meal)){
+			}else if(((Restaurant) currentUser).getListOfSpecialMeal().contains(meal)){
 				//throw exception meal already an special meal
 			}else{
 				//throw exception meal not in the menu
@@ -441,7 +441,7 @@ public class Core implements Observable {
 	public void removeSpecialMeal(Meal meal){
 		if(currentUser instanceof Restaurant){
 			if(((Restaurant) currentUser).getListOfMeal().contains(meal)){
-				((Restaurant) currentUser).getListOfDiscountMeal().remove(meal);
+				((Restaurant) currentUser).getListOfSpecialMeal().remove(meal);
 				((Restaurant) currentUser).getListOfMeal().add(meal);
 			}else if(((Restaurant) currentUser).getListOfMeal().contains(meal)){
 				//throw exception meal already not a special meal
@@ -505,7 +505,7 @@ public class Core implements Observable {
 	 */
 	public void giveRemoveConsensus(boolean b){
 		if(currentUser instanceof Customer){
-			((Customer) currentUser).changeBeNotifyed(b);
+			((Customer) currentUser).changeBeNotified(b);
 			listOfUsers.put(currentUser.getUsername(), currentUser);
 			if(b){
 				registerObserver((Customer) currentUser);
