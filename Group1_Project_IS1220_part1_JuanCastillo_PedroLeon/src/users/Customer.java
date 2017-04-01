@@ -106,8 +106,11 @@ public class Customer extends User implements Observer{
 			System.out.println("Fidelity Card is not of type Points");
 		}
 	}
-	
-	public void changeBeNotifyed(boolean b){
+	/**
+	 * tested: YES
+	 * @param b
+	 */
+	public void changeBeNotified(boolean b){
 		setBeNotified(b);
 	}
 	

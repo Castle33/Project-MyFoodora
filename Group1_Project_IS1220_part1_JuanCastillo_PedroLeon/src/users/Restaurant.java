@@ -3,7 +3,12 @@ package users;
 import java.util.ArrayList;
 
 import restaurant_structure.*;
-
+/**
+ * 
+ * @author Juan Castillo (programmer)
+ * @author Pedro León (tester)
+ *
+ */
 public class Restaurant extends User{
 	
 	private Address address;
@@ -13,7 +18,13 @@ public class Restaurant extends User{
 	private ArrayList<Meal> listOfSpecialMeal;
 	private ArrayList<Meal> listOfMeal;
 	private int countOfOrdersCompleted;
-	
+	/**
+	 * tested: YES
+	 * @param name
+	 * @param username
+	 * @param password
+	 * @param address
+	 */
 	public Restaurant(String name, String username, String password, Address address) {
 		super(name, username, password);
 		this.address = address;
@@ -33,24 +44,45 @@ public class Restaurant extends User{
 	/*
 	 * Add and remove methods
 	 */
-	
+	/**
+	 * tested: YES
+	 * @param starter
+	 */
 	public void addStarter (Starter starter){
 		menu.addStarter(starter);
 	}
+	/**
+	 * tested: YES
+	 * @param starter
+	 */
 	public void removeStarter(Starter starter){
 		menu.removeStarter(starter);
 	}
-	
+	/**
+	 * tested: YES
+	 * @param mainDish
+	 */
 	public void addMainDish (MainDish mainDish){
 		menu.addMainDish(mainDish);
 	}
+	/**
+	 * tested: YES
+	 * @param mainDish
+	 */
 	public void removeMainDish(MainDish mainDish){
 		menu.removeMainDish(mainDish);
 	}
-	
+	/**
+	 * tested: YES
+	 * @param dessert
+	 */
 	public void addDessert (Dessert dessert){
 		menu.addDessert(dessert);
 	}
+	/**
+	 * tested: YES
+	 * @param dessert
+	 */
 	public void removeDessert(Dessert dessert){
 		menu.removeDessert(dessert);
 	}
@@ -92,7 +124,11 @@ public class Restaurant extends User{
 		}
 		return null;
 	}
-	
+	/**
+	 * tested: YES
+	 * @param itemName
+	 * @return
+	 */
 	public Item getItemByName(String itemName){
 		for(Item i : menu.getStarters()){
 			if(i.getName().equalsIgnoreCase(itemName)){
@@ -120,7 +156,11 @@ public class Restaurant extends User{
 		}
 		return false;
 	}
-	
+	/**
+	 * tested: YES
+	 * @param n
+	 * @return
+	 */
 	public double round2dec (double n){
 		return Math.round(n*100.0)/100.0;
 	}

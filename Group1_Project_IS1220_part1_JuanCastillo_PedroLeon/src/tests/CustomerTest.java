@@ -9,6 +9,8 @@ import system.FidelityCardBasic;
 import system.FidelityCardPoint;
 import users.Address;
 import users.Customer;
+import users.Restaurant;
+import restaurant_structure.Meal;
 
 public class CustomerTest {
 
@@ -76,7 +78,13 @@ public class CustomerTest {
 
 	@Test
 	public void testChangeBeNotified() {
-		fail("Not yet implemented");
+		Address a1 = new Address(3,4);
+		Address a2 = new Address(6,8);
+		Customer c1 = new Customer("Juan", "jcastillo33", "Castillo", a1, "jcastillo@gmail.com", "630285192", "newpassword");
+		Customer c2 = new Customer("Pedro", "pleonpita", "Leon", a2, "pleonpita@gmail.com", "0695599143", "newpassword2");
+		c1.changeBeNotified(true);
+		c2.changeBeNotified(false);
+		assertTrue(c1.isBeNotified() == true && c2.isBeNotified() == false);
 	}
 
 	@Test
