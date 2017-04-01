@@ -2,8 +2,9 @@ package restaurant_structure;
 
 /**
  * 
- * @author Pedro León
- *
+ * @author Pedro León (programer)
+ * @author Juan Castillo (tester)
+ * tested: YES
  */
 
 public class Starter extends Item {

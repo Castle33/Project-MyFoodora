@@ -1,5 +1,12 @@
 package restaurant_structure;
 
+/**
+ * 
+ * @author Pedro León (programer)
+ * @author Juan Castillo (tester)
+ * tested: YES
+ */
+
 import java.util.List;
 
 public class HalfMeal extends Meal {
