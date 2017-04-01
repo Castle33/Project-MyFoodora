@@ -57,7 +57,7 @@ public class OrderTest {
 		
 		Calendar time = o6.calcDeliveryTime(a3);
 		Calendar initTime = Calendar.getInstance();
-		System.out.println("Delivery time: " + (time.getTimeInMillis() - initTime.getTimeInMillis()));
+		assertTrue((time.getTimeInMillis() - initTime.getTimeInMillis()) == 504000);
 	}
 
 	@Test
@@ -144,7 +144,6 @@ public class OrderTest {
 		o1.addMeal(hm, 1);
 		o1.addItem(m, 1);
 		
-		System.out.println(o1.calcPrice());
 		assertTrue(o1.calcPrice() == 19.2 || o1.calcPrice() == 0.0);
 	}
 
