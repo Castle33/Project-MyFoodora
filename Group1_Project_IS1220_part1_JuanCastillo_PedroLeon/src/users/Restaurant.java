@@ -4,10 +4,11 @@ import java.util.ArrayList;
 
 import restaurant_structure.*;
 /**
- * 
+ * tested
  * @author Juan Castillo (programmer)
  * @author Pedro León (tester)
- *
+ * tested: YES
+ * list of methods changed: addSpecialMeal; getPriceMeal; getMealByName
  */
 public class Restaurant extends User{
 	
@@ -58,6 +59,7 @@ public class Restaurant extends User{
 	public void removeStarter(Starter starter){
 		menu.removeStarter(starter);
 	}
+	
 	/**
 	 * tested: YES
 	 * @param mainDish
@@ -72,6 +74,7 @@ public class Restaurant extends User{
 	public void removeMainDish(MainDish mainDish){
 		menu.removeMainDish(mainDish);
 	}
+	
 	/**
 	 * tested: YES
 	 * @param dessert
@@ -87,16 +90,35 @@ public class Restaurant extends User{
 		menu.removeDessert(dessert);
 	}
 	
+	/**
+	 * tested: YES
+	 * @param meal
+	 */
 	public void addMeal(Meal meal) {
 		listOfMeal.add(meal);
 	}
+	/**
+	 * tested: YES
+	 * @param meal
+	 */
 	public void removeMeal(Meal meal) {
 		listOfMeal.remove(meal);
 	}
 	
+	/**
+	 * tested: YES
+	 * changed getter/setter of listOfSpecialMeal
+	 * -before: getListOfDiscountMeal/setListOfDiscountMeal
+	 * -after: getListOfSpecialMeal/setListOfSpecialMeal
+	 * @param meal
+	 */
 	public void addSpecialMeal(Meal meal) {
 		listOfSpecialMeal.add(meal);
 	}
+	/**
+	 * tested: YES
+	 * @param meal
+	 */
 	public void removeSpecialMeal(Meal meal) {
 		listOfSpecialMeal.remove(meal);
 	}
@@ -105,19 +127,38 @@ public class Restaurant extends User{
 	/*
 	 * Various methods: Get Price Meal, Get Meal/Item by name, Determine if Menu is Special, Round Value to 2 decimals
 	 */
-	
+	/**
+	 * tested: YES
+	 * changed if statement to differentiate SpecialMeal from Meal
+	 * - before: 		} else if(determineIfDiscountMeal(meal)){
+	 * - after: 		} else if(!determineIfDiscountMeal(meal)){
+	 * @param meal
+	 * @return
+	 */
 	public double getPriceMeal (Meal meal){
 		if(!listOfSpecialMeal.contains(meal) && !listOfMeal.contains(meal)){
 			System.out.println("This meal is not in the Restaurant menu");
 			throw new NullPointerException();
-		} else if(determineIfDiscountMeal(meal)){
+		} else if(!determineIfDiscountMeal(meal)){
 			return round2dec(meal.getFullPrice()*(1-getDiscountFactor()));
 		}
 		return round2dec(meal.getFullPrice()*(1-getSpecialDiscountFactor()));
 	}
-	
+	/**
+	 * tested: YES
+	 * changed added for loop to search meal in listOfSpecialMeal too
+	 * - before: for loop only for listOfMeal
+	 * - after: for loop for both listOfMeal and listOfSpecialMeal
+	 * @param mealName
+	 * @return
+	 */
 	public Meal getMealByName(String mealName){
 		for(Meal m :listOfMeal){
+			if(m.getName().equalsIgnoreCase(mealName)){
+				return m;
+			}
+		}
+		for(Meal m : listOfSpecialMeal){
 			if(m.getName().equalsIgnoreCase(mealName)){
 				return m;
 			}
@@ -229,14 +270,14 @@ public class Restaurant extends User{
 	/**
 	 * @return the listOfDiscountMeal
 	 */
-	public ArrayList<Meal> getListOfDiscountMeal() {
+	public ArrayList<Meal> getListOfSpecialMeal() {
 		return listOfSpecialMeal;
 	}
 
 	/**
 	 * @param listOfDiscountMeal the listOfDiscountMeal to set
 	 */
-	public void setListOfDiscountMeal(ArrayList<Meal> listOfDiscountMeal) {
+	public void setListOfSpecialMeal(ArrayList<Meal> listOfDiscountMeal) {
 		this.listOfSpecialMeal = listOfDiscountMeal;
 	}
 
