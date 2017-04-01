@@ -11,7 +11,7 @@ import users.Address;
  * 
  * @author Juan Castillo (programmer)
  * @author Pedro León (coder)
- * tested: NO
+ * tested: YES
  */
 public class Order {
 	
@@ -120,7 +120,10 @@ public class Order {
 	public boolean isFidelityCardBasic(){
 		return(customer.getFidelityCard() instanceof FidelityCardBasic);
 	}
-	
+	/**
+	 * tested: YES
+	 * @return
+	 */
 	public double calcPrice(){
 		double price = 0.0;
 		
