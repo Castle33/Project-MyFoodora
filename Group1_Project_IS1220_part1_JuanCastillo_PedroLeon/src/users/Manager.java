@@ -1,9 +1,20 @@
 package users;
-
+/**
+ * 
+ * @author Juan Castillo (programmer)
+ * @author Pedro León (tester)
+ * tested: YES
+ */
 public class Manager extends User {
 	
 	private String surname;
-
+	/**
+	 * tested: YES
+	 * @param name
+	 * @param username
+	 * @param password
+	 * @param surname
+	 */
 	public Manager(String name, String username, String password, String surname) {
 		super(name, username, password);
 		this.surname = surname;
