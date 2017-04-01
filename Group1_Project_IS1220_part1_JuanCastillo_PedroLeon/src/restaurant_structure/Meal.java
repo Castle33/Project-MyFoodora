@@ -10,11 +10,6 @@ public abstract class Meal {
 	private double fullPrice;
 	private String type;
 	
-	public Meal (String name){
-		this.name = name;
-		this.mealItems = new ArrayList<Item>();
-	}
-	
 	public Meal(String name, List<Item> mealItems){
 		this.name = name;
 		this.mealItems = mealItems;
@@ -76,8 +71,41 @@ public abstract class Meal {
 	}
 
 
-	public void setMealItems(List<Item> mealItems) throws Exception{
+	public void setMealItems(List<Item> mealItems){
 		this.mealItems = mealItems;
+		if(this instanceof HalfMeal){
+			if(mealItems.size() != 2){
+				System.out.println("Error: HalfMeal must contain only two Items");
+			}
+		} else if (this instanceof FullMeal){
+			if(mealItems.size() != 3){
+				System.out.println("Error: FullMeal must contain only two Items");
+			}
+		}
+		/*
+		 * for getting the meal type we check by pairs of items if they have the same type
+		 * to check by pairs we need an auxiliary variable Item to take the values of the precedent item in the list
+		 */
+		
+		Item auxItem = mealItems.get(0);
+		boolean resFoodType = true;
+		fullPrice = 0.0;
+		for(Item i : mealItems){
+			fullPrice += i.getPrice();
+			if(auxItem.getFoodType()==i.getFoodType()){
+				resFoodType = true;
+			}else{
+				resFoodType = false;
+			}
+			auxItem = i;
+		}
+		
+		// finally if the result is false then the food type is standard, for a true result we take the same as dish type
+		if(resFoodType == false){
+			this.type = "standard";
+		}else{
+			this.type = auxItem.getFoodType();
+		}
 	}
 
 
