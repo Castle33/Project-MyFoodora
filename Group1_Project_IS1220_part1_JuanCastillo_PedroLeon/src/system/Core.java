@@ -1,6 +1,8 @@
 package system;
 
 import java.util.*;
+
+import exceptions.AccessDeniedException;
 import users.*;
 import users.Observer;
 import restaurant_structure.*;
@@ -552,20 +554,20 @@ public class Core implements Observable {
 	 */
 	
 	/* Register/unregister method, for register use registerUser method*/
-	public void unregisterCourier(User user){
+	public void unregisterCourier(User user) throws AccessDeniedException{
 		System.out.println("Unregister demand");
 		if(user instanceof Courier){
 			listOfUsers.remove(user);
 			System.out.println("Courier:" + user + "unregistered.");
 		}else{
-			//throw exception not a courier
+			throw new AccessDeniedException();
 		}
 	}
 	
 	/* off-duty update (current delivered): we consider that the courier puts him as OffDuty once 
 	 * he has delivered his currentOrder.
 	 * The courier automaticaly is set OnDuty when accepting an order (courier.acceptOrder) */
-	public void updateCourierState(User user){
+	public void updateCourierState(User user) throws AccessDeniedException{
 		if(user instanceof Courier){
 			Courier courier = (Courier) user;
 			courier.setPosition(courier.getCurrentOrder().getCustomer().getAddress());
@@ -577,7 +579,7 @@ public class Core implements Observable {
 			}
 			listOfUsers.put(courier.getUsername(), courier);
 		}else{
-			//throw exception not a courier
+			throw new AccessDeniedException();
 		}
 	}
 	
