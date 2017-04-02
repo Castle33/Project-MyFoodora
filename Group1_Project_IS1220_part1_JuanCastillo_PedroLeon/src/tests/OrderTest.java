@@ -47,17 +47,19 @@ public class OrderTest {
 	@Test
 	public void testCalcDeliveryTime() {
 		
-		Address a1 = new Address(3000,4000);
+		Address a1 = new Address(5560,2780);
 		Customer c1 = new Customer("Juan", "jcastillo33", "Castillo", a1, "jcastillo@gmail.com", "630285192", "newpassword");
-		Address a2 = new Address(3000,0);
+		Address a2 = new Address(2224,-1668);
 		Restaurant r = new Restaurant("TGF", "TGFParis", "newpasswordr", a2);
 		Order o6 = new Order(c1,r);
 		
 		Address a3 = new Address(0,0);
-		
+
+		Calendar initTime = o6.getDate();
 		Calendar time = o6.calcDeliveryTime(a3);
-		Calendar initTime = Calendar.getInstance();
-		assertTrue((time.getTimeInMillis() - initTime.getTimeInMillis()) == 504000);
+		long courseTime = time.getTimeInMillis() - initTime.getTimeInMillis();
+		System.out.println(courseTime);
+		assertTrue(courseTime == 600000);
 	}
 
 	@Test

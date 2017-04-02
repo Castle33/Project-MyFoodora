@@ -65,7 +65,7 @@ public class Order {
 	 */
 	/**
 	 * tested: YES
-	 * the division of 5000 between 13.9 can give a range of values between [360000,360005] (ms)
+	 * the division of 13900 (m) between 13.9 (m/s) gives exactly 1000 (s)
 	 * @return
 	 */
 	public Calendar calcDeliveryTime(Address address){
