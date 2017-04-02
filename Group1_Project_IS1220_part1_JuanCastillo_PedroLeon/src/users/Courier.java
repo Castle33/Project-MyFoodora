@@ -74,7 +74,7 @@ public class Courier extends User{
 		};
 	}
 	//Compares Couriers depending on the delivery Date of their current order
-	public static Comparator<Courier> compareDeliveyDate(){
+	public static Comparator<Courier> compareDeliveryDate(){
 		return new Comparator<Courier>(){
 			@Override
 			public int compare(Courier arg0, Courier arg1) {

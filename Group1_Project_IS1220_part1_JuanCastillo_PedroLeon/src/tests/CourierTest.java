@@ -51,7 +51,7 @@ public class CourierTest {
 	}
 
 	@Test
-	public void testCompareDeliveyDate() {
+	public void testCompareDeliveryDate() {
 		Courier c = new Courier("c","pleon","password1","c",new Address(0,0),"0754641222");
 		Courier d = new Courier("d","lucho","password2","d",new Address(0,0),"0654641222");
 		Courier e = new Courier("e","lu","password3","e",new Address(0,0),"0664641222");
@@ -73,7 +73,7 @@ public class CourierTest {
 		clist.addLast(d);
 		clist.addLast(e);
 		clist.addLast(c);
-		Collections.sort(clist, Courier.compareDeliveyDate());
+		Collections.sort(clist, Courier.compareDeliveryDate());
 		assertTrue(clist.get(0).equals(c));
 		assertTrue(clist.get(1).equals(d));
 		assertTrue(clist.get(2).equals(e));

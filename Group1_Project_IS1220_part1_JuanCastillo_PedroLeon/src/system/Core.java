@@ -626,7 +626,7 @@ public class Core implements Observable {
 			//This while loop tries to add the order to the listPendingOrders of a Courier until
 			//it does it or no Courier wants to add the order
 			while(currentSortedCouriers.isEmpty() && !currentCouriersOnDuty.isEmpty() && !order.isAssignedCourier()){
-				Collections.sort(currentCouriersOnDuty,Courier.compareDeliveyDate());
+				Collections.sort(currentCouriersOnDuty,Courier.compareDeliveryDate());
 				if(currentCouriersOnDuty.getFirst().decideAddOrder(order)){
 					this.listOfCompletedOrders.add(currentCouriersOnDuty.removeFirst().getCurrentOrder());
 					this.listOfPendingOrders.removeFirst();
