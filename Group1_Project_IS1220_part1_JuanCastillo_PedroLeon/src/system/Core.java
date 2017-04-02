@@ -105,67 +105,6 @@ public class Core implements Observable {
 	
 	/***************************************************************************************************/
 	/**
-	 * delivery policies related
-	 * behavioral pattern
-	 */
-	// TO DO
-	
-	/***************************************************************************************************/
-	/**
-	 * shipped order sorting policies related
-	 * behavioral pattern
-	 */
-	// TO DO
-	
-	/***************************************************************************************************/
-	/**
-	 * special orders notifications related
-	 * observer pattern
-	 */
-	
-	/***************************************************************************************************/
-	/**
-	 * pricing and fidelity related
-	 */
-	// TO DO
-	
-	/***************************************************************************************************/
-	/**
-	 * notify special offers related
-	 * observer pattern
-	 */
-	/* (non-Javadoc)
-	 * @see system.Observable#registerObserver(users.Observer)
-	 */
-	@Override
-	public void registerObserver(Observer observer) {
-		Customer c = (Customer) observer;
-		listOfToNotify.add(c);
-	}
-
-	/* (non-Javadoc)
-	 * @see system.Observable#removeObserver(users.Observer)
-	 */
-	@Override
-	public void removeObserver(Observer observer) {
-		Customer c = (Customer) observer;
-		listOfToNotify.remove(c);
-	}
-
-	/* (non-Javadoc)
-	 * @see system.Observable#notifyObservers(users.Observer)
-	 */
-	@Override
-	public void notifyObservers(Restaurant r, Meal m) {
-		for(User u : listOfToNotify){
-			Customer c = (Customer) u;
-			c.update( r, m);
-		}
-	}
-	
-	
-	/***************************************************************************************************/
-	/**
 	 * Manager methods
 	 * (DONE) add/remove any kind of user & activate/deactivate any kind of user
 	 * (DONE) changing the service fee/ markup-percentage / delivery cost
@@ -428,6 +367,40 @@ public class Core implements Observable {
 			deliveryPolicy = new DeliveryFairOccupation();
 		}else{
 			throw new AccessDeniedException();
+		}
+	}
+	
+	/***************************************************************************************************/
+	/**
+	 * notify special offers related
+	 * observer pattern
+	 */
+	/* (non-Javadoc)
+	 * @see system.Observable#registerObserver(users.Observer)
+	 */
+	@Override
+	public void registerObserver(Observer observer) {
+		Customer c = (Customer) observer;
+		listOfToNotify.add(c);
+	}
+
+	/* (non-Javadoc)
+	 * @see system.Observable#removeObserver(users.Observer)
+	 */
+	@Override
+	public void removeObserver(Observer observer) {
+		Customer c = (Customer) observer;
+		listOfToNotify.remove(c);
+	}
+
+	/* (non-Javadoc)
+	 * @see system.Observable#notifyObservers(users.Observer)
+	 */
+	@Override
+	public void notifyObservers(Restaurant r, Meal m) {
+		for(User u : listOfToNotify){
+			Customer c = (Customer) u;
+			c.update( r, m);
 		}
 	}
 	

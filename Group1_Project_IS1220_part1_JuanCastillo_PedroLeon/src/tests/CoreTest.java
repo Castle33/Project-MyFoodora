@@ -4,34 +4,14 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.LinkedList;
 
 import org.junit.Test;
 
-import exceptions.AccessDeniedException;
-import exceptions.UsernameAlreadyRegisteredException;
-import restaurant_structure.Dessert;
-import restaurant_structure.HalfMeal;
-import restaurant_structure.Item;
-import restaurant_structure.MainDish;
-import restaurant_structure.Starter;
-import system.Core;
-import system.DeliveryFastest;
-import system.DeliveryFairOccupation;
-import system.Order;
-import system.TargetProfitDeliveryCost;
-import system.TargetProfitMarkup;
-import system.TargetProfitServiceFee;
-import system.FidelityCardPoint;
-import system.FidelityCardBasic;
-import system.FidelityCardLottery;
-import users.Manager;
-import users.Restaurant;
-import users.User;
-import users.Address;
-import users.Courier;
-import users.Customer;
+import exceptions.*;
+import restaurant_structure.*;
+import system.*;
+import users.*;
 
 public class CoreTest {
 	
