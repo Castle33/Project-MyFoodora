@@ -1,5 +1,12 @@
 package system;
 
+/**
+ * 
+ * @author Juan Castillo (programer)
+ * @author Pedro León (tester)
+ * tested: YES
+ */
+
 import users.Courier;
 import users.Address;
 
@@ -9,7 +16,7 @@ import java.util.LinkedList;
 public class DeliveryFastest implements IDeliveryPolicy{
 	
 	private LinkedList<Courier> listSortedCouriers;
-	Address restAddress;
+	private Address restAddress;
 	
 	
 	
@@ -33,5 +40,22 @@ public class DeliveryFastest implements IDeliveryPolicy{
 		Collections.sort(listSortedCouriers, Courier.compareDistance());
 		return listSortedCouriers;
 	}
+
+	public LinkedList<Courier> getListSortedCouriers() {
+		return listSortedCouriers;
+	}
+
+	public void setListSortedCouriers(LinkedList<Courier> listSortedCouriers) {
+		this.listSortedCouriers = listSortedCouriers;
+	}
+
+	public Address getRestAddress() {
+		return restAddress;
+	}
+
+	public void setRestAddress(Address restAddress) {
+		this.restAddress = restAddress;
+	}
+	
 	
 }

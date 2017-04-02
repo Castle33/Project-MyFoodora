@@ -1,5 +1,12 @@
 package system;
 
+/**
+ * 
+ * @author Juan Castillo (programer)
+ * @author Pedro León (tester)
+ * tested: YES
+ */
+
 import users.Courier;
 import users.Address;
 
@@ -29,5 +36,15 @@ public class DeliveryFairOccupation implements IDeliveryPolicy {
 		Collections.sort(listSortedCouriers, Courier.compareNumOrders());
 		return listSortedCouriers;
 	}
+
+	public LinkedList<Courier> getListSortedCouriers() {
+		return listSortedCouriers;
+	}
+
+	public void setListSortedCouriers(LinkedList<Courier> listSortedCouriers) {
+		this.listSortedCouriers = listSortedCouriers;
+	}
+	
+	
 
 }
