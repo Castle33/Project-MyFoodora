@@ -27,10 +27,35 @@ import users.Courier;
 import users.Customer;
 
 public class CoreTest {
+	
+	/* Core */
+	Core c = new Core();
+
+	/* Address */
+	Address a1 = new Address(3,4);
+	Address a2 = new Address(3,4);
+	Address a3 = new Address(3,4);
+	Address a4 = new Address(6,8);
+	
+	/* Users - register/logIn must be done in each test */
+	Manager m = (Manager) c.getListOfMasterManager().get(1);
+	Customer cu1 = new Customer("Luis", "luiscobas", "Cobas", a1, "lcobas@gmail.com", "630285192", "newpassword");
+	Customer cu2 = new Customer("Juan", "jcastillo33", "Castillo", a3, "jcastillo@gmail.com", "630285192", "newpassword");
+	Customer cu3 = new Customer("Pedro", "pleonpita", "Leon", a4, "pleonpita@gmail.com", "0695599143", "newpassword2");
+	Restaurant r1 = new Restaurant("La Playa", "LaPlayaBilbao", "newpasswordr", a1);
+	Courier co1 = new Courier("luiso","lucho","password1","cobas",new Address(4,8),"0654641222");
+	
+	/* Items */
+	Starter s1 = new Starter("Tortilla", 5.5, "Standard");
+	MainDish md1 = new MainDish("Bacalao", 15.5, "GlutenFree");
+	Dessert d1 = new Dessert("Melon", 4, "Standard");
+	
+	/* Meals - items must be added in each test */
+	ArrayList<Item> list1 = new ArrayList<Item>();
+	HalfMeal m1 = new HalfMeal("Mediterranea", list1);
 
 	@Test
 	public void testCore() {
-		Core c = new Core();
 		assertTrue(c.getName() == "MyFoodora" && c.getServiceFee() == 3.0 && c.getMarkupPercentage() == 0.1 && c.getDeliveryCost() == 2.0);
 		assertTrue(c.getListOfUsers().get("jcastillo33").getUsername() == "jcastillo33");
 		assertTrue(c.getListOfUsers().get("pleonpita").getUsername() == "pleonpita");
@@ -42,80 +67,52 @@ public class CoreTest {
 
 	@Test
 	public void testRegisterUser() {
-		Core c = new Core();
-		Manager m = new Manager("Marc", "mbataillou", "pmaasrscword", "Bataillou");
-		c.registerUser(m);
+		Manager man = new Manager("Marc", "mbataillou", "pmaasrscword", "Bataillou");
+		c.registerUser(man);
 		assertTrue(c.getListOfUsers().get("mbataillou").getUsername() == "mbataillou");
 	}
 
 	@Test
 	public void testUserLogIn() {
-		Core c = new Core();
-		Manager m = new Manager("Marc", "mbataillou", "pmaasrscword", "Bataillou");
-		c.registerUser(m);
-		c.userLogIn(m);
+		Manager man = new Manager("Marc", "mbataillou", "pmaasrscword", "Bataillou");
+		c.registerUser(man);
+		c.userLogIn(man);
 		assertTrue(c.getCurrentUser().getUsername() == "mbataillou");
 	}
 
 	@Test
 	public void testLogOut() {
-		Core c = new Core();
-		Manager m = (Manager) c.getListOfMasterManager().get(1);
-		c.registerUser(m);
-		c.userLogIn(m);
-		assertTrue(c.getCurrentUser().getUsername() == "pleonpita");
+		Manager man = new Manager("Marc", "mbataillou", "pmaasrscword", "Bataillou");
+		c.userLogIn(man);
+		assertTrue(c.getCurrentUser().getUsername() == "mbataillou");
 		c.logOut();
 		assertNull(c.getCurrentUser());
 	}
 
 	@Test
 	public void testRegisterObserver() {
-		Core c = new Core();
-		Address a = new Address(3,4);
-		Customer cu = new Customer("Luis", "luiscobas", "Cobas", a, "lcobas@gmail.com", "630285192", "newpassword");
-		c.registerUser(cu);
-		c.userLogIn(cu);
-		c.registerObserver(cu);
+		c.registerUser(cu1);
+		c.userLogIn(cu1);
+		c.registerObserver(cu1);
 		assertTrue(c.getListOfToNotify().get(0).getUsername() == "luiscobas");
 	}
 
 	@Test
 	public void testRemoveObserver() {
-		Core c = new Core();
-		Address a = new Address(3,4);
-		Customer cu = new Customer("Luis", "luiscobas", "Cobas", a, "lcobas@gmail.com", "630285192", "newpassword");
-		c.registerUser(cu);
-		c.userLogIn(cu);
-		c.registerObserver(cu);
+		c.registerUser(cu1);
+		c.userLogIn(cu1);
+		c.registerObserver(cu1);
 		assertTrue(c.getListOfToNotify().get(0).getUsername() == "luiscobas");
-		c.removeObserver(cu);
+		c.removeObserver(cu1);
 		assertTrue(c.getListOfToNotify().isEmpty());
 	}
 
 	@Test
 	public void testNotifyObservers() {
-		Core c = new Core();
-		
-		Starter s1 = new Starter("Tortilla", 5.5, "Standard");
-		MainDish md1 = new MainDish("Bacalao", 15.5, "GlutenFree");
-		Dessert d1 = new Dessert("Melon", 4, "Standard");
-		ArrayList<Item> list1 = new ArrayList<Item>();
-		ArrayList<Item> list2 = new ArrayList<Item>();
 		list1.add(s1);
 		list1.add(md1);
-		list2.add(md1);
-		list2.add(d1);
-		HalfMeal m1 = new HalfMeal("Mediterranea", list1);
-		Address a1 = new Address(3,4);
-		Restaurant r = new Restaurant("La Playa", "LaPlayaBilbao", "newpasswordr", a1);
-		r.addMeal(m1);
-		
-		Address a2 = new Address(3,4);
-		Address a3 = new Address(3,4);
-		Address a4 = new Address(6,8);
-		Customer cu1 = new Customer("Luis", "luiscobas", "Cobas", a2, "lcobas@gmail.com", "630285192", "newpassword");
-		Customer cu2 = new Customer("Juan", "jcastillo33", "Castillo", a3, "jcastillo@gmail.com", "630285192", "newpassword");
-		Customer cu3 = new Customer("Pedro", "pleonpita", "Leon", a4, "pleonpita@gmail.com", "0695599143", "newpassword2");
+		m1.setMealItems(list1);
+		r1.addMeal(m1);
 		c.registerUser(cu1);
 		c.registerObserver(cu1);
 		c.registerUser(cu2);
@@ -127,21 +124,15 @@ public class CoreTest {
 
 	@Test
 	public void testActivateUser() {
-		Core c = new Core();
-		Manager m = (Manager) c.getListOfMasterManager().get(1);
 		c.userLogIn(m);
-
-		Customer cu1 = new Customer("Luis", "luiscobas", "Cobas", new Address(3,4), "lcobas@gmail.com", "630285192", "newpassword");
-		Restaurant r = new Restaurant("La Playa", "LaPlayaBilbao", "newpasswordr",  new Address(3,4));
-		Courier d = new Courier("luiso","lucho","password1","cobas",new Address(4,8),"0654641222");
 		
 		assertNull(c.getListOfUsers().get("luiscobas"));
 		assertNull(c.getListOfUsers().get("LaPlayaBilbao"));
 		assertNull(c.getListOfUsers().get("lucho"));
 		
 		c.activateUser(cu1);
-		c.activateUser(r);
-		c.activateUser(d);
+		c.activateUser(r1);
+		c.activateUser(co1);
 		
 		assertTrue(c.getListOfUsers().get("luiscobas").getUsername() == "luiscobas");
 		assertTrue(c.getListOfUsers().get("LaPlayaBilbao").getUsername() == "LaPlayaBilbao");
@@ -150,21 +141,15 @@ public class CoreTest {
 
 	@Test
 	public void testDeactivateUser() {
-		Core c = new Core();
-		Manager m = (Manager) c.getListOfMasterManager().get(1);
 		c.userLogIn(m);
-
-		Customer cu1 = new Customer("Luis", "luiscobas", "Cobas", new Address(3,4), "lcobas@gmail.com", "630285192", "newpassword");
-		Restaurant r = new Restaurant("La Playa", "LaPlayaBilbao", "newpasswordr",  new Address(3,4));
-		Courier d = new Courier("luiso","lucho","password1","cobas",new Address(4,8),"0654641222");
 		
 		c.registerUser(cu1);
-		c.registerUser(r);
-		c.registerUser(d);
+		c.registerUser(r1);
+		c.registerUser(co1);
 		
 		c.deactivateUser(cu1);
-		c.deactivateUser(r);
-		c.deactivateUser(d);
+		c.deactivateUser(r1);
+		c.deactivateUser(co1);
 		
 		assertNull(c.getListOfUsers().get("luiscobas"));
 		assertNull(c.getListOfUsers().get("LaPlayaBilbao"));
@@ -173,21 +158,15 @@ public class CoreTest {
 
 	@Test
 	public void testAddUser() {
-		Core c = new Core();
-		Manager m = (Manager) c.getListOfMasterManager().get(1);
 		c.userLogIn(m);
-
-		Customer cu1 = new Customer("Luis", "luiscobas", "Cobas", new Address(3,4), "lcobas@gmail.com", "630285192", "newpassword");
-		Restaurant r = new Restaurant("La Playa", "LaPlayaBilbao", "newpasswordr",  new Address(3,4));
-		Courier d = new Courier("luiso","lucho","password1","cobas",new Address(4,8),"0654641222");
 		
 		assertNull(c.getListOfUsers().get("luiscobas"));
 		assertNull(c.getListOfUsers().get("LaPlayaBilbao"));
 		assertNull(c.getListOfUsers().get("lucho"));
 		
 		c.addUser(cu1);
-		c.addUser(r);
-		c.addUser(d);
+		c.addUser(r1);
+		c.addUser(co1);
 		
 		assertTrue(c.getListOfUsers().get("luiscobas").getUsername() == "luiscobas");
 		assertTrue(c.getListOfUsers().get("LaPlayaBilbao").getUsername() == "LaPlayaBilbao");
@@ -196,21 +175,15 @@ public class CoreTest {
 
 	@Test
 	public void testRemoveUser() {
-		Core c = new Core();
-		Manager m = (Manager) c.getListOfMasterManager().get(1);
 		c.userLogIn(m);
-
-		Customer cu1 = new Customer("Luis", "luiscobas", "Cobas", new Address(3,4), "lcobas@gmail.com", "630285192", "newpassword");
-		Restaurant r = new Restaurant("La Playa", "LaPlayaBilbao", "newpasswordr",  new Address(3,4));
-		Courier d = new Courier("luiso","lucho","password1","cobas",new Address(4,8),"0654641222");
 		
 		c.registerUser(cu1);
-		c.registerUser(r);
-		c.registerUser(d);
+		c.registerUser(r1);
+		c.registerUser(co1);
 		
 		c.removeUser(cu1);
-		c.removeUser(r);
-		c.removeUser(d);
+		c.removeUser(r1);
+		c.removeUser(co1);
 		
 		assertNull(c.getListOfUsers().get("luiscobas"));
 		assertNull(c.getListOfUsers().get("LaPlayaBilbao"));
@@ -219,8 +192,6 @@ public class CoreTest {
 
 	@Test
 	public void testChangeServiceFee() {
-		Core c = new Core();
-		Manager m = (Manager) c.getListOfMasterManager().get(1);
 		c.userLogIn(m);
 		
 		c.changeServiceFee(4.0);
@@ -230,8 +201,6 @@ public class CoreTest {
 
 	@Test
 	public void testChangeMarkup() {
-		Core c = new Core();
-		Manager m = (Manager) c.getListOfMasterManager().get(1);
 		c.userLogIn(m);
 		
 		c.changeMarkup(0.15);
@@ -241,8 +210,6 @@ public class CoreTest {
 
 	@Test
 	public void testChangeDeliveryCost() {
-		Core c = new Core();
-		Manager m = (Manager) c.getListOfMasterManager().get(1);
 		c.userLogIn(m);
 		
 		c.changeDeliveryCost(3.0);
@@ -252,8 +219,6 @@ public class CoreTest {
 
 	@Test
 	public void testSetTargetProfitToDeliveryCost() {
-		Core c = new Core();
-		Manager m = (Manager) c.getListOfMasterManager().get(1);
 		c.userLogIn(m);
 		
 		c.setTargetProfitToDeliveryCost();
@@ -263,8 +228,6 @@ public class CoreTest {
 
 	@Test
 	public void testSetTargetProfitToMarkup() {
-		Core c = new Core();
-		Manager m = (Manager) c.getListOfMasterManager().get(1);
 		c.userLogIn(m);
 		
 		c.setTargetProfitToMarkup();
@@ -274,8 +237,6 @@ public class CoreTest {
 
 	@Test
 	public void testSetTargetProfitToServiceFee() {
-		Core c = new Core();
-		Manager m = (Manager) c.getListOfMasterManager().get(1);
 		c.userLogIn(m);
 		
 		c.setTargetProfitToServiceFee();
