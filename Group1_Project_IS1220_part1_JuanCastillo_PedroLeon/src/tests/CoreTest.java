@@ -63,8 +63,10 @@ public class CoreTest {
 		Manager man = new Manager("Marc", "mbataillou", "pmaasrscword", "Bataillou");
 		try{
 			c.registerUser(man);
+			c.registerUser(man);
 		}
 		catch(UsernameAlreadyRegisteredException e){
+			System.out.println(e.getMessage());
 			System.out.println("User: " + man.getUsername() + " already registered.");
 		}
 		assertTrue(c.getListOfUsers().get("mbataillou").getUsername() == "mbataillou");
