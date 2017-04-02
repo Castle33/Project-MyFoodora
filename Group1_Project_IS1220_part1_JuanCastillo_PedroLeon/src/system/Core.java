@@ -639,6 +639,166 @@ public class Core implements Observable {
 		}
 	}
 	
+	/***************************************************************************************************/
+	/*
+	 * Getters and Setters: no setters for ID and Counter
+	 */
+	
+	
+	/**
+	 * @return the currentUser
+	 */
+	public User getCurrentUser() {
+		return currentUser;
+	}
+
+	/**
+	 * @param currentUser the currentUser to set
+	 */
+	public void setCurrentUser(User currentUser) {
+		this.currentUser = currentUser;
+	}
+
+	/**
+	 * @return the listOfUsers
+	 */
+	public HashMap<String, User> getListOfUsers() {
+		return listOfUsers;
+	}
+
+	/**
+	 * @param listOfUsers the listOfUsers to set
+	 */
+	public void setListOfUsers(HashMap<String, User> listOfUsers) {
+		this.listOfUsers = listOfUsers;
+	}
+
+	/**
+	 * @return the listOfToNotify
+	 */
+	public ArrayList<User> getListOfToNotify() {
+		return listOfToNotify;
+	}
+
+	/**
+	 * @param listOfToNotify the listOfToNotify to set
+	 */
+	public void setListOfToNotify(ArrayList<User> listOfToNotify) {
+		this.listOfToNotify = listOfToNotify;
+	}
+
+	/**
+	 * @return the deliveryPolicy
+	 */
+	public IDeliveryPolicy getDeliveryPolicy() {
+		return deliveryPolicy;
+	}
+
+	/**
+	 * @param deliveryPolicy the deliveryPolicy to set
+	 */
+	public void setDeliveryPolicy(IDeliveryPolicy deliveryPolicy) {
+		this.deliveryPolicy = deliveryPolicy;
+	}
+
+	/**
+	 * @return the tProfitPolicy
+	 */
+	public ITargetProfitPolicy gettProfitPolicy() {
+		return tProfitPolicy;
+	}
+
+	/**
+	 * @param tProfitPolicy the tProfitPolicy to set
+	 */
+	public void settProfitPolicy(ITargetProfitPolicy tProfitPolicy) {
+		this.tProfitPolicy = tProfitPolicy;
+	}
+
+	/**
+	 * @return the listOfCompletedOrders
+	 */
+	public ArrayList<Order> getListOfCompletedOrders() {
+		return listOfCompletedOrders;
+	}
+
+	/**
+	 * @param listOfCompletedOrders the listOfCompletedOrders to set
+	 */
+	public void setListOfCompletedOrders(ArrayList<Order> listOfCompletedOrders) {
+		this.listOfCompletedOrders = listOfCompletedOrders;
+	}
+
+	/**
+	 * @return the listOfPendingOrders
+	 */
+	public LinkedList<Order> getListOfPendingOrders() {
+		return listOfPendingOrders;
+	}
+
+	/**
+	 * @param listOfPendingOrders the listOfPendingOrders to set
+	 */
+	public void setListOfPendingOrders(LinkedList<Order> listOfPendingOrders) {
+		this.listOfPendingOrders = listOfPendingOrders;
+	}
+
+	/**
+	 * @return the serviceFee
+	 */
+	public double getServiceFee() {
+		return serviceFee;
+	}
+
+	/**
+	 * @param serviceFee the serviceFee to set
+	 */
+	public void setServiceFee(double serviceFee) {
+		this.serviceFee = serviceFee;
+	}
+
+	/**
+	 * @return the markupPercentage
+	 */
+	public double getMarkupPercentage() {
+		return markupPercentage;
+	}
+
+	/**
+	 * @param markupPercentage the markupPercentage to set
+	 */
+	public void setMarkupPercentage(double markupPercentage) {
+		this.markupPercentage = markupPercentage;
+	}
+
+	/**
+	 * @return the deliveryCost
+	 */
+	public double getDeliveryCost() {
+		return deliveryCost;
+	}
+
+	/**
+	 * @param deliveryCost the deliveryCost to set
+	 */
+	public void setDeliveryCost(double deliveryCost) {
+		this.deliveryCost = deliveryCost;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @return the listOfMasterManager
+	 */
+	public ArrayList<User> getListOfMasterManager() {
+		return listOfMasterManager;
+	}
+	
 	
 
 }

@@ -2,13 +2,50 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+
 import org.junit.Test;
+
+import system.Core;
+import system.DeliveryFastest;
+import system.Order;
+import system.TargetProfitDeliveryCost;
+import users.Manager;
+import users.User;
 
 public class CoreTest {
 
 	@Test
 	public void testCore() {
-		fail("Not yet implemented");
+		Core c = new Core();
+		assertTrue(c.getN);
+		this.name = "MyFoodora";
+		this.serviceFee = 3.0;
+		this.markupPercentage = 0.1;
+		this.deliveryCost = 2.0;
+		
+		listOfUsers = new HashMap<String,User>();
+		
+		listOfToNotify = new ArrayList<User>();
+		
+		deliveryPolicy = new DeliveryFastest();
+		tProfitPolicy = new TargetProfitDeliveryCost();
+		
+		listOfCompletedOrders = new ArrayList<Order>();
+		listOfPendingOrders = new LinkedList<Order>();
+		
+		/*
+		 * initialization of listOfMasterManager adding both app creators
+		 */
+		this.listOfMasterManager = new ArrayList<User>();
+		Manager jc = new Manager("Juan", "jcastillo33", "pjausasnword", "Castillo");
+		listOfMasterManager.add(jc);
+		Manager pl = new Manager("Pedro", "pleonpita", "ppaesdsrwoord", "Leon");
+		listOfMasterManager.add(pl);
+		listOfUsers.put(jc.getUsername(), jc);
+		listOfUsers.put(pl.getUsername(), pl);
 	}
 
 	@Test
