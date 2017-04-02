@@ -537,8 +537,8 @@ public class Core implements Observable {
 	public void unregisterCourier(User user) throws AccessDeniedException{
 		System.out.println("Unregister demand");
 		if(user instanceof Courier){
-			listOfUsers.remove(user);
-			System.out.println("Courier:" + user + "unregistered.");
+			listOfUsers.remove(user.getUsername());
+			System.out.println("Courier:" + user.getUsername() + " unregistered.");
 		}else{
 			throw new AccessDeniedException();
 		}

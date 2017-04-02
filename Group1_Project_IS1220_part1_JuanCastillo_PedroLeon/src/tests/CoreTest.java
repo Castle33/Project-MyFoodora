@@ -755,20 +755,36 @@ public class CoreTest {
 	}
 
 	@Test
-	public void testGiveRemoveConsensus() {
-		fail("Not yet implemented");
+	public void testGiveRemoveConsensus() throws AccessDeniedException, UsernameAlreadyRegisteredException{
+		try{
+			c.registerUser(cu1);
+			c.userLogIn(cu1);
+			c.giveRemoveConsensus(true);
+			assertTrue(((Customer) c.getCurrentUser()).isBeNotified() == true && c.getListOfToNotify().contains(cu1));
+			c.giveRemoveConsensus(false);
+			assertTrue(((Customer) c.getCurrentUser()).isBeNotified() == false && !c.getListOfToNotify().contains(cu1));
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " is not a customer.");
+		}
+		catch(UsernameAlreadyRegisteredException e){
+			System.out.println("User -" + cu1.getUsername() + "- already registered.");
+		}
+		
 	}
 
 	@Test
-	public void testUnregisterCourier() throws AccessDeniedException{
-		c.getListOfUsers().put(co1.getUsername(), co1);
-		c.getListOfUsers().put(m.getUsername(), m);
+	public void testUnregisterCourier() throws AccessDeniedException, UsernameAlreadyRegisteredException{
 		try {
-			c.unregisterCourier(m);
+			c.registerUser(co1);
+			assertTrue(c.getListOfUsers().get("lucho").getUsername() == "lucho");
+			c.userLogIn(co1);
+			c.unregisterCourier(co1);
 		} catch(AccessDeniedException e) {
 			System.out.println("unregisterCourier correctly throws exception");
-		} finally {
-			c.unregisterCourier(co1);	
+		} catch(UsernameAlreadyRegisteredException e){
+			System.out.println("User -" + co1.getUsername() + "- already registered.");
+		} finally {	
 			assertNull(c.getListOfUsers().get("lucho"));
 		}
 		
