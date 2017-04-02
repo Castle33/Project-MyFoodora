@@ -13,6 +13,10 @@ import restaurant_structure.*;
 
 public class Core implements Observable {
 	
+	/* application attributes */
+	final String name;
+	final ArrayList<User> listOfMasterManager;
+	
 	/* lists of system's users */
 	private User currentUser;
 	private HashMap<String,User> listOfUsers;
@@ -36,9 +40,17 @@ public class Core implements Observable {
 	private double deliveryCost;
 	
 	public Core(double serviceFee, double markupPercentage, double deliveryCost){
+		this.name = "MyFoodora";
 		this.serviceFee = serviceFee;
 		this.markupPercentage = markupPercentage;
 		this.deliveryCost = deliveryCost;
+		
+		/*
+		 * initialization of listOfMasterManager adding both app creators
+		 */
+		this.listOfMasterManager = new ArrayList<User>();
+		listOfMasterManager.add(new Manager("Juan", "jcastillo33", "pjausasnword", "Castillo"));
+		listOfMasterManager.add(new Manager("Pedro", "pleonpita", "ppaesdsrwoord", "Leon"));
 	}
 	
 	/***************************************************************************************************/
