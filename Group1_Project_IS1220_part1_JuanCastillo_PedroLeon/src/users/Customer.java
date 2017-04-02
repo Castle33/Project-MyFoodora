@@ -121,7 +121,7 @@ public class Customer extends User implements Observer{
 			 * show in customer screen new notification
 			 * TO DO
 			 */
-			System.out.println("User: " + this.getUsername() + " got restaurant: " + r.getName() + "'s new special offer " + m.getName() + " last price = " + m.getFullPrice() + ", new price = " + m.getFullPrice()*r.getSpecialDiscountFactor());
+			System.out.println("User: " + this.getUsername() + " got restaurant: " + r.getName() + "'s new special offer " + m.getName() + " last price = " + m.getFullPrice() + ", new price = " + r.getPriceMeal(m));
 		}
 	}
 	
