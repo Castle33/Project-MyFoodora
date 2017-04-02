@@ -18,7 +18,7 @@ public class TargetProfitDeliveryCost implements ITargetProfitPolicy {
 			}
 		}
 		if(lastMonthNumOrders != 0){
-			deliveryCost = targetProfit - (lastMonthTotalFoodIncome*markupPercentage/lastMonthNumOrders) - serviceFee;
+			deliveryCost = (lastMonthTotalFoodIncome*markupPercentage - targetProfit)/lastMonthNumOrders + serviceFee;
 		}else{
 			// throw exception NO order last month
 		}

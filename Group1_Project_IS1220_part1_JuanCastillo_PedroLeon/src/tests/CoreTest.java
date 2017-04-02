@@ -3,6 +3,7 @@ package tests;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -49,10 +50,12 @@ public class CoreTest {
 	Starter s1 = new Starter("Tortilla", 5.5, "Standard");
 	MainDish md1 = new MainDish("Bacalao", 15.5, "GlutenFree");
 	Dessert d1 = new Dessert("Melon", 4, "Standard");
-	
-	/* Meals - items must be added in each test */
 	ArrayList<Item> list1 = new ArrayList<Item>();
-	HalfMeal m1 = new HalfMeal("Mediterranea", list1);
+	
+	/* Order */
+	Order o1 = new Order(cu1, r1);
+	Order o2 = new Order(cu2, r1);
+	Order o3 = new Order(cu3, r1);
 
 	@Test
 	public void testCore() {
@@ -83,6 +86,7 @@ public class CoreTest {
 	@Test
 	public void testLogOut() {
 		Manager man = new Manager("Marc", "mbataillou", "pmaasrscword", "Bataillou");
+		c.registerUser(man);
 		c.userLogIn(man);
 		assertTrue(c.getCurrentUser().getUsername() == "mbataillou");
 		c.logOut();
@@ -111,6 +115,7 @@ public class CoreTest {
 	public void testNotifyObservers() {
 		list1.add(s1);
 		list1.add(md1);
+		HalfMeal m1 = new HalfMeal("Medio menu del día - entrante", list1);
 		m1.setMealItems(list1);
 		r1.addMeal(m1);
 		c.registerUser(cu1);
@@ -234,12 +239,102 @@ public class CoreTest {
 
 	@Test
 	public void testGetParameterToTargetProfit() {
-		fail("Not yet implemented");
+		c.userLogIn(m);
+		list1.add(s1);
+		list1.add(md1);
+		HalfMeal m1 = new HalfMeal("Medio menu del día - entrante", list1);
+		r1.addMeal(m1);
+		m1.setMealItems(list1);
+		list1.remove(0);
+		list1.add(d1);
+		HalfMeal m2 = new HalfMeal("Medio menu del día - entrante", list1);
+		r1.addMeal(m2);
+		m2.setMealItems(list1);
+		o1.addMeal(m1,4);
+		o2.addItem(s1,1);
+		o2.addMeal(m2,1);
+		o3.addMeal(m2,4);
+		ArrayList<Order> auxiliarListOfCompletedOrders = new ArrayList<Order>();
+		auxiliarListOfCompletedOrders.add(o1);
+		auxiliarListOfCompletedOrders.add(o2);
+		auxiliarListOfCompletedOrders.add(o3);
+		c.setListOfCompletedOrders(auxiliarListOfCompletedOrders);
+		Calendar initDate = Calendar.getInstance();
+		Calendar finDate = Calendar.getInstance();
+		initDate.set(Calendar.MONTH, 2);
+		finDate.set(Calendar.MONTH, 5);
+		/*
+		 * Starts at Core: getParameterToTargetProfit(targetProfit, initDate, finDate);
+		 * 1st call from TargetProfitDeliveryCost/TargetProfitServiceFee/TargetProfitMarkup: computeProfitStrategyBased(serviceFee, markupPercentage, deliveryCost, targetProfit, listOfCompletedOrders, initDate, finDate);
+		 * for order with date between initDate and finDate it adds order price
+		 * 2nd call from Order: calcPrice();
+		 * adds all meals and items
+		 * 3rd call from Restaurant: getPriceMeal();
+		 * returns meal's price (discount applied)
+		 * Example: 
+		 * - listOfCompletedOrders information:
+		 * 		numberOfOrders = 3
+		 * 		totalIncome:
+		 * 		totalIncome = sum(orderPrice)
+		 * 			orderPrice  = ((starterPrice + mainDishPrice)*discount)*numberOfMeals + sum(itemPrice*numberOfItems)
+		 * 			order1Price = ((5.5 + 15.5)*0.95)*4 = 79.8
+		 * 			order2Price = ((15.5 + 4.0)*0.95)*1 + (5.5)*1 = 24.02
+		 * 			order3Price = ((15.5 + 4.0)*0.95)*4 = 74.1
+		 * 		totalIncome = 79.8 + 24.02 + 74.1 = 177,92
+		 * - Core information:
+		 * 		TargetProfitDeliveryCost:	serviceFee = 3.0 / markupPercetange = 0.1
+		 * 		TargetProfitServiceFee: 	markupPercentage = 0.1 / deliveryCost = 2.0
+		 * 		TargetProfitMarkup:			deliveryCost = 2.0 / serviceFee = 3.0
+		 * - Client input information:
+		 * 		targetProfit = 25
+		 * 
+		 * profitOneOrder = orderPrice*markupPercentage + serviceFee - deliveryCost
+		 * totalProfit = totalIncome*markupPercentage + (serviceFee - deliveryCost)*numberOfOrders
+		 * TargetProfitDeliveryCost:
+		 * deliveryCost = (totalIncome*markupPercentage - totalProfit)/numberOfOrders + serviceFee
+		 * deliveryCost = (177,92*0.1 - 25)/3 + 3.0 = (17.79 - 25)/3 + 3.0 = -7.21/3 + 3.0 = -2.4 + 3.0 = 0.6
+		 * TargetProfitServiceFee:
+		 * serviceFee = (totalProfit - totalIncome*markupPercentage)/numberOfOrders + deliveryCost
+		 * serviceFee = (25 - 177.92*0.1)/3 + 2.0 = (25 - 17.79)/3 + 2.0 = 7.21/3 + 2.0 = 2.4 + 2.0 = 4.4
+		 * TargetProfitMarkup:
+		 * markupPercenthttp://marketplace.eclipse.org/marketplace-client-intro?mpc_install=264age = (totalProfit - (serviceFee - deliveryCost)*numberOfOrders)/totalIncome
+		 * markupPercentage = (25 - (3.0 - 2.0)*3)/177.92 = (25 - 3)/177.92 = 22/177.92 = 
+		 */
+		assertTrue(r1.round2dec(c.getParameterToTargetProfit(25, initDate, finDate)) == 0.6);
+		c.setTargetProfitToServiceFee();
+		assertTrue(r1.round2dec(c.getParameterToTargetProfit(25, initDate, finDate)) == 4.4);
+		c.setTargetProfitToMarkup();
+		assertTrue(r1.round2dec(c.getParameterToTargetProfit(25, initDate, finDate)) == 0.12);
+		
 	}
 
 	@Test
 	public void testComputeTotalIncome() {
-		fail("Not yet implemented");
+		c.userLogIn(m);
+		list1.add(s1);
+		list1.add(md1);
+		HalfMeal m1 = new HalfMeal("Medio menu del día - entrante", list1);
+		r1.addMeal(m1);
+		m1.setMealItems(list1);
+		list1.remove(0);
+		list1.add(d1);
+		HalfMeal m2 = new HalfMeal("Medio menu del día - entrante", list1);
+		r1.addMeal(m2);
+		m2.setMealItems(list1);
+		o1.addMeal(m1,4);
+		o2.addItem(s1,1);
+		o2.addMeal(m2,1);
+		o3.addMeal(m2,4);
+		ArrayList<Order> auxiliarListOfCompletedOrders = new ArrayList<Order>();
+		auxiliarListOfCompletedOrders.add(o1);
+		auxiliarListOfCompletedOrders.add(o2);
+		auxiliarListOfCompletedOrders.add(o3);
+		c.setListOfCompletedOrders(auxiliarListOfCompletedOrders);
+		Calendar initDate = Calendar.getInstance();
+		Calendar finDate = Calendar.getInstance();
+		initDate.set(Calendar.MONTH, 2);
+		finDate.set(Calendar.MONTH, 5);
+		System.out.println(c.computeTotalIncome(initDate, finDate));
 	}
 
 	@Test

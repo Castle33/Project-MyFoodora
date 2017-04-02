@@ -17,7 +17,7 @@ public class TargetProfitServiceFee implements ITargetProfitPolicy {
 			}
 		}
 		if(lastMonthNumOrders != 0){
-			serviceFee = targetProfit - (lastMonthTotalFoodIncome*markupPercentage/lastMonthNumOrders) - deliveryCost ;
+			serviceFee = (targetProfit - lastMonthTotalFoodIncome*markupPercentage)/lastMonthNumOrders + deliveryCost ;
 		}else{
 			// throw exception NO order last month
 		}

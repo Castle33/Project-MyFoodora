@@ -17,7 +17,7 @@ public class TargetProfitMarkup implements ITargetProfitPolicy {
 			}
 		}
 		if(lastMonthNumOrders != 0){
-			markupPercentage = (targetProfit - serviceFee + deliveryCost)/(lastMonthTotalFoodIncome/lastMonthNumOrders);
+			markupPercentage = (targetProfit - (serviceFee - deliveryCost)*lastMonthNumOrders)/lastMonthTotalFoodIncome;
 		}else{
 			// throw exception NO order last month
 		}
