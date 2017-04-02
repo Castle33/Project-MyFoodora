@@ -73,10 +73,10 @@ public class Courier extends User{
 			public int compare(Courier arg0, Courier arg1) {
 				if(arg0.currentOrder.getDeliveryDate().after(arg1.currentOrder.getDeliveryDate())){
 					return 1;
-				} else if(arg0.currentOrder.getDeliveryDate().equals(arg1.currentOrder.getDeliveryDate())){
-					return 0;
-				} else {
+				} else if(arg0.currentOrder.getDeliveryDate().before(arg1.currentOrder.getDeliveryDate())){
 					return -1;
+				} else {
+					return 0;
 				}
 			}
 			
