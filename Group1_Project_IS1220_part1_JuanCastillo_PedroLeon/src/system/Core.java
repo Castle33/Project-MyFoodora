@@ -581,15 +581,6 @@ public class Core implements Observable {
 		}
 	}
 	
-	/* updating courier position*/
-	public void updateCourierPosition(User user, Address newPosition){
-		if(user instanceof Courier){
-			((Courier)user).setPosition(newPosition);
-		}else{
-			//throw exception not a courier
-		}
-	}
-	
 	public void processOrders(){
 		Courier courier = null;
 		//Get all the users and put all Couriers to a LinkedList
