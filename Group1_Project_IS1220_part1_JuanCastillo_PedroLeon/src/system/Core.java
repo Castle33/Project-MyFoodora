@@ -22,14 +22,14 @@ public class Core implements Observable {
 	private HashMap<String,User> listOfUsers;
 	
 	/* list of user to be notified */
-	private List<User> listOfToNotify;
+	private ArrayList<User> listOfToNotify;
 	
 	/* Policies strategies */
 	private IDeliveryPolicy deliveryPolicy;
 	private ITargetProfitPolicy tProfitPolicy;
 	
 	/* Orders */
-	private List<Order> listOfCompletedOrders;
+	private ArrayList<Order> listOfCompletedOrders;
 	private LinkedList<Order> listOfPendingOrders;
 	
 	/*
@@ -39,18 +39,32 @@ public class Core implements Observable {
 	private double markupPercentage;
 	private double deliveryCost;
 	
-	public Core(double serviceFee, double markupPercentage, double deliveryCost){
+	public Core(){
 		this.name = "MyFoodora";
-		this.serviceFee = serviceFee;
-		this.markupPercentage = markupPercentage;
-		this.deliveryCost = deliveryCost;
+		this.serviceFee = 3.0;
+		this.markupPercentage = 0.1;
+		this.deliveryCost = 2.0;
+		
+		listOfUsers = new HashMap<String,User>();
+		
+		listOfToNotify = new ArrayList<User>();
+		
+		deliveryPolicy = new DeliveryFastest();
+		tProfitPolicy = new TargetProfitDeliveryCost();
+		
+		listOfCompletedOrders = new ArrayList<Order>();
+		listOfPendingOrders = new LinkedList<Order>();
 		
 		/*
 		 * initialization of listOfMasterManager adding both app creators
 		 */
 		this.listOfMasterManager = new ArrayList<User>();
-		listOfMasterManager.add(new Manager("Juan", "jcastillo33", "pjausasnword", "Castillo"));
-		listOfMasterManager.add(new Manager("Pedro", "pleonpita", "ppaesdsrwoord", "Leon"));
+		Manager jc = new Manager("Juan", "jcastillo33", "pjausasnword", "Castillo");
+		listOfMasterManager.add(jc);
+		Manager pl = new Manager("Pedro", "pleonpita", "ppaesdsrwoord", "Leon");
+		listOfMasterManager.add(pl);
+		listOfUsers.put(jc.getUsername(), jc);
+		listOfUsers.put(pl.getUsername(), pl);
 	}
 	
 	/***************************************************************************************************/
