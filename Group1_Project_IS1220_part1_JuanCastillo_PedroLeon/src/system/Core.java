@@ -533,12 +533,13 @@ public class Core implements Observable {
 	 * -accept/refuse to a delivery call
 	 */
 	
-	/* Register/unregister method, for register use registerUser method*/
+	/* Register/Unregister method, for register use registerUser method*/
 	public void unregisterCourier(User user) throws AccessDeniedException{
 		System.out.println("Unregister demand");
 		if(user instanceof Courier){
-			listOfUsers.remove(user.getUsername());
-			System.out.println("Courier:" + user.getUsername() + " unregistered.");
+			Courier courier = (Courier) user;
+			listOfUsers.remove(courier.getUsername(),courier);
+			System.out.println( courier + " unregistered.");
 		}else{
 			throw new AccessDeniedException();
 		}
@@ -577,21 +578,22 @@ public class Core implements Observable {
 		LinkedList<Courier> currentCouriersOnDuty = new LinkedList<Courier>();
 		while(listOfPendingOrders.size()!=0){
 			//Gets the first order of the list and sorts all couriers depending on the delivery policy
-			Order order = this.listOfPendingOrders.getFirst();
+			Order order = listOfPendingOrders.getFirst();
 			LinkedList<Courier> currentSortedCouriers = this.deliveryPolicy.setDeliveryPolicy(listCouriers, order.getRestaurant().getAddress());
 			//This while loop tries to address a Courier to an order until 
 			//it does it or no Courier is available or wants to take the order
 			while(!order.isAssignedCourier() && !currentSortedCouriers.isEmpty()){
 				courier = currentSortedCouriers.getFirst();
 				if(!courier.isOnDuty()){
+					
 					if(courier.decideTakingOrder(order)){
-						this.listOfCompletedOrders.add(courier.getCurrentOrder());
-						this.listOfPendingOrders.removeFirst();
+						listOfCompletedOrders.add(courier.getCurrentOrder());
 						currentCouriersOnDuty.add(currentSortedCouriers.removeFirst());
 					} else {
 						currentSortedCouriers.removeFirst();
-						this.listOfPendingOrders.add(this.listOfPendingOrders.removeFirst());
+						listOfPendingOrders.add(listOfPendingOrders.getFirst());
 					}
+					listOfUsers.put(courier.getUsername(), courier);
 				} else {
 					currentCouriersOnDuty.add(currentSortedCouriers.removeFirst());
 				}
@@ -601,9 +603,10 @@ public class Core implements Observable {
 			while(currentSortedCouriers.isEmpty() && !currentCouriersOnDuty.isEmpty() && !order.isAssignedCourier()){
 				Collections.sort(currentCouriersOnDuty,Courier.compareDeliveryDate());
 				if(currentCouriersOnDuty.getFirst().decideAddOrder(order)){
-					this.listOfCompletedOrders.add(currentCouriersOnDuty.removeFirst().getCurrentOrder());
-					this.listOfPendingOrders.removeFirst();
+					this.listOfCompletedOrders.add(currentCouriersOnDuty.getFirst().getCurrentOrder());
 				}
+				listOfUsers.put(currentCouriersOnDuty.getFirst().getUsername(), currentCouriersOnDuty.getFirst());
+				currentCouriersOnDuty.removeFirst();
 			}
 			this.listOfPendingOrders.removeFirst();
 			/*
