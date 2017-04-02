@@ -8,7 +8,7 @@ import system.FidelityCardLottery;
 /**
  * 
  * @author Juan Castillo (programer)
- * @author Pedro Le?n (tester)
+ * @author Pedro Leon (tester)
  *
  */
 public class Customer extends User implements Observer{

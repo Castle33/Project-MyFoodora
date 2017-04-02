@@ -1,5 +1,12 @@
 package users;
 
+/**
+ * 
+ * @author Pedro León (programer)
+ * @author Juan Castillo (tester)
+ * tested: YES
+ */
+
 import java.util.*;
 import system.Order;
 
