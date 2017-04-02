@@ -566,18 +566,18 @@ public class Core implements Observable {
 	
 	/* off-duty update (current delivered): we consider that the courier puts him as OffDuty once 
 	 * he has delivered his currentOrder.
-	 * The courier automaticaly is set OnDuty when accepting an order (courier.acceptOrder) */
+	 * The courier automatically is set OnDuty when accepting an order (courier.acceptOrder) */
 	public void updateCourierState(User user) throws AccessDeniedException{
 		if(user instanceof Courier){
 			Courier courier = (Courier) user;
 			courier.setPosition(courier.getCurrentOrder().getCustomer().getAddress());
-			if(!courier.getListPendingOrders().isEmpty() && !courier.isOnDuty()){
+			if(!courier.getListPendingOrders().isEmpty()){
 				// Courier still has pending orders
 				courier.acceptOrder(courier.getListPendingOrders().removeFirst());
 			} else {
 				courier.setOnDuty(false);
 			}
-			listOfUsers.put(courier.getUsername(), courier);
+			listOfUsers.put(courier.getUsername(), courier); //Updates courier info in the listOfUsers
 		}else{
 			throw new AccessDeniedException();
 		}
