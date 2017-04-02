@@ -36,7 +36,7 @@ public class Courier extends User{
 	public String toString() {
 		return "Courier [surname=" + surname + ", name=" + getName() + ", username=" + getUsername() 
 				+ ", position=" + position + ", phoneNumber=" + phoneNumber
-				+ ", ID=" + getID() + ", onDuty=" + onDuty + "]";
+				+ ", ID=" + getID() + ", onDuty=" + onDuty + ", currentOrder=" + getCurrentOrder() + "]";
 	}
 	
 	/***************************************************************************************************/
