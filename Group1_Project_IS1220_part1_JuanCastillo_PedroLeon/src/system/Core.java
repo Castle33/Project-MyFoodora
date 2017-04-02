@@ -3,6 +3,7 @@ package system;
 import java.util.*;
 
 import exceptions.AccessDeniedException;
+import exceptions.UsernameAlreadyRegisteredException;
 import users.*;
 import users.Observer;
 import restaurant_structure.*;
@@ -73,30 +74,29 @@ public class Core implements Observable {
 	/**
 	 * generic user's methods
 	 */
-	public void registerUser(User user){
+	public void registerUser(User user) throws UsernameAlreadyRegisteredException{
 		if(currentUser == null){
 			if(listOfUsers.containsKey(user.getUsername())){
-				//throw exception
+				throw new UsernameAlreadyRegisteredException();
 			}else{
 				listOfUsers.put(user.getUsername(), user);
 			}
 		}else{
-			//throw exception if currentUser != null
+			System.out.println("Already logged in as user: -" + user.getUsername() + "-.");
 		}
 		
 	}
 	
-	public String userLogIn(User user){
+	public void userLogIn(User user){
 		if(listOfUsers.containsKey(user.getUsername())){
 			if(listOfUsers.get(user.getUsername()).getPassword().equals(user.getPassword())){
 				currentUser = user;
 			}else{
-				//throw exception
+				System.out.println("When trying to log in user: -" + user.getUsername() + "- wrong password.");
 			}
 		}else{
-			//throw exception
+			System.out.println("User " + user.getUsername() + " NOT registered in the system.");
 		}
-		return "User not registered!";
 	}
 	
 	public void logOut(){
@@ -178,96 +178,96 @@ public class Core implements Observable {
 	 */
 	
 	/* activate/deactivate & add/remove user */
-	public void activateUser(User user){
+	public void activateUser(User user) throws AccessDeniedException{
 		if(currentUser instanceof Manager){
 			listOfUsers.put(user.getUsername(), user);
 		}else{
-			//throw exception
+			throw new AccessDeniedException();
 		}
 	}
 
-	public void deactivateUser(User user){
+	public void deactivateUser(User user) throws AccessDeniedException{
 		if(currentUser instanceof Manager){
 			listOfUsers.remove(user.getUsername(), user);
 		}else{
-			//throw exception
+			throw new AccessDeniedException();
 		}
 	}
 	
-	public void addUser(User user){
+	public void addUser(User user) throws AccessDeniedException, UsernameAlreadyRegisteredException{
 		if(currentUser instanceof Manager){
 			if(listOfUsers.containsKey(user.getUsername())){
-				//throw exception
+				throw new UsernameAlreadyRegisteredException();
 			}else{
 				activateUser(user);
 			}
 		}else{
-			//throw exception
+			throw new AccessDeniedException();
 		}
 	}
 	
-	public void removeUser(User user){
+	public void removeUser(User user) throws AccessDeniedException{
 		if(currentUser instanceof Manager){
 			if(listOfUsers.containsKey(user.getUsername())){
 				deactivateUser(user);
 			}else{
-				//throw exception
+				System.out.println("User " + user.getUsername() + " already NOT in the system.");
 			}
 		}else{
-			//throw exception
+			throw new AccessDeniedException();
 		}
 	}
 	
 	/* changing SF &| MP &| DC */
-	public void changeServiceFee(double newServiceFee){
+	public void changeServiceFee(double newServiceFee) throws AccessDeniedException{
 		if(currentUser instanceof Manager){
 			serviceFee = newServiceFee;
 		}else{
-			//throw exception
+			throw new AccessDeniedException();
 		}
 	}
 	
-	public void changeMarkup(double newMarkupPercentage){
+	public void changeMarkup(double newMarkupPercentage) throws AccessDeniedException{
 		if(currentUser instanceof Manager){
 			markupPercentage = newMarkupPercentage;
 		}else{
-			//throw exception
+			throw new AccessDeniedException();
 		}
 	}
 	
-	public void changeDeliveryCost(double newDeliveryCost){
+	public void changeDeliveryCost(double newDeliveryCost) throws AccessDeniedException{
 		if(currentUser instanceof Manager){
 			deliveryCost = newDeliveryCost;
 		}else{
-			//throw exception
+			throw new AccessDeniedException();
 		}
 	}
 	
-	public void setTargetProfitToDeliveryCost(){
+	public void setTargetProfitToDeliveryCost() throws AccessDeniedException{
 		if(currentUser instanceof Manager){
 			tProfitPolicy = new TargetProfitDeliveryCost();
 		}else{
-			//throw exception
+			throw new AccessDeniedException();
 		}
 	}
 	
-	public void setTargetProfitToMarkup(){
+	public void setTargetProfitToMarkup() throws AccessDeniedException{
 		if(currentUser instanceof Manager){
 			tProfitPolicy = new TargetProfitMarkup();
 		}else{
-			//throw exception
+			throw new AccessDeniedException();
 		}
 	}
 	
-	public void setTargetProfitToServiceFee(){
+	public void setTargetProfitToServiceFee() throws AccessDeniedException{
 		if(currentUser instanceof Manager){
 			tProfitPolicy = new TargetProfitServiceFee();
 		}else{
-			//throw exception
+			throw new AccessDeniedException();
 		}
 	}
 	
-	public double getParameterToTargetProfit(double targetProfit, Calendar initDate, Calendar finDate){
+	public double getParameterToTargetProfit(double targetProfit, Calendar initDate, Calendar finDate) throws AccessDeniedException{
 		/*
 		 * depending on the target profit strategy this method will return a different parameter to achieve a target profit
 		 * for TargetProfitDeliveryCost behavior, delivery cost will be returned
@@ -279,28 +279,29 @@ public class Core implements Observable {
 		if(currentUser instanceof Manager){
 			return tProfitPolicy.computeProfitStrategyBased(serviceFee, markupPercentage, deliveryCost, targetProfit, listOfCompletedOrders, initDate, finDate);
 		}else{
-			// throw exception NO manager logged in
-			return 0.0;
+			throw new AccessDeniedException();
 		}
 	}
 	
 	/* compute total income/profit */
-	public double computeTotalIncome(Calendar initDate, Calendar finDate){
+	public double computeTotalIncome(Calendar initDate, Calendar finDate) throws AccessDeniedException{
 		double totalIncome = 0;
 		if(currentUser instanceof Manager){
 			for(Order o : listOfCompletedOrders){
 				if(o.getDate().after(initDate) && o.getDate().before(finDate)){
-					totalIncome += o.calcPrice() * markupPercentage + serviceFee;
+					totalIncome += o.calcPrice() + serviceFee;
 				}
 			}
+			if(totalIncome == 0){
+				System.out.println("No order completed between initial date: " + initDate.getTime() + " and final date: " + finDate.getTime());
+			}
+			return totalIncome;
+		}else{
+			throw new AccessDeniedException();
 		}
-		if(totalIncome == 0){
-			//throw exception no order between dates
-		}
-		return totalIncome;
 	}
 	
-	public double computeTotalProfit(double targetProfit, Calendar initDate, Calendar finDate){
+	public double computeTotalProfit(Calendar initDate, Calendar finDate) throws AccessDeniedException{
 		double totalProfit = 0;
 		if(currentUser instanceof Manager){
 			for(Order o : listOfCompletedOrders){
@@ -308,16 +309,17 @@ public class Core implements Observable {
 					totalProfit += o.calcPrice() * markupPercentage + serviceFee - deliveryCost;
 				}
 			}
+			if(totalProfit == 0){
+				System.out.println("No order completed between initial date: " + initDate.getTime() + " and final date: " + finDate.getTime());
+			}
+			return totalProfit;
+		}else{
+			throw new AccessDeniedException();
 		}
-		
-		if(totalProfit == 0){
-			//throw exception no order between dates
-		}
-		return totalProfit;
 	}
 	
 	/* compute average income per customer */
-	public double computeAverageIncome(Calendar initDate, Calendar finDate){
+	public double computeAverageIncome(Calendar initDate, Calendar finDate) throws AccessDeniedException{
 		double averageIncome = 0;
 		int numOfOrders = 0;
 		if(currentUser instanceof Manager){
@@ -327,15 +329,18 @@ public class Core implements Observable {
 					numOfOrders += 1;
 				}
 			}
+			if(averageIncome == 0){
+				System.out.println("No order completed between initial date: " + initDate.getTime() + " and final date: " + finDate.getTime());
+			}
+			averageIncome /= numOfOrders;
+			return averageIncome;
+		}else{
+			throw new AccessDeniedException();
 		}
-		if(averageIncome == 0){
-			//throw exception no order between dates
-		}
-		return averageIncome/numOfOrders;
 	}
 	
 	/* most/least active restaurant/courier*/
-	public Restaurant LeastActiveRestaurant(){
+	public Restaurant leastActiveRestaurant() throws AccessDeniedException{
 		Restaurant leastRestaurant = null;
 		if(currentUser instanceof Manager){
 			Collection<User> collectionOfUsers = listOfUsers.values();
@@ -350,10 +355,10 @@ public class Core implements Observable {
 			}
 			return leastRestaurant;
 		}else{
-			return null;
+			throw new AccessDeniedException();
 		}
 	}
-	public Restaurant MostActiveRestaurant(){
+	public Restaurant mostActiveRestaurant() throws AccessDeniedException{
 		Restaurant mostRestaurant = null;
 		if(currentUser instanceof Manager){
 			Collection<User> collectionOfUsers = listOfUsers.values();
@@ -368,11 +373,11 @@ public class Core implements Observable {
 			}
 			return mostRestaurant;
 		}else{
-			return null;
+			throw new AccessDeniedException();
 		}
 	}
 	
-	public Courier LeastActiveCourier(){
+	public Courier leastActiveCourier() throws AccessDeniedException{
 		Courier leastCourier = null;
 		if(currentUser instanceof Manager){
 			Collection<User> collectionOfUsers = listOfUsers.values();
@@ -380,49 +385,49 @@ public class Core implements Observable {
 				if(user instanceof Courier){
 					if(leastCourier == null){
 						leastCourier = (Courier) user;
-					}else if(((Restaurant) user).getCountOfOrdersCompleted() < leastCourier.getCountOfOrdersCompleted()){
+					}else if(((Courier) user).getCountOfOrdersCompleted() < leastCourier.getCountOfOrdersCompleted()){
 						leastCourier = (Courier) user;
 					}
 				}
 			}
 			return leastCourier;
 		}else{
-			return null;
+			throw new AccessDeniedException();
 		}
 	}
-	public Courier MostActiveCourier(){
+	public Courier mostActiveCourier() throws AccessDeniedException{
 		Courier mostCourier = null;
 		if(currentUser instanceof Manager){
 			Collection<User> collectionOfUsers = listOfUsers.values();
 			for(User user : collectionOfUsers){
-				if(user instanceof Restaurant){
+				if(user instanceof Courier){
 					if(mostCourier == null){
 						mostCourier = (Courier) user;
-					}else if(((Restaurant) user).getCountOfOrdersCompleted() > mostCourier.getCountOfOrdersCompleted()){
+					}else if(((Courier) user).getCountOfOrdersCompleted() > mostCourier.getCountOfOrdersCompleted()){
 						mostCourier = (Courier) user;
 					}
 				}
 			}
 			return mostCourier;
 		}else{
-			return null;
+			throw new AccessDeniedException();
 		}
 	}
 	
 	/* setting delivery policy */
-	public void setDeliveryToFastest(){
+	public void setDeliveryToFastest() throws AccessDeniedException{
 		if(currentUser instanceof Manager){
 			deliveryPolicy = new DeliveryFastest();
 		}else{
-			//throw exception
+			throw new AccessDeniedException();
 		}
 	}
 	
-	public void setDeliveryToFairOccupation(){
+	public void setDeliveryToFairOccupation() throws AccessDeniedException{
 		if(currentUser instanceof Manager){
 			deliveryPolicy = new DeliveryFairOccupation();
 		}else{
-			//throw exception
+			throw new AccessDeniedException();
 		}
 	}
 	
@@ -433,49 +438,53 @@ public class Core implements Observable {
 	 * -sorting of shipped orders with respect to different criteria
 	 */
 	
-	public void displayRestaurantInfo(){
+	public void displayRestaurantInfo() throws AccessDeniedException{
 		if(currentUser instanceof Restaurant){
-			System.out.println("Restaurant information display:");
-			currentUser.toString();
+			System.out.println("Restaurant information display: ");
+			System.out.println("\tName: " + currentUser.getName());
+			System.out.println("\tUsername: " + currentUser.getUsername());
+			System.out.println("\tPassword: " + currentUser.getPassword());
+			System.out.println("\tID: " + currentUser.getID());
+			System.out.println("\tAddress: " + ((Restaurant) currentUser).getAddress());
 			System.out.println("Meal list display:");
 			for(Meal m : ((Restaurant) currentUser).getListOfMeal()){
-				m.toString();
+				System.out.println("\t" + m);
 			}
 			System.out.println("Special meal list display:");
-			for(Meal dm : ((Restaurant) currentUser).getListOfSpecialMeal()){
-				dm.toString();
+			for(Meal sm : ((Restaurant) currentUser).getListOfSpecialMeal()){
+				System.out.println("\t" + sm);
 			}
 		}else{
-			// throw exception
+			throw new AccessDeniedException();
 		}
 	}
 	/*
 	 * call notify observers to send them the new special offer included in 'meal'
 	 */
-	public void setSpecialMeal(Meal meal){
+	public void setSpecialMeal(Meal meal)  throws AccessDeniedException{
 		if(currentUser instanceof Restaurant){
 			if(((Restaurant) currentUser).getListOfMeal().contains(meal)){
 				((Restaurant) currentUser).getListOfMeal().remove(meal);
 				((Restaurant) currentUser).getListOfSpecialMeal().add(meal);
 				notifyObservers((Restaurant) currentUser, meal);
 			}else if(((Restaurant) currentUser).getListOfSpecialMeal().contains(meal)){
-				//throw exception meal already an special meal
-			}else{
-				//throw exception meal not in the menu
+				System.out.println("Meal " + meal.getName() + " already an special meal");
 			}
+		}else{
+			throw new AccessDeniedException();
 		}
 	}
 	
-	public void removeSpecialMeal(Meal meal){
+	public void removeSpecialMeal(Meal meal)  throws AccessDeniedException{
 		if(currentUser instanceof Restaurant){
-			if(((Restaurant) currentUser).getListOfMeal().contains(meal)){
+			if(((Restaurant) currentUser).getListOfSpecialMeal().contains(meal)){
 				((Restaurant) currentUser).getListOfSpecialMeal().remove(meal);
 				((Restaurant) currentUser).getListOfMeal().add(meal);
 			}else if(((Restaurant) currentUser).getListOfMeal().contains(meal)){
-				//throw exception meal already not a special meal
-			}else{
-				//throw exception meal not in the menu
+				System.out.println("Meal " + meal.getName() + " already NOT an special meal");
 			}
+		}else{
+			throw new AccessDeniedException();
 		}
 	}
 	
@@ -487,28 +496,27 @@ public class Core implements Observable {
 	 * (DONE) give/remove consensus to be notified whenever a new special offer
 	 */
 	
-	public Order placeNewOrder(Restaurant restaurant){
+	public void placeNewOrder(Restaurant restaurant) throws AccessDeniedException{
 		if(currentUser instanceof Customer){
-			return new Order((Customer)currentUser,restaurant);
+			listOfPendingOrders.add(new Order((Customer)currentUser,restaurant));
 		} else {
-			//throw exception Not A Customer
-			return null;
+			throw new AccessDeniedException();
 		}
 	}
 	
-	public void registerFidelityCard(FidelityCard fidelityCard){
+	public void registerFidelityCard(FidelityCard fidelityCard) throws AccessDeniedException{
 		if(currentUser instanceof Customer){
 			((Customer) currentUser).setFidelityCard(fidelityCard);
 		} else {
-			//throw exception Not A Customer
+			throw new AccessDeniedException();
 		}
 	}
 	
-	public void unregisterFidelityCard(){
+	public void unregisterFidelityCard() throws AccessDeniedException{
 		if(currentUser instanceof Customer){
 			((Customer) currentUser).setFidelityCardtoBasic();
 		} else {
-			//throw exception Not A Customer
+			throw new AccessDeniedException();
 		}
 	}
 	

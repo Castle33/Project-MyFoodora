@@ -9,6 +9,8 @@ import java.util.LinkedList;
 
 import org.junit.Test;
 
+import exceptions.AccessDeniedException;
+import exceptions.UsernameAlreadyRegisteredException;
 import restaurant_structure.Dessert;
 import restaurant_structure.HalfMeal;
 import restaurant_structure.Item;
@@ -16,10 +18,14 @@ import restaurant_structure.MainDish;
 import restaurant_structure.Starter;
 import system.Core;
 import system.DeliveryFastest;
+import system.DeliveryFairOccupation;
 import system.Order;
 import system.TargetProfitDeliveryCost;
 import system.TargetProfitMarkup;
 import system.TargetProfitServiceFee;
+import system.FidelityCardPoint;
+import system.FidelityCardBasic;
+import system.FidelityCardLottery;
 import users.Manager;
 import users.Restaurant;
 import users.User;
@@ -41,10 +47,14 @@ public class CoreTest {
 	/* Users - register/logIn must be done in each test */
 	Manager m = (Manager) c.getListOfMasterManager().get(1);
 	Customer cu1 = new Customer("Luis", "luiscobas", "Cobas", a1, "lcobas@gmail.com", "630285192", "newpassword");
-	Customer cu2 = new Customer("Juan", "jcastillo33", "Castillo", a3, "jcastillo@gmail.com", "630285192", "newpassword");
-	Customer cu3 = new Customer("Pedro", "pleonpita", "Leon", a4, "pleonpita@gmail.com", "0695599143", "newpassword2");
+	Customer cu2 = new Customer("Juan", "jcastillo", "Castillo", a3, "jcastillo@gmail.com", "630285192", "newpassword");
+	Customer cu3 = new Customer("Pedro", "pleon", "Leon", a4, "pleonpita@gmail.com", "0695599143", "newpassword2");
 	Restaurant r1 = new Restaurant("La Playa", "LaPlayaBilbao", "newpasswordr", a1);
-	Courier co1 = new Courier("luiso","lucho","password1","cobas", a2,"0654641222");
+	Restaurant r2 = new Restaurant("TGF", "TGFParis", "newpasswordr", a2);
+	Restaurant r3 = new Restaurant("McDonals", "mcdonalsmadrid", "newpasswordr2", a3);
+	Courier co1 = new Courier("Luis","lucho","password1","Cobas", a1,"0654641222");
+	Courier co2 = new Courier("Jesus","jisus","password2","Martinez", a2,"0654641222");
+	Courier co3 = new Courier("Angel","aantolin","password3","Antolin", a3,"0654641222");
 	
 	/* Items */
 	Starter s1 = new Starter("Tortilla", 5.5, "Standard");
@@ -69,24 +79,39 @@ public class CoreTest {
 	}
 
 	@Test
-	public void testRegisterUser() {
+	public void testRegisterUser() throws UsernameAlreadyRegisteredException{
 		Manager man = new Manager("Marc", "mbataillou", "pmaasrscword", "Bataillou");
-		c.registerUser(man);
+		try{
+			c.registerUser(man);
+		}
+		catch(UsernameAlreadyRegisteredException e){
+			System.out.println("User: " + man.getUsername() + " already registered.");
+		}
 		assertTrue(c.getListOfUsers().get("mbataillou").getUsername() == "mbataillou");
 	}
 
 	@Test
-	public void testUserLogIn() {
+	public void testUserLogIn() throws UsernameAlreadyRegisteredException{
 		Manager man = new Manager("Marc", "mbataillou", "pmaasrscword", "Bataillou");
-		c.registerUser(man);
+		try{
+			c.registerUser(man);
+		}
+		catch(UsernameAlreadyRegisteredException e){
+			System.out.println("User: " + man.getUsername() + " already registered.");
+		}
 		c.userLogIn(man);
 		assertTrue(c.getCurrentUser().getUsername() == "mbataillou");
 	}
 
 	@Test
-	public void testLogOut() {
+	public void testLogOut() throws UsernameAlreadyRegisteredException{
 		Manager man = new Manager("Marc", "mbataillou", "pmaasrscword", "Bataillou");
-		c.registerUser(man);
+		try{
+			c.registerUser(man);
+		}
+		catch(UsernameAlreadyRegisteredException e){
+			System.out.println("User: " + man.getUsername() + " already registered.");
+		}
 		c.userLogIn(man);
 		assertTrue(c.getCurrentUser().getUsername() == "mbataillou");
 		c.logOut();
@@ -94,16 +119,26 @@ public class CoreTest {
 	}
 
 	@Test
-	public void testRegisterObserver() {
-		c.registerUser(cu1);
+	public void testRegisterObserver() throws UsernameAlreadyRegisteredException{
+		try{
+			c.registerUser(cu1);
+		}
+		catch(UsernameAlreadyRegisteredException e){
+			System.out.println("User: " + cu1.getUsername() + " already registered.");
+		}
 		c.userLogIn(cu1);
 		c.registerObserver(cu1);
 		assertTrue(c.getListOfToNotify().get(0).getUsername() == "luiscobas");
 	}
 
 	@Test
-	public void testRemoveObserver() {
-		c.registerUser(cu1);
+	public void testRemoveObserver() throws UsernameAlreadyRegisteredException{
+		try{
+			c.registerUser(cu1);
+		}
+		catch(UsernameAlreadyRegisteredException e){
+			System.out.println("User: " + cu1.getUsername() + " already registered.");
+		}
 		c.userLogIn(cu1);
 		c.registerObserver(cu1);
 		assertTrue(c.getListOfToNotify().get(0).getUsername() == "luiscobas");
@@ -112,49 +147,66 @@ public class CoreTest {
 	}
 
 	@Test
-	public void testNotifyObservers() {
+	public void testNotifyObservers() throws UsernameAlreadyRegisteredException{
 		list1.add(s1);
 		list1.add(md1);
 		HalfMeal m1 = new HalfMeal("Medio menu del día - entrante", list1);
 		m1.setMealItems(list1);
 		r1.addMeal(m1);
-		c.registerUser(cu1);
-		c.registerObserver(cu1);
-		c.registerUser(cu2);
-		c.registerObserver(cu2);
-		c.registerUser(cu3);
-		c.registerObserver(cu3);
+		try{
+			c.registerUser(cu1);
+			c.registerObserver(cu1);
+			c.registerUser(cu2);
+			c.registerObserver(cu2);
+			c.registerUser(cu3);
+			c.registerObserver(cu3);
+		}
+		catch(UsernameAlreadyRegisteredException e){
+			System.out.println("User already registered.");
+		}
 		//c.notifyObservers(r, m1);
 	}
 
 	@Test
-	public void testActivateUser() {
+	public void testActivateUser() throws AccessDeniedException{
 		c.userLogIn(m);
 		
 		assertNull(c.getListOfUsers().get("luiscobas"));
 		assertNull(c.getListOfUsers().get("LaPlayaBilbao"));
 		assertNull(c.getListOfUsers().get("lucho"));
-		
-		c.activateUser(cu1);
-		c.activateUser(r1);
-		c.activateUser(co1);
-		
+		try{
+			c.activateUser(cu1);
+			c.activateUser(r1);
+			c.activateUser(co1);
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
+		}
 		assertTrue(c.getListOfUsers().get("luiscobas").getUsername() == "luiscobas");
 		assertTrue(c.getListOfUsers().get("LaPlayaBilbao").getUsername() == "LaPlayaBilbao");
 		assertTrue(c.getListOfUsers().get("lucho").getUsername() == "lucho");
 	}
 
 	@Test
-	public void testDeactivateUser() {
-		c.userLogIn(m);
+	public void testDeactivateUser() throws UsernameAlreadyRegisteredException, AccessDeniedException{
+		try{
+			c.registerUser(cu1);
+			c.registerUser(r1);
+			c.registerUser(co1);
+		}
+		catch(UsernameAlreadyRegisteredException e){
+			System.out.println("User already registered.");
+		}
+		try{
+			c.userLogIn(m);
+			c.deactivateUser(cu1);
+			c.deactivateUser(r1);
+			c.deactivateUser(co1);
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
+		}
 		
-		c.registerUser(cu1);
-		c.registerUser(r1);
-		c.registerUser(co1);
-		
-		c.deactivateUser(cu1);
-		c.deactivateUser(r1);
-		c.deactivateUser(co1);
 		
 		assertNull(c.getListOfUsers().get("luiscobas"));
 		assertNull(c.getListOfUsers().get("LaPlayaBilbao"));
@@ -162,33 +214,46 @@ public class CoreTest {
 	}
 
 	@Test
-	public void testAddUser() {
-		c.userLogIn(m);
-		
+	public void testAddUser() throws UsernameAlreadyRegisteredException, AccessDeniedException{
 		assertNull(c.getListOfUsers().get("luiscobas"));
 		assertNull(c.getListOfUsers().get("LaPlayaBilbao"));
 		assertNull(c.getListOfUsers().get("lucho"));
-		
-		c.addUser(cu1);
-		c.addUser(r1);
-		c.addUser(co1);
-		
+		try{
+			c.userLogIn(m);
+			c.addUser(cu1);
+			c.addUser(r1);
+			c.addUser(co1);
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
+		}
+		catch(UsernameAlreadyRegisteredException e){
+			System.out.println("User already registered.");
+		}
 		assertTrue(c.getListOfUsers().get("luiscobas").getUsername() == "luiscobas");
 		assertTrue(c.getListOfUsers().get("LaPlayaBilbao").getUsername() == "LaPlayaBilbao");
 		assertTrue(c.getListOfUsers().get("lucho").getUsername() == "lucho");
 	}
 
 	@Test
-	public void testRemoveUser() {
-		c.userLogIn(m);
-		
-		c.registerUser(cu1);
-		c.registerUser(r1);
-		c.registerUser(co1);
-		
-		c.removeUser(cu1);
-		c.removeUser(r1);
-		c.removeUser(co1);
+	public void testRemoveUser() throws UsernameAlreadyRegisteredException, AccessDeniedException{
+		try{
+			c.registerUser(cu1);
+			c.registerUser(r1);
+			c.registerUser(co1);
+		}
+		catch(UsernameAlreadyRegisteredException e){
+			System.out.println("User already registered.");
+		}
+		try{
+			c.userLogIn(m);
+			c.removeUser(cu1);
+			c.removeUser(r1);
+			c.removeUser(co1);
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
+		}
 		
 		assertNull(c.getListOfUsers().get("luiscobas"));
 		assertNull(c.getListOfUsers().get("LaPlayaBilbao"));
@@ -196,49 +261,79 @@ public class CoreTest {
 	}
 
 	@Test
-	public void testChangeServiceFee() {
+	public void testChangeServiceFee() throws AccessDeniedException{
 		c.userLogIn(m);
-		c.changeServiceFee(4.0);
+		try{
+			c.changeServiceFee(4.0);
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
+		}
 		assertTrue(c.getServiceFee() == 4.0);
 	}
 
 	@Test
-	public void testChangeMarkup() {
+	public void testChangeMarkup() throws AccessDeniedException{
 		c.userLogIn(m);
-		c.changeMarkup(0.15);
+		try{
+			c.changeMarkup(0.15);
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
+		}
 		assertTrue(c.getMarkupPercentage() == 0.15);
 	}
 
 	@Test
-	public void testChangeDeliveryCost() {
+	public void testChangeDeliveryCost() throws AccessDeniedException{
 		c.userLogIn(m);
-		c.changeDeliveryCost(3.0);
+		try{
+			c.changeDeliveryCost(3.0);
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
+		}
 		assertTrue(c.getDeliveryCost() == 3.0);
 	}
 
 	@Test
-	public void testSetTargetProfitToDeliveryCost() {
+	public void testSetTargetProfitToDeliveryCost() throws AccessDeniedException{
 		c.userLogIn(m);
-		c.setTargetProfitToDeliveryCost();
+		try{
+			c.setTargetProfitToDeliveryCost();
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
+		}
 		assertTrue(c.gettProfitPolicy() instanceof TargetProfitDeliveryCost);
 	}
 
 	@Test
-	public void testSetTargetProfitToMarkup() {
+	public void testSetTargetProfitToMarkup() throws AccessDeniedException{
 		c.userLogIn(m);
-		c.setTargetProfitToMarkup();
+		try{
+			c.setTargetProfitToMarkup();
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
+		}
 		assertTrue(c.gettProfitPolicy() instanceof TargetProfitMarkup);
 	}
 
 	@Test
-	public void testSetTargetProfitToServiceFee() {
+	public void testSetTargetProfitToServiceFee() throws AccessDeniedException{
 		c.userLogIn(m);
-		c.setTargetProfitToServiceFee();
+		try{
+			c.setTargetProfitToServiceFee();
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
+		}
 		assertTrue(c.gettProfitPolicy() instanceof TargetProfitServiceFee);
 	}
 
 	@Test
-	public void testGetParameterToTargetProfit() {
+	public void testGetParameterToTargetProfit() throws AccessDeniedException{
 		c.userLogIn(m);
 		list1.add(s1);
 		list1.add(md1);
@@ -247,7 +342,7 @@ public class CoreTest {
 		m1.setMealItems(list1);
 		list1.remove(0);
 		list1.add(d1);
-		HalfMeal m2 = new HalfMeal("Medio menu del día - entrante", list1);
+		HalfMeal m2 = new HalfMeal("Medio menu del día - postre", list1);
 		r1.addMeal(m2);
 		m2.setMealItems(list1);
 		o1.addMeal(m1,4);
@@ -297,19 +392,24 @@ public class CoreTest {
 		 * serviceFee = (totalProfit - totalIncome*markupPercentage)/numberOfOrders + deliveryCost
 		 * serviceFee = (25 - 177.92*0.1)/3 + 2.0 = (25 - 17.79)/3 + 2.0 = 7.21/3 + 2.0 = 2.4 + 2.0 = 4.4
 		 * TargetProfitMarkup:
-		 * markupPercenthttp://marketplace.eclipse.org/marketplace-client-intro?mpc_install=264age = (totalProfit - (serviceFee - deliveryCost)*numberOfOrders)/totalIncome
+		 * markupPercenage = (totalProfit - (serviceFee - deliveryCost)*numberOfOrders)/totalIncome
 		 * markupPercentage = (25 - (3.0 - 2.0)*3)/177.92 = (25 - 3)/177.92 = 22/177.92 = 
 		 */
-		assertTrue(r1.round2dec(c.getParameterToTargetProfit(25, initDate, finDate)) == 0.6);
-		c.setTargetProfitToServiceFee();
-		assertTrue(r1.round2dec(c.getParameterToTargetProfit(25, initDate, finDate)) == 4.4);
-		c.setTargetProfitToMarkup();
-		assertTrue(r1.round2dec(c.getParameterToTargetProfit(25, initDate, finDate)) == 0.12);
+		try{
+			assertTrue(r1.round2dec(c.getParameterToTargetProfit(25, initDate, finDate)) == 0.6);
+			c.setTargetProfitToServiceFee();
+			assertTrue(r1.round2dec(c.getParameterToTargetProfit(25, initDate, finDate)) == 4.4);
+			c.setTargetProfitToMarkup();
+			assertTrue(r1.round2dec(c.getParameterToTargetProfit(25, initDate, finDate)) == 0.12);
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
+		}
 		
 	}
 
 	@Test
-	public void testComputeTotalIncome() {
+	public void testComputeTotalIncome() throws AccessDeniedException{
 		c.userLogIn(m);
 		list1.add(s1);
 		list1.add(md1);
@@ -318,7 +418,7 @@ public class CoreTest {
 		m1.setMealItems(list1);
 		list1.remove(0);
 		list1.add(d1);
-		HalfMeal m2 = new HalfMeal("Medio menu del día - entrante", list1);
+		HalfMeal m2 = new HalfMeal("Medio menu del día - postre", list1);
 		r1.addMeal(m2);
 		m2.setMealItems(list1);
 		o1.addMeal(m1,4);
@@ -334,77 +434,312 @@ public class CoreTest {
 		Calendar finDate = Calendar.getInstance();
 		initDate.set(Calendar.MONTH, 2);
 		finDate.set(Calendar.MONTH, 5);
-		System.out.println(c.computeTotalIncome(initDate, finDate));
+		try{
+			assertTrue(r1.round2dec(c.computeTotalIncome(initDate, finDate)) == 186.9);
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
+		}
 	}
 
 	@Test
-	public void testComputeTotalProfit() {
-		fail("Not yet implemented");
+	public void testComputeTotalProfit() throws AccessDeniedException {
+		c.userLogIn(m);
+		list1.add(s1);
+		list1.add(md1);
+		HalfMeal m1 = new HalfMeal("Medio menu del día - entrante", list1);
+		r1.addMeal(m1);
+		m1.setMealItems(list1);
+		list1.remove(0);
+		list1.add(d1);
+		HalfMeal m2 = new HalfMeal("Medio menu del día - postre", list1);
+		r1.addMeal(m2);
+		m2.setMealItems(list1);
+		o1.addMeal(m1,4);
+		o2.addItem(s1,1);
+		o2.addMeal(m2,1);
+		o3.addMeal(m2,4);
+		ArrayList<Order> auxiliarListOfCompletedOrders = new ArrayList<Order>();
+		auxiliarListOfCompletedOrders.add(o1);
+		auxiliarListOfCompletedOrders.add(o2);
+		auxiliarListOfCompletedOrders.add(o3);
+		c.setListOfCompletedOrders(auxiliarListOfCompletedOrders);
+		Calendar initDate = Calendar.getInstance();
+		Calendar finDate = Calendar.getInstance();
+		initDate.set(Calendar.MONTH, 2);
+		finDate.set(Calendar.MONTH, 5);
+		try{
+			assertTrue(r1.round2dec(c.computeTotalProfit(initDate, finDate)) == 20.79);
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
+		}
 	}
 
 	@Test
-	public void testComputeAverageIncome() {
-		fail("Not yet implemented");
+	public void testComputeAverageIncome() throws AccessDeniedException {
+		// not actually income as it multiplies the order price by 0.1
+		c.userLogIn(m);
+		list1.add(s1);
+		list1.add(md1);
+		HalfMeal m1 = new HalfMeal("Medio menu del día - entrante", list1);
+		r1.addMeal(m1);
+		m1.setMealItems(list1);
+		list1.remove(0);
+		list1.add(d1);
+		HalfMeal m2 = new HalfMeal("Medio menu del día - postre", list1);
+		r1.addMeal(m2);
+		m2.setMealItems(list1);
+		o1.addMeal(m1,4);
+		o2.addItem(s1,1);
+		o2.addMeal(m2,1);
+		o3.addMeal(m2,4);
+		ArrayList<Order> auxiliarListOfCompletedOrders = new ArrayList<Order>();
+		auxiliarListOfCompletedOrders.add(o1);
+		auxiliarListOfCompletedOrders.add(o2);
+		auxiliarListOfCompletedOrders.add(o3);
+		c.setListOfCompletedOrders(auxiliarListOfCompletedOrders);
+		Calendar initDate = Calendar.getInstance();
+		Calendar finDate = Calendar.getInstance();
+		initDate.set(Calendar.MONTH, 2);
+		finDate.set(Calendar.MONTH, 5);
+		try{
+			assertTrue(r1.round2dec(c.computeAverageIncome(initDate, finDate)) == 8.93);
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
+		}
 	}
 
 	@Test
-	public void testLeastActiveRestaurant() {
-		fail("Not yet implemented");
+	public void testLeastActiveRestaurant() throws UsernameAlreadyRegisteredException, AccessDeniedException {
+		c.userLogIn(m);
+		r1.setCountOfOrdersCompleted(10);
+		r2.setCountOfOrdersCompleted(15);
+		r3.setCountOfOrdersCompleted(5);
+		try{
+			c.addUser(r1);
+			c.addUser(r2);
+			c.addUser(r3);
+			assertTrue(c.leastActiveRestaurant().getUsername() == "mcdonalsmadrid");
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
+		}
+		catch(UsernameAlreadyRegisteredException e){
+			System.out.println("User already registered.");
+		}
 	}
 
 	@Test
-	public void testMostActiveRestaurant() {
-		fail("Not yet implemented");
+	public void testMostActiveRestaurant() throws UsernameAlreadyRegisteredException, AccessDeniedException{
+		c.userLogIn(m);
+		r1.setCountOfOrdersCompleted(10);
+		r2.setCountOfOrdersCompleted(15);
+		r3.setCountOfOrdersCompleted(5);
+		try{
+			c.addUser(r1);
+			c.addUser(r2);
+			c.addUser(r3);
+			assertTrue(c.mostActiveRestaurant().getUsername() == "TGFParis");
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
+		}
+		catch(UsernameAlreadyRegisteredException e){
+			System.out.println("User already registered.");
+		}
 	}
 
 	@Test
-	public void testLeastActiveCourier() {
-		fail("Not yet implemented");
+	public void testLeastActiveCourier() throws UsernameAlreadyRegisteredException, AccessDeniedException{
+		c.userLogIn(m);
+		co1.setCountOfOrdersCompleted(10);
+		co2.setCountOfOrdersCompleted(15);
+		co3.setCountOfOrdersCompleted(5);
+		try{
+			c.addUser(co1);
+			c.addUser(co2);
+			c.addUser(co3);
+			assertTrue(c.leastActiveCourier().getUsername() == "aantolin");
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
+		}
+		catch(UsernameAlreadyRegisteredException e){
+			System.out.println("User already registered.");
+		}
 	}
 
 	@Test
-	public void testMostActiveCourier() {
-		fail("Not yet implemented");
+	public void testMostActiveCourier() throws UsernameAlreadyRegisteredException, AccessDeniedException{
+		c.userLogIn(m);
+		co1.setCountOfOrdersCompleted(10);
+		co2.setCountOfOrdersCompleted(15);
+		co3.setCountOfOrdersCompleted(5);
+		try{
+			c.addUser(co1);
+			c.addUser(co2);
+			c.addUser(co3);
+			assertTrue(c.mostActiveCourier().getUsername() == "jisus");
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
+		}
+		catch(UsernameAlreadyRegisteredException e){
+			System.out.println("User already registered.");
+		}
 	}
 
 	@Test
-	public void testSetDeliveryToFastest() {
-		fail("Not yet implemented");
+	public void testSetDeliveryToFastest() throws AccessDeniedException {
+		c.userLogIn(m);
+		try{
+			c.setDeliveryToFastest();
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
+		}
+		assertTrue(c.getDeliveryPolicy() instanceof DeliveryFastest);
 	}
 
 	@Test
-	public void testSetDeliveryToFairOccupation() {
-		fail("Not yet implemented");
+	public void testSetDeliveryToFairOccupation() throws AccessDeniedException {
+		c.userLogIn(m);
+		try{
+			c.setDeliveryToFairOccupation();
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
+		}
+		assertTrue(c.getDeliveryPolicy() instanceof DeliveryFairOccupation);
 	}
 
 	@Test
-	public void testDisplayRestaurantInfo() {
-		fail("Not yet implemented");
+	public void testDisplayRestaurantInfo() throws UsernameAlreadyRegisteredException, AccessDeniedException{
+		list1.add(s1);
+		list1.add(md1);
+		HalfMeal m1 = new HalfMeal("Medio menu del día - entrante", list1);
+		r1.addMeal(m1);
+		list1.remove(0);
+		list1.add(d1);
+		HalfMeal m2 = new HalfMeal("Medio menu del día - postre", list1);
+		r1.addSpecialMeal(m2);
+		try{
+			c.registerUser(r1);
+			c.userLogIn(r1);
+			//c.displayRestaurantInfo();
+		}
+		catch(UsernameAlreadyRegisteredException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " already registered.");
+		}
+		/*
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a restaurant.");
+		}*/
 	}
 
 	@Test
-	public void testSetSpecialMeal() {
-		fail("Not yet implemented");
+	public void testSetSpecialMeal() throws UsernameAlreadyRegisteredException, AccessDeniedException{
+		list1.add(s1);
+		list1.add(md1);
+		HalfMeal m1 = new HalfMeal("Medio menu del día - entrante", list1);
+		r1.addMeal(m1);
+		cu1.setBeNotified(true);
+		cu2.setBeNotified(false);
+		cu3.setBeNotified(true);
+		try{
+			c.registerUser(r1);
+			c.registerUser(cu1);
+			c.registerUser(cu2);
+			c.registerUser(cu3);
+			c.registerObserver(cu1);
+			c.registerObserver(cu2);
+			c.registerObserver(cu3);
+			c.userLogIn(r1);
+			//c.setSpecialMeal(m1);
+		}
+		catch(UsernameAlreadyRegisteredException e){
+			System.out.println("User already registered.");
+		}
+		/*
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a restaurant.");
+		}*/
 	}
 
 	@Test
-	public void testRemoveSpecialMeal() {
-		fail("Not yet implemented");
+	public void testRemoveSpecialMeal() throws UsernameAlreadyRegisteredException, AccessDeniedException{
+		list1.add(s1);
+		list1.add(md1);
+		HalfMeal m1 = new HalfMeal("Medio menu del día - entrante", list1);
+		r1.addMeal(m1);
+		try{
+			c.registerUser(r1);
+			c.userLogIn(r1);
+			c.setSpecialMeal(m1);
+			assertTrue(((Restaurant) c.getCurrentUser()).getListOfSpecialMeal().get(0).getName() == "Medio menu del día - entrante");
+			c.removeSpecialMeal(m1);
+			assertTrue(((Restaurant) c.getCurrentUser()).getListOfSpecialMeal().isEmpty());
+		}
+		catch(UsernameAlreadyRegisteredException e){
+			System.out.println("User: -" + r1.getUsername() + "- already registered.");
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a restaurant.");
+		}
+		
 	}
 
 	@Test
-	public void testPlaceNewOrder() {
-		fail("Not yet implemented");
+	public void testPlaceNewOrder() throws UsernameAlreadyRegisteredException, AccessDeniedException{
+		try{
+			c.registerUser(cu1);
+			c.userLogIn(cu1);
+			c.placeNewOrder(r1);
+			assertTrue(c.getListOfPendingOrders().get(0).getCustomer().getUsername() == "luiscobas");
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " is not a customer.");
+		}
+		catch(UsernameAlreadyRegisteredException e){
+			System.out.println("User -" + cu1.getUsername() + "- already registered.");
+		}
 	}
 
 	@Test
-	public void testRegisterFidelityCard() {
-		fail("Not yet implemented");
+	public void testRegisterFidelityCard() throws UsernameAlreadyRegisteredException, AccessDeniedException{
+		FidelityCardPoint fc = new FidelityCardPoint();
+		try{
+			c.registerUser(cu1);
+			c.userLogIn(cu1);
+			c.registerFidelityCard(fc);
+			assertTrue(((Customer) c.getCurrentUser()).getFidelityCard() instanceof FidelityCardPoint);
+		}
+		catch(UsernameAlreadyRegisteredException e){
+			System.out.println("User -" + cu1.getUsername() + "- already registered.");
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " is not a customer.");
+		}
 	}
 
 	@Test
-	public void testUnregisterFidelityCard() {
-		fail("Not yet implemented");
+	public void testUnregisterFidelityCard() throws UsernameAlreadyRegisteredException, AccessDeniedException {
+		try{
+			cu1.setFidelityCardtoLottery();
+			c.registerUser(cu1);
+			c.userLogIn(cu1);
+			assertTrue(((Customer) c.getCurrentUser()).getFidelityCard() instanceof FidelityCardLottery);
+			c.unregisterFidelityCard();
+			assertTrue(((Customer) c.getCurrentUser()).getFidelityCard() instanceof FidelityCardBasic);
+		}
+		catch(UsernameAlreadyRegisteredException e){
+			System.out.println("User -" + cu1.getUsername() + "- already registered.");
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " is not a customer.");
+		}
 	}
 
 	@Test
