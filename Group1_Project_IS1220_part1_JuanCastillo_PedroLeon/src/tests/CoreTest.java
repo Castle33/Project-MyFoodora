@@ -743,8 +743,35 @@ public class CoreTest {
 	}
 
 	@Test
-	public void testGetHistoryOrders() {
-		fail("Not yet implemented");
+	public void testGetHistoryOrders() throws AccessDeniedException, UsernameAlreadyRegisteredException{
+		
+		Order o3 = new Order(new Customer("o3", "o3", "o3", a2, "o3", "o3", "o3"), new Restaurant("TGF", "TGFParis", "newpasswordr", a2));
+		Order o2 = new Order(cu1, new Restaurant("TGF", "TGFParis", "newpasswordr", a2));
+		Order o1 = new Order(cu1, new Restaurant("TGF", "TGFParis", "newpasswordr", a3));
+		ArrayList<Order> completedOrders = new ArrayList<Order>();
+		completedOrders.add(o3);
+		completedOrders.add(o2);
+		completedOrders.add(o1);
+		
+		c.setListOfCompletedOrders(completedOrders);
+		
+		try{
+			c.registerUser(cu1);
+		}
+		catch(UsernameAlreadyRegisteredException e){
+			System.out.println("User -" + cu1.getUsername() + "- already registered.");
+		}
+		c.userLogIn(m);
+		
+		ArrayList<Order> historyOrders = new ArrayList<Order>();
+		
+		try {
+			historyOrders = c.getHistoryOrders();
+		} catch (AccessDeniedException e) {
+			System.out.println("getHistoryOrders correctly throws exception");
+		}
+		
+		
 	}
 
 	@Test
@@ -753,23 +780,84 @@ public class CoreTest {
 	}
 
 	@Test
-	public void testUnregisterCourier() {
-		fail("Not yet implemented");
+	public void testUnregisterCourier() throws AccessDeniedException{
+		c.getListOfUsers().put(co1.getUsername(), co1);
+		c.getListOfUsers().put(m.getUsername(), m);
+		try {
+			c.unregisterCourier(m);
+		} catch(AccessDeniedException e) {
+			System.out.println("unregisterCourier correctly throws exception");
+		} finally {
+			c.unregisterCourier(co1);	
+			assertNull(c.getListOfUsers().get("lucho"));
+		}
+		
 	}
 
 	@Test
-	public void testUpdateCourierState() {
-		fail("Not yet implemented");
+	public void testUpdateCourierState() throws AccessDeniedException{
+		c.getListOfUsers().put(co1.getUsername(), co1);
+		Order o = new Order(new Customer("J", "j", "C", a4, "j@gmail.com", "63", "pass"), new Restaurant("T", "T", "pass", a1));
+		Order o1 = new Order(new Customer("Juan", "jcastillo33", "Castillo", a3, "jcastillo@gmail.com", "630285192", "newpassword"), new Restaurant("TGF", "TGFParis", "newpasswordr", a4));
+		co1.setCurrentOrder(o);
+		co1.setOnDuty(true);
+		c.updateCourierState(co1);
+		Courier tempC = (Courier)c.getListOfUsers().get(co1.getUsername());
+			assertFalse(tempC.isOnDuty());
+			assertEquals(tempC.getPosition(),a4);
+		try {
+			c.updateCourierState(m);
+		} catch(AccessDeniedException e) {
+			System.out.println("updateCourierState correctly throws exception");
+		} finally {
+			LinkedList<Order> olist = new LinkedList<Order>();
+			olist.addFirst(o1);
+			co1.setListPendingOrders(olist);
+			c.updateCourierState(co1);
+			assertTrue(co1.getListPendingOrders().isEmpty());
+			assertEquals(co1.getCurrentOrder().getID(),o1.getID());
+		}
+		
 	}
-
-	@Test
-	public void testUpdateCourierPosition() {
-		fail("Not yet implemented");
-	}
-
+ 
 	@Test
 	public void testProcessOrders() {
-		fail("Not yet implemented");
+		Courier c1 = new Courier("c","c","password1","c",new Address(1,3),"0754641222");
+		Courier d1 = new Courier("d","d","password2","d",new Address(0,0),"0654641222");
+		Courier e1 = new Courier("e","e","password3","e",new Address(3,4),"0664641222");
+		
+		Order o = new Order(new Customer("order", "order", "order", a1, "order", "order", "order"), new Restaurant("TGF", "TGFParis", "newpasswordr", a2));
+		Order o1 = new Order(new Customer("o1", "o1", "o1", a3, "o1", "o1", "o1"), new Restaurant("TGF", "TGFParis", "newpasswordr", a3));
+		Order o2 = new Order(new Customer("o2", "o2", "o2", a2, "o2", "o2", "o2"), new Restaurant("TGF", "TGFParis", "newpasswordr", a2));
+		Order o3 = new Order(new Customer("o3", "o3", "o3", a2, "o3", "o3", "o3"), new Restaurant("TGF", "TGFParis", "newpasswordr", a2));
+		
+		LinkedList<Order> olist = new LinkedList<Order>();
+		olist.add(o1); 
+		olist.add(o2);
+		olist.add(o3);
+		olist.add(o);
+		
+		c.getListOfUsers().put(c1.getUsername(), d1);
+		c.getListOfUsers().put(d1.getUsername(), c1);
+		c.getListOfUsers().put(e1.getUsername(), e1);
+		c.getListOfUsers().put(m.getUsername(), m);
+		
+		c.setListOfPendingOrders(olist);
+		c.processOrders();
+		
+			assertTrue(c.getListOfPendingOrders().isEmpty());
+			assertTrue(c.getListOfCompletedOrders().contains(o1));
+			assertTrue(c.getListOfCompletedOrders().contains(o2));
+			assertTrue(c.getListOfCompletedOrders().contains(o3));
+		
+		System.out.println(c.getListOfUsers().get("c"));
+		System.out.println(c.getListOfUsers().get("d"));
+		System.out.println(c.getListOfUsers().get("e"));
+		Courier temp = (Courier)c.getListOfUsers().get("e");
+		Courier temp1 = (Courier)c.getListOfUsers().get("c");
+		System.out.println(temp.getListPendingOrders()); // 90% of times contains order "o"
+		System.out.println(temp1.getListPendingOrders()); // Should be empty
+		
 	}
 
 }

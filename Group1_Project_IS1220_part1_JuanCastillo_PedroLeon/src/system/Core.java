@@ -520,7 +520,7 @@ public class Core implements Observable {
 		}
 	}
 	
-	public ArrayList<Order> getHistoryOrders(){
+	public ArrayList<Order> getHistoryOrders() throws AccessDeniedException{
 		if(currentUser instanceof Customer){
 			ArrayList<Order> customerOrders = new ArrayList<Order>();
 			for(Order o : listOfCompletedOrders){
@@ -530,8 +530,7 @@ public class Core implements Observable {
 			}
 			return customerOrders;
 		} else {
-			//throw exception Not A Customer
-			return null;
+			throw new AccessDeniedException();
 		}
 	}
 	/*
@@ -539,7 +538,7 @@ public class Core implements Observable {
 	 * -b = true gives consensus
 	 * -b = false removes consensus
 	 */
-	public void giveRemoveConsensus(boolean b){
+	public void giveRemoveConsensus(boolean b) throws AccessDeniedException{
 		if(currentUser instanceof Customer){
 			((Customer) currentUser).changeBeNotified(b);
 			listOfUsers.put(currentUser.getUsername(), currentUser);
@@ -549,7 +548,7 @@ public class Core implements Observable {
 				removeObserver((Customer) currentUser);
 			}
 		}else{
-			//throw exception NOT a Customer
+			throw new AccessDeniedException();
 		}
 	}
 	
