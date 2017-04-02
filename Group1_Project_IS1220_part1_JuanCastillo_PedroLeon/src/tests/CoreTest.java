@@ -43,7 +43,7 @@ public class CoreTest {
 	Customer cu2 = new Customer("Juan", "jcastillo33", "Castillo", a3, "jcastillo@gmail.com", "630285192", "newpassword");
 	Customer cu3 = new Customer("Pedro", "pleonpita", "Leon", a4, "pleonpita@gmail.com", "0695599143", "newpassword2");
 	Restaurant r1 = new Restaurant("La Playa", "LaPlayaBilbao", "newpasswordr", a1);
-	Courier co1 = new Courier("luiso","lucho","password1","cobas",new Address(4,8),"0654641222");
+	Courier co1 = new Courier("luiso","lucho","password1","cobas", a2,"0654641222");
 	
 	/* Items */
 	Starter s1 = new Starter("Tortilla", 5.5, "Standard");
@@ -193,54 +193,42 @@ public class CoreTest {
 	@Test
 	public void testChangeServiceFee() {
 		c.userLogIn(m);
-		
 		c.changeServiceFee(4.0);
-		
 		assertTrue(c.getServiceFee() == 4.0);
 	}
 
 	@Test
 	public void testChangeMarkup() {
 		c.userLogIn(m);
-		
 		c.changeMarkup(0.15);
-		
 		assertTrue(c.getMarkupPercentage() == 0.15);
 	}
 
 	@Test
 	public void testChangeDeliveryCost() {
 		c.userLogIn(m);
-		
 		c.changeDeliveryCost(3.0);
-		
 		assertTrue(c.getDeliveryCost() == 3.0);
 	}
 
 	@Test
 	public void testSetTargetProfitToDeliveryCost() {
 		c.userLogIn(m);
-		
 		c.setTargetProfitToDeliveryCost();
-		
 		assertTrue(c.gettProfitPolicy() instanceof TargetProfitDeliveryCost);
 	}
 
 	@Test
 	public void testSetTargetProfitToMarkup() {
 		c.userLogIn(m);
-		
 		c.setTargetProfitToMarkup();
-		
 		assertTrue(c.gettProfitPolicy() instanceof TargetProfitMarkup);
 	}
 
 	@Test
 	public void testSetTargetProfitToServiceFee() {
 		c.userLogIn(m);
-		
 		c.setTargetProfitToServiceFee();
-		
 		assertTrue(c.gettProfitPolicy() instanceof TargetProfitServiceFee);
 	}
 
