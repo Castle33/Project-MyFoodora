@@ -106,6 +106,8 @@ public class MyFoodora {
 				while(sc.hasNextLine()){
 					input = sc.nextLine();
 					if(!input.isEmpty()){
+						input.replaceAll("<", "\"");
+						input.replaceAll(">", "\"");
 						treatCmd(input);
 					}
 				}

@@ -5,6 +5,7 @@ import java.util.Calendar;
 import exceptions.AccessDeniedException;
 import exceptions.InputMismatchException;
 import exceptions.NumberOfArgumentsException;
+import system.Core;
 
 /**
  * ShowTotalProfit 1 <startDate> <endDate>
@@ -12,32 +13,38 @@ import exceptions.NumberOfArgumentsException;
  *
  */
 public class ShowTotalProfit implements CommandProcessor{
-	final int nArgs = 2;
 	StringCast stringCast = new StringCast();
 	
-	public String process(String[] args) throws NumberOfArgumentsException {
+	public String process(String[] args) throws NumberOfArgumentsException, InputMismatchException {
 		try{
-			if(args[nArgs] == null){
+			if(args.length == 2){
 				Calendar cal1 = Calendar.getInstance();
 				Calendar cal2 = Calendar.getInstance();
 				try {
 					cal1 = stringCast.string2Calendar(args[0]);
 					cal2 = stringCast.string2Calendar(args[1]);
-					System.out.println("The total profit for the specified time interval is: " +MyFoodora.core.computeTotalProfit(cal1, cal2));
+					return "The total profit for the specified time interval is: " +String.valueOf(MyFoodora.core.computeTotalProfit(cal1, cal2));
 					
 				} catch (InputMismatchException e) {
-					System.out.println(e.getMessage());
+					return e.getMessage();
+				}
+			}else if(args.length == 0){
+				Calendar cal1 = Calendar.getInstance();
+				Calendar cal2 = Calendar.getInstance();
+				try {
+					cal1 = stringCast.string2Calendar(Core.creationDate);
+					return "The total profit for the specified time interval is: " +String.valueOf(MyFoodora.core.computeTotalProfit(cal1, cal2));
+					
+				} catch (InputMismatchException e) {
+					return e.getMessage();
 				}
 			}else{
 				throw new NumberOfArgumentsException();
 			}
 		}catch(NumberOfArgumentsException e){
-			e.getMessage();
-			return null;
+			return e.getMessage();
 		}catch(AccessDeniedException e){
-			System.out.println(e.getMessage());
-			return null;
+			return e.getMessage();
 		}
-		return null;
 	}
 }

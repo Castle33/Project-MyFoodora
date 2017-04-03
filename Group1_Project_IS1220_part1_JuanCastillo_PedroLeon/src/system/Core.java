@@ -19,6 +19,7 @@ public class Core implements Observable {
 	/* application attributes */
 	final String name;
 	final ArrayList<User> listOfMasterManager;
+	public final static String creationDate = "2017/03/02";
 	
 	/* lists of system's users */
 	private User currentUser;
