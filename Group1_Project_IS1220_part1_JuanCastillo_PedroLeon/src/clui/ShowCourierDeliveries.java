@@ -2,6 +2,7 @@ package clui;
 
 import java.util.LinkedList;
 import java.util.Collection;
+import java.util.Collections;
 
 import exceptions.NumberOfArgumentsException;
 import system.DeliveryFairOccupation;
@@ -35,6 +36,7 @@ public class ShowCourierDeliveries implements CommandProcessor{
 					}
 				}
 				orderedCouriers = dfo.setDeliveryPolicy(couriers, new Address(0,0));
+				Collections.reverse(orderedCouriers);
 				return orderedCouriers.toString();
 			}else{
 				throw new NumberOfArgumentsException();

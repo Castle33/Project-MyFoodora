@@ -1,0 +1,27 @@
+login <username> <password>
+logout <>
+registerRestaurant <name> <address> <username> <password>
+registerCustomer <name> <address> <username> <password>
+registerCourier <name> <address> <username> <password>
+addDishRestaurantMenu <dishname> <dishCategory> <foodCategory> <unitPrice>
+createMeal <mealName>
+addDish2Meal <dishName> <mealName>
+showMeal <mealName>
+setSpecialOffer <mealName>
+removeFromSepcialOffer <mealName>
+createOrder <restaurantName> <orderName>
+addItem2Order <orderName> <itemName>
+endOrder <orderName> <date>
+onDuty <username>
+offDuty <username>
+findDeliverer <orderName>
+setDeliveryPolicy <delPolicyName>
+setProfitPolicy <ProfitPolicyName>
+associatedCard <username> <cardType>
+showCourierDeliveries <>
+showRestaurantTop <>
+showCustomers <>
+showMenuItem <restaurantName>
+showTotalProfit<startDate> <endDate>
+runTest <testScenarioFile>
+help <>

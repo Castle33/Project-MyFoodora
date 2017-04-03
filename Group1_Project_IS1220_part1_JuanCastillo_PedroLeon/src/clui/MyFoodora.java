@@ -32,7 +32,7 @@ public class MyFoodora {
 		this.args = new ArrayList<String>();
 		MyFoodora.listTempMeals = new ArrayList<Meal>();
 		MyFoodora.core = new Core();
-		MyFoodora.readCmdFile("listCmd.txt");
+		MyFoodora.readCmdFile("src/texts/listCmd.txt");
 	}
 
 	public void launcherCL() {
@@ -74,7 +74,7 @@ public class MyFoodora {
 				ArrayList<String> temp_string = new ArrayList<String>();
 				for(int i = 1; i < input.length; i++){
 					if(input[i].charAt(0) != '"' || input[i].charAt(input[i].length()-1) !='"') {
-						System.out.println("Sintax Error: Arguments must be surrounded by quotation marks");
+						System.out.println("Syntax Error: Arguments must be surrounded by quotation marks");
 					} else {
 						//Eliminates quotation marks from argument and adds it to the temporary list
 						temp_string.add(input[i].substring(1, input[i].length()-1));
