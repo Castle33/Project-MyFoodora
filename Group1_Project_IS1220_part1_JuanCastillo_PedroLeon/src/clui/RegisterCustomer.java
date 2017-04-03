@@ -1,5 +1,7 @@
 package clui;
 
+import java.util.Arrays;
+
 import exceptions.*;
 import users.Customer;
 /**
@@ -15,12 +17,12 @@ public class RegisterCustomer implements CommandProcessor{
 	 * @see clui.CommandProcessor#process(java.lang.String[])
 	 */
 	@Override
-	public String process(String[] args) throws NumberOfArgumentsException {
+	public String process(String[] args) {
 		try{
-			if(args[nArgs] == null){
+			if(args.length == nArgs){
 				customer = new Customer(args[0],args[2],args[1],MyFoodora.stringCast.string2Address(args[3]),args[6],args[5],args[4]);
 				MyFoodora.core.registerUser(customer);
-				return ("Courier: -" + customer.getUsername() + "- registered.");
+				return ("Customer: -" + customer.getUsername() + "- registered.");
 			}else{
 				throw new NumberOfArgumentsException();
 			}

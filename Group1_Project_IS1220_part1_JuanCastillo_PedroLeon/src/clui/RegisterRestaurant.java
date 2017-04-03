@@ -15,9 +15,9 @@ public class RegisterRestaurant implements CommandProcessor{
 	 * @see clui.CommandProcessor#process(java.lang.String[])
 	 */
 	@Override
-	public String process(String[] args) throws NumberOfArgumentsException{
+	public String process(String[] args) {
 		try{
-			if(args[nArgs] == null){
+			if(args.length == nArgs){
 				restaurant = new Restaurant(args[0],args[2],args[3],MyFoodora.stringCast.string2Address(args[1]));
 				MyFoodora.core.registerUser(restaurant);
 				return ("Restaurant: -" + restaurant.getUsername() + "- registered.");

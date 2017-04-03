@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import restaurant_structure.Meal;
 
@@ -24,14 +25,17 @@ public class MyFoodora {
 	private ArrayList<String> args;
 	private static ArrayList<String> listCmds;
 	private CommandProcessor cmdProcessor;
+	private String commandReturn;
 	
 	
 	public MyFoodora() {
 		super();
 		this.name = "";
+		this.commandReturn = null;
 		this.args = new ArrayList<String>();
 		MyFoodora.listTempMeals = new ArrayList<Meal>();
 		MyFoodora.core = new Core();
+		MyFoodora.stringCast = new StringCast();
 		MyFoodora.readCmdFile("src/texts/listCmd.txt");
 	}
 
@@ -52,7 +56,8 @@ public class MyFoodora {
 			sc.close();
 			
 		} catch (Exception e) {
-			System.out.println("Unexpected error: Please try again in a few minutes");
+			//System.out.println("Unexpected error: Please try again in a few minutes");
+			e.printStackTrace();
 		}
 	}
 	
@@ -140,66 +145,120 @@ public class MyFoodora {
 		if(!command.equals("")){
 			
 			try{
+				
 				switch (command.toLowerCase()){
 				case "login":
+					cmdProcessor = new LogIn();
+					cmdProcessor.process(argum);
 					break;
 				case "logout":
+					cmdProcessor = new LogOut();
+					cmdProcessor.process(argum);
 					break;
 				case "registerrestaurant":
+					cmdProcessor = new RegisterRestaurant();
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				case "registercustomer":
 					cmdProcessor = new RegisterCustomer();
-					cmdProcessor.process(argum);
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				case "registercourier":
+					cmdProcessor = new RegisterCourier();
+					cmdProcessor.process(argum);
 					break;
 				case "adddishrestaurantmenu":
+					cmdProcessor = new AddDishRestaurantMenu();
+					cmdProcessor.process(argum);
 					break;
 				case "createmeal":
+					cmdProcessor = new CreateMeal();
+					cmdProcessor.process(argum);
 					break;
 				case "adddish2meal":
+					cmdProcessor = new AddDish2Meal();
+					cmdProcessor.process(argum);
 					break;
 				case "showmeal":
+					cmdProcessor = new ShowMeal();
+					cmdProcessor.process(argum);
 					break;
 				case "savemeal":
+					cmdProcessor = new SaveMeal();
+					cmdProcessor.process(argum);
 					break;
 				case "setspecialoffer":
+					cmdProcessor = new SetSpecialOffer();
+					cmdProcessor.process(argum);
 					break;
 				case "removefromspecialoffer":
+					cmdProcessor = new RemoveSpecialOffer();
+					cmdProcessor.process(argum);
 					break;
 				case "createorder":
+					cmdProcessor = new CreateOrder();
+					cmdProcessor.process(argum);
 					break;
 				case "additem2order":
+					cmdProcessor = new AddItem2Order();
+					cmdProcessor.process(argum);
 					break;
 				case "endorder":
+					cmdProcessor = new EndOrder();
+					cmdProcessor.process(argum);
 					break;
 				case "onduty":
+					cmdProcessor = new OnDuty();
+					cmdProcessor.process(argum);
 					break;
 				case "offduty":
+					cmdProcessor = new OffDuty();
+					cmdProcessor.process(argum);
 					break;
-				case "finddeliver":
+				case "finddeliverer":
+					cmdProcessor = new FindDeliverer();
+					cmdProcessor.process(argum);
 					break;
 				case "setdeliverypolicy":
+					cmdProcessor = new SetDeliveryPolicy();
+					cmdProcessor.process(argum);
 					break;
 				case "setprofitpolicy":
+					cmdProcessor = new SetProfitPolicy();
+					cmdProcessor.process(argum);
 					break;
 				case "associatecard":
+					cmdProcessor = new AssociateCard();
+					cmdProcessor.process(argum);
 					break;
-				case "showcouriersdeliveries":
+				case "showcourierdeliveries":
+					cmdProcessor = new ShowCourierDeliveries();
+					cmdProcessor.process(argum);
 					break;
 				case "showrestauranttop":
+					cmdProcessor = new ShowRestaurantTop();
+					cmdProcessor.process(argum);
 					break;
 				case "showcustomers":
+					cmdProcessor = new ShowCustomers();
+					cmdProcessor.process(argum);
 					break;
 				case "showmenuitem":
+					cmdProcessor = new ShowMenuItem();
+					cmdProcessor.process(argum);
 					break;
 				case "showtotalprofit":
+					cmdProcessor = new ShowTotalProfit();
+					cmdProcessor.process(argum);
 					break;
 				}
 			}catch (NumberOfArgumentsException e){
 				System.out.println("Error in arguments: Wrong number of arguments for command "+command);
 			}catch (InputMismatchException e1){
 				System.out.println("Error in arguments: Wrong type of arguments for command "+command);
+			}finally{
+				System.out.println(getCommandReturn());
+				setCommandReturn("");
 			}
 		}
 	}
@@ -281,5 +340,13 @@ public class MyFoodora {
 			array.add(args[i]) ;
 		}
 		return array;
+	}
+	
+	public String getCommandReturn(){
+		return commandReturn;
+	}
+	
+	public void setCommandReturn(String cr){
+		commandReturn = cr;
 	}
 }

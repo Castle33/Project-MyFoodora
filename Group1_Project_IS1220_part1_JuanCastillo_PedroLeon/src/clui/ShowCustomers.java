@@ -12,13 +12,14 @@ import users.*;
  * @author Juan Castillo
  *
  */
-public class ShowCustomers {
+
+public class ShowCustomers implements CommandProcessor{
 	final int nArgs = 0;
 	HashMap<String,User> temp_listOfUsers = new HashMap<String,User>();
 	ArrayList<User> users = new ArrayList<User>();
 	ArrayList<Customer> customers = new ArrayList<Customer>();
 	String message;
-	
+	@Override
 	public String process(String[] args) throws NumberOfArgumentsException, InputMismatchException {
 		try{
 			if(args[nArgs] == null){

@@ -1,8 +1,8 @@
 login <username> <password>
 logout <>
 registerRestaurant <name> <address> <username> <password>
-registerCustomer <name> <address> <username> <password>
-registerCourier <name> <address> <username> <password>
+registerCustomer <firstName> <lastName> <username> <address> <password> <phoneNumber> <email>
+registerCourier <firstName> <lastName> <username> <position> <password> <phoneNumber>
 addDishRestaurantMenu <dishname> <dishCategory> <foodCategory> <unitPrice>
 createMeal <mealName>
 addDish2Meal <dishName> <mealName>

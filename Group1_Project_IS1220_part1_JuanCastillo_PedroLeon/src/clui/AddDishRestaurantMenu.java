@@ -27,7 +27,7 @@ public class AddDishRestaurantMenu implements CommandProcessor{
 				if(((Restaurant) MyFoodora.core.getCurrentUser()).getItemByName(args[0]) == null){
 					switch(args[1].toUpperCase()){
 					case "STARTER":
-						item = new Starter(args[0], Integer.parseInt(args[3]), args[1]);
+						item = new Starter(args[0], Double.parseDouble(args[3]), args[1]);
 						MyFoodora.core.addItem(item);
 						message = "Starter: " + item.getName() + " added to " + MyFoodora.core.getCurrentUser().getName() + "'s menu.";
 						break;
