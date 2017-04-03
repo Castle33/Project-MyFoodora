@@ -27,6 +27,7 @@ public class EndOrder implements CommandProcessor{
 				if(order != null){
 					if(!order.getItems().isEmpty() && !order.getMeals().isEmpty()){
 						MyFoodora.core.placeNewOrder(order);
+						MyFoodora.core.processOrders();
 						return "Customer: " + order.getCustomer().getUsername() + " placed Order: " + order.getName() + " to Restaurant: " + order.getRestaurant().getName();
 					}
 				}else{
