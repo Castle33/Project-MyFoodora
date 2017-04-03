@@ -1,6 +1,7 @@
 package users;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import restaurant_structure.*;
 /**
@@ -34,11 +35,31 @@ public class Restaurant extends User{
 		this.menu = new Menu();
 		this.listOfMeal = new ArrayList<Meal>();
 		this.listOfSpecialMeal = new ArrayList<Meal>();
+		this.countOfOrdersCompleted = 0;
 	}
 
 	@Override
 	public String toString() {
 		return "Restaurant [name=" + getName() + ", username=" + getUsername() + ", ID=" + getID() + "]";
+	}
+	
+	/***************************************************************************************************/
+	/* A Comparator method depending on number of orders received and completed */
+	
+	public static Comparator<Restaurant> compareNumOrdersCompleted(){
+		return new Comparator<Restaurant>(){
+			@Override
+			public int compare(Restaurant arg0, Restaurant arg1) {
+				if(arg0.countOfOrdersCompleted > arg1.countOfOrdersCompleted){
+					return 1;
+				} else if(arg0.countOfOrdersCompleted == arg1.countOfOrdersCompleted){
+					return 0;
+				} else {
+					return -1;
+				}
+			}
+			
+		};
 	}
 	
 	/***************************************************************************************************/

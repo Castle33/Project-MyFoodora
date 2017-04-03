@@ -11,6 +11,8 @@ import restaurant_structure.Meal;
 public class ShowMeal implements CommandProcessor{
 	final int nArgs = 1;
 	Item item;
+	Meal meal;
+	boolean mealFound = true;
 	/* (non-Javadoc)
 	 * @see clui.CommandProcessor#process(java.lang.String[])
 	 */
@@ -20,15 +22,21 @@ public class ShowMeal implements CommandProcessor{
 			if(args[nArgs] == null){
 				for( Meal m : MyFoodora.listTempMeals){
 					if(m.getName() == args[1]){
-						return "Meal: " + m.getName() + " has items: " + m.getMealItems();
+						meal = m;
+					} else {
+						mealFound = false;
 					}
 				}
+				if(mealFound){
+					return "Meal: " + meal.getName() + " has items: " + meal.getMealItems();
+				} else {
+					return "Error: Meal not found";
+				}				
 			}else{
 				throw new NumberOfArgumentsException();
 			}
 		}catch(NumberOfArgumentsException e){
 			return e.getMessage();
 		}
-		return null;
 	}
 }
