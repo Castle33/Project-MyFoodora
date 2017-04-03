@@ -454,7 +454,37 @@ public class Core implements Observable {
 				((Restaurant) currentUser).getListOfSpecialMeal().remove(meal);
 				((Restaurant) currentUser).getListOfMeal().add(meal);
 			}else if(((Restaurant) currentUser).getListOfMeal().contains(meal)){
-				System.out.println("Meal " + meal.getName() + " already NOT an special meal");
+				System.out.println("Meal " + meal.getName() + " already NOT an special meal.");
+			}
+		}else{
+			throw new AccessDeniedException();
+		}
+	}
+	
+	public void addMeal(Meal meal)  throws AccessDeniedException{
+		if(currentUser instanceof Restaurant){
+			if(((Restaurant) currentUser).getListOfMeal().contains(meal)){
+				System.out.println("Meal " + meal.getName() + " already added.");
+			}else {
+				((Restaurant) currentUser).getListOfMeal().add(meal);
+			}
+		}else{
+			throw new AccessDeniedException();
+		}
+	}
+	
+	public void addItem(Item item)  throws AccessDeniedException{
+		if(currentUser instanceof Restaurant){
+			if(((Restaurant) currentUser).getMenu().getStarters().contains(item) || ((Restaurant) currentUser).getMenu().getMainDishes().contains(item) || ((Restaurant) currentUser).getMenu().getDesserts().contains(item)){
+				System.out.println("Item " + item.getName() + " already added.");
+			}else {
+				if(item instanceof Starter){
+					((Restaurant) currentUser).addStarter((Starter)item);
+				}else if(item instanceof MainDish){
+					((Restaurant) currentUser).addMainDish((MainDish)item);
+				}else if(item instanceof Dessert){
+					((Restaurant) currentUser).addDessert((Dessert)item);
+				}
 			}
 		}else{
 			throw new AccessDeniedException();

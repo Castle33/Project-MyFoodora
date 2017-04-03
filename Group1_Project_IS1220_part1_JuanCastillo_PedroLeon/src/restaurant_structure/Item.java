@@ -16,14 +16,14 @@ public abstract class Item {
 	private double price;
 	private String foodType;
 	
-	protected Item(String name, double price, String foodType){
+	public Item(String name, double price, String foodType){
 		this.name = name;
 		this.price = price;
 		this.foodType = foodType;
 		
 	}
 	
-	protected Item(String name, double price){
+	public Item(String name, double price){
 		this.name = name;
 		this.price = price;
 	}

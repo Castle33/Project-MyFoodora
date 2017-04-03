@@ -672,6 +672,44 @@ public class CoreTest {
 		}
 		
 	}
+	
+	@Test
+	public void addMeal()  throws AccessDeniedException{
+		list1.add(s1);
+		list1.add(md1);
+		HalfMeal m1 = new HalfMeal("Medio menu del día - entrante", list1);
+		try{
+			c.registerUser(r1);
+			c.userLogIn(r1);
+			c.addMeal(m1);
+			assertTrue(((Restaurant) c.getCurrentUser()).getListOfMeal().contains(m1));
+		}
+		catch(UsernameAlreadyRegisteredException e){
+			System.out.println("User: -" + r1.getUsername() + "- already registered.");
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a restaurant.");
+		}
+	}
+	
+	@Test
+	public void addItem()  throws AccessDeniedException{
+		try{
+			c.registerUser(r1);
+			c.userLogIn(r1);
+			c.addItem(s1);
+			c.addItem(d1);
+			assertTrue(((Restaurant) c.getCurrentUser()).getMenu().getStarters().contains(s1));
+			assertFalse(((Restaurant) c.getCurrentUser()).getMenu().getMainDishes().contains(s1));
+			assertTrue(((Restaurant) c.getCurrentUser()).getMenu().getDesserts().contains(d1));
+		}
+		catch(UsernameAlreadyRegisteredException e){
+			System.out.println("User: -" + r1.getUsername() + "- already registered.");
+		}
+		catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a restaurant.");
+		}
+	}
 
 	@Test
 	public void testPlaceNewOrder() throws UsernameAlreadyRegisteredException, AccessDeniedException{
