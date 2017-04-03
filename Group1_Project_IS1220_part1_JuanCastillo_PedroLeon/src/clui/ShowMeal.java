@@ -27,8 +27,7 @@ public class ShowMeal implements CommandProcessor{
 				throw new NumberOfArgumentsException();
 			}
 		}catch(NumberOfArgumentsException e){
-			e.getMessage();
-			return null;
+			return e.getMessage();
 		}
 		return null;
 	}
