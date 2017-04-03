@@ -12,6 +12,7 @@ import restaurant_structure.Meal;
 public class SaveMeal implements CommandProcessor{
 	final int nArgs = 1;
 	Item item;
+	String message;
 	/* (non-Javadoc)
 	 * @see clui.CommandProcessor#process(java.lang.String[])
 	 */
@@ -22,9 +23,12 @@ public class SaveMeal implements CommandProcessor{
 				for( Meal m : MyFoodora.listTempMeals){
 					if(m.getName() == args[1]){
 						MyFoodora.core.addMeal(m);
-						return "Meal: " + m.getName() + " saved to " + MyFoodora.core.getCurrentUser().getName() + "'s menu.";
+						message = "Meal: " + m.getName() + " saved to " + MyFoodora.core.getCurrentUser().getName() + "'s menu.";
+					}else{
+						message = "Meal: " + m.getName() + " not found in list of temporal meals. For meal creation use CreateMeal <mealName> <mealCategory>/AddDish2Meal <dishName> <mealName>/SaveMeal <mealName>";
 					}
 				}
+				return message;
 			}else{
 				throw new NumberOfArgumentsException();
 			}
@@ -35,6 +39,5 @@ public class SaveMeal implements CommandProcessor{
 			System.out.println(e.getMessage());
 			return null;
 		}
-		return null;
 	}
 }

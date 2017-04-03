@@ -18,6 +18,7 @@ public class ShowRestaurantTop implements CommandProcessor{
 	HashMap<String,User> temp_listOfUsers = new HashMap<String,User>();
 	ArrayList<User> users = new ArrayList<User>();
 	ArrayList<Restaurant> rest = new ArrayList<Restaurant>();
+	String message;
 	
 	@Override
 	public String process(String[] args) throws NumberOfArgumentsException {
@@ -34,7 +35,11 @@ public class ShowRestaurantTop implements CommandProcessor{
 				}
 				Collections.sort(rest, Restaurant.compareNumOrdersCompleted());
 				Collections.reverse(rest);
-				return "The restaurants sorted by number of completed orders in decreasing order are:\n" + rest.toString();
+				for(Restaurant restaurant : rest){
+					message += restaurant.getUsername();
+					message += "\n";
+				}
+				return "The restaurants sorted by number of completed orders in decreasing order are:\n" + message;
 			}else{
 				throw new NumberOfArgumentsException();
 			}

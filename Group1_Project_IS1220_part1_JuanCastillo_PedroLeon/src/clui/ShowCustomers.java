@@ -17,6 +17,7 @@ public class ShowCustomers {
 	HashMap<String,User> temp_listOfUsers = new HashMap<String,User>();
 	ArrayList<User> users = new ArrayList<User>();
 	ArrayList<Customer> customers = new ArrayList<Customer>();
+	String message;
 	
 	public String process(String[] args) throws NumberOfArgumentsException, InputMismatchException {
 		try{
@@ -28,7 +29,11 @@ public class ShowCustomers {
 						users.remove(u);
 					}
 				}
-				return "List of customers " + users.toString();
+				for(User u : users){
+					message += u.getUsername();
+					message += "\n";
+				}
+				return "List of customers: " + message;
 			}else{
 				throw new NumberOfArgumentsException();
 			}

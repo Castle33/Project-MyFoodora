@@ -17,7 +17,7 @@ import users.Address;
  */
 public class ShowCourierDeliveries implements CommandProcessor{
 	final int nArgs = 0;
-	String message;
+	String message = "";
 	LinkedList<Courier> couriers = new LinkedList<Courier>();
 	LinkedList<Courier> orderedCouriers = new LinkedList<Courier>();
 	DeliveryFairOccupation dfo = new DeliveryFairOccupation();
@@ -37,14 +37,16 @@ public class ShowCourierDeliveries implements CommandProcessor{
 				}
 				orderedCouriers = dfo.setDeliveryPolicy(couriers, new Address(0,0));
 				Collections.reverse(orderedCouriers);
-				return orderedCouriers.toString();
+				for(Courier cu : orderedCouriers){
+					message += cu.getUsername();
+					message += "\n";
+				}
+				return "List of ordered couriers: " + message;
 			}else{
 				throw new NumberOfArgumentsException();
 			}
 		}catch(NumberOfArgumentsException e){
-			System.out.println(e.getMessage());
-			return null;
+			return e.getMessage();
 		}
 	}
-
 }
