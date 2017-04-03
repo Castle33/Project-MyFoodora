@@ -2,6 +2,9 @@ package clui;
 
 import system.*;
 import java.util.Scanner;
+
+import exceptions.NumberOfArgumentsException;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -86,7 +89,7 @@ public class MyFoodora {
 				readTestScenario("testScenario.txt");
 				
 			} else {
-				System.out.println("Error reading arguments");
+				System.out.println("Error reading arguments: argumetns could not be found");
 			}
 			
 		}
@@ -100,7 +103,7 @@ public class MyFoodora {
 		try {
 			try {
 				sc = new Scanner(file);
-				System.out.println("Processing commands from file " + filename);
+				System.out.println("Processing commands from file " + filename + " ...");
 				while(sc.hasNextLine()){
 					input = sc.nextLine();
 					if(!input.isEmpty()){
@@ -134,61 +137,66 @@ public class MyFoodora {
 		String[] argum;
 		argum = listToArray(arguments);
 		if(!command.equals("")){
-			switch (command.toLowerCase()){
-			case "login":
-				break;
-			case "logout":
-				break;
-			case "registerrestaurant":
-				break;
-			case "registercustomer":
-				cmdProcessor = new RegisterCustomer();
-				cmdProcessor.process(argum);
-				break;
-			case "registercourier":
-				break;
-			case "adddishrestaurantmenu":
-				break;
-			case "createmeal":
-				break;
-			case "adddish2meal":
-				break;
-			case "showmeal":
-				break;
-			case "savemeal":
-				break;
-			case "setspecialoffer":
-				break;
-			case "removefromspecialoffer":
-				break;
-			case "createorder":
-				break;
-			case "additem2order":
-				break;
-			case "endorder":
-				break;
-			case "onduty":
-				break;
-			case "offduty":
-				break;
-			case "finddeliver":
-				break;
-			case "setdeliverypolicy":
-				break;
-			case "setprofitpolicy":
-				break;
-			case "associatecard":
-				break;
-			case "showcouriersdeliveries":
-				break;
-			case "showrestauranttop":
-				break;
-			case "showcustomers":
-				break;
-			case "showmenuitem":
-				break;
-			case "showtotalprofit":
-				break;
+			
+			try{
+				switch (command.toLowerCase()){
+				case "login":
+					break;
+				case "logout":
+					break;
+				case "registerrestaurant":
+					break;
+				case "registercustomer":
+					cmdProcessor = new RegisterCustomer();
+					cmdProcessor.process(argum);
+					break;
+				case "registercourier":
+					break;
+				case "adddishrestaurantmenu":
+					break;
+				case "createmeal":
+					break;
+				case "adddish2meal":
+					break;
+				case "showmeal":
+					break;
+				case "savemeal":
+					break;
+				case "setspecialoffer":
+					break;
+				case "removefromspecialoffer":
+					break;
+				case "createorder":
+					break;
+				case "additem2order":
+					break;
+				case "endorder":
+					break;
+				case "onduty":
+					break;
+				case "offduty":
+					break;
+				case "finddeliver":
+					break;
+				case "setdeliverypolicy":
+					break;
+				case "setprofitpolicy":
+					break;
+				case "associatecard":
+					break;
+				case "showcouriersdeliveries":
+					break;
+				case "showrestauranttop":
+					break;
+				case "showcustomers":
+					break;
+				case "showmenuitem":
+					break;
+				case "showtotalprofit":
+					break;
+				}
+			}catch (NumberOfArgumentsException e){
+				System.out.println("Error in arguments: Wrong number of arguments for command "+command);
 			}
 		}
 	}
