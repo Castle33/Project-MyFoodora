@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class MyFoodora {
 	protected static Core core = new Core();
+	protected static StringCast stringCast;
 	private String name;
 	private String[] args;
 	
