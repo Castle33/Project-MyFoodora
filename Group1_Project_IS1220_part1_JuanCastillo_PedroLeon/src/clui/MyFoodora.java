@@ -220,7 +220,7 @@ public class MyFoodora {
 					}
 				}
 				returnValue += "\n";
-				counter = 0;
+				counter = 1;
 				prevValue = i;
 			}
 		}
