@@ -21,6 +21,7 @@ public class MyFoodora {
 	private String name;
 	private ArrayList<String> args;
 	private static ArrayList<String> listCmds;
+	private CommandProcessor cmdProcessor;
 	
 	
 	public MyFoodora() {
@@ -34,8 +35,7 @@ public class MyFoodora {
 
 	public void launcherCL() {
 		Scanner sc;
-		String input = "", 
-			cmdNameOutput;
+		String input = "";
 		try {
 			sc = new Scanner(System.in);
 			System.out.println("¡Welcome to MyFoodora!\tCheck possible commands = type 'help'\tEnd program = type 'stop'");
@@ -43,9 +43,7 @@ public class MyFoodora {
 			
 			while(!input.equals("stop")){
 				input = sc.nextLine();
-				cmdNameOutput = readCmdNameArgs(input);
-				System.out.println(cmdNameOutput);
-				
+				treatCmd(input);
 				System.out.print(">");
 			}
 			System.out.println("Leaving MyFoodora\tSee you later!");
@@ -56,16 +54,16 @@ public class MyFoodora {
 		}
 	}
 	
-	public String readCmdNameArgs(String s) {
+	public void treatCmd(String s) {
 		
 		if(s.equals("help")){
-			return displayListCmd();
+			System.out.println(displayListCmd());
 			
 		} else {
 			String[] input = s.trim().split(" ");
 			if(!checkCmdExists(input[0])){ //TO-DO boolean function that checks if name is in the list of Commands
 				name = "";
-				return "Error finding command: Make sure the command is correctly introduced";
+				System.out.println("Error finding command: Make sure the command is correctly introduced");
 			} else {
 				name = input[0];
 			}
@@ -74,22 +72,53 @@ public class MyFoodora {
 				ArrayList<String> temp_string = new ArrayList<String>();
 				for(int i = 1; i < input.length; i++){
 					if(input[i].charAt(0) != '"' || input[i].charAt(input[i].length()-1) !='"') {
-						return "Sintax Error: Arguments must be surrounded by quotation marks";
+						System.out.println("Sintax Error: Arguments must be surrounded by quotation marks");
 					} else {
 						//Eliminates quotation marks from argument and adds it to the temporary list
 						temp_string.add(input[i].substring(1, input[i].length()-1));
 					}
 				}
 				args = temp_string;
-				return "Command name " +name+ " read: checking if valid arguments...";
+				System.out.println("Command name " +name+ " read: checking if valid arguments...");
+				processCommand(name, args);
+				
 			} else if (input[0].equals("runTest")){
-				//TO-DO: Read testScenario file and execute the commands
-				return "";
+				readTestScenario("testScenario.txt");
+				
 			} else {
-				return "Error reading arguments";
+				System.out.println("Error reading arguments");
 			}
 			
 		}
+	}
+	
+	public void readTestScenario(String filename){
+		File file = new File(filename);
+		Scanner sc = null;
+		String input = "";
+		
+		try {
+			try {
+				sc = new Scanner(file);
+				System.out.println("Processing commands from file " + filename);
+				while(sc.hasNextLine()){
+					input = sc.nextLine();
+					if(!input.isEmpty()){
+						treatCmd(input);
+					}
+				}
+				System.out.println("All commands from file "+filename+" processed");
+				
+			} catch (FileNotFoundException e) {
+				System.out.println("File not found: please enter a valid file name");
+			}
+		} catch (Exception e) {
+			System.out.println("Unexpected error: Please try again in a few minutes");
+		} finally {
+			sc.close();
+		}
+		
+		
 	}
 	
 	public boolean checkCmdExists(String name){
@@ -101,6 +130,9 @@ public class MyFoodora {
 	}
 	
 	public void processCommand(String command, ArrayList<String> arguments){
+		
+		String[] argum;
+		argum = listToArray(arguments);
 		if(!command.equals("")){
 			switch (command.toLowerCase()){
 			case "login":
@@ -110,6 +142,8 @@ public class MyFoodora {
 			case "registerrestaurant":
 				break;
 			case "registercustomer":
+				cmdProcessor = new RegisterCustomer();
+				cmdProcessor.process(argum);
 				break;
 			case "registercourier":
 				break;
@@ -180,31 +214,6 @@ public class MyFoodora {
 			}
 		}
 		return returnValue;
-	}
-	public void readTestScenario(String filename){
-		File file = new File(filename);
-		Scanner sc = null;
-		String input = "", 
-				cmdNameOutput;
-		
-		try {
-			try {
-				sc = new Scanner(file);
-				System.out.println("Processing commands from file " + filename);
-				while(sc.hasNextLine()){
-					input = sc.nextLine();
-				}
-				
-			} catch (FileNotFoundException e) {
-				System.out.println("File not found: please enter a valid file name");
-			}
-		} catch (Exception e) {
-			System.out.println("Unexpected error: Please try again in a few minutes");
-		} finally {
-			sc.close();
-		}
-		
-		
 	}
 	
 	/*
