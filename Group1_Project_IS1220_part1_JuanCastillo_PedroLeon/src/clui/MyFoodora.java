@@ -3,14 +3,13 @@ package clui;
 import system.*;
 import java.util.Scanner;
 
+import exceptions.InputMismatchException;
 import exceptions.NumberOfArgumentsException;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -197,6 +196,8 @@ public class MyFoodora {
 				}
 			}catch (NumberOfArgumentsException e){
 				System.out.println("Error in arguments: Wrong number of arguments for command "+command);
+			}catch (InputMismatchException e1){
+				System.out.println("Error in arguments: Wrong type of arguments for command "+command);
 			}
 		}
 	}
