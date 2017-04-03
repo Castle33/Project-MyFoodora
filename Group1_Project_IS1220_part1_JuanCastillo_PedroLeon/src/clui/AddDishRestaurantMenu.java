@@ -50,8 +50,7 @@ public class AddDishRestaurantMenu implements CommandProcessor{
 				throw new NumberOfArgumentsException();
 			}
 		}catch(AccessDeniedException e){
-			System.out.println(e.getMessage());
-			return null;
+			return e.getMessage();
 		}
 	}
 	

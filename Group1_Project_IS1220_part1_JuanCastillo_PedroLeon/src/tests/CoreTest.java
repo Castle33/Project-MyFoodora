@@ -716,8 +716,8 @@ public class CoreTest {
 		try{
 			c.registerUser(cu1);
 			c.userLogIn(cu1);
-			c.placeNewOrder(r1);
-			assertTrue(c.getListOfPendingOrders().get(0).getCustomer().getUsername() == "luiscobas");
+			c.placeNewOrder(o1);
+			assertTrue(c.getListOfPendingOrders().get(0).getCustomer().getUsername() == "luiscobas" && c.getListOfPendingOrders().get(0).equals(o1));
 		}
 		catch(AccessDeniedException e){
 			System.out.println("User: " + c.getCurrentUser().getUsername() + " is not a customer.");
@@ -843,19 +843,22 @@ public class CoreTest {
 		Order o1 = new Order(new Customer("Juan", "jcastillo33", "Castillo", a3, "jcastillo@gmail.com", "630285192", "newpassword"), new Restaurant("TGF", "TGFParis", "newpasswordr", a4));
 		co1.setCurrentOrder(o);
 		co1.setOnDuty(true);
-		c.updateCourierState(co1);
+		c.setCurrentUser(co1);
+		c.updateCourierState();
 		Courier tempC = (Courier)c.getListOfUsers().get(co1.getUsername());
 			assertFalse(tempC.isOnDuty());
 			assertEquals(tempC.getPosition(),a4);
 		try {
-			c.updateCourierState(m);
+			c.setCurrentUser(m);
+			c.updateCourierState();
 		} catch(AccessDeniedException e) {
 			System.out.println("updateCourierState correctly throws exception");
 		} finally {
 			LinkedList<Order> olist = new LinkedList<Order>();
 			olist.addFirst(o1);
 			co1.setListPendingOrders(olist);
-			c.updateCourierState(co1);
+			c.setCurrentUser(co1);
+			c.updateCourierState();
 			assertTrue(co1.getListPendingOrders().isEmpty());
 			assertEquals(co1.getCurrentOrder().getID(),o1.getID());
 		}

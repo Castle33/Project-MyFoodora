@@ -67,14 +67,11 @@ public class AssociateCard implements CommandProcessor{
 				throw new NumberOfArgumentsException();
 			}
 		}catch(NumberOfArgumentsException e){
-			System.out.println(e.getMessage());
-			return null;
+			return e.getMessage();
 		}catch(InputMismatchException e){
-			System.out.println(e.getMessage());
-			return null;
+			return e.getMessage();
 		}catch(AccessDeniedException e){
-			System.out.println(e.getMessage());
-			return null;
+			return e.getMessage();
 		}
 	}
 }

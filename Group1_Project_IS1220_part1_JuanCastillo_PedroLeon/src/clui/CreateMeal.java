@@ -47,8 +47,7 @@ public class CreateMeal implements CommandProcessor{
 				throw new NumberOfArgumentsException();
 			}
 		}catch(InputMismatchException e){
-			System.out.println(e.getMessage());
-			return null;
+			return e.getMessage();
 		}
 	}
 }

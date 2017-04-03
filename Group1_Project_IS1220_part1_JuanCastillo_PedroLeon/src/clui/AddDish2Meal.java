@@ -30,13 +30,13 @@ public class AddDish2Meal implements CommandProcessor {
 							itemAdded.add(item);
 							m.setMealItems(itemAdded);
 							MyFoodora.listTempMeals.set(index, m);
-							return "Item: " + args[0] + " has been added to Meal: " + args[1] +". ShowMeal <mealName> to check temporal meal state.";
 						}
 						index++;
 					}
 					if(itemAdded.isEmpty()){
 						return "Meal: " + args[1] + " not in temporal list of meals. To add this meal use CreateMeal <mealName> <mealCategory>.";
 					}
+					return "Item: " + args[0] + " has been added to Meal: " + args[1] +". ShowMeal <mealName> to check temporal meal state.";
 				}else{
 					return "Item: " + args[0] + " not in " + MyFoodora.core.getCurrentUser().getName() + "'s menu.";
 				}
@@ -44,9 +44,7 @@ public class AddDish2Meal implements CommandProcessor {
 				throw new NumberOfArgumentsException();
 			}
 		}catch(NumberOfArgumentsException e){
-			System.out.println(e.getMessage());
-			return null;
+			return e.getMessage();
 		}
-		return null;
 	}
 }

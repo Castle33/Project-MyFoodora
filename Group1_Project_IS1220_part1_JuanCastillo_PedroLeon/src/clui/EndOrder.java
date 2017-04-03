@@ -29,6 +29,8 @@ public class EndOrder implements CommandProcessor{
 						MyFoodora.core.placeNewOrder(order);
 						MyFoodora.core.processOrders();
 						return "Customer: " + order.getCustomer().getUsername() + " placed Order: " + order.getName() + " to Restaurant: " + order.getRestaurant().getName();
+					}else{
+						return "Order: " + args[0] + " has nor meals nor items";
 					}
 				}else{
 					return "Order: " + args[0] + " not created in MyFoodora.";
@@ -37,12 +39,9 @@ public class EndOrder implements CommandProcessor{
 				throw new NumberOfArgumentsException();
 			}
 		}catch(NumberOfArgumentsException e){
-			System.out.println(e.getMessage());
-			return null;
+			return e.getMessage();
 		}catch(AccessDeniedException e){
-			System.out.println(e.getMessage());
-			return null;
+			return e.getMessage();
 		}
-		return null;
 	}
 }

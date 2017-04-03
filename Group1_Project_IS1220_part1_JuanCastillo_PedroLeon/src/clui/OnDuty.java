@@ -1,6 +1,7 @@
 package clui;
 
 import exceptions.NumberOfArgumentsException;
+import exceptions.AccessDeniedException;
 import users.Courier;
 
 /**
@@ -20,14 +21,15 @@ public class OnDuty implements CommandProcessor{
 				if(MyFoodora.core.getCurrentUser() instanceof Courier){
 					return "Courier: " + MyFoodora.core.getCurrentUser().getUsername() + " tried to update its state.\nSystem automatocally updates courier's state when accepting an order is finished.";
 				}else{
-					return "Access Denied: Unauthorized user.";
+					throw new AccessDeniedException();
 				}
 			}else{
 				throw new NumberOfArgumentsException();
 			}
 		}catch(NumberOfArgumentsException e){
-			System.out.println(e.getMessage());
-			return null;
+			return e.getMessage();
+		}catch(AccessDeniedException e){
+			return e.getMessage();
 		}
 	}
 }

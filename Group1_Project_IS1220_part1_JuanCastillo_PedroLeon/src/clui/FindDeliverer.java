@@ -17,6 +17,7 @@ public class FindDeliverer implements CommandProcessor {
 	LinkedList<Order> tempPendingOrders = new LinkedList<Order> ();
 	Order order;
 	EndOrder endOrder;
+	String message;
 	/* (non-Javadoc)
 	 * @see clui.CommandProcessor#process(java.lang.String[])
 	 */
@@ -37,24 +38,24 @@ public class FindDeliverer implements CommandProcessor {
 						for(User u : users){
 							if(u instanceof Courier){
 								if(((Courier)u).getCurrentOrder().equals(order)){
-									return "Order: " + order.getName() + " is being delivered by Courier: " + u.getUsername();
+									message = "Order: " + order.getName() + " is being delivered by Courier: " + u.getUsername();
 								}else{
-									return "Order: " + order.getName() + " not in the system.";
+									message = "Order: " + order.getName() + " not in the system.";
 								}
 							}
 						}
 						MyFoodora.core.setListOfPendingOrders(tempPendingOrders);
 					}
-				}if(order == null){
+				}
+				if(order == null){
 					return "Order: " + args[0] + " not created. For creating orders use CreateOrder <restaurantName>/AddItem2Order <orderName> <itemName> <itemQuantity>/EndOrder <orderName> commands.";
 				}
+				return message;
 			}else{
 				throw new NumberOfArgumentsException();
 			}
 		}catch(NumberOfArgumentsException e){
-			System.out.println(e.getMessage());
-			return null;
+			return e.getMessage();
 		}
-		return null;
 	}
 }
