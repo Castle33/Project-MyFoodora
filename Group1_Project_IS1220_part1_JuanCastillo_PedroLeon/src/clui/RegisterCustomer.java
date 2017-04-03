@@ -15,7 +15,7 @@ public class RegisterCustomer implements CommandProcessor{
 	 * @see clui.CommandProcessor#process(java.lang.String[])
 	 */
 	@Override
-	public String process(String[] args) throws NumberOfArgumentsException, InputMismatchException {
+	public String process(String[] args) throws NumberOfArgumentsException {
 		try{
 			if(args[nArgs] == null){
 				customer = new Customer(args[0],args[2],args[1],MyFoodora.stringCast.string2Address(args[3]),args[6],args[5],args[4]);

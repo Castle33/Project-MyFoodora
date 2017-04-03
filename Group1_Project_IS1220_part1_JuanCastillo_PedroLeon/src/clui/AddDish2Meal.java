@@ -20,7 +20,7 @@ public class AddDish2Meal implements CommandProcessor {
 	 * @see clui.CommandProcessor#process(java.lang.String[])
 	 */
 	@Override
-	public String process(String[] args) throws NumberOfArgumentsException {
+	public String process(String[] args) {
 		try{
 			if(args[nArgs] == null){
 				if(((Restaurant) MyFoodora.core.getCurrentUser()).getItemByName(args[0]) != null){

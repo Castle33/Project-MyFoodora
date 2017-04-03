@@ -15,7 +15,7 @@ public class RegisterCourier implements CommandProcessor {
 	 * @see clui.CommandProcessor#process(java.lang.String[])
 	 */
 	@Override
-	public String process(String[] args) throws NumberOfArgumentsException, InputMismatchException {
+	public String process(String[] args) throws NumberOfArgumentsException {
 		try{
 			if(args[nArgs] == null){
 				courier = new Courier(args[0],args[2],args[4],args[1],MyFoodora.stringCast.string2Address(args[4]),args[5]);

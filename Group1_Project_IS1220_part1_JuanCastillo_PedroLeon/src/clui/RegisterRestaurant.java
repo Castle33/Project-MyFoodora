@@ -15,7 +15,7 @@ public class RegisterRestaurant implements CommandProcessor{
 	 * @see clui.CommandProcessor#process(java.lang.String[])
 	 */
 	@Override
-	public String process(String[] args) throws InputMismatchException, NumberOfArgumentsException{
+	public String process(String[] args) throws NumberOfArgumentsException{
 		try{
 			if(args[nArgs] == null){
 				restaurant = new Restaurant(args[0],args[2],args[3],MyFoodora.stringCast.string2Address(args[1]));
