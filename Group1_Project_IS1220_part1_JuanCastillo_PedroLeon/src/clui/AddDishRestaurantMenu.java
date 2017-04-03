@@ -5,7 +5,7 @@ import restaurant_structure.Item;
 import restaurant_structure.Starter;
 import restaurant_structure.MainDish;
 import restaurant_structure.Dessert;
-import restaurant_structure.ItemType;
+import users.Restaurant;
 /**
  * AddDishRestaurantMenu 4 <dishName> <dishCategory> <foodCategory> <unitPrice>
  * @author Pedro León
@@ -21,10 +21,10 @@ public class AddDishRestaurantMenu implements CommandProcessor{
 	 * @see clui.CommandProcessor#process(java.lang.String[])
 	 */
 	@Override
-	public String process(String[] args) throws NumberOfArgumentsException, InputMismatchException {
+	public String process(String[] args) throws NumberOfArgumentsException {
 		try{
 			if(args[nArgs] == null){
-				if(args[2].toUpperCase() == ItemType.STANDARD.toString() || args[2].toUpperCase() == ItemType.VEGETARIAN.toString() || args[2].toUpperCase() == ItemType.GLUTENFREE.toString()){
+				if(((Restaurant) MyFoodora.core.getCurrentUser()).getItemByName(args[0]) == null){
 					switch(args[1].toUpperCase()){
 					case "STARTER":
 						item = new Starter(args[0], Integer.parseInt(args[3]), args[1]);
@@ -44,14 +44,11 @@ public class AddDishRestaurantMenu implements CommandProcessor{
 					}
 					return message;
 				}else{
-					throw new InputMismatchException();
+					return "Item. " + item.getName() + " already added to menu.";
 				}
 			}else{
 				throw new NumberOfArgumentsException();
 			}
-		}catch(InputMismatchException e){
-			System.out.println(e.getMessage());
-			return null;
 		}catch(AccessDeniedException e){
 			System.out.println(e.getMessage());
 			return null;
