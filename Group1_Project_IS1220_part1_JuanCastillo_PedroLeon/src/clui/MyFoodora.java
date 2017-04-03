@@ -15,6 +15,7 @@ public class MyFoodora {
 	protected static Core core;
 	protected static StringCast stringCast;
 	protected static ArrayList<Meal> listTempMeals;
+	protected static ArrayList<Order> listTempOrders;
 	private String name;
 	private ArrayList<String> args;
 	private static ArrayList<String> listCmds;

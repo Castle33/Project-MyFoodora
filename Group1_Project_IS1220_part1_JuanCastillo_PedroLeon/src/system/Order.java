@@ -26,6 +26,7 @@ public class Order {
 	private double priceTotal;
 	private Calendar date;
 	private Calendar deliveryDate;
+	private String name;
 	/**
 	 * tested: YES
 	 * @param customer
@@ -237,6 +238,14 @@ public class Order {
 
 	public void setDeliveryDate(Calendar deliveryDate) {
 		this.deliveryDate = deliveryDate;
+	}
+	
+	public String getName(){
+		return name;
+	}
+	
+	public void setName(){
+		this.name = customer.getUsername() + restaurant.getUsername();
 	}
 	
 	

@@ -494,14 +494,15 @@ public class Core implements Observable {
 	/***************************************************************************************************/
 	/** Customers related
 	 * (DONE) place orders
+	 * - add items to order
 	 * (DONE) register/unregister to/from a fidelity card plan
 	 * (DONE) access to information related to their account
 	 * (DONE) give/remove consensus to be notified whenever a new special offer
 	 */
 	
-	public void placeNewOrder(Restaurant restaurant) throws AccessDeniedException{
+	public void placeNewOrder(Order order) throws AccessDeniedException{
 		if(currentUser instanceof Customer){
-			listOfPendingOrders.add(new Order((Customer)currentUser,restaurant));
+			listOfPendingOrders.add(order);
 		} else {
 			throw new AccessDeniedException();
 		}
