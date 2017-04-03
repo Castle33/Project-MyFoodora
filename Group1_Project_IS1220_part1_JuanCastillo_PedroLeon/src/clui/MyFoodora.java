@@ -4,6 +4,8 @@ import system.*;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -46,7 +48,7 @@ public class MyFoodora {
 				
 				System.out.print(">");
 			}
-			System.out.println("Leaving MyFoodora\tSee you later ;)");
+			System.out.println("Leaving MyFoodora\tSee you later!");
 			sc.close();
 			
 		} catch (Exception e) {
@@ -57,7 +59,8 @@ public class MyFoodora {
 	public String readCmdNameArgs(String s) {
 		
 		if(s.equals("help")){
-			//TO-DO : display list of commands
+			return displayListCmd();
+			
 		} else {
 			String[] input = s.trim().split(" ");
 			if(!checkCmdExists(input[0])){ //TO-DO boolean function that checks if name is in the list of Commands
@@ -78,7 +81,10 @@ public class MyFoodora {
 					}
 				}
 				args = temp_string;
-				return "Command name " +name+ " read: checking if valid arguments";
+				return "Command name " +name+ " read: checking if valid arguments...";
+			} else if (input[0].equals("runTest")){
+				//TO-DO: Read testScenario file and execute the commands
+				return "";
 			} else {
 				return "Error reading arguments";
 			}
@@ -94,12 +100,117 @@ public class MyFoodora {
 		}
 	}
 	
-	public void processCommand(String name, ArrayList<String> args){
-		if(!name.equals("")){
-			
+	public void processCommand(String command, ArrayList<String> arguments){
+		if(!command.equals("")){
+			switch (command.toLowerCase()){
+			case "login":
+				break;
+			case "logout":
+				break;
+			case "registerrestaurant":
+				break;
+			case "registercustomer":
+				break;
+			case "registercourier":
+				break;
+			case "adddishrestaurantmenu":
+				break;
+			case "createmeal":
+				break;
+			case "adddish2meal":
+				break;
+			case "showmeal":
+				break;
+			case "savemeal":
+				break;
+			case "setspecialoffer":
+				break;
+			case "removefromspecialoffer":
+				break;
+			case "createorder":
+				break;
+			case "additem2order":
+				break;
+			case "endorder":
+				break;
+			case "onduty":
+				break;
+			case "offduty":
+				break;
+			case "finddeliver":
+				break;
+			case "setdeliverypolicy":
+				break;
+			case "setprofitpolicy":
+				break;
+			case "associatecard":
+				break;
+			case "showcouriersdeliveries":
+				break;
+			case "showrestauranttop":
+				break;
+			case "showcustomers":
+				break;
+			case "showmenuitem":
+				break;
+			case "showtotalprofit":
+				break;
+			}
 		}
 	}
 	
+	public String displayListCmd(){
+		int counter = 0;
+		int prevValue = 0;
+		String returnValue = "";
+		for(int i=0; i<listCmds.size(); i++){
+			if(listCmds.get(i).charAt(0)!='<'){
+				counter++;
+			}
+			if(counter==2){
+				for(int j=prevValue; j<i;j++){
+					returnValue += listCmds.get(j);
+					if(j!=i-1){
+						returnValue += " ";
+					}
+				}
+				returnValue += "\n";
+				counter = 0;
+				prevValue = i;
+			}
+		}
+		return returnValue;
+	}
+	public void readTestScenario(String filename){
+		File file = new File(filename);
+		Scanner sc = null;
+		String input = "", 
+				cmdNameOutput;
+		
+		try {
+			try {
+				sc = new Scanner(file);
+				System.out.println("Processing commands from file " + filename);
+				while(sc.hasNextLine()){
+					input = sc.nextLine();
+				}
+				
+			} catch (FileNotFoundException e) {
+				System.out.println("File not found: please enter a valid file name");
+			}
+		} catch (Exception e) {
+			System.out.println("Unexpected error: Please try again in a few minutes");
+		} finally {
+			sc.close();
+		}
+		
+		
+	}
+	
+	/*
+	 * Reads the file with the list of commands (name and arguments) and safes it to a static variable
+	 * Example: login <username> <password>
+	 */
 	public static void readCmdFile(String fileName) {
 		  
 		  String stringCmds = "";
