@@ -751,6 +751,12 @@ public class CoreTest {
 			historyOrders = c.getHistoryOrders();
 		} catch (AccessDeniedException e) {
 			System.out.println("getHistoryOrders correctly throws exception");
+		} finally {
+			c.userLogIn(cu1);
+			historyOrders = c.getHistoryOrders();
+			assertTrue(historyOrders.contains(o1));
+			assertTrue(historyOrders.contains(o2));
+			assertFalse(historyOrders.contains(o3));
 		}
 		
 		
