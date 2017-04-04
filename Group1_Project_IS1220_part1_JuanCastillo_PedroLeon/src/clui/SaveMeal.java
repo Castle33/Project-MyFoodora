@@ -13,7 +13,7 @@ import restaurant_structure.FullMeal;
 public class SaveMeal implements CommandProcessor{
 	final int nArgs = 1;
 	Item item;
-	String message;
+	String message = "";
 	/* (non-Javadoc)
 	 * @see clui.CommandProcessor#process(java.lang.String[])
 	 */
@@ -22,22 +22,24 @@ public class SaveMeal implements CommandProcessor{
 		try{
 			if(args.length == 1){
 				for( String m : MyFoodora.listTempMeals.keySet()){
-					if(m == args[0]){
+					if(m.equals(args[0])){
 						if(MyFoodora.listTempMeals.get(m).size() == 2){
 							HalfMeal hm = new HalfMeal(m, MyFoodora.listTempMeals.get(m));
 							MyFoodora.core.addMeal(hm);
-							message = "HalfMeal: " + m + " saved to " + MyFoodora.core.getCurrentUser().getName() + "'s menu.";
+							MyFoodora.listTempMeals.remove(args[0]);
+							message += "HalfMeal: " + m + " saved to " + MyFoodora.core.getCurrentUser().getName() + "'s menu.\n";
 						}else if(MyFoodora.listTempMeals.get(m).size() == 3){
 							FullMeal fm = new FullMeal(m, MyFoodora.listTempMeals.get(m));
 							MyFoodora.core.addMeal(fm);
-							message = "FullMeal: " + m + " saved to " + MyFoodora.core.getCurrentUser().getName() + "'s menu.";
+							MyFoodora.listTempMeals.remove(args[0]);
+							message += "FullMeal: " + m + " saved to " + MyFoodora.core.getCurrentUser().getName() + "'s menu.\n";
 						}else{
-							message = "Meal must have 2 or 3 items not more.";
+							message += "Meal must have 2 or 3 items not more.\n";
 						}
 					}
 				}
 				if(message == null){
-					return message = "Meal: " + args[0] + " not found in list of temporal meals. For meal creation use CreateMeal <mealName> <mealCategory>/AddDish2Meal <dishName> <mealName>/SaveMeal <mealName>";
+					return message += "Meal: " + args[0] + " not found in list of temporal meals.\nFor meal creation use CreateMeal <mealName> <mealCategory>/AddDish2Meal <dishName> <mealName>/SaveMeal <mealName>\n";
 				}
 				return message;
 			}else{

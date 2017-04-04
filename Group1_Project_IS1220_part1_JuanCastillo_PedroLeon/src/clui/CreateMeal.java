@@ -18,7 +18,7 @@ public class CreateMeal implements CommandProcessor{
 	 * @see clui.CommandProcessor#process(java.lang.String[])
 	 */
 	@Override
-	public String process(String[] args) throws NumberOfArgumentsException, InputMismatchException {
+	public String process(String[] args) {
 		try{
 			if(args.length == nArgs){
 				if(args[1].toUpperCase().equals(MealType.HALFMEAL.toString()) || args[1].toUpperCase().equals(MealType.FULLMEAL.toString())){
@@ -40,6 +40,8 @@ public class CreateMeal implements CommandProcessor{
 				throw new NumberOfArgumentsException();
 			}
 		}catch(InputMismatchException e){
+			return e.getMessage();
+		}catch(NumberOfArgumentsException e){
 			return e.getMessage();
 		}
 	}

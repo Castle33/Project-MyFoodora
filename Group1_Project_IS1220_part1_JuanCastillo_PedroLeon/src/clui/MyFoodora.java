@@ -49,7 +49,7 @@ public class MyFoodora {
 			System.out.println("¡Welcome to MyFoodora!\tCheck possible commands = type 'help'\tEnd program = type 'stop'");
 			System.out.print(">");
 			
-			while(!input.equals("stop")){
+			while(!input.equals("stop") && sc.hasNextLine()){
 				input = sc.nextLine();
 				treatCmd(input);
 				System.out.print(">");
@@ -183,7 +183,7 @@ public class MyFoodora {
 					break;
 				case "showmeal":
 					cmdProcessor = new ShowMeal();
-					cmdProcessor.process(argum);
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				case "savemeal":
 					cmdProcessor = new SaveMeal();

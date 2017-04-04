@@ -44,7 +44,7 @@ public class AddDishRestaurantMenu implements CommandProcessor{
 					}
 					return message;
 				}else{
-					return "Item. " + item.getName() + " already added to menu.";
+					return "Item. " + args[0] + " already added to menu.";
 				}
 			}else{
 				throw new NumberOfArgumentsException();

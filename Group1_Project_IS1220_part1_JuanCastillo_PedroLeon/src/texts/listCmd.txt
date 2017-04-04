@@ -6,6 +6,7 @@ registerCourier <firstName> <lastName> <username> <position> <password> <phoneNu
 addDishRestaurantMenu <dishname> <dishCategory> <foodCategory> <unitPrice>
 createMeal <mealName> <mealCategory>
 addDish2Meal <dishName> <mealName>
+removeItemFromMeal <dishName> <mealName>
 showMeal <mealName>
 saveMeal <mealName>
 setSpecialOffer <mealName>
