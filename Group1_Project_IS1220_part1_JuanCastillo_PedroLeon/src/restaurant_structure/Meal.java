@@ -11,7 +11,6 @@ package restaurant_structure;
  */
 
 import java.util.List;
-import java.util.ArrayList;
 
 public abstract class Meal {
 	
@@ -24,12 +23,12 @@ public abstract class Meal {
 		this.name = name;
 		this.mealItems = mealItems;
 		
-		if(this instanceof HalfMeal){
-			if(mealItems.size() != 2){
+		if(this instanceof HalfMeal){	
+			if(mealItems.size() > 2){
 				System.out.println("Error: HalfMeal must contain only two Items");
 			}
 		} else if (this instanceof FullMeal){
-			if(mealItems.size() != 3){
+			if(mealItems.size() > 3){
 				System.out.println("Error: FullMeal must contain only two Items");
 			}
 		}
@@ -57,7 +56,6 @@ public abstract class Meal {
 		}else{
 			this.type = auxItem.getFoodType();
 		}
-		
 	}
 
 

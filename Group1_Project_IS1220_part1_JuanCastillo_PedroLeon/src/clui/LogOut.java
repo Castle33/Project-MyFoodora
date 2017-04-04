@@ -1,14 +1,13 @@
 package clui;
 
 import exceptions.NumberOfArgumentsException;
-import users.User;
 /**
  * LogOut 0 <>
  * @author Pedro León
  *
  */
 public class LogOut implements CommandProcessor {
-	final int nArgs = 2;
+	final int nArgs = 0;
 	String message;
 	/* (non-Javadoc)
 	 * @see clui.CommandProcessor#process(java.lang.String[])
@@ -16,18 +15,12 @@ public class LogOut implements CommandProcessor {
 	@Override
 	public String process(String[] args) {
 		try{
-			if(args[nArgs] == null){
-				for(User user : MyFoodora.core.getListOfUsers().values()){
-					if(user.getUsername().equals(args[0])){
-						if(user.equals(MyFoodora.core.getCurrentUser())){
-							MyFoodora.core.logOut();
-							message = "User " + args[0] + " correctly logged out.";
-						}else{
-							message = "User " + args[0] + " not logged in.";
-						}
-					}else{
-						message = "User " + args[0] + " not registered in system.";
-					}
+			if(args.length == 1){
+				if(MyFoodora.core.getCurrentUser() != null){
+					MyFoodora.core.logOut();
+					message = "User correctly logged out.";
+				}else{
+					message = "No user logged in.";
 				}
 				return message;
 			}else{

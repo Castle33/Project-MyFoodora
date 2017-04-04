@@ -1,7 +1,6 @@
 package clui;
 
 import exceptions.NumberOfArgumentsException;
-import users.User;
 
 /**
  * LogIn 2 <username> <password>
@@ -10,25 +9,25 @@ import users.User;
  */
 public class LogIn implements CommandProcessor{
 	final int nArgs = 2;
-	String message;
+	String message = null;
 	/* (non-Javadoc)
 	 * @see clui.CommandProcessor#process(java.lang.String[])
 	 */
 	@Override
 	public String process(String[] args) {
 		try{
-			if(args[nArgs] == null){
-				for(User user : MyFoodora.core.getListOfUsers().values()){
-					if(user.getUsername().equals(args[0])){
-						MyFoodora.core.userLogIn(user);
-						if(user.equals(MyFoodora.core.getCurrentUser())){
-							message = "User " + args[0] + " already logged in.";
-						}else{
-							message = "User " + args[0] + " correctly logged in.";
-						}
-					}else{
-						message = "User " + args[0] + " not registered in system.";
+			if(args.length == 2){
+				if(MyFoodora.core.getCurrentUser() == null){
+					if(MyFoodora.core.getListOfUsers().containsKey(args[0])){
+						MyFoodora.core.userLogIn(MyFoodora.core.getListOfUsers().get(args[0]));
+						message = "User " + args[0] + " correctly logged in.";
 					}
+				}else{
+					message = "User " + args[0] + " already logged in.";
+				}
+				if(message == null){
+					message = "User " + args[0] + " not registered in system.";
+					System.out.println(MyFoodora.core.getCurrentUser());
 				}
 				return message;
 			}else{

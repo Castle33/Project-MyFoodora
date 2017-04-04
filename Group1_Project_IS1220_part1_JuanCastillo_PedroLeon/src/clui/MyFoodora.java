@@ -13,13 +13,15 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
+import restaurant_structure.Item;
 import restaurant_structure.Meal;
 
 public class MyFoodora {
 	protected static Core core;
 	protected static StringCast stringCast;
-	protected static ArrayList<Meal> listTempMeals;
+	protected static HashMap<String,ArrayList<Item>> listTempMeals;
 	protected static ArrayList<Order> listTempOrders;
 	private String name;
 	private ArrayList<String> args;
@@ -33,7 +35,7 @@ public class MyFoodora {
 		this.name = "";
 		this.commandReturn = null;
 		this.args = new ArrayList<String>();
-		MyFoodora.listTempMeals = new ArrayList<Meal>();
+		MyFoodora.listTempMeals = new HashMap<String,ArrayList<Item>>();
 		MyFoodora.core = new Core();
 		MyFoodora.stringCast = new StringCast();
 		MyFoodora.readCmdFile("src/texts/listCmd.txt");
@@ -149,11 +151,11 @@ public class MyFoodora {
 				switch (command.toLowerCase()){
 				case "login":
 					cmdProcessor = new LogIn();
-					cmdProcessor.process(argum);
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				case "logout":
 					cmdProcessor = new LogOut();
-					cmdProcessor.process(argum);
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				case "registerrestaurant":
 					cmdProcessor = new RegisterRestaurant();
@@ -165,19 +167,19 @@ public class MyFoodora {
 					break;
 				case "registercourier":
 					cmdProcessor = new RegisterCourier();
-					cmdProcessor.process(argum);
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				case "adddishrestaurantmenu":
 					cmdProcessor = new AddDishRestaurantMenu();
-					cmdProcessor.process(argum);
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				case "createmeal":
 					cmdProcessor = new CreateMeal();
-					cmdProcessor.process(argum);
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				case "adddish2meal":
 					cmdProcessor = new AddDish2Meal();
-					cmdProcessor.process(argum);
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				case "showmeal":
 					cmdProcessor = new ShowMeal();
@@ -185,7 +187,7 @@ public class MyFoodora {
 					break;
 				case "savemeal":
 					cmdProcessor = new SaveMeal();
-					cmdProcessor.process(argum);
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				case "setspecialoffer":
 					cmdProcessor = new SetSpecialOffer();

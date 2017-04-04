@@ -4,7 +4,7 @@ package exceptions;
 public class InputMismatchException extends Exception {
 	
 	public InputMismatchException(){
-		super("Argument mismatch exception - usually with addresses and dates.");
+		super("ArgumentMismatchException - Usually with addresses and dates.\nAlso with ENUM such as itemCategory/mealCategory/DeliveryPolicyType/FidelityPolicyType/ProfitPolicyType");
 	}
 
 }

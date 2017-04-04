@@ -3,6 +3,7 @@ package clui;
 import exceptions.NumberOfArgumentsException;
 import restaurant_structure.Item;
 import restaurant_structure.Meal;
+import users.Restaurant;
 /**
  * ShowMeal 1 <mealName>
  * @author Pedro León
@@ -19,16 +20,10 @@ public class ShowMeal implements CommandProcessor{
 	@Override
 	public String process(String[] args) throws NumberOfArgumentsException {
 		try{
-			if(args[nArgs] == null){
-				for( Meal m : MyFoodora.listTempMeals){
-					if(m.getName() == args[1]){
-						meal = m;
-					} else {
-						mealFound = false;
-					}
-				}
-				if(mealFound){
-					return "Meal: " + meal.getName() + " has items: " + meal.getMealItems();
+			if(args.length == 1){
+				meal = ((Restaurant) MyFoodora.core.getCurrentUser()).getMealByName(args[0]);
+				if(meal != null){
+					return "Meal: " + meal + " has items: " + meal.getMealItems();
 				} else {
 					return "Error: Meal not found";
 				}				

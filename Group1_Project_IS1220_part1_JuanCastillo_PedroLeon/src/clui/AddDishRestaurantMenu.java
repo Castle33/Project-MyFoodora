@@ -23,7 +23,7 @@ public class AddDishRestaurantMenu implements CommandProcessor{
 	@Override
 	public String process(String[] args) throws NumberOfArgumentsException {
 		try{
-			if(args[nArgs] == null){
+			if(args.length == nArgs){
 				if(((Restaurant) MyFoodora.core.getCurrentUser()).getItemByName(args[0]) == null){
 					switch(args[1].toUpperCase()){
 					case "STARTER":
@@ -32,12 +32,12 @@ public class AddDishRestaurantMenu implements CommandProcessor{
 						message = "Starter: " + item.getName() + " added to " + MyFoodora.core.getCurrentUser().getName() + "'s menu.";
 						break;
 					case "MAINDISH":
-						item = new MainDish(args[0], Integer.parseInt(args[3]), args[1]);
+						item = new MainDish(args[0], Double.parseDouble(args[3]), args[1]);
 						MyFoodora.core.addItem(item);
 						message = "MainDish: " + item.getName() + " added to " + MyFoodora.core.getCurrentUser().getName() + "'s menu.";
 						break;
 					case "DESSERT":
-						item = new Dessert(args[0], Integer.parseInt(args[3]), args[1]);
+						item = new Dessert(args[0], Double.parseDouble(args[3]), args[1]);
 						MyFoodora.core.addItem(item);
 						message = "Dessert: " + item.getName() + " added to " + MyFoodora.core.getCurrentUser().getName() + "'s menu.";
 						break;

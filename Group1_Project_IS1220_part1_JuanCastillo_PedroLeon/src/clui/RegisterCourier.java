@@ -1,7 +1,5 @@
 package clui;
 
-import java.util.Arrays;
-
 import exceptions.*;
 import users.Courier;
 /**
@@ -17,9 +15,8 @@ public class RegisterCourier implements CommandProcessor {
 	 * @see clui.CommandProcessor#process(java.lang.String[])
 	 */
 	@Override
-	public String process(String[] args) throws NumberOfArgumentsException {
+	public String process(String[] args) {
 		try{
-			System.out.println(Arrays.toString(args));
 			if(args.length == nArgs){
 				courier = new Courier(args[0],args[2],args[4],args[1],MyFoodora.stringCast.string2Address(args[3]),args[5]);
 				MyFoodora.core.registerUser(courier);
@@ -30,6 +27,8 @@ public class RegisterCourier implements CommandProcessor {
 		}catch(InputMismatchException e){
 			return e.getMessage();
 		}catch(UsernameAlreadyRegisteredException e){
+			return e.getMessage();
+		}catch(NumberOfArgumentsException e){
 			return e.getMessage();
 		}
 	}

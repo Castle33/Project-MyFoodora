@@ -1,12 +1,13 @@
-login <username> <password>
-logout <>
+logIn <username> <password>
+logOut <>
 registerRestaurant <name> <address> <username> <password>
 registerCustomer <firstName> <lastName> <username> <address> <password> <phoneNumber> <email>
 registerCourier <firstName> <lastName> <username> <position> <password> <phoneNumber>
 addDishRestaurantMenu <dishname> <dishCategory> <foodCategory> <unitPrice>
-createMeal <mealName>
+createMeal <mealName> <mealCategory>
 addDish2Meal <dishName> <mealName>
 showMeal <mealName>
+saveMeal <mealName>
 setSpecialOffer <mealName>
 removeFromSepcialOffer <mealName>
 createOrder <restaurantName> <orderName>

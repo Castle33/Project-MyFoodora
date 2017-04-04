@@ -3,7 +3,8 @@ package clui;
 import exceptions.NumberOfArgumentsException;
 import exceptions.AccessDeniedException;
 import restaurant_structure.Item;
-import restaurant_structure.Meal;
+import restaurant_structure.HalfMeal;
+import restaurant_structure.FullMeal;
 /**
  * SaveMeal 1 <mealName>
  * @author Pedro León
@@ -19,14 +20,24 @@ public class SaveMeal implements CommandProcessor{
 	@Override
 	public String process(String[] args) throws NumberOfArgumentsException {
 		try{
-			if(args[nArgs] == null){
-				for( Meal m : MyFoodora.listTempMeals){
-					if(m.getName() == args[1]){
-						MyFoodora.core.addMeal(m);
-						message = "Meal: " + m.getName() + " saved to " + MyFoodora.core.getCurrentUser().getName() + "'s menu.";
-					}else{
-						message = "Meal: " + m.getName() + " not found in list of temporal meals. For meal creation use CreateMeal <mealName> <mealCategory>/AddDish2Meal <dishName> <mealName>/SaveMeal <mealName>";
+			if(args.length == 1){
+				for( String m : MyFoodora.listTempMeals.keySet()){
+					if(m == args[0]){
+						if(MyFoodora.listTempMeals.get(m).size() == 2){
+							HalfMeal hm = new HalfMeal(m, MyFoodora.listTempMeals.get(m));
+							MyFoodora.core.addMeal(hm);
+							message = "HalfMeal: " + m + " saved to " + MyFoodora.core.getCurrentUser().getName() + "'s menu.";
+						}else if(MyFoodora.listTempMeals.get(m).size() == 3){
+							FullMeal fm = new FullMeal(m, MyFoodora.listTempMeals.get(m));
+							MyFoodora.core.addMeal(fm);
+							message = "FullMeal: " + m + " saved to " + MyFoodora.core.getCurrentUser().getName() + "'s menu.";
+						}else{
+							message = "Meal must have 2 or 3 items not more.";
+						}
 					}
+				}
+				if(message == null){
+					return message = "Meal: " + args[0] + " not found in list of temporal meals. For meal creation use CreateMeal <mealName> <mealCategory>/AddDish2Meal <dishName> <mealName>/SaveMeal <mealName>";
 				}
 				return message;
 			}else{
