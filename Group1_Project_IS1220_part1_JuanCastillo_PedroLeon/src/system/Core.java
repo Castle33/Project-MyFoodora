@@ -63,9 +63,9 @@ public class Core implements Observable {
 		 * initialization of listOfMasterManager adding both app creators
 		 */
 		this.listOfMasterManager = new ArrayList<User>();
-		Manager jc = new Manager("Juan", "jcastillo33", "pjausasnword", "Castillo");
+		Manager jc = new Manager("Juan", "ceo", "123456789", "Castillo");
 		listOfMasterManager.add(jc);
-		Manager pl = new Manager("Pedro", "pleonpita", "ppaesdsrwoord", "Leon");
+		Manager pl = new Manager("Pedro", "deputy", "987654321", "Leon");
 		listOfMasterManager.add(pl);
 		listOfUsers.put(jc.getUsername(), jc);
 		listOfUsers.put(pl.getUsername(), pl);
