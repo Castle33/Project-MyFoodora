@@ -2,14 +2,18 @@ package clui;
 
 import users.Address;
 import java.util.Calendar;
-import exceptions.InputMismatchException;;
+import exceptions.InputMismatchException;
 
 public class StringCast {
 	
 	public Address string2Address(String input) throws InputMismatchException {
 		String[] coordinates = input.split(",");
 		if(coordinates.length == 2){
-			return(new Address(Integer.parseInt(coordinates[0]),Integer.parseInt(coordinates[1])));
+			if(isNumeric(coordinates[0])){
+				return(new Address(Integer.parseInt(coordinates[0]),Integer.parseInt(coordinates[1])));
+			}else{
+				throw new InputMismatchException();
+			}
 		}else{
 			throw new InputMismatchException();
 		}
@@ -24,6 +28,19 @@ public class StringCast {
 		}else{
 			throw new InputMismatchException();
 		}
+	}
+	
+	public static boolean isNumeric(String str)  
+	{  
+	  try  
+	  {  
+	    double d = Double.parseDouble(str);  
+	  }  
+	  catch(NumberFormatException nfe)  
+	  {  
+	    return false;  
+	  }  
+	  return true;  
 	}
 
 }

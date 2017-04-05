@@ -20,14 +20,13 @@ public class LogIn implements CommandProcessor{
 				if(MyFoodora.core.getCurrentUser() == null){
 					if(MyFoodora.core.getListOfUsers().containsKey(args[0])){
 						MyFoodora.core.userLogIn(MyFoodora.core.getListOfUsers().get(args[0]));
-						message = "User " + args[0] + " correctly logged in.";
+						message = "User -" + args[0] + "- correctly logged in.";
 					}
 				}else{
 					message = "User " + args[0] + " already logged in.";
 				}
 				if(message == null){
-					message = "User " + args[0] + " not registered in system.";
-					System.out.println(MyFoodora.core.getCurrentUser());
+					message = "User not registered in system.";
 				}
 				return message;
 			}else{
