@@ -369,4 +369,20 @@ public class MyFoodora {
 	public void setCommandReturn(String cr){
 		commandReturn = cr;
 	}
+
+	/**
+	 * @return the core
+	 */
+	public static Core getCore() {
+		return core;
+	}
+
+	/**
+	 * @param core the core to set
+	 */
+	public static void setCore(Core core) {
+		MyFoodora.core = core;
+	}
+	
+	
 }

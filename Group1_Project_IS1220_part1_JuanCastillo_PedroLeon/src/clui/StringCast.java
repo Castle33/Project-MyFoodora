@@ -24,17 +24,51 @@ public class StringCast {
 		if(coordinates.length == 3){
 			Calendar calendar = Calendar.getInstance();
 			calendar.set(Integer.parseInt(coordinates[2]), Integer.parseInt(coordinates[1]), Integer.parseInt(coordinates[0]));
-			return(calendar);
+			return calendar;
 		}else{
 			throw new InputMismatchException();
 		}
 	}
 	
+	public double string2Double(String input) throws InputMismatchException {
+		if(isNumeric(input)){
+			double toDouble = Double.parseDouble(input);
+			return toDouble;
+		}else{
+			throw new InputMismatchException();
+		}
+	}
+	
+	public String string2Dish(String input) throws InputMismatchException {
+		if(input.toUpperCase().equals("STARTER") || input.toUpperCase().equals("MAINDISH") || input.toUpperCase().equals("DESSERT")){
+			return input.toUpperCase();
+		}else{
+			throw new InputMismatchException();
+		}
+	}
+	
+	public String string2DishType(String input) throws InputMismatchException {
+		if(input.toUpperCase().equals("STANDARD") || input.toUpperCase().equals("VEGETARIAN") || input.toUpperCase().equals("GLUTENFREE")){
+			return input.toUpperCase();
+		}else{
+			throw new InputMismatchException();
+		}
+	}
+	
+	public String string2MealType(String input) throws InputMismatchException {
+		if(input.toUpperCase().equals("HALFMEAL") || input.toUpperCase().equals("FULLMEAL")){
+			return input.toUpperCase();
+		}else{
+			throw new InputMismatchException();
+		}
+	}
+	
+	
 	public static boolean isNumeric(String str)  
 	{  
 	  try  
 	  {  
-	    double d = Double.parseDouble(str);  
+	    Double.parseDouble(str);  
 	  }  
 	  catch(NumberFormatException nfe)  
 	  {  

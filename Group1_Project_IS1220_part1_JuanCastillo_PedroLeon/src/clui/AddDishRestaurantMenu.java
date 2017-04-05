@@ -2,6 +2,7 @@ package clui;
 
 import exceptions.NumberOfArgumentsException;
 import exceptions.AccessDeniedException;
+import exceptions.InputMismatchException;
 import restaurant_structure.ItemFactory;
 import users.Restaurant;
 /**
@@ -13,7 +14,7 @@ public class AddDishRestaurantMenu implements CommandProcessor{
 	final int nArgs = 4;
 	String dishCategory; // "Starter"/"MainDish"/"Dessert"
 	String message;
-	ItemFactory itemFactory;
+	ItemFactory itemFactory = new ItemFactory();
 
 	/* (non-Javadoc)
 	 * @see clui.CommandProcessor#process(java.lang.String[])
@@ -23,10 +24,11 @@ public class AddDishRestaurantMenu implements CommandProcessor{
 		try{
 			if(args.length == nArgs){
 				if(((Restaurant) MyFoodora.core.getCurrentUser()).getItemByName(args[0]) == null){
-					MyFoodora.core.addItem(itemFactory.getItem(args[1], args[0], Double.parseDouble(args[3]), args[2]));
-					return "Item: " + args[0] + " added to " + MyFoodora.core.getCurrentUser().getName() + "'s menu.";
+					
+					MyFoodora.core.addItem(itemFactory.getItem(MyFoodora.stringCast.string2Dish(args[1]), args[0], MyFoodora.stringCast.string2Double(args[3]), MyFoodora.stringCast.string2DishType(args[2])));
+					return "Item: -" + args[0] + "- added to " + MyFoodora.core.getCurrentUser().getName() + "'s menu.";
 				}else{
-					return "Item. " + args[0] + " already added to menu.";
+					return "Item: -" + args[0] + "- already added to menu.";
 				}
 			}else{
 				throw new NumberOfArgumentsException();
@@ -34,6 +36,8 @@ public class AddDishRestaurantMenu implements CommandProcessor{
 		}catch(AccessDeniedException e){
 			return e.getMessage();
 		}catch(NumberOfArgumentsException e){
+			return e.getMessage();
+		}catch(InputMismatchException e){
 			return e.getMessage();
 		}
 	}

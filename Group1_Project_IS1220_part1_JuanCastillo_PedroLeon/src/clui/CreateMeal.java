@@ -5,9 +5,8 @@ import java.util.ArrayList;
 import exceptions.InputMismatchException;
 import exceptions.NumberOfArgumentsException;
 import restaurant_structure.Item;
-import restaurant_structure.MealType;
 /**
- * CreateMeal 2 <mealName> <mealCategory>
+ * CreateMeal 2 "mealName" "mealCategory"
  * @author Pedro León
  *
  */
@@ -21,21 +20,17 @@ public class CreateMeal implements CommandProcessor{
 	public String process(String[] args) {
 		try{
 			if(args.length == nArgs){
-				if(args[1].toUpperCase().equals(MealType.HALFMEAL.toString()) || args[1].toUpperCase().equals(MealType.FULLMEAL.toString())){
-					switch(args[1].toUpperCase()){
-					case "HALFMEAL":
-						MyFoodora.listTempMeals.put(args[0], new ArrayList<Item>());
-						message = "HalfMeal: " + args[0] + " added to temporal list of meals.";
-						break;
-					case "FULLMEAL":
-						MyFoodora.listTempMeals.put(args[0], new ArrayList<Item>());
-						message = "FullMeal: " + args[0] + " added to temporal list of meals.";
-						break;
-					}
-					return message;
-				}else{
-					throw new InputMismatchException();
+				switch(MyFoodora.stringCast.string2MealType(args[1])){
+				case "HALFMEAL":
+					MyFoodora.listTempMeals.put(args[0], new ArrayList<Item>());
+					message = "HalfMeal: -" + args[0] + "- added to temporal list of meals.";
+					break;
+				case "FULLMEAL":
+					MyFoodora.listTempMeals.put(args[0], new ArrayList<Item>());
+					message = "FullMeal: -" + args[0] + "- added to temporal list of meals.";
+					break;
 				}
+				return message;
 			}else{
 				throw new NumberOfArgumentsException();
 			}

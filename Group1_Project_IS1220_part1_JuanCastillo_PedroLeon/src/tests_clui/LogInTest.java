@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import clui.MyFoodora;
-import clui.RegisterCustomer;
 import clui.LogIn;
 
 public class LogInTest {
@@ -22,16 +21,18 @@ public class LogInTest {
 		args1[5] = "630285192";
 		args1[6] = "pleonpita@gmail.com";
 		String[] args2 = new String[2];
-		args1[0] = "pleon";
-		args1[1] = "password";
+		args2[0] = "pleon";
+		args2[1] = "password";
 		String message;
 		
 		mf.processCommand("RegisterCustomer", MyFoodora.arrayToList(args1));
-		System.out.println(MyFoodora.);
 		LogIn li = new LogIn();
 		message = li.process(args2);
-		System.out.println(message);
-		assertTrue(message.equals("User -pleon- correctly logged in."));
+		assertTrue(message.equals("User: -pleon- correctly logged in."));
+		
+		String[] args3 = new String[3];
+		message = li.process(args3);
+		assertTrue(message.equals("Incorrect number of arguments - type help for further command information."));
 		
 	}
 }

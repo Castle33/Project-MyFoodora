@@ -3,15 +3,15 @@ registerRestaurant <VIPS> <10,32> <spain> <batidoDeOreo>
 registerRestaurant <McDonalds> <5,3> <donald> <elmacdoessano>
 registerRestaurant <Tagliatella> <21,13> <thebest> <simone>
 registerRestaurant <Dominos> <3,80> <pizza> <barbecueistop>
-registerCourier <Angel> <Antolin> <PotaBestia> <6,9> <cricri>
-registerCourier <Yisus> <Martinez> <Tulipanes> <2,1> <cenicienta>
-registerCustomer <Luis> <Cobas> <mocho> <6,6> <fallingInMIX>
-registerCustomer <Marc> <Bataillou> <rata> <50,45> <tofeliz>
-registerCustomer <Emilio> <Emilio> <emilio> <13,14> <rae>
-registerCustomer <Paco> <Paqueras> <peon> <2,1> <jaquemate>
-registerCustomer <Arturo> <Garrido> <elnino> <15,14> <bcg>
-registerCustomer <Richi> <NoMeAcuerdo> <president> <25,28> <elasesino>
-registerCustomer <Pablo> <Descu> <espanol> <39,2> <bpmaster>
+registerCourier <Angel> <Antolin> <PotaBestia> <6,9> <cricri> <0695599143>
+registerCourier <Yisus> <Martinez> <Tulipanes> <2,1> <cenicienta> <0695599143>
+registerCustomer <Luis> <Cobas> <mocho> <6,6> <fallingInMIX> <0695599143> <luchocobas@gmail.com>
+registerCustomer <Marc> <Bataillou> <rata> <50,45> <tofeliz> <0695599143> <bataillou@gmail.com>
+registerCustomer <Emilio> <Emilio> <emilio> <13,14> <rae> <0695599143> <emilioemilio@gmail.com>
+registerCustomer <Paco> <Paqueras> <peon> <2,1> <jaquemate> <0695599143> <paqeras@gmail.com>
+registerCustomer <Arturo> <Garrido> <elnino> <15,14> <bcg> <0695599143> <artu@gmail.com>
+registerCustomer <Richi> <NoMeAcuerdo> <president> <25,28> <elasesino> <0695599143> <rickyrubio@gmail.com>
+registerCustomer <Pablo> <Descu> <espanol> <39,2> <bpmaster> <0695599143> <descu@gmail.com>
 login <Emporter> <ilfautfermer>
 addDishRestauarantMenu <Potstickers> <starter> <standard> <3.50>
 addDishRestauarantMenu <Dumplings> <starter> <vegetarian> <4.80>

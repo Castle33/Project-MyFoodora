@@ -4,41 +4,41 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import clui.RegisterCustomer;
 import clui.MyFoodora;
+import clui.RegisterRestaurant;
 
-public class RegisterCustomerTest {
+public class RegisterRestaurantTest {
 
 	@Test
 	public void testProcess() {
 		MyFoodora mf = new MyFoodora();
-		String[] args1 = new String[2];
-		args1[0] = "Pedro";
-		args1[1] = "Leon";
+		String[] args1 = new String[4];
+		args1[0] = "Bonheur";
+		args1[1] = "1,4";
+		args1[2] = "Emporter";
+		args1[3] = "ilfautfermer";
 		String message;
-		RegisterCustomer rc = new RegisterCustomer();
+		RegisterRestaurant rr = new RegisterRestaurant();
 		
-		message = rc.process(args1);
-		assertTrue(message.equals("Customer: -pleon- registered."));
+		message = rr.process(args1);
+		assertTrue(message.equals("Restaurant: -Emporter- registered."));
 		
 
-		String[] args2 = new String[6];
-		args2[0] = "Pedro";
-		args2[1] = "Leon";
-		args2[2] = "pleon";
-		args2[3] = "0,0";
-		args2[4] = "password";
-		args2[5] = "630285192";
+		String[] args2 = new String[3];
+		args2[0] = "Bonheur";
+		args2[1] = "1,4";
+		args2[2] = "Emporter";
 		
-		message = rc.process(args2);
+		message = rr.process(args2);
 		assertTrue(message.equals("Incorrect number of arguments - type help for further command information."));
 		
-		message= rc.process(args1);
+		message= rr.process(args1);
 		assertTrue(message.equals("This username already exists: try a different username"));
 		
-		args1[3] = "(0,0)";
-		message= rc.process(args1);
+		args1[1] = "(0,0)";
+		message= rr.process(args1);
 		assertTrue(message.equals("ArgumentMismatchException\nUsually with Integer/Double/Address/Date\nAlso with itemCategory/mealCategory/DeliveryPolicyType/FidelityPolicyType/ProfitPolicyType\n\titemCategory: 'Starter'/'MainDish'/'Dessert'\n\tmealCategory: 'HalfMeal'/'FullMeal'\n\tDeliveryPolicyType: 'Fastest'/'FairOccupation'\n\tFidelityPolicyType: 'Basic'/'Point'/'Lottery'\n\tProfitPolicyType: 'DeliveryCost'/'Markup'/'ServiceFee'\n"));
 		
 	}
+
 }

@@ -16,15 +16,15 @@ public class ShowMeal implements CommandProcessor{
 	 * @see clui.CommandProcessor#process(java.lang.String[])
 	 */
 	@Override
-	public String process(String[] args) throws NumberOfArgumentsException {
+	public String process(String[] args) {
 		try{
 			if(args.length == 1){
 				meal = ((Restaurant) MyFoodora.core.getCurrentUser()).getMealByName(args[0]);
 				if(meal != null){
-					return "From " + MyFoodora.core.getCurrentUser().getUsername() + "'s menu, Meal: " + meal + " has items: " + meal.getMealItems();
+					return "From " + MyFoodora.core.getCurrentUser().getName() + "'s menu, Meal: -" + args[0] + "- has items: " + meal.getMealItems();
 				} else {
 					if(MyFoodora.listTempMeals.keySet().contains(args[0])){
-						return "From listOfTempMeals, Meal: " + args[0] + " has items: " + MyFoodora.listTempMeals.get(args[0]) + "\nTo add items use AddDish2Meal <dishName> <mealName>.\nTo save meal to "+ MyFoodora.core.getCurrentUser().getUsername() + "'s menu use SaveMeal <mealName>.";
+						return "From listOfTempMeals, Meal: -" + args[0] + "- has items: " + MyFoodora.listTempMeals.get(args[0]) + "\nTo add items use AddDish2Meal <dishName> <mealName>.\nTo save meal to "+ MyFoodora.core.getCurrentUser().getName() + "'s menu use SaveMeal <mealName>.";
 					} else {
 						return "Error: Meal not found";
 					}

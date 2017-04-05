@@ -3,7 +3,7 @@ package clui;
 import exceptions.*;
 import users.Courier;
 /**
- * RegisterCourier 6 <firstName> <lastName> <username> <position> <password> <phoneNumber>
+ * RegisterCourier 6 "firstName" "lastName" "username" "position" "password" "phoneNumber"
  * @author Pedro León
  *
  */

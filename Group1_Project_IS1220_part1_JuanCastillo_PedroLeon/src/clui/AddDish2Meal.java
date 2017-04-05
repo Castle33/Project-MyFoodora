@@ -5,7 +5,7 @@ import restaurant_structure.Item;
 import users.Restaurant;
 import java.util.ArrayList;
 /**
- * AddDish2Meal 2 <dishName> <mealName>
+ * AddDish2Meal 2 "dishName" "mealName"
  * @author Pedro León
  *
  */
@@ -27,12 +27,12 @@ public class AddDish2Meal implements CommandProcessor {
 						itemList.add(itemFound);
 						MyFoodora.listTempMeals.remove(args[1]);
 						MyFoodora.listTempMeals.put(args[1],itemList);
-						return "Item: " + args[0] + " added to Meal: " + args[1];
+						return "Item: -" + args[0] + "- added to Meal: -" + args[1]+ "-.";
 					}else{
-						return "Meal: " + args[1] + " not in temporary meal list. To add it use CreateMeal <mealName> <mealCategory>";
+						return "Meal: -" + args[1] + "- not in temporary meal list. To add it use CreateMeal <mealName> <mealCategory>.";
 					}
 				}else{
-					return "Item: " + args[0] + " not in " + MyFoodora.core.getCurrentUser().getName() + "'s menu.";
+					return "Item: -" + args[0] + "- not in " + MyFoodora.core.getCurrentUser().getName() + "'s menu.";
 				}
 			}else{
 				throw new NumberOfArgumentsException();
