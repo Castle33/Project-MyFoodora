@@ -11,9 +11,8 @@ import java.util.ArrayList;
  */
 public class AddDish2Meal implements CommandProcessor {
 	final int nArgs = 2;
-	String mealFound;
 	Item itemFound;
-	ArrayList<Item> itemAdded;
+	ArrayList<Item> itemList;
 	/* (non-Javadoc)
 	 * @see clui.CommandProcessor#process(java.lang.String[])
 	 */
@@ -23,15 +22,11 @@ public class AddDish2Meal implements CommandProcessor {
 			if(args.length == nArgs){
 				itemFound = ((Restaurant) MyFoodora.core.getCurrentUser()).getItemByName(args[0]);
 				if(itemFound != null){
-					for( String m : MyFoodora.listTempMeals.keySet()){
-						if(m.equals(args[1])){
-							mealFound = m;
-							itemAdded = MyFoodora.listTempMeals.get(mealFound);
-							itemAdded.add(itemFound);
-							MyFoodora.listTempMeals.put(mealFound,itemAdded);
-						}
-					}
-					if(mealFound != null){
+					if(MyFoodora.listTempMeals.keySet().contains(args[1])){
+						itemList = MyFoodora.listTempMeals.get(args[1]);
+						itemList.add(itemFound);
+						MyFoodora.listTempMeals.remove(args[1]);
+						MyFoodora.listTempMeals.put(args[1],itemList);
 						return "Item: " + args[0] + " added to Meal: " + args[1];
 					}else{
 						return "Meal: " + args[1] + " not in temporary meal list. To add it use CreateMeal <mealName> <mealCategory>";

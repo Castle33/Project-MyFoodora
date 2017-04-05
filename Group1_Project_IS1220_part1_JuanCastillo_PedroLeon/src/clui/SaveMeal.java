@@ -21,27 +21,23 @@ public class SaveMeal implements CommandProcessor{
 	public String process(String[] args) throws NumberOfArgumentsException {
 		try{
 			if(args.length == 1){
-				for( String m : MyFoodora.listTempMeals.keySet()){
-					if(m.equals(args[0])){
-						if(MyFoodora.listTempMeals.get(m).size() == 2){
-							HalfMeal hm = new HalfMeal(m, MyFoodora.listTempMeals.get(m));
-							MyFoodora.core.addMeal(hm);
-							MyFoodora.listTempMeals.remove(args[0]);
-							message += "HalfMeal: " + m + " saved to " + MyFoodora.core.getCurrentUser().getName() + "'s menu.\n";
-						}else if(MyFoodora.listTempMeals.get(m).size() == 3){
-							FullMeal fm = new FullMeal(m, MyFoodora.listTempMeals.get(m));
-							MyFoodora.core.addMeal(fm);
-							MyFoodora.listTempMeals.remove(args[0]);
-							message += "FullMeal: " + m + " saved to " + MyFoodora.core.getCurrentUser().getName() + "'s menu.\n";
-						}else{
-							message += "Meal must have 2 or 3 items not more.\n";
-						}
+				if(MyFoodora.listTempMeals.keySet().contains(args[0])){
+					if(MyFoodora.listTempMeals.get(args[0]).size() == 2){
+						HalfMeal hm = new HalfMeal(args[0], MyFoodora.listTempMeals.get(args[0]));
+						MyFoodora.core.addMeal(hm);
+						MyFoodora.listTempMeals.remove(args[0]);
+						return "HalfMeal: " + args[0] + " saved to " + MyFoodora.core.getCurrentUser().getName() + "'s menu.";
+					}else if(MyFoodora.listTempMeals.get(args[0]).size() == 3){
+						FullMeal fm = new FullMeal(args[0], MyFoodora.listTempMeals.get(args[0]));
+						MyFoodora.core.addMeal(fm);
+						MyFoodora.listTempMeals.remove(args[0]);
+						return "FullMeal: " + args[0]+ " saved to " + MyFoodora.core.getCurrentUser().getName() + "'s menu.";
+					}else{
+						return "Meal must have 2 or 3 items not more.";
 					}
-				}
-				if(message == null){
+				}else{
 					return message += "Meal: " + args[0] + " not found in list of temporal meals.\nFor meal creation use CreateMeal <mealName> <mealCategory>/AddDish2Meal <dishName> <mealName>/SaveMeal <mealName>\n";
 				}
-				return message;
 			}else{
 				throw new NumberOfArgumentsException();
 			}

@@ -181,6 +181,10 @@ public class MyFoodora {
 					cmdProcessor = new AddDish2Meal();
 					setCommandReturn(cmdProcessor.process(argum));
 					break;
+				case "removeitemfrommeal":
+					cmdProcessor = new RemoveItemFromMeal();
+					setCommandReturn(cmdProcessor.process(argum));
+					break;
 				case "showmeal":
 					cmdProcessor = new ShowMeal();
 					setCommandReturn(cmdProcessor.process(argum));
@@ -342,6 +346,20 @@ public class MyFoodora {
 			array.add(args[i]) ;
 		}
 		return array;
+	}
+	
+	public static Item getItemByName(String itemName, String mealName){
+		Item itemFound = null;
+		for(String meal : listTempMeals.keySet()){
+			if(meal.equals(mealName)){
+				for(Item item : listTempMeals.get(mealName)){
+					if(item.getName().equals(itemName)){
+						itemFound = item;
+					}
+				}
+			}
+		}
+		return itemFound;
 	}
 	
 	public String getCommandReturn(){
