@@ -27,7 +27,7 @@ public class LogInTest {
 		String message;
 		
 		mf.processCommand("RegisterCustomer", MyFoodora.arrayToList(args1));
-		
+		System.out.println(MyFoodora.);
 		LogIn li = new LogIn();
 		message = li.process(args2);
 		System.out.println(message);
