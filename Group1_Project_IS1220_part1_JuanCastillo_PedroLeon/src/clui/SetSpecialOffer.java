@@ -2,34 +2,35 @@ package clui;
 
 import exceptions.AccessDeniedException;
 import exceptions.NumberOfArgumentsException;
-import restaurant_structure.Item;
 import restaurant_structure.Meal;
 import users.Restaurant;
 /**
- * SetSpecialOffer 1 <mealName>
+ * SetSpecialOffer 1 "mealName"
  * @author Pedro León
  *
  */
 public class SetSpecialOffer implements CommandProcessor {
 	final int nArgs = 1;
-	Item item;
-	String message;
+	Meal mealFound;
 	/* (non-Javadoc)
 	 * @see clui.CommandProcessor#process(java.lang.String[])
 	 */
 	@Override
-	public String process(String[] args) throws NumberOfArgumentsException {
+	public String process(String[] args) {
 		try{
-			if(args[nArgs] == null){
-				for( Meal m : ((Restaurant)MyFoodora.core.getCurrentUser()).getListOfMeal()){
-					if(m.getName() == args[1]){
-						MyFoodora.core.setSpecialMeal(m);
-						message = "Meal: " + m.getName() + " added to " + MyFoodora.core.getCurrentUser().getName() + "'s list of special offer.";
+			if(args.length == nArgs){
+				mealFound = ((Restaurant)MyFoodora.core.getCurrentUser()).getMealByName(args[0]);
+				if(mealFound != null){
+					System.out.println(((Restaurant)MyFoodora.core.getCurrentUser()).getListOfMeal().contains(mealFound));
+					if(((Restaurant)MyFoodora.core.getCurrentUser()).getListOfMeal().contains(mealFound)){
+						MyFoodora.core.setSpecialMeal(mealFound);
+						return "Meal: -" + args[0] + "- added to " + MyFoodora.core.getCurrentUser().getName() + "'s list of special offer.";
 					}else{
-						message = "Meal: " + m.getName() + " not found in " + MyFoodora.core.getCurrentUser().getName() + "'s list of special offer.";
+						return "Meal: -" + args[0] + "- already in " + MyFoodora.core.getCurrentUser().getName() + "'s list of special offer.";
 					}
+				}else{
+					return "Meal: -" + args[0] + "- not found in " + MyFoodora.core.getCurrentUser().getName() + "'s menu.";
 				}
-				return message;
 			}else{
 				throw new NumberOfArgumentsException();
 			}

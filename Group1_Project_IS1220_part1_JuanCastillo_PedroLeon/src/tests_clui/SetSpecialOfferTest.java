@@ -4,10 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import clui.RemoveItemFromMeal;
 import clui.MyFoodora;
+import clui.SetSpecialOffer;
 
-public class RemoveItemFromMealTest {
+public class SetSpecialOfferTest {
 
 	@Test
 	public void testProcess() {
@@ -48,25 +48,24 @@ public class RemoveItemFromMealTest {
 		String[] args9 = new String[2];
 		args9[0] = "Douhua";
 		args9[1] = "Vegie";
-		String[] args10 = new String[2];
-		args10[0] = "Douhua";
-		args10[1] = "Vegie";
-		RemoveItemFromMeal rifm1 = new RemoveItemFromMeal();
+		String[] args10 = new String[1];
+		args10[0] = "Vegie";
+		String[] args11 = new String[1];
+		args11[0] = "Vegie";
+		SetSpecialOffer sso = new SetSpecialOffer();
 		
 		mf.processCommand("RegisterRestaurant", MyFoodora.arrayToList(args1));
 		mf.processCommand("LogIn", MyFoodora.arrayToList(args2));
-		assertTrue(rifm1.process(args10).equals("Meal: -Vegie- not in temporary meal list.\nTo add it use CreateMeal <mealName> <mealCategory>."));
 		mf.processCommand("CreateMeal", MyFoodora.arrayToList(args3));
 		mf.processCommand("AddDishRestaurantMenu", MyFoodora.arrayToList(args4));
-		System.out.println(rifm1.process(args10));
-		assertTrue(rifm1.process(args10).equals("Item: -Douhua- not added in Meal: -Vegie-.\nTo add items use AddDish2Meal <dishName> <mealName>."));
 		mf.processCommand("AddDishRestaurantMenu", MyFoodora.arrayToList(args5));
 		mf.processCommand("AddDishRestaurantMenu", MyFoodora.arrayToList(args6));
 		mf.processCommand("AddDish2Meal", MyFoodora.arrayToList(args7));
 		mf.processCommand("AddDish2Meal", MyFoodora.arrayToList(args8));
 		mf.processCommand("AddDish2Meal", MyFoodora.arrayToList(args9));
+		mf.processCommand("SaveMeal", MyFoodora.arrayToList(args10));
 		
-		assertTrue(rifm1.process(args10).equals("Item: -Douhua- removed from Meal: -Vegie-."));
+		assertTrue(sso.process(args11).equals("Meal: -Vegie- added to Bonheur's list of special offer."));
+		assertTrue(sso.process(args11).equals("Meal: -Vegie- not found in Bonheur's list of meals."));
 	}
-
 }
