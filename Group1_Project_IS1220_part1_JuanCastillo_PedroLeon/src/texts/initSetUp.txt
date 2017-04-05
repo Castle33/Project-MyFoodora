@@ -45,6 +45,7 @@ addDish2Meal <Wontons> <Tradition>
 addDish2Meal <3SeasonRice> <Tradition>
 addDish2Meal <Guilinggao> <Tradition>
 saveMeal <Tradition>
+logout <>
 login <spain> <batidoDeOreo>
 addDishRestauarantMenu <Quesadilla> <starter> <standard> <6.50>
 addDishRestauarantMenu <Croquettes> <starter> <vegetarian> <5.80>
@@ -78,6 +79,7 @@ addDish2Meal <TexMexNachos> <Western>
 addDish2Meal <Villaroy> <Western>
 addDish2Meal <Pancakes> <Western>
 saveMeal <Western>
+logout <>
 login <donald> <elmacdoessano>
 addDishRestauarantMenu <FrenchFries> <starter> <standard> <3.50>
 addDishRestauarantMenu <OnionRings> <starter> <vegetarian> <5.80>
@@ -111,36 +113,71 @@ addDish2Meal <McNuggets> <HappyMeal>
 addDish2Meal <McPollo> <HappyMeal>
 addDish2Meal <Actimel> <HappyMeal>
 saveMeal <HappyMeal>
+logout <>
 login <thebest> <simone>
-addDishRestauarantMenu <FrenchFries> <starter> <standard> <3.50>
-addDishRestauarantMenu <OnionRings> <starter> <vegetarian> <5.80>
-addDishRestauarantMenu <McNuggets> <starter> <glutenfree> <4.80>
-addDishRestauarantMenu <Salad> <starter> <standard> <3.60>
-addDishRestauarantMenu <BigMac> <maindish> <vegetarian> <12.10>
-addDishRestauarantMenu <McRoyal> <maindish> <glutenfree> <17.00>
-addDishRestauarantMenu <McPollo> <maindish> <standard> <15.60>
-addDishRestauarantMenu <McWrap> <maindish> <vegetarian> <14.00>
-addDishRestauarantMenu <McFlurry> <dessert> <glutenfree> <6.99>
-addDishRestauarantMenu <Sundae> <dessert> <standard> <4.99>
-addDishRestauarantMenu <Actimel> <dessert> <vegetarian> <2.20>
-addDishRestauarantMenu <Apple> <dessert> <glutenfree> <3.50>
-createMeal <MyCombo> <fullmeal>
-addDish2Meal <FrenchFries> <MyCombo>
-addDish2Meal <BigMac> <MyCombo>
-addDish2Meal <McFlurry> <MyCombo>
-saveMeal <MyCombo>
-createMeal <McDeluxe> <fullmeal>
-addDish2Meal <OnionRings> <McDeluxe>
-addDish2Meal <McRoyal> <McDeluxe>
-addDish2Meal <Sundae> <McDeluxe>
-saveMeal <McDeluxe>
-createMeal <Vegetarian> <fullmeal>
-addDish2Meal <Salad> <Vegetarian>
-addDish2Meal <McWrap> <Vegetarian>
-addDish2Meal <Apple> <Vegetarian>
-saveMeal <Vegetarian>
-createMeal <HappyMeal> <fullmeal>
-addDish2Meal <McNuggets> <HappyMeal>
-addDish2Meal <McPollo> <HappyMeal>
-addDish2Meal <Actimel> <HappyMeal>
-saveMeal <HappyMeal>
+addDishRestauarantMenu <Carpaccio> <starter> <standard> <3.50>
+addDishRestauarantMenu <Provoletta> <starter> <vegetarian> <5.80>
+addDishRestauarantMenu <Affumicata> <starter> <glutenfree> <4.80>
+addDishRestauarantMenu <Cannelloni> <starter> <standard> <3.60>
+addDishRestauarantMenu <Risotto> <maindish> <vegetarian> <12.10>
+addDishRestauarantMenu <Scaloppine> <maindish> <glutenfree> <17.00>
+addDishRestauarantMenu <Carbonara> <maindish> <standard> <15.60>
+addDishRestauarantMenu <Pizza> <maindish> <vegetarian> <14.00>
+addDishRestauarantMenu <Tiramisu> <dessert> <glutenfree> <6.99>
+addDishRestauarantMenu <Cheesecake> <dessert> <standard> <4.99>
+addDishRestauarantMenu <SorbettoAlLimone> <dessert> <vegetarian> <2.20>
+addDishRestauarantMenu <PannaCotta> <dessert> <glutenfree> <3.50>
+createMeal <DayMenu> <fullmeal>
+addDish2Meal <Cannelloni> <DayMenu>
+addDish2Meal <Scaloppine> <DayMenu>
+addDish2Meal <PannaCotta> <DayMenu>
+saveMeal <DayMenu>
+createMeal <Piamonte> <fullmeal>
+addDish2Meal <Affumicata> <Piamonte>
+addDish2Meal <Pizza> <Piamonte>
+addDish2Meal <Cheesecake> <Piamonte>
+saveMeal <Piamonte>
+createMeal <MenuNapoli> <fullmeal>
+addDish2Meal <Provoletta> <MenuNapoli>
+addDish2Meal <Risotto> <MenuNapoli>
+addDish2Meal <SorbettoAlLimone> <MenuNapoli>
+saveMeal <MenuNapoli>
+createMeal <Comandante> <fullmeal>
+addDish2Meal <Carpaccio> <Comandante>
+addDish2Meal <Carbonara> <Comandante>
+addDish2Meal <Tiramisu> <Comandante>
+saveMeal <Comandante>
+logout <>
+login <pizza> <barbecueistop>
+addDishRestauarantMenu <Kickers> <starter> <standard> <3.50>
+addDishRestauarantMenu <GarlicBread> <starter> <vegetarian> <5.80>
+addDishRestauarantMenu <GreekSalad> <starter> <glutenfree> <4.80>
+addDishRestauarantMenu <ChickenWings> <starter> <standard> <3.60>
+addDishRestauarantMenu <PizzaCheesix> <maindish> <vegetarian> <12.10>
+addDishRestauarantMenu <PizzaBarbecue> <maindish> <glutenfree> <17.00>
+addDishRestauarantMenu <PizzaHawaiana> <maindish> <standard> <15.60>
+addDishRestauarantMenu <PizzaPepperoni> <maindish> <vegetarian> <14.00>
+addDishRestauarantMenu <DChocolate> <dessert> <glutenfree> <6.99>
+addDishRestauarantMenu <Vulcano> <dessert> <standard> <4.99>
+addDishRestauarantMenu <CookieCream> <dessert> <vegetarian> <2.20>
+addDishRestauarantMenu <ChocoCream> <dessert> <glutenfree> <3.50>
+createMeal <Diabola> <fullmeal>
+addDish2Meal <Kickers> <Diabola>
+addDish2Meal <PizzaCheesix> <Diabola>
+addDish2Meal <DChocolate> <Diabola>
+saveMeal <Diabola>
+createMeal <SuperCombo> <fullmeal>
+addDish2Meal <GarlicBread> <SuperCombo>
+addDish2Meal <PizzaBarbecue> <SuperCombo>
+addDish2Meal <Vulcano> <SuperCombo>
+saveMeal <SuperCombo>
+createMeal <DominosMenu> <fullmeal>
+addDish2Meal <GreekSalad> <DominosMenu>
+addDish2Meal <PizzaHawaiana> <DominosMenu>
+addDish2Meal <CookieCream> <DominosMenu>
+saveMeal <DominosMenu>
+createMeal <ComboDeluxe> <fullmeal>
+addDish2Meal <ChickenWings> <ComboDeluxe>
+addDish2Meal <PizzaPepperoni> <ComboDeluxe>
+addDish2Meal <ChocoCream> <ComboDeluxe>
+saveMeal <ComboDeluxe>
