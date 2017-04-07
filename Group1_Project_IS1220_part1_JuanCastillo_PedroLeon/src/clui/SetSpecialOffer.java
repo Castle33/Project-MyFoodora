@@ -21,7 +21,6 @@ public class SetSpecialOffer implements CommandProcessor {
 			if(args.length == nArgs){
 				mealFound = ((Restaurant)MyFoodora.core.getCurrentUser()).getMealByName(args[0]);
 				if(mealFound != null){
-					System.out.println(((Restaurant)MyFoodora.core.getCurrentUser()).getListOfMeal().contains(mealFound));
 					if(((Restaurant)MyFoodora.core.getCurrentUser()).getListOfMeal().contains(mealFound)){
 						MyFoodora.core.setSpecialMeal(mealFound);
 						return "Meal: -" + args[0] + "- added to " + MyFoodora.core.getCurrentUser().getName() + "'s list of special offer.";

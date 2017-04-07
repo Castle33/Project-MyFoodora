@@ -244,8 +244,8 @@ public class Order {
 		return name;
 	}
 	
-	public void setName(){
-		this.name = customer.getUsername() + restaurant.getUsername();
+	public void setName(String n){
+		this.name = n;
 	}
 	
 	

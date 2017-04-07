@@ -5,9 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import clui.MyFoodora;
-import clui.SetSpecialOffer;
+import clui.RemoveSpecialOffer;
 
-public class SetSpecialOfferTest {
+public class RemoveSpecialOfferTest {
 
 	@Test
 	public void testProcess() {
@@ -52,7 +52,9 @@ public class SetSpecialOfferTest {
 		args10[0] = "Vegie";
 		String[] args11 = new String[1];
 		args11[0] = "Vegie";
-		SetSpecialOffer sso = new SetSpecialOffer();
+		String[] args12 = new String[1];
+		args12[0] = "Vegie";
+		RemoveSpecialOffer rso = new RemoveSpecialOffer();
 		
 		mf.processCommand("RegisterRestaurant", MyFoodora.arrayToList(args1));
 		mf.processCommand("LogIn", MyFoodora.arrayToList(args2));
@@ -63,9 +65,11 @@ public class SetSpecialOfferTest {
 		mf.processCommand("AddDish2Meal", MyFoodora.arrayToList(args7));
 		mf.processCommand("AddDish2Meal", MyFoodora.arrayToList(args8));
 		mf.processCommand("AddDish2Meal", MyFoodora.arrayToList(args9));
-		assertTrue(sso.process(args11).equals("Meal: -Vegie- not found in Bonheur's menu."));
+		assertTrue(rso.process(args12).equals("Meal: -Vegie- not found in Bonheur's menu."));
 		mf.processCommand("SaveMeal", MyFoodora.arrayToList(args10));
-		assertTrue(sso.process(args11).equals("Meal: -Vegie- added to Bonheur's list of special offer."));
-		assertTrue(sso.process(args11).equals("Meal: -Vegie- already in Bonheur's list of special offer."));
+		mf.processCommand("setSpecialOffer", MyFoodora.arrayToList(args11));
+		assertTrue(rso.process(args12).equals("Meal: -Vegie- removed from Bonheur's list of special offer."));
+		assertTrue(rso.process(args12).equals("Meal: -Vegie- already removed from Bonheur's list of special offer."));
 	}
+
 }

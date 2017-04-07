@@ -10,7 +10,7 @@ removeItemFromMeal <dishName> <mealName>
 showMeal <mealName>
 saveMeal <mealName>
 setSpecialOffer <mealName>
-removeFromSepcialOffer <mealName>
+removeSepcialOffer <mealName>
 createOrder <restaurantName> <orderName>
 addItem2Order <orderName> <itemName>
 endOrder <orderName> <date>

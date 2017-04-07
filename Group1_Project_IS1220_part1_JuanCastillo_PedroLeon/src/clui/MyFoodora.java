@@ -36,6 +36,7 @@ public class MyFoodora {
 		this.commandReturn = null;
 		this.args = new ArrayList<String>();
 		MyFoodora.listTempMeals = new HashMap<String,ArrayList<Item>>();
+		MyFoodora.listTempOrders = new ArrayList<Order>();
 		MyFoodora.core = new Core();
 		MyFoodora.stringCast = new StringCast();
 		MyFoodora.readCmdFile("src/texts/listCmd.txt");
@@ -195,11 +196,11 @@ public class MyFoodora {
 					break;
 				case "setspecialoffer":
 					cmdProcessor = new SetSpecialOffer();
-					cmdProcessor.process(argum);
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				case "removefromspecialoffer":
 					cmdProcessor = new RemoveSpecialOffer();
-					cmdProcessor.process(argum);
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				case "createorder":
 					cmdProcessor = new CreateOrder();
