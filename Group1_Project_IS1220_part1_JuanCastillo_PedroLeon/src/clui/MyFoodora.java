@@ -204,15 +204,19 @@ public class MyFoodora {
 					break;
 				case "createorder":
 					cmdProcessor = new CreateOrder();
-					cmdProcessor.process(argum);
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				case "additem2order":
 					cmdProcessor = new AddItem2Order();
-					cmdProcessor.process(argum);
+					setCommandReturn(cmdProcessor.process(argum));
+					break;
+				case "addmeal2order":
+					cmdProcessor = new AddMeal2Order();
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				case "endorder":
 					cmdProcessor = new EndOrder();
-					cmdProcessor.process(argum);
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				case "onduty":
 					cmdProcessor = new OnDuty();

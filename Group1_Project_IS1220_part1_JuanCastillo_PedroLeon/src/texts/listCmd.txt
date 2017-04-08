@@ -12,7 +12,8 @@ saveMeal <mealName>
 setSpecialOffer <mealName>
 removeSepcialOffer <mealName>
 createOrder <restaurantName> <orderName>
-addItem2Order <orderName> <itemName>
+addItem2Order <orderName> <itemName> <itemQuantity>
+addMeal2Order <orderName> <mealName> <mealQuantity>
 endOrder <orderName> <date>
 onDuty <username>
 offDuty <username>

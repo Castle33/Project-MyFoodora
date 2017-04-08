@@ -63,6 +63,14 @@ public class StringCast {
 		}
 	}
 	
+	public int string2Integer(String input) throws InputMismatchException {
+		if(isNumeric(input)){
+			int toInteger = Integer.parseInt(input);
+			return toInteger;
+		}else{
+			throw new InputMismatchException();
+		}
+	}
 	
 	public static boolean isNumeric(String str)  
 	{  

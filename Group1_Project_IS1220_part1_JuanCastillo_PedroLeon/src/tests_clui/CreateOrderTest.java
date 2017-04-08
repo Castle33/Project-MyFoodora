@@ -18,10 +18,10 @@ public class CreateOrderTest {
 		CreateOrder co = new CreateOrder();
 		
 		mf.treatCmd("registerCustomer \"Luis\" \"Cobas\" \"mocho\" \"6,6\" \"fallingInMIX\" \"0695599143\" \"luchocobas@gmail.com\"");
-		mf.treatCmd("logIn \"mocho\" \"fallingInMIX\"");
 		assertTrue(co.process(args1).equals("Restaurant: -Emporter- not registered in MyFoodora."));
 
 		mf.treatCmd("registerRestaurant \"Bonheur\" \"1,4\" \"Emporter\" \"ilfautfermer\"");
+		mf.treatCmd("logIn \"mocho\" \"fallingInMIX\"");
 		assertTrue(co.process(args1).equals("Customer: -mocho- created Order: -Chinois-."));
 		
 		mf.treatCmd("logOut \"\"");

@@ -23,6 +23,7 @@ public class CreateOrder implements CommandProcessor{
 		try{
 			if(args.length == nArgs){
 				restaurant = (Restaurant) MyFoodora.core.getListOfUsers().get(args[0]);
+				//System.out.println(MyFoodora.core.getListOfUsers());
 				if(restaurant != null){
 					if(MyFoodora.core.getCurrentUser() instanceof Customer){
 						order = new Order((Customer) MyFoodora.core.getCurrentUser(), restaurant);

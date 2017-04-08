@@ -9,7 +9,6 @@ import exceptions.*;
  */
 public class RegisterRestaurant implements CommandProcessor{
 	final int nArgs = 4;
-	private Restaurant restaurant;
 	
 	/* (non-Javadoc)
 	 * @see clui.CommandProcessor#process(java.lang.String[])
@@ -18,8 +17,7 @@ public class RegisterRestaurant implements CommandProcessor{
 	public String process(String[] args) {
 		try{
 			if(args.length == nArgs){
-				restaurant = new Restaurant(args[0],args[2],args[3],MyFoodora.stringCast.string2Address(args[1]));
-				MyFoodora.core.registerUser(restaurant);
+				MyFoodora.core.registerUser(new Restaurant(args[0],args[2],args[3],MyFoodora.stringCast.string2Address(args[1])));
 				return ("Restaurant: -" + args[2] + "- registered.");
 			}else{
 				throw new NumberOfArgumentsException();

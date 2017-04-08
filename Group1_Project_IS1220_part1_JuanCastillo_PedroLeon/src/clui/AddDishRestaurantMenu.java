@@ -23,12 +23,16 @@ public class AddDishRestaurantMenu implements CommandProcessor{
 	public String process(String[] args) {
 		try{
 			if(args.length == nArgs){
-				if(((Restaurant) MyFoodora.core.getCurrentUser()).getItemByName(args[0]) == null){
-					
-					MyFoodora.core.addItem(itemFactory.getItem(MyFoodora.stringCast.string2Dish(args[1]), args[0], MyFoodora.stringCast.string2Double(args[3]), MyFoodora.stringCast.string2DishType(args[2])));
-					return "Item: -" + args[0] + "- added to " + MyFoodora.core.getCurrentUser().getName() + "'s menu.";
+				if(MyFoodora.core.getCurrentUser() instanceof Restaurant){
+					if(((Restaurant) MyFoodora.core.getCurrentUser()).getItemByName(args[0]) == null){
+						
+						MyFoodora.core.addItem(itemFactory.getItem(MyFoodora.stringCast.string2Dish(args[1]), args[0], MyFoodora.stringCast.string2Double(args[3]), MyFoodora.stringCast.string2DishType(args[2])));
+						return "Item: -" + args[0] + "- added to " + MyFoodora.core.getCurrentUser().getName() + "'s menu.";
+					}else{
+						return "Item: -" + args[0] + "- already added to menu.";
+					}
 				}else{
-					return "Item: -" + args[0] + "- already added to menu.";
+					throw new AccessDeniedException();
 				}
 			}else{
 				throw new NumberOfArgumentsException();

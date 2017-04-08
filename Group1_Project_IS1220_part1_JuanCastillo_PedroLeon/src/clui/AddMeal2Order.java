@@ -1,19 +1,18 @@
 package clui;
 
-import exceptions.NumberOfArgumentsException;
 import exceptions.InputMismatchException;
+import exceptions.NumberOfArgumentsException;
+import restaurant_structure.Meal;
 import system.Order;
-import restaurant_structure.Item;
-
 /**
- * AddItem2Order 3 "orderName" "itemName" "itemQuantity"
+ * AddMeal2Order 3 "orderName" "mealName" "mealQuantity"
  * @author Pedro León
  *
  */
-public class AddItem2Order implements CommandProcessor{
+public class AddMeal2Order implements CommandProcessor{
 	final int nArgs = 3;
 	private Order orderFound;
-	private Item itemFound;
+	private Meal mealFound;
 	/* (non-Javadoc)
 	 * @see clui.CommandProcessor#process(java.lang.String[])
 	 */
@@ -27,12 +26,12 @@ public class AddItem2Order implements CommandProcessor{
 					}
 				}
 				if(orderFound != null){
-					itemFound = orderFound.getRestaurant().getItemByName(args[1]);
-					if(itemFound != null){
-						orderFound.addItem(itemFound, MyFoodora.stringCast.string2Integer(args[2]));
-						return "Customer: -" + MyFoodora.core.getCurrentUser().getUsername() + "- added Item: -" + args[1] + "- to Order -" + args[0] + "-.";
+					mealFound = orderFound.getRestaurant().getMealByName(args[1]);
+					if(mealFound != null){
+						orderFound.addMeal(mealFound, MyFoodora.stringCast.string2Integer(args[2]));
+						return "Customer: -" + MyFoodora.core.getCurrentUser().getUsername() + "- added Meal: -" + args[1] + "- to Order -" + args[0] + "-.";
 					}else{
-						return "Item: -" + args[1] + "- not in " + orderFound.getRestaurant().getName() + "'s menu.";
+						return "Meal: -" + args[1] + "- not in " + orderFound.getRestaurant().getName() + "'s menu.";
 					}
 				}else{
 					return "Order: -" + args[0] + "- not created in MyFoodora.\nFor order creation use createOrder <restaurantUsername> <orderName>.";
@@ -46,4 +45,5 @@ public class AddItem2Order implements CommandProcessor{
 			return e.getMessage();
 		}
 	}
+
 }
