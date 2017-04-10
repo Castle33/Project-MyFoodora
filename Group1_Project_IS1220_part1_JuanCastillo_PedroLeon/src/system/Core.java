@@ -477,7 +477,7 @@ public class Core implements Observable {
 	/* Restaurant related
 	 * (DONE) see restaurant class
 	 * (DONE) set/remove special meal in the menu
-	 * -sorting of shipped orders with respect to different criteria
+	 * (DONE) add meal/item
 	 */
 	/**
 	 * Displays all the information of the restaurant
@@ -654,8 +654,7 @@ public class Core implements Observable {
 	/* Couriers related
 	 * (DONE) register/unregister their account to the MyFoodora system
 	 * (DONE) state their state as on-duty or off-duty
-	 * (DONE) change their position
-	 * -accept/refuse to a delivery call
+	 * (DONE) accept/refuse to a delivery call
 	 */
 	
 	/* Register/Unregister method, for register use registerUser method*/
