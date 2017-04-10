@@ -1,7 +1,7 @@
 package system;
 
 /**
- * 
+ * Sorts a list of couriers based on the number of completed orders (in ascending order)
  * @author Juan Castillo (programer)
  * @author Pedro León (tester)
  * tested: YES

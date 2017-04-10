@@ -41,7 +41,10 @@ public class Courier extends User{
 	
 	/***************************************************************************************************/
 	/* Two Comparators methods depending on distance to restaurant or number of orders of Class Courier */
-	
+	/**
+	 * Comparator use to sort couriers in the Delivery Fastest Policy depending on their distance to the restaurant
+	 * @return a comparator that compares couriers based on the attribute <code>distanceToRest</code>
+	 */
 	public static Comparator<Courier> compareDistance(){
 		return new Comparator<Courier>(){
 			@Override
@@ -57,7 +60,11 @@ public class Courier extends User{
 			
 		};
 	}
-	
+	/**
+	 * Comparator used to sort couriers in the Delivery Fair Occupation Policy depending on their number of
+	 * completed orders.
+	 * @return a comparator that compares couriers based on the attribute <code>countOfOrdersCompleted</code>
+	 */
 	public static Comparator<Courier> compareNumOrders(){
 		return new Comparator<Courier>(){
 			@Override
@@ -73,7 +80,12 @@ public class Courier extends User{
 			
 		};
 	}
-	//Compares Couriers depending on the delivery Date of their current order
+	/**
+	 * Comparator used to sort couriers in the <code>processOrders</code> function by comparing their delivery
+	 * time of their current order. It allows to assign an order to a courier when all couriers are currently on duty
+	 * @return a comparator that compares couriers based on the attribute <code>deliveryDate</code> of the object
+	 * <code>currentOrder</code>
+	 */
 	public static Comparator<Courier> compareDeliveryDate(){
 		return new Comparator<Courier>(){
 			@Override
@@ -93,12 +105,25 @@ public class Courier extends User{
 	/***************************************************************************************************/
 	/* Methods for treating with Orders */
 	
+	/**
+	 * Adds an order to the list of pending orders of a courier.
+	 * @param order
+	 * 		the order that wants to be added.
+	 */
 	public void addNewOrder(Order order){
 		Order tempOrder = order;
 		tempOrder.setAssignedCourier(true);
 		this.listPendingOrders.add(tempOrder);
 	}
 	
+	/**
+	 * The courier accepts an order, setting it to its current order, changing his state to OnDuty, calculating
+	 * the delivery date estimation and adding 1 to the num of orders completed
+	 * @param order
+	 * the order to be accepted
+	 * @return
+	 * TRUE, as it is used in the function <code>decideAddOrder</code> that decides whether or not to accept the order
+	 */
 	public boolean acceptOrder(Order order){
 		this.currentOrder = order;
 		this.currentOrder.setAssignedCourier(true);
@@ -108,10 +133,23 @@ public class Courier extends User{
 		return true;
 	}
 	
+	/**
+	 * The courier refuses to take an order
+	 * @return
+	 * FALSE
+	 */
 	public boolean refuseOrder(){
 		return false;
 	}
 	
+	/**
+	 * Function that simulates the reaction of a courier to an order: assigns a probability of 5% that the courier will
+	 * decline the order and calls the functions <code>acceptOrder</code> or <code>refuseOrder</code> accordingly.
+	 * @param order
+	 * the order to be accepted of refused
+	 * @return
+	 * TRUE if the order is accepted and FALSE if refused
+	 */
 	public boolean decideTakingOrder(Order order){	
 		if(Math.random() < 0.05){
 			return refuseOrder();
@@ -119,6 +157,16 @@ public class Courier extends User{
 			return acceptOrder(order);
 		}
 	}
+	
+	/**
+	 * Function that simulates the reaction of a courier to an order: assigns a probability of 1% that the courier will
+	 * decline to add the order to its list of pending orders and calls the functions <code>acceptOrder</code> or
+	 * <code>refuseOrder</code> accordingly.
+	 * @param order
+	 * the order to be added to the list of pending orders of a courier
+	 * @return
+	 * TRUE if the order is added and FALSE if not
+	 */
 	public boolean decideAddOrder(Order order){
 		if(listPendingOrders.isEmpty()){
 			if(Math.random() < 0.1){

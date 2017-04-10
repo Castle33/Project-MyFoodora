@@ -2,7 +2,12 @@ package system;
 
 import java.util.Calendar;
 import java.util.List;
-
+/**
+ * Computes the Service Fee value required to meet a target profit, given the Markup Percentage and the Delivery Cost
+ * @author Pedro Leon (programmer)
+ * @author Juan Castillo (tester)
+ *
+ */
 public class TargetProfitServiceFee implements ITargetProfitPolicy {
 	
 	@Override

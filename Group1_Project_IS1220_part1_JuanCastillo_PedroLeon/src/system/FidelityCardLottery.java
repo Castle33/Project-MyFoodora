@@ -1,6 +1,7 @@
 package system;
 /**
- * 
+ * This fidelity card plan has a coefficient of 1 or 0, being 0 when the user wins the lottery, which happens with
+ * a determined probability, by default 10%.
  * @author Juan Castillo (programer)
  * @author Pedro León (tester)
  *

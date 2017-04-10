@@ -4,7 +4,8 @@ package users;
  * 
  * This class allows to implement different types of users
  * 
- * @author taun3_000
+ * @author Juan Castillo (programmer)
+ * @author Pedro Leon (tester) 
  *
  */
 
@@ -15,9 +16,11 @@ public abstract class User {
 	private String password;
 	private int ID;
 	private static int counter;
-	
-	/*
+
+	/**
 	 * Constructor with name and username
+	 * @param name
+	 * @param username
 	 */
 	public User(String name, String username) {
 		super();
@@ -26,8 +29,11 @@ public abstract class User {
 		this.ID= ++counter;
 	}
 
-	/*
+	/**
 	 * Constructor with name, username and password
+	 * @param name
+	 * @param username
+	 * @param password
 	 */
 	public User(String name, String username, String password) {
 		super();

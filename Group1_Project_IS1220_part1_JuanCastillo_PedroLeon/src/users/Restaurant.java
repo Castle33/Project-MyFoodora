@@ -45,7 +45,11 @@ public class Restaurant extends User{
 	
 	/***************************************************************************************************/
 	/* A Comparator method depending on number of orders received and completed */
-	
+	/**
+	 * A comparator method that compares restaurants based on the number of orders received and completed
+	 * @return
+	 * A new comparator that compares restaurants based on the argument <code>countOfOrdersCompleted</code>
+	 */
 	public static Comparator<Restaurant> compareNumOrdersCompleted(){
 		return new Comparator<Restaurant>(){
 			@Override
@@ -149,12 +153,13 @@ public class Restaurant extends User{
 	 * Various methods: Get Price Meal, Get Meal/Item by name, Determine if Menu is Special, Round Value to 2 decimals
 	 */
 	/**
+	 * Returns the price of a given meal taking into account if it is special or not
 	 * tested: YES
 	 * changed if statement to differentiate SpecialMeal from Meal
 	 * - before: 		} else if(determineIfDiscountMeal(meal)){
 	 * - after: 		} else if(!determineIfDiscountMeal(meal)){
-	 * @param meal
-	 * @return
+	 * @param meal that wants to be priced
+	 * @return the price of the meal with two decimals
 	 */
 	public double getPriceMeal (Meal meal){
 		if(!listOfSpecialMeal.contains(meal) && !listOfMeal.contains(meal)){
@@ -170,8 +175,8 @@ public class Restaurant extends User{
 	 * changed added for loop to search meal in listOfSpecialMeal too
 	 * - before: for loop only for listOfMeal
 	 * - after: for loop for both listOfMeal and listOfSpecialMeal
-	 * @param mealName
-	 * @return
+	 * @param the name of the meal that wants to be searched
+	 * @return the object meal if it is in the list of meals or null otherwise
 	 */
 	public Meal getMealByName(String mealName){
 		for(Meal m :listOfMeal){
@@ -188,8 +193,8 @@ public class Restaurant extends User{
 	}
 	/**
 	 * tested: YES
-	 * @param itemName
-	 * @return
+	 * @param the name of the item that wants to be searched
+	 * @return the item if it is in the menu or null otherwise
 	 */
 	public Item getItemByName(String itemName){
 		for(Item i : menu.getStarters()){
@@ -209,7 +214,11 @@ public class Restaurant extends User{
 		}
 		return null;
 	}
-	
+	/**
+	 * 
+	 * @param the meal that wants to be determined if special or not 
+	 * @return TRUE if it is special and FALSE otherwise
+	 */
 	public boolean determineIfDiscountMeal(Meal meal){
 		if(!listOfSpecialMeal.contains(meal) && !listOfMeal.contains(meal)){
 			System.out.println("This meal is not in the Restaurant menu");
@@ -220,8 +229,8 @@ public class Restaurant extends User{
 	}
 	/**
 	 * tested: YES
-	 * @param n
-	 * @return
+	 * @param double number that wants to rounded to two decimals
+	 * @return the parameter rounded to two decimals
 	 */
 	public double round2dec (double n){
 		return Math.round(n*100.0)/100.0;

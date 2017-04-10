@@ -96,8 +96,10 @@ public class Customer extends User implements Observer{
 		return 0;
 	}
 	/**
+	 * Adds fidelity points to the card
 	 * tested: YES
 	 * @param n
+	 * number of points to add
 	 */
 	public void addFidelityPoints(int n){
 		if(this.fidelityCard instanceof FidelityCardPoint){

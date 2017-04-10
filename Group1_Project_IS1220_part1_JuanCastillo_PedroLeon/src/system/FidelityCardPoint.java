@@ -1,6 +1,8 @@
 package system;
 /**
- * 
+ * This fidelity card plan has a coefficient of 1 or 1-discount: this is determined by the discounts points that are
+ * obtained each time the customer places an order. When the customer reaches a concrete amount of points (by default 100)
+ * a determined discount is applied to the next order (by default 10%) and the points are then removed from the customer.
  * @author Juan Castillo (programer)
  * @author Pedro León (tester)
  *

@@ -9,8 +9,11 @@ import users.Observer;
 import restaurant_structure.*;
 
 /**
- * 
+ * The main class of the system and the one in charge of calling all other functions of the system as well as the users.
+ * It is also the one that stores the information of the restaurants and users, and is in charge of processing the 
+ * orders received from the customers.
  * @author Pedro León
+ * @author Juan Castillo
  *
  */
 
@@ -42,7 +45,9 @@ public class Core implements Observable {
 	private double serviceFee;
 	private double markupPercentage;
 	private double deliveryCost;
-	
+	/**
+	 * Constructor of the class Core
+	 */
 	public Core(){
 		this.name = "MyFoodora";
 		this.serviceFee = 3.0;
@@ -73,7 +78,9 @@ public class Core implements Observable {
 	
 	/***************************************************************************************************/
 	/**
-	 * generic user's methods
+	 * Registers a user to the system, verifying if the username is already used
+	 * @param user to be registered
+	 * @throws UsernameAlreadyRegisteredException
 	 */
 	public void registerUser(User user) throws UsernameAlreadyRegisteredException{
 		if(currentUser == null){
@@ -87,7 +94,11 @@ public class Core implements Observable {
 		}
 		
 	}
-	
+	/**
+	 * Logs in a user, setting the currentUser to this one and verifying is password is correct and the user is
+	 * registered
+	 * @param user that wants to log in
+	 */
 	public void userLogIn(User user){
 		if(listOfUsers.containsKey(user.getUsername())){
 			if(listOfUsers.get(user.getUsername()).getPassword().equals(user.getPassword())){
@@ -99,13 +110,15 @@ public class Core implements Observable {
 			System.out.println("User " + user.getUsername() + " NOT registered in the system.");
 		}
 	}
-	
+	/**
+	 * Sets the current user to null
+	 */
 	public void logOut(){
 		currentUser = null;
 	}
 	
 	/***************************************************************************************************/
-	/**
+	/*
 	 * Manager methods
 	 * (DONE) add/remove any kind of user & activate/deactivate any kind of user
 	 * (DONE) changing the service fee/ markup-percentage / delivery cost
@@ -118,6 +131,11 @@ public class Core implements Observable {
 	 */
 	
 	/* activate/deactivate & add/remove user */
+	/**
+	 * Adds a user to the system
+	 * @param user
+	 * @throws AccessDeniedException
+	 */
 	public void activateUser(User user) throws AccessDeniedException{
 		if(currentUser instanceof Manager){
 			listOfUsers.put(user.getUsername(), user);
@@ -125,7 +143,11 @@ public class Core implements Observable {
 			throw new AccessDeniedException();
 		}
 	}
-
+	/**
+	 * Removes a user from the system
+	 * @param user
+	 * @throws AccessDeniedException
+	 */
 	public void deactivateUser(User user) throws AccessDeniedException{
 		if(currentUser instanceof Manager){
 			listOfUsers.remove(user.getUsername(), user);
@@ -133,7 +155,12 @@ public class Core implements Observable {
 			throw new AccessDeniedException();
 		}
 	}
-	
+	/**
+	 * Calls the function <code>activateUser</code> if the two exceptions do not occur
+	 * @param user
+	 * @throws AccessDeniedException
+	 * @throws UsernameAlreadyRegisteredException
+	 */
 	public void addUser(User user) throws AccessDeniedException, UsernameAlreadyRegisteredException{
 		if(currentUser instanceof Manager){
 			if(listOfUsers.containsKey(user.getUsername())){
@@ -145,7 +172,11 @@ public class Core implements Observable {
 			throw new AccessDeniedException();
 		}
 	}
-	
+	/**
+	 * Calls the function <code>deactivateUser</code> if the exception do not occur
+	 * @param user
+	 * @throws AccessDeniedException
+	 */
 	public void removeUser(User user) throws AccessDeniedException{
 		if(currentUser instanceof Manager){
 			if(listOfUsers.containsKey(user.getUsername())){
@@ -206,16 +237,15 @@ public class Core implements Observable {
 			throw new AccessDeniedException();
 		}
 	}
-	
+	/**
+	 * depending on the target profit strategy this method will return a different parameter to achieve a target profit
+	 * for TargetProfitDeliveryCost behavior, delivery cost will be returned
+	 * for TargetProfitMarkup behavior, markup percentage will be returned
+	 * for TargetProfitServiceFee behavior, service fee will be returned
+	 * 
+	 * later the manager will be able to change this parameters of the core with changeDeliveryCost/Markup/ServiceFee
+	 */
 	public double getParameterToTargetProfit(double targetProfit, Calendar initDate, Calendar finDate) throws AccessDeniedException{
-		/*
-		 * depending on the target profit strategy this method will return a different parameter to achieve a target profit
-		 * for TargetProfitDeliveryCost behavior, delivery cost will be returned
-		 * for TargetProfitMarkup behavior, markup percentage will be returned
-		 * for TargetProfitServiceFee behavior, service fee will be returned
-		 * 
-		 * later the manager will be able to change this parameters of the core with changeDeliveryCost/Markup/ServiceFee
-		 */
 		if(currentUser instanceof Manager){
 			return tProfitPolicy.computeProfitStrategyBased(serviceFee, markupPercentage, deliveryCost, targetProfit, listOfCompletedOrders, initDate, finDate);
 		}else{
@@ -224,6 +254,13 @@ public class Core implements Observable {
 	}
 	
 	/* compute total income/profit */
+	/**
+	 * Computes total income between two dates
+	 * @param initDate
+	 * @param finDate
+	 * @return the double number of the total income between the two parameter dates
+	 * @throws AccessDeniedException
+	 */
 	public double computeTotalIncome(Calendar initDate, Calendar finDate) throws AccessDeniedException{
 		double totalIncome = 0;
 		if(currentUser instanceof Manager){
@@ -240,7 +277,13 @@ public class Core implements Observable {
 			throw new AccessDeniedException();
 		}
 	}
-	
+	/**
+	 * Computes total profit between two dates
+	 * @param initDate
+	 * @param finDate
+	 * @return the double number of the total profit between the two parameter dates
+	 * @throws AccessDeniedException
+	 */
 	public double computeTotalProfit(Calendar initDate, Calendar finDate) throws AccessDeniedException{
 		double totalProfit = 0;
 		if(currentUser instanceof Manager){
@@ -258,7 +301,13 @@ public class Core implements Observable {
 		}
 	}
 	
-	/* compute average income per customer */
+	/**
+	 * Compute average income per customer between two dates
+	 * @param initDate
+	 * @param finDate
+	 * @return the double number of the average income between the two parameter dates
+	 * @throws AccessDeniedException
+	 */
 	public double computeAverageIncome(Calendar initDate, Calendar finDate) throws AccessDeniedException{
 		double averageIncome = 0;
 		int numOfOrders = 0;
@@ -280,6 +329,11 @@ public class Core implements Observable {
 	}
 	
 	/* most/least active restaurant/courier*/
+	/**
+	 * Determines the least active restaurant by number of completed orders
+	 * @return the least active restaurant
+	 * @throws AccessDeniedException
+	 */
 	public Restaurant leastActiveRestaurant() throws AccessDeniedException{
 		Restaurant leastRestaurant = null;
 		if(currentUser instanceof Manager){
@@ -298,6 +352,11 @@ public class Core implements Observable {
 			throw new AccessDeniedException();
 		}
 	}
+	/**
+	 * Determines the most active restaurant by number of completed orders
+	 * @return the most active restaurant
+	 * @throws AccessDeniedException
+	 */
 	public Restaurant mostActiveRestaurant() throws AccessDeniedException{
 		Restaurant mostRestaurant = null;
 		if(currentUser instanceof Manager){
@@ -316,7 +375,11 @@ public class Core implements Observable {
 			throw new AccessDeniedException();
 		}
 	}
-	
+	/**
+	 * Determines the least active courier by number of completed orders
+	 * @return the least active courier
+	 * @throws AccessDeniedException
+	 */
 	public Courier leastActiveCourier() throws AccessDeniedException{
 		Courier leastCourier = null;
 		if(currentUser instanceof Manager){
@@ -335,6 +398,11 @@ public class Core implements Observable {
 			throw new AccessDeniedException();
 		}
 	}
+	/**
+	 * Determines the most active courier by number of completed orders
+	 * @return the most active courier
+	 * @throws AccessDeniedException
+	 */
 	public Courier mostActiveCourier() throws AccessDeniedException{
 		Courier mostCourier = null;
 		if(currentUser instanceof Manager){
@@ -406,12 +474,15 @@ public class Core implements Observable {
 	}
 	
 	/***************************************************************************************************/
-	/** Restaurant related
+	/* Restaurant related
 	 * (DONE) see restaurant class
 	 * (DONE) set/remove special meal in the menu
 	 * -sorting of shipped orders with respect to different criteria
 	 */
-	
+	/**
+	 * Displays all the information of the restaurant
+	 * @throws AccessDeniedException
+	 */
 	public void displayRestaurantInfo() throws AccessDeniedException{
 		if(currentUser instanceof Restaurant){
 			System.out.println("Restaurant information display: ");
@@ -432,8 +503,10 @@ public class Core implements Observable {
 			throw new AccessDeniedException();
 		}
 	}
-	/*
-	 * call notify observers to send them the new special offer included in 'meal'
+	/**
+	 * Call notify observers to send them the new special offer included in 'meal'
+	 * @param meal
+	 * @throws AccessDeniedException
 	 */
 	public void setSpecialMeal(Meal meal)  throws AccessDeniedException{
 		if(currentUser instanceof Restaurant){
@@ -493,14 +566,18 @@ public class Core implements Observable {
 	}
 	
 	/***************************************************************************************************/
-	/** Customers related
+	/* Customers related
 	 * (DONE) place orders
 	 * - add items to order
 	 * (DONE) register/unregister to/from a fidelity card plan
 	 * (DONE) access to information related to their account
 	 * (DONE) give/remove consensus to be notified whenever a new special offer
 	 */
-	
+	/**
+	 * Allows a customer to place a new order
+	 * @param order
+	 * @throws AccessDeniedException
+	 */
 	public void placeNewOrder(Order order) throws AccessDeniedException{
 		if(currentUser instanceof Customer){
 			listOfPendingOrders.add(order);
@@ -508,7 +585,11 @@ public class Core implements Observable {
 			throw new AccessDeniedException();
 		}
 	}
-	
+	/**
+	 * Allows a customer to change of fidelity plan
+	 * @param fidelityCard
+	 * @throws AccessDeniedException
+	 */
 	public void registerFidelityCard(FidelityCard fidelityCard) throws AccessDeniedException{
 		if(currentUser instanceof Customer){
 			((Customer) currentUser).setFidelityCard(fidelityCard);
@@ -516,7 +597,10 @@ public class Core implements Observable {
 			throw new AccessDeniedException();
 		}
 	}
-	
+	/**
+	 * Resets the fidelity card of the current customer to Basic
+	 * @throws AccessDeniedException
+	 */
 	public void unregisterFidelityCard() throws AccessDeniedException{
 		if(currentUser instanceof Customer){
 			((Customer) currentUser).setFidelityCardtoBasic();
@@ -524,7 +608,11 @@ public class Core implements Observable {
 			throw new AccessDeniedException();
 		}
 	}
-	
+	/**
+	 * Creates a list of all orders placed by the current customer
+	 * @return a list of all orders placed by the current customer
+	 * @throws AccessDeniedException
+	 */
 	public ArrayList<Order> getHistoryOrders() throws AccessDeniedException{
 		if(currentUser instanceof Customer){
 			ArrayList<Order> customerOrders = new ArrayList<Order>();
@@ -543,6 +631,11 @@ public class Core implements Observable {
 	 * -b = true gives consensus
 	 * -b = false removes consensus
 	 */
+	/**
+	 * Allows the customer to set whether or not to receive notifications from the system 
+	 * @param b: if TRUE gives consensus, if FALSE removes consensus
+	 * @throws AccessDeniedException
+	 */
 	public void giveRemoveConsensus(boolean b) throws AccessDeniedException{
 		if(currentUser instanceof Customer){
 			((Customer) currentUser).changeBeNotified(b);
@@ -558,7 +651,7 @@ public class Core implements Observable {
 	}
 	
 	/***************************************************************************************************/
-	/** Couriers related
+	/* Couriers related
 	 * (DONE) register/unregister their account to the MyFoodora system
 	 * (DONE) state their state as on-duty or off-duty
 	 * (DONE) change their position
@@ -566,6 +659,11 @@ public class Core implements Observable {
 	 */
 	
 	/* Register/Unregister method, for register use registerUser method*/
+	/**
+	 * Removes a courier from the system
+	 * @param user
+	 * @throws AccessDeniedException
+	 */
 	public void unregisterCourier(User user) throws AccessDeniedException{
 		System.out.println("Unregister demand");
 		if(user instanceof Courier){
@@ -577,9 +675,16 @@ public class Core implements Observable {
 		}
 	}
 	
-	/* off-duty update (current delivered): we consider that the courier puts him as OffDuty once 
+	/* Off-duty update (current delivered): we consider that the courier puts him as OffDuty once 
 	 * he has delivered his currentOrder.
 	 * The courier automatically is set OnDuty when accepting an order (courier.acceptOrder) */
+	/**
+	 * Off-duty update (current delivered): we consider that the courier puts him as OffDuty once 
+	 * he has delivered his currentOrder.
+	 * The courier automatically is set OnDuty when accepting an order (courier.acceptOrder) so no need
+	 * to implement this functionality
+	 * @throws AccessDeniedException
+	 */
 	public void updateCourierState() throws AccessDeniedException{
 		if(currentUser instanceof Courier){
 			Courier courier = (Courier) currentUser;
@@ -596,7 +701,20 @@ public class Core implements Observable {
 			throw new AccessDeniedException();
 		}
 	}
-	
+	/**
+	 * Main function of the core. It distributes all current orders to the couriers based on the current delivery policy.
+	 * Steps:
+	 * 1) Creates two main lists : currentSortedCouriers (all couriers sorted with the current delivery policy) and
+	 * 							currentCouriersOnDuty (all couriers that are currently treating an order)
+	 * 2) Enters a while loop that goes through all orders and finish once all orders are treated
+	 * Inside the main while loop there are two order while loops:
+	 * 3) First one goes through all available couriers and ask them whether they accept the order or not
+	 * 4) The second loop happens only when no available courier accepts the order and tries to assign the order to the
+	 * 		list of pending orders of the currently on-duty couriers (that had not previously declined the order), giving
+	 * 		 priority to the couriers that will finish their current order before 
+	 * 5) If the order is still not assigned it is automatically removed
+	 * 
+	 */
 	public void processOrders(){
 		Courier courier = null;
 		//Get all the users and put all Couriers to a LinkedList

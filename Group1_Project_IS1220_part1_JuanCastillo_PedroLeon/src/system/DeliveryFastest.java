@@ -1,7 +1,8 @@
 package system;
 
 /**
- * 
+ * Sorts a list of couriers based on the distance to the specified address, which is meant to be
+ * the restaurant's one (in ascending order)
  * @author Juan Castillo (programer)
  * @author Pedro León (tester)
  * tested: YES

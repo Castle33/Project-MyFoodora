@@ -20,11 +20,12 @@ public class Address {
 		this.y = y;
 	}
 	/**
+	 * Calculates the distance between two addresses 
 	 * tested: YES
 	 * -before: 		return Math.hypot(this.x-address.x, this.y-address.y);
 	 * -after: 		return Math.hypot(x-address.getX(),y-address.getY());
-	 * @param address
-	 * @return
+	 * @param address with which calculate the distance of the current instance of address
+	 * @return the distance as a double number
 	 */
 	public double calcDistance(Address address){
 		return Math.hypot(x-address.getX(),y-address.getY());
