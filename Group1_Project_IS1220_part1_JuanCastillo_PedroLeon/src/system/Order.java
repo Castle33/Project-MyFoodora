@@ -8,7 +8,9 @@ import users.Customer;
 import users.Restaurant;
 import users.Address;
 /**
- * 
+ * The class use to create an order that has the information of the customer that ordered it and the restaurant chosen
+ * by him. Contains information of the date it was created and the approximate delivery time, as well as a list of all
+ * meals and dishes chosen, with its amount and final price.
  * @author Juan Castillo (programmer)
  * @author Pedro León (coder)
  * tested: YES
@@ -28,6 +30,7 @@ public class Order {
 	private Calendar deliveryDate;
 	private String name;
 	/**
+	 * Constructor without date: sets the date to the current local time
 	 * tested: YES
 	 * @param customer
 	 * @param restaurant
@@ -43,6 +46,7 @@ public class Order {
 		items = new HashMap<Item,Integer>();
 	}
 	/**
+	 * Constructor with date
 	 * tested: YES
 	 * @param customer
 	 * @param restaurant
@@ -65,9 +69,11 @@ public class Order {
 	 * 
 	 */
 	/**
+	 * Calculates the approximated delivery time of the order, considering the Coordinates in meters and the average
+	 * speed of the courier of 50 km/h (13.9 m/s). The function calculates the time it takes the courier to reach the
+	 * restaurant and then arrive to the customer's address.
 	 * tested: YES
-	 * the division of 13900 (m) between 13.9 (m/s) gives exactly 1000 (s)
-	 * @return
+	 * @return a CALENDAR value of the calculated delivery date
 	 */
 	public Calendar calcDeliveryTime(Address address){
 		int deliveryTime = (int) Math.round(customer.getAddress().calcDistance(restaurant.getAddress())/13.9);
@@ -86,9 +92,12 @@ public class Order {
 	 * - n = 2
 	 */
 	/**
+	 * Adds a meal to the order
 	 * tested: YES
 	 * @param m
+	 * the desired meal to add
 	 * @param n
+	 * the number of the meal m to add
 	 */
 	public void addMeal(Meal m, int n){
 		if(!meals.containsKey(m)){
@@ -99,9 +108,12 @@ public class Order {
 		}
 	}
 	/**
+	 * Adds a dish to the order
 	 * tested: YES
 	 * @param i
+	 * the desired dish to add
 	 * @param n
+	 * the number of the dish i to add
 	 */
 	public void addItem(Item i, int n){
 		if(!items.containsKey(i)){
@@ -122,8 +134,10 @@ public class Order {
 		return(customer.getFidelityCard() instanceof FidelityCardBasic);
 	}
 	/**
+	 * Calculates the final price of the order, taking into account the special meals and the fdelity card plan of
+	 * the customer
 	 * tested: YES
-	 * @return
+	 * @return the final price as a two decimal number
 	 */
 	public double calcPrice(){
 		double price = 0.0;
