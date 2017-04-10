@@ -712,11 +712,12 @@ public class Core implements Observable {
 	 * 4) The second loop happens only when no available courier accepts the order and tries to assign the order to the
 	 * 		list of pending orders of the currently on-duty couriers (that had not previously declined the order), giving
 	 * 		 priority to the couriers that will finish their current order before 
-	 * 5) If the order is still not assigned it is automatically removed
+	 * 5) If the order is still not assigned it is automatically removed and the customer is informed of the issue
 	 * 
 	 */
 	public void processOrders(){
 		Courier courier = null;
+		boolean orderAssigned = false;
 		//Get all the users and put all Couriers to a LinkedList
 		LinkedList<User> currentUsers = new LinkedList<User>(listOfUsers.values());
 		LinkedList<Courier> listCouriers = new LinkedList<Courier>();
@@ -728,6 +729,7 @@ public class Core implements Observable {
 		//List where all users on duty will be added
 		LinkedList<Courier> currentCouriersOnDuty = new LinkedList<Courier>();
 		while(listOfPendingOrders.size()!=0){
+			orderAssigned = false;
 			//Gets the first order of the list and sorts all couriers depending on the delivery policy
 			Order order = listOfPendingOrders.getFirst();
 			LinkedList<Courier> currentSortedCouriers = this.deliveryPolicy.setDeliveryPolicy(listCouriers, order.getRestaurant().getAddress());
@@ -740,6 +742,7 @@ public class Core implements Observable {
 					if(courier.decideTakingOrder(order)){
 						listOfCompletedOrders.add(courier.getCurrentOrder());
 						currentCouriersOnDuty.add(currentSortedCouriers.removeFirst());
+						orderAssigned = true;
 					} else {
 						currentSortedCouriers.removeFirst();
 						listOfPendingOrders.add(listOfPendingOrders.getFirst());
@@ -755,14 +758,19 @@ public class Core implements Observable {
 				Collections.sort(currentCouriersOnDuty,Courier.compareDeliveryDate());
 				if(currentCouriersOnDuty.getFirst().decideAddOrder(order)){
 					this.listOfCompletedOrders.add(currentCouriersOnDuty.getFirst().getCurrentOrder());
+					orderAssigned = true;
 				}
 				listOfUsers.put(currentCouriersOnDuty.getFirst().getUsername(), currentCouriersOnDuty.getFirst());
 				currentCouriersOnDuty.removeFirst();
 			}
 			this.listOfPendingOrders.removeFirst();
-			/*
-			 * NOTIFICATION TO CUSTOMER: NOT YET IMPLEMENTED
-			 */
+			/* NOTIFICATION TO CUSTOMER */
+			if(!orderAssigned){
+				System.out.println("The order with ID "+ order.getID() + " could not be addressed to a courier and has been removed from the system.");
+				System.out.println("Please notify the customer "+order.getCustomer().getName()+" by phone or email:");
+				System.out.println("Phone number: "+order.getCustomer().getPhoneNumber());
+				System.out.println("Email: "+order.getCustomer().getEmail());
+			}
 		}
 	}
 	
