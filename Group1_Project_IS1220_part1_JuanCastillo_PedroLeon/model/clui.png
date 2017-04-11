@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.14" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="clui.MyFoodora" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/MyFoodora.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="130" y="211"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="2" language="java" name="clui.CommandProcessor" 
+    project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/CommandProcessor.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="755" y="255"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="3" language="java" name="clui.StringCast" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/StringCast.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-221" y="2"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="clui.AddDish2Meal" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/AddDish2Meal.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="481" y="-116"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="clui.AddDishRestaurantMenu" 
+    project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/AddDishRestaurantMenu.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="534" y="-323"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="clui.AddItem2Order" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/AddItem2Order.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="730" y="-153"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="clui.AddMeal2Order" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/AddMeal2Order.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="907" y="-349"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="clui.AssociateCard" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/AssociateCard.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1034" y="-170"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="clui.CreateMeal" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/CreateMeal.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1284" y="-181"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="clui.CreateOrder" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/CreateOrder.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1478" y="-165"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="clui.EndOrder" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/EndOrder.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1370" y="26"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="clui.FindDeliverer" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/FindDeliverer.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1665" y="75"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="clui.LogIn" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/LogIn.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1429" y="220"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="clui.LogOut" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/LogOut.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1648" y="316"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="clui.OffDuty" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/OffDuty.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1424" y="388"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="clui.OnDuty" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/OnDuty.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1620" y="561"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="clui.RegisterCourier" 
+    project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/RegisterCourier.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1358" y="585"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="clui.RegisterRestaurant" 
+    project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/RegisterRestaurant.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1388" y="761"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="clui.RegisterCustomer" 
+    project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/RegisterCustomer.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1177" y="727"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="clui.RemoveItemFromMeal" 
+    project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/RemoveItemFromMeal.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1160" y="903"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="clui.RemoveSpecialOffer" 
+    project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/RemoveSpecialOffer.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="960" y="811"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="clui.SaveMeal" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/SaveMeal.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="878" y="1056"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="clui.SetDeliveryPolicy" 
+    project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/SetDeliveryPolicy.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="747" y="897"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="clui.SetProfitPolicy" 
+    project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/SetProfitPolicy.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="605" y="1126"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="clui.SetSpecialOffer" 
+    project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/SetSpecialOffer.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="533" y="959"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="clui.ShowCourierDeliveries" 
+    project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/ShowCourierDeliveries.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="320" y="1127"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="clui.ShowCustomers" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/ShowCustomers.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="35" y="1136"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="clui.ShowMeal" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/ShowMeal.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="33" y="916"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="clui.ShowMenuItem" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/ShowMenuItem.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-201" y="929"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="clui.ShowRestaurantTop" 
+    project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/ShowRestaurantTop.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-218" y="733"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="clui.ShowTotalProfit" 
+    project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/clui/ShowTotalProfit.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="129" y="-171"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <realization id="32">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="33">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="34">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="35">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="36">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="37">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="38">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="39">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="40">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="41">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="42">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <association id="43">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="44" name="stringCast"/>      
+      <multiplicity id="45" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="46">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="47" name="endOrder"/>      
+      <multiplicity id="48" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="49">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="50">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="51">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="52">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <association id="53">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="54" name="stringCast"/>      
+      <multiplicity id="55" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="56">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <association id="57">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="58" name="cmdProcessor"/>      
+      <multiplicity id="59" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="60">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="61">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="62">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="63">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="64">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="65">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="66">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="67">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="68">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="69">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="70">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="71">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
