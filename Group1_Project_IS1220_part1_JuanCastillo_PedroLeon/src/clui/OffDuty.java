@@ -3,7 +3,7 @@ package clui;
 import exceptions.NumberOfArgumentsException;
 import exceptions.AccessDeniedException;
 /**
- * OffDuty 1 <username>
+ * OffDuty 1 "username"
  * @author Pedro León
  *
  */
@@ -15,9 +15,9 @@ public class OffDuty implements CommandProcessor{
 	@Override
 	public String process(String[] args) {
 		try{
-			if(args[nArgs] == null){
+			if(args.length == nArgs){
 				MyFoodora.core.updateCourierState();
-				return "Courier: " + MyFoodora.core.getCurrentUser().getUsername() + " updated its state to: OffDuty.";
+				return "Courier: -" + MyFoodora.core.getCurrentUser().getUsername() + "- updated its state to 'offDuty'.";
 			}else{
 				throw new NumberOfArgumentsException();
 			}

@@ -5,7 +5,7 @@ import exceptions.AccessDeniedException;
 import users.Courier;
 
 /**
- * OnDuty <username>
+ * OnDuty "username"
  * @author Pedro León
  *
  */
@@ -15,11 +15,11 @@ public class OnDuty implements CommandProcessor{
 	 * @see clui.CommandProcessor#process(java.lang.String[])
 	 */
 	@Override
-	public String process(String[] args) throws NumberOfArgumentsException {
+	public String process(String[] args) {
 		try{
-			if(args[nArgs] == null){
+			if(args.length == nArgs){
 				if(MyFoodora.core.getCurrentUser() instanceof Courier){
-					return "Courier: " + MyFoodora.core.getCurrentUser().getUsername() + " tried to update its state.\nSystem automatocally updates courier's state when accepting an order is finished.";
+					return "Courier: -" + MyFoodora.core.getCurrentUser().getUsername() + "- tried to update its state.\nSystem automatically sets courier 'on dutty' when accepting an order.";
 				}else{
 					throw new AccessDeniedException();
 				}

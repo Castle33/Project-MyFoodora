@@ -219,11 +219,11 @@ public class MyFoodora {
 					break;
 				case "onduty":
 					cmdProcessor = new OnDuty();
-					cmdProcessor.process(argum);
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				case "offduty":
 					cmdProcessor = new OffDuty();
-					cmdProcessor.process(argum);
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				case "finddeliverer":
 					cmdProcessor = new FindDeliverer();
