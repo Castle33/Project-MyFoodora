@@ -10,11 +10,16 @@ package system;
 import users.Courier;
 import users.Address;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.LinkedList;
 
-public class DeliveryFairOccupation implements IDeliveryPolicy {
+public class DeliveryFairOccupation implements IDeliveryPolicy ,Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3609713588930528651L;
 	private LinkedList<Courier> listSortedCouriers;
 	
 	public DeliveryFairOccupation() {

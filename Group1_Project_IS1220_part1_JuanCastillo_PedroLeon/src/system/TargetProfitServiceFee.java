@@ -1,5 +1,6 @@
 package system;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 /**
@@ -8,8 +9,13 @@ import java.util.List;
  * @author Juan Castillo (tester)
  *
  */
-public class TargetProfitServiceFee implements ITargetProfitPolicy {
+public class TargetProfitServiceFee implements ITargetProfitPolicy ,Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9187604569872864719L;
+
 	@Override
 	public double computeProfitStrategyBased(double serviceFee, double markupPercentage, double deliveryCost, double targetProfit, List<Order> listOfCompletedOrders, Calendar initDate, Calendar finDate){
 		double lastMonthTotalFoodIncome = 0;

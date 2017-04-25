@@ -1,4 +1,7 @@
 package system;
+
+import java.io.Serializable;
+
 /**
  * This fidelity card plan has a coefficient of 1 or 0, being 0 when the user wins the lottery, which happens with
  * a determined probability, by default 10%.
@@ -6,8 +9,12 @@ package system;
  * @author Pedro León (tester)
  *
  */
-public class FidelityCardLottery implements FidelityCard{
+public class FidelityCardLottery implements FidelityCard ,Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3537484697972103942L;
 	private double lotteryProba;
 	/**
 	 * tested: YES

@@ -1,5 +1,7 @@
 package users;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Pedro León (programer)
@@ -10,7 +12,11 @@ package users;
 import java.util.*;
 import system.Order;
 
-public class Courier extends User{
+public class Courier extends User implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1073852164817064065L;
 	private String surname;
 	private Address position;
 	private String phoneNumber;

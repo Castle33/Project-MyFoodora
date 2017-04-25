@@ -11,11 +11,16 @@ package system;
 import users.Courier;
 import users.Address;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.LinkedList;
 
-public class DeliveryFastest implements IDeliveryPolicy{
+public class DeliveryFastest implements IDeliveryPolicy ,Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6211899393291066900L;
 	private LinkedList<Courier> listSortedCouriers;
 	private Address restAddress;
 	

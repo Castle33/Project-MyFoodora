@@ -1,5 +1,7 @@
 package restaurant_structure;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Pedro León (programer)
@@ -9,7 +11,12 @@ package restaurant_structure;
 
 import java.util.List;
 
-public class HalfMeal extends Meal {
+public class HalfMeal extends Meal implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5126998047406642741L;
 
 	public HalfMeal(String name, List<Item> mealItems) {
 		super(name, mealItems);

@@ -1,5 +1,7 @@
 package restaurant_structure;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Pedro León (programer)
@@ -7,8 +9,13 @@ package restaurant_structure;
  * tested: YES
  */
 
-public class Dessert extends Item {
+public class Dessert extends Item implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3218518375820286036L;
+
 	/*
 	 * constructor indicating type and not indicating type
 	 */

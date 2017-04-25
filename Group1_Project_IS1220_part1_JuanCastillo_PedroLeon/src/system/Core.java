@@ -1,5 +1,6 @@
 package system;
 
+import java.io.Serializable;
 import java.util.*;
 
 import exceptions.AccessDeniedException;
@@ -17,8 +18,12 @@ import restaurant_structure.*;
  *
  */
 
-public class Core implements Observable {
+public class Core implements Observable ,Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5497781413672498696L;
 	/* application attributes */
 	final String name;
 	final ArrayList<User> listOfMasterManager;

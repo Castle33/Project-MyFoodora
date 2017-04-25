@@ -1,17 +1,23 @@
 package restaurant_structure;
 
+import java.io.Serializable;
+
 /**
  * class that will be extended by Starter, MainDish and Dessert
  * @author Pedro León
  *
  */
 
-public abstract class Item {
+public abstract class Item implements Serializable {
 	
 	/*
 	 * each item or dish will specified by a name
 	 */
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5399999657982554198L;
 	private String name;
 	private double price;
 	private String foodType;

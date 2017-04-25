@@ -1,12 +1,19 @@
 package users;
+
+import java.io.Serializable;
+
 /**
  * 
  * @author Juan Castillo (programmer)
  * @author Pedro León (tester)
  * tested: YES
  */
-public class Manager extends User {
+public class Manager extends User implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5624499074797331876L;
 	private String surname;
 	/**
 	 * tested: YES

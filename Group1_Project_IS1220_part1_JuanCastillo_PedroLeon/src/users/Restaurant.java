@@ -1,5 +1,6 @@
 package users;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -11,8 +12,12 @@ import restaurant_structure.*;
  * tested: YES
  * list of methods changed: addSpecialMeal; getPriceMeal; getMealByName
  */
-public class Restaurant extends User{
+public class Restaurant extends User implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4442382790814046909L;
 	private Address address;
 	private double discountFactor;
 	private double specialDiscountFactor;

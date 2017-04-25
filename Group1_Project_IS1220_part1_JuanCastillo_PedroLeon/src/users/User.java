@@ -1,5 +1,7 @@
 package users;
 
+import java.io.Serializable;
+
 /**
  * 
  * This class allows to implement different types of users
@@ -9,8 +11,12 @@ package users;
  *
  */
 
-public abstract class User {
+public abstract class User implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3632256084770939081L;
 	private String name;
 	private String username;
 	private String password;

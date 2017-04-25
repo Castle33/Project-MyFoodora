@@ -1,5 +1,7 @@
 package users;
 
+import java.io.Serializable;
+
 import restaurant_structure.Meal;
 import system.FidelityCard;
 import system.FidelityCardBasic;
@@ -11,8 +13,12 @@ import system.FidelityCardLottery;
  * @author Pedro Leon (tester)
  *
  */
-public class Customer extends User implements Observer{
+public class Customer extends User implements Observer ,Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1756158000342775367L;
 	private String surname;
 	private Address address;
 	private String email;

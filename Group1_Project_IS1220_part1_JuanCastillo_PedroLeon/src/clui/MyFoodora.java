@@ -68,10 +68,9 @@ public class MyFoodora {
 		
 		if(s.equals("help")){
 			System.out.println(displayListCmd());
-			
 		} else {
 			String[] input = s.trim().split(" ");
-			if(!checkCmdExists(input[0])){ //TO-DO boolean function that checks if name is in the list of Commands
+			if(!checkCmdExists(input[0])){
 				name = "";
 				System.out.println("Error finding command: Make sure the command is correctly introduced");
 			} else {

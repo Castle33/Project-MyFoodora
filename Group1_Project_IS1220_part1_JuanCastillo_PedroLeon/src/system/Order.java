@@ -1,5 +1,6 @@
 package system;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.Calendar;
 import restaurant_structure.Meal;
@@ -15,8 +16,12 @@ import users.Address;
  * @author Pedro León (coder)
  * tested: YES
  */
-public class Order {
+public class Order implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4760926302086088767L;
 	private int ID;
 	private static int counter = 0;
 	private Customer customer;

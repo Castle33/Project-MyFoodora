@@ -1,4 +1,7 @@
 package system;
+
+import java.io.Serializable;
+
 /**
  * This fidelity card plan has a coefficient of 1 or 1-discount: this is determined by the discounts points that are
  * obtained each time the customer places an order. When the customer reaches a concrete amount of points (by default 100)
@@ -7,8 +10,12 @@ package system;
  * @author Pedro León (tester)
  *
  */
-public class FidelityCardPoint implements FidelityCard{
+public class FidelityCardPoint implements FidelityCard ,Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5182054242756211941L;
 	private int points;
 	private double discount;
 	private int discPoints;

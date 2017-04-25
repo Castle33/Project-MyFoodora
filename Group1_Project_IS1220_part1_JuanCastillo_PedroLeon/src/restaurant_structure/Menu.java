@@ -1,6 +1,7 @@
 package restaurant_structure;
 
 import java.util.List;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -10,8 +11,12 @@ import java.util.ArrayList;
  * @author Pedro León
  *
  */
-public class Menu {
+public class Menu implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8100353078966721305L;
 	private List<Starter> starters;
 	private List<MainDish> mainDishes;
 	private List<Dessert> desserts;

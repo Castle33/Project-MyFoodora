@@ -1,5 +1,7 @@
 package restaurant_structure;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Pedro León (programer)
@@ -12,8 +14,12 @@ package restaurant_structure;
 
 import java.util.List;
 
-public abstract class Meal {
+public abstract class Meal implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 179432838418653523L;
 	private String name;
 	private List<Item> mealItems;
 	private double fullPrice;
