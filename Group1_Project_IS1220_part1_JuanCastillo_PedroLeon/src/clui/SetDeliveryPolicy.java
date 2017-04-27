@@ -6,7 +6,7 @@ import exceptions.InputMismatchException;
 import system.DeliveryPolicyType;
 
 /**
- * SetDeliveryPolicy 1 <delPolicyName>
+ * SetDeliveryPolicy 1 "delPolicyName"
  * @author Pedro León
  *
  */
@@ -19,19 +19,17 @@ public class SetDeliveryPolicy implements CommandProcessor{
 	@Override
 	public String process(String[] args) {
 		try{
-			if(args[nArgs] == null){
+			if(args.length == nArgs){
 				if(args[0].toUpperCase() == DeliveryPolicyType.FASTEST.toString() || args[0].toUpperCase() == DeliveryPolicyType.FAIROCCUPATION.toString()){
 					switch(args[0].toUpperCase()){
 					case "FASTEST":
 						MyFoodora.core.setDeliveryToFastest();
-						message = "Delivery policy changed to: DeliveryToFastest";
 						break;
 					case "FAIROCCUPATION":
 						MyFoodora.core.setDeliveryToFairOccupation();
-						message = "Delivery policy changed to: DeliveryToFairOccupation";
 						break;
 					}
-					return message;
+					return "Delivery policy changed to: -" + args[0] + "-.";
 				}else{
 					throw new InputMismatchException();
 				}

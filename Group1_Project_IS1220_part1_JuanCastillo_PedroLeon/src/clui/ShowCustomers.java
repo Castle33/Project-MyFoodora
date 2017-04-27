@@ -1,44 +1,51 @@
 package clui;
 
+import java.util.Collection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import exceptions.InputMismatchException;
+import exceptions.AccessDeniedException;
 import exceptions.NumberOfArgumentsException;
 import users.*;
 
 /**
- * ShowCustomers 0
+ * ShowCustomers 0 ""
  * @author Juan Castillo
  *
  */
 
 public class ShowCustomers implements CommandProcessor{
-	final int nArgs = 0;
+	final int nArgs = 1;
 	HashMap<String,User> temp_listOfUsers = new HashMap<String,User>();
-	ArrayList<User> users = new ArrayList<User>();
+	Collection<User> users;
 	ArrayList<Customer> customers = new ArrayList<Customer>();
-	String message;
+	String message = "";
 	@Override
-	public String process(String[] args) throws NumberOfArgumentsException, InputMismatchException {
+	public String process(String[] args) {
 		try{
-			if(args[nArgs] == null){
-				temp_listOfUsers = MyFoodora.core.getListOfUsers();
-				users = (ArrayList<User>) temp_listOfUsers.values();
-				for(User u : users){
-					if(!(u instanceof Customer)){
-						users.remove(u);
+			if(args.length == nArgs){
+				if(MyFoodora.core.getCurrentUser() instanceof Manager){
+					temp_listOfUsers = MyFoodora.core.getListOfUsers();
+					users = temp_listOfUsers.values();
+					for(User u : users){
+						if(u instanceof Customer){
+							message += "\n-" + u.getUsername() + "-.";
+						}
 					}
+					if(message != ""){
+						return "List of customers:" + message;
+					}else{
+						return "No customers registered in the system.";
+					}
+				}else{
+					throw new AccessDeniedException();
 				}
-				for(User u : users){
-					message += u.getUsername();
-					message += "\n";
-				}
-				return "List of customers: " + message;
 			}else{
 				throw new NumberOfArgumentsException();
 			}
 		}catch(NumberOfArgumentsException e){
+			return e.getMessage();
+		}catch(AccessDeniedException e){
 			return e.getMessage();
 		}
 	}

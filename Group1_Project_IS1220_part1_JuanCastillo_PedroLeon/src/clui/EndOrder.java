@@ -3,6 +3,8 @@ package clui;
 import exceptions.NumberOfArgumentsException;
 import exceptions.AccessDeniedException;
 import system.Order;
+import users.User;
+import users.Courier;
 
 /**
  * EndOrder 1 "orderName"
@@ -26,8 +28,10 @@ public class EndOrder implements CommandProcessor{
 				}
 				if(orderFound != null){
 					if(!orderFound.getItems().isEmpty() || !orderFound.getMeals().isEmpty()){
+						MyFoodora.listTempOrders.remove(orderFound);
 						MyFoodora.core.placeNewOrder(orderFound);
 						MyFoodora.core.processOrders();
+						
 						return "Customer: -" + orderFound.getCustomer().getUsername() + "- placed Order: -" + args[0] + "- to Restaurant: -" + orderFound.getRestaurant().getName() + "-.";
 					}else{
 						return "Order: -" + args[0] + "- has nor meals nor items.";

@@ -227,39 +227,39 @@ public class MyFoodora {
 					break;
 				case "finddeliverer":
 					cmdProcessor = new FindDeliverer();
-					cmdProcessor.process(argum);
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				case "setdeliverypolicy":
 					cmdProcessor = new SetDeliveryPolicy();
-					cmdProcessor.process(argum);
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				case "setprofitpolicy":
 					cmdProcessor = new SetProfitPolicy();
-					cmdProcessor.process(argum);
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				case "associatecard":
 					cmdProcessor = new AssociateCard();
-					cmdProcessor.process(argum);
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				case "showcourierdeliveries":
 					cmdProcessor = new ShowCourierDeliveries();
-					cmdProcessor.process(argum);
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				case "showrestauranttop":
 					cmdProcessor = new ShowRestaurantTop();
-					cmdProcessor.process(argum);
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				case "showcustomers":
 					cmdProcessor = new ShowCustomers();
-					cmdProcessor.process(argum);
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				case "showmenuitem":
 					cmdProcessor = new ShowMenuItem();
-					cmdProcessor.process(argum);
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				case "showtotalprofit":
 					cmdProcessor = new ShowTotalProfit();
-					cmdProcessor.process(argum);
+					setCommandReturn(cmdProcessor.process(argum));
 					break;
 				}
 			}catch (NumberOfArgumentsException e){

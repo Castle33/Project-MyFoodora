@@ -7,13 +7,11 @@ import system.FidelityCardBasic;
 import system.FidelityCardPoint;
 import system.FidelityCardLottery;
 import system.FidelityCardType;
-import java.util.Collection;
 import java.util.ArrayList;
-import users.User;
 import users.Customer;
 
 /**
- * AssociateCard 2 <userName> <cardType>
+ * AssociateCard 2 "userName" "cardType"
  * @author Pedro León
  *
  */
@@ -28,40 +26,26 @@ public class AssociateCard implements CommandProcessor{
 	@Override
 	public String process(String[] args) {
 		try{
-			if(args[nArgs] == null){
-				Collection<User> users = MyFoodora.core.getListOfUsers().values();
-				for(User u : users){
-					if(u instanceof Customer){
-						customers.add((Customer) u);
-						for(Customer cu : customers){
-							if(cu.getUsername().equals(args[0])){
-								customer = cu;
-							}
-						}
-					}
-				}
-				if(customer != null){
-					if(args[1].toUpperCase() == FidelityCardType.BASIC.toString() || args[1].toUpperCase() == FidelityCardType.POINT.toString() || args[1].toUpperCase() == FidelityCardType.LOTTERY.toString()){
+			if(args.length == nArgs){
+				if(MyFoodora.core.getCurrentUser().getUsername().equals(args[0])){
+					if(args[1].toUpperCase().equals(FidelityCardType.BASIC.toString()) || args[1].toUpperCase().equals(FidelityCardType.POINT.toString()) || args[1].toUpperCase().equals(FidelityCardType.LOTTERY.toString())){
 						switch(args[0].toUpperCase()){
 						case "BASIC":
 							MyFoodora.core.registerFidelityCard(new FidelityCardBasic());
-							message = "Cutomer: " + args[0] + " changed to FidelityCardBasic.";
 							break;
 						case "POINT":
 							MyFoodora.core.registerFidelityCard(new FidelityCardPoint());
-							message = "Cutomer: " + args[0] + " changed to FidelityCardPoint.";
 							break;
 						case "LOTTERY":
 							MyFoodora.core.registerFidelityCard(new FidelityCardLottery());
-							message = "Cutomer: " + args[0] + " changed to FidelityCardLottery.";
 							break;
 						}
-						return message;
+						return "Cutomer: -" + args[0] + "- changed to fidelity card -" + args[1] + "-.";
 					}else{
 						throw new InputMismatchException();
 					}
 				}else{
-					return "Customer: " + args[0] + " not registered in the system.";
+					return "Customer: -" + args[0] + "- not logged in the system.";
 				}
 			}else{
 				throw new NumberOfArgumentsException();

@@ -6,7 +6,7 @@ import exceptions.NumberOfArgumentsException;
 import system.ProfitPolicyType;
 
 /**
- * SetProfitPolicy 1 <ProfitPolicyName>
+ * SetProfitPolicy 1 "ProfitPolicyName"
  * @author Pedro León
  *
  */
@@ -19,23 +19,20 @@ public class SetProfitPolicy implements CommandProcessor{
 	@Override
 	public String process(String[] args) {
 		try{
-			if(args[nArgs] == null){
-				if(args[0].toUpperCase() == ProfitPolicyType.DELIVERYCOST.toString() || args[0].toUpperCase() == ProfitPolicyType.MARKUP.toString() || args[0].toUpperCase() == ProfitPolicyType.SERVICEFEE.toString()){
+			if(args.length == nArgs){
+				if(args[0].toUpperCase().equals(ProfitPolicyType.DELIVERYCOST.toString()) || args[0].toUpperCase().equals(ProfitPolicyType.MARKUP.toString()) || args[0].toUpperCase().equals(ProfitPolicyType.SERVICEFEE.toString())){
 					switch(args[0].toUpperCase()){
 					case "DELIVERYCOST":
 						MyFoodora.core.setTargetProfitToDeliveryCost();;
-						message = "Delivery policy changed to: TargetProfitToDeliveryCost";
 						break;
 					case "MARKUP":
 						MyFoodora.core.setTargetProfitToMarkup();
-						message = "Delivery policy changed to: TargetProfitToMarkup";
 						break;
 					case "SERVICEFEE":
 						MyFoodora.core.setTargetProfitToServiceFee();
-						message = "Delivery policy changed to: TargetProfitToServiceFee";
 						break;
 					}
-					return message;
+					return "Profit policy changed to: -" + args[0] + "-.";
 				}else{
 					throw new InputMismatchException();
 				}

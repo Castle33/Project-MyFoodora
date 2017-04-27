@@ -25,6 +25,6 @@ showCourierDeliveries <>
 showRestaurantTop <>
 showCustomers <>
 showMenuItem <restaurantName>
-showTotalProfit <startDate> <endDate>
+showTotalProfit<startDate> <endDate>
 runTest <testScenarioFile>
 help <>
