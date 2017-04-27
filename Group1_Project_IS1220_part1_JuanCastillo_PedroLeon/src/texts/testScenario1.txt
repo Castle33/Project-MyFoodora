@@ -1,0 +1,80 @@
+logIn <ceo> <123456789>
+//// Falta añadir commands para mostrar los items de la configuracion inicial
+registerRestaurant <Rest1> <1,1> <username1> <password1>
+registerRestaurant <Rest2> <2,2> <username2> <password2>
+registerRestaurant <Rest3> <3,3> <username3> <password3>
+registerCustomer <Luis> <Almajano> <almeja> <4,6> <fuckspeed> <0695599143> <almeja@gmail.com>
+registerCustomer <Maria> <Orco> <cobasich> <6,9> <fallingInLove> <0169696943> <mordorMeQuiere@gmail.com>
+registerCustomer <Isaias> <Leyend> <thuglife> <20,18> <nopassword> <0167536421> <mequedaba@gmail.com>
+registerCourier <Mr> <Amazon> <courier1> <2,1> <pass1> <0695436143>
+registerCourier <Ms> <Fedex> <courier2> <4,7> <pass2> <0616299143>
+//display list of restaurants
+showCustomers <>
+logOut <>
+logIn <username1> <password1>
+addDishRestaurantMenu <starter1> <starter> <standard> <7.0>
+addDishRestaurantMenu <main1> <maindish> <vegetarian> <14.5>
+addDishRestaurantMenu <dessert1> <dessert> <glutenfree> <4.9>
+logOut <>
+logIn <username2> <password2>
+addDishRestaurantMenu <starter2> <starter> <standard> <7.0>
+addDishRestaurantMenu <main2> <maindish> <standard> <14.5>
+addDishRestaurantMenu <dessert2> <dessert> <standard> <4.9>
+logOut <>
+logIn <username3> <password3>
+addDishRestaurantMenu <starter3> <starter> <vegetarian> <7.0>
+addDishRestaurantMenu <main3> <maindish> <vegetarian> <14.5>
+addDishRestaurantMenu <dessert3> <dessert> <vegetarian> <4.9>
+createMeal <Vegetarian3> <fullmeal>
+addDish2Meal <starter3> <Vegetarian3>
+addDish2Meal <main3> <Vegetarian3>
+addDish2Meal <dessert3> <Vegetarian3>
+saveMeal <Vegetarian3>
+createMeal <halfVegetarian3> <halfmeal>
+addDish2Meal <main3> <halfVegetarian3>
+addDish2Meal <dessert3> <halfVegetarian3>
+saveMeal <halfVegetarian3>
+setSpecialOffer <Vegetarian3>
+logOut <>
+logIn <username2> <password2>
+createMeal <Standard2> <fullmeal>
+addDish2Meal <starter2> <Standard2>
+addDish2Meal <main2> <Standard2>
+addDish2Meal <dessert2> <Standard2>
+saveMeal <Standard2>
+setSpecialOffer <Standard2>
+logOut <>
+logIn <username1> <password1>
+createMeal <halfMix1> <halfmeal>
+addDish2Meal <starter1> <halfMix1>
+addDish2Meal <main1> <halfMix1>
+saveMeal <halfMix1>
+setSpecialOffer <halfMix1>
+logOut <>
+logIn <ceo> <123456789>
+showMenuItem <Rest1>
+showMenuItem <Rest2>
+showMenuItem <Rest3>
+logOut <>
+logIn <almeja> <fuckspeed>
+createOrder <Rest1> <order1>
+addItem2Order <order1> <starter1> <2>
+addMeal2Order <order1> <halfMix1> <1>
+endOrder <order1> <27/04/2017>			//Revisar
+logOut <>
+logIn <cobasich> <fallingInLove>
+createOrder <Rest2> <order2>
+addItem2Order <order2> <main2> <1>
+endOrder <order2> <28/04/2017>			//Revisar
+logOut <>
+logIn <thuglife> <nopassword>
+createOrder <Rest3> <order3>
+addMeal2Order <order3> <Vegetarian3> <3>
+endOrder <order3> <28/04/2017>			//Revisar
+logOut <>
+logIn <ceo> <123456789>
+showTotalProfit<01/04/2017> <31/04/2017>	//Revisar
+setProfitPolicy <SERVICEFEE>			//Revisar
+showTotalProfit<01/04/2017> <31/04/2017>	//Revisar
+showCourierDeliveries <>			//Revisar
+logOut <>
