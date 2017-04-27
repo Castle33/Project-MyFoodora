@@ -237,7 +237,7 @@ public class Restaurant extends User implements Serializable{
 	 * @param double number that wants to rounded to two decimals
 	 * @return the parameter rounded to two decimals
 	 */
-	public double round2dec (double n){
+	public static double round2dec (double n){
 		return Math.round(n*100.0)/100.0;
 	}
 

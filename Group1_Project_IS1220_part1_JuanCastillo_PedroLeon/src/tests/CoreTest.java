@@ -378,11 +378,11 @@ public class CoreTest {
 		 * markupPercentage = (25 - (3.0 - 2.0)*3)/177.92 = (25 - 3)/177.92 = 22/177.92 = 
 		 */
 		try{
-			assertTrue(r1.round2dec(c.getParameterToTargetProfit(25, initDate, finDate)) == 0.6);
+			assertTrue(Restaurant.round2dec(c.getParameterToTargetProfit(25, initDate, finDate)) == 0.6);
 			c.setTargetProfitToServiceFee();
-			assertTrue(r1.round2dec(c.getParameterToTargetProfit(25, initDate, finDate)) == 4.4);
+			assertTrue(Restaurant.round2dec(c.getParameterToTargetProfit(25, initDate, finDate)) == 4.4);
 			c.setTargetProfitToMarkup();
-			assertTrue(r1.round2dec(c.getParameterToTargetProfit(25, initDate, finDate)) == 0.12);
+			assertTrue(Restaurant.round2dec(c.getParameterToTargetProfit(25, initDate, finDate)) == 0.12);
 		}
 		catch(AccessDeniedException e){
 			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
@@ -417,7 +417,7 @@ public class CoreTest {
 		initDate.set(Calendar.MONTH, 2);
 		finDate.set(Calendar.MONTH, 5);
 		try{
-			assertTrue(r1.round2dec(c.computeTotalIncome(initDate, finDate)) == 186.9);
+			assertTrue(Restaurant.round2dec(c.computeTotalIncome(initDate, finDate)) == 186.9);
 		}
 		catch(AccessDeniedException e){
 			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
@@ -451,7 +451,7 @@ public class CoreTest {
 		initDate.set(Calendar.MONTH, 2);
 		finDate.set(Calendar.MONTH, 5);
 		try{
-			assertTrue(r1.round2dec(c.computeTotalProfit(initDate, finDate)) == 20.79);
+			assertTrue(Restaurant.round2dec(c.computeTotalProfit(initDate, finDate)) == 20.79);
 		}
 		catch(AccessDeniedException e){
 			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
@@ -486,7 +486,7 @@ public class CoreTest {
 		initDate.set(Calendar.MONTH, 2);
 		finDate.set(Calendar.MONTH, 5);
 		try{
-			assertTrue(r1.round2dec(c.computeAverageIncome(initDate, finDate)) == 8.93);
+			assertTrue(Restaurant.round2dec(c.computeAverageIncome(initDate, finDate)) == 8.93);
 		}
 		catch(AccessDeniedException e){
 			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");

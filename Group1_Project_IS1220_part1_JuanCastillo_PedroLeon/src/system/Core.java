@@ -761,7 +761,7 @@ public class Core implements Observable ,Serializable {
 			while(currentSortedCouriers.isEmpty() && !currentCouriersOnDuty.isEmpty() && !order.isAssignedCourier()){
 				Collections.sort(currentCouriersOnDuty,Courier.compareDeliveryDate());
 				if(currentCouriersOnDuty.getFirst().decideAddOrder(order)){
-					this.listOfCompletedOrders.add(currentCouriersOnDuty.getFirst().getCurrentOrder());
+					this.listOfCompletedOrders.add(order);
 					orderAssigned = true;
 				}
 				listOfUsers.put(currentCouriersOnDuty.getFirst().getUsername(), currentCouriersOnDuty.getFirst());

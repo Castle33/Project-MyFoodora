@@ -243,9 +243,7 @@ public class RestaurantTest {
 
 	@Test
 	public void testRound2dec() {
-		Address a1 = new Address(3,4);
-		Restaurant r = new Restaurant("La Playa", "LaPlayaBilbao", "newpasswordr", a1);
-		assertTrue(r.round2dec(3.563) == 3.56 && r.round2dec(3.567) == 3.57);
+		assertTrue(Restaurant.round2dec(3.563) == 3.56 && Restaurant.round2dec(3.567) == 3.57);
 	}
 
 }

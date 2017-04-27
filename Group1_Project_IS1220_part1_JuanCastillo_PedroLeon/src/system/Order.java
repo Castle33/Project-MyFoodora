@@ -160,7 +160,7 @@ public class Order implements Serializable {
 			price += items.get(i)*i.getPrice();
 		}
 		price *= customer.getFidelityCard().applyFidelityPlan();
-		price = restaurant.round2dec(price);
+		price = Restaurant.round2dec(price);
 		this.priceFood = price;
 		return price;
 	}

@@ -6,6 +6,7 @@ import exceptions.AccessDeniedException;
 import exceptions.InputMismatchException;
 import exceptions.NumberOfArgumentsException;
 import system.Core;
+import users.Restaurant;
 
 /**
  * ShowTotalProfit 1 "startDate" "endDate"
@@ -23,17 +24,17 @@ public class ShowTotalProfit implements CommandProcessor{
 				try {
 					cal1 = stringCast.string2Calendar(args[0]);
 					cal2 = stringCast.string2Calendar(args[1]);
-					return "The total profit for the specified time interval is: " +String.valueOf(MyFoodora.core.computeTotalProfit(cal1, cal2));
+					return "The total profit for the specified time interval is: -" + Restaurant.round2dec(MyFoodora.core.computeTotalProfit(cal1, cal2)) + "-.";
 					
 				} catch (InputMismatchException e) {
 					return e.getMessage();
 				}
-			}else if(args.length == 0){
+			}else if(args.length == 1){
 				Calendar cal1 = Calendar.getInstance();
 				Calendar cal2 = Calendar.getInstance();
 				try {
 					cal1 = stringCast.string2Calendar(Core.creationDate);
-					return "The total profit for the specified time interval is: " +String.valueOf(MyFoodora.core.computeTotalProfit(cal1, cal2));
+					return "The total profit from init date until now is: -" + Restaurant.round2dec(MyFoodora.core.computeTotalProfit(cal1, cal2)) + "-.";
 					
 				} catch (InputMismatchException e) {
 					return e.getMessage();

@@ -3,8 +3,6 @@ package clui;
 import exceptions.NumberOfArgumentsException;
 import exceptions.AccessDeniedException;
 import system.Order;
-import users.User;
-import users.Courier;
 
 /**
  * EndOrder 1 "orderName"
