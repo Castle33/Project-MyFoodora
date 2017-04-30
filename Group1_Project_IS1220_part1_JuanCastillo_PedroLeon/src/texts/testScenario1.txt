@@ -77,8 +77,9 @@ logOut <>
 logIn <ceo> <123456789>
 showTotalProfit <01/04/2017> <31/04/2017>
 showTotalProfit	<31/04/2017>
-setProfitPolicy <SERVICEFEE>			//Revisar
+setProfitPolicy <SERVICEFEE>
 showTotalProfit <01/04/2017> <31/04/2017>
 showTotalProfit	<31/04/2017>
-showCourierDeliveries <>			//Revisar
+showCourierDeliveries <>
+showRestaurantTop <>
 logOut <>
