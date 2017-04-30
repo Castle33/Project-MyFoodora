@@ -10,8 +10,6 @@ registerCustomer <Maria> <Orco> <cobasich> <6,9> <fallingInLove> <0169696943> <m
 registerCustomer <Isaias> <Leyend> <thuglife> <20,18> <nopassword> <0167536421> <mequedaba@gmail.com>
 registerCourier <Mr> <Amazon> <courier1> <2,1> <pass1> <0695436143>
 registerCourier <Ms> <Fedex> <courier2> <4,7> <pass2> <0616299143>
-showRestaurantsRegistered <>
-showCustomers <>
 logOut <>
 logIn <username1> <password1>
 addDishRestaurantMenu <starter1> <starter> <standard> <7.0>
