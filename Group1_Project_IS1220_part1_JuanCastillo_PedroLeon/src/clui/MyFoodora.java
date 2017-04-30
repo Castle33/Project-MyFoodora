@@ -261,6 +261,9 @@ public class MyFoodora {
 					cmdProcessor = new ShowTotalProfit();
 					setCommandReturn(cmdProcessor.process(argum));
 					break;
+				case "showrestaurantsregistered":
+					cmdProcessor = new ShowRestaurantsRegistered();
+					setCommandReturn(cmdProcessor.process(argum));
 				}
 			}catch (NumberOfArgumentsException e){
 				System.out.println("Error in arguments: Wrong number of arguments for command "+command);

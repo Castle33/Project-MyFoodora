@@ -22,9 +22,10 @@ setDeliveryPolicy <delPolicyName>
 setProfitPolicy <ProfitPolicyName>
 associatedCard <username> <cardType>
 showCourierDeliveries <>
+showRestaurantsRegistered <>
 showRestaurantTop <>
 showCustomers <>
 showMenuItem <restaurantName>
-showTotalProfit<startDate> <endDate>
+showTotalProfit <startDate> <endDate>
 runTest <testScenarioFile>
 help <>
