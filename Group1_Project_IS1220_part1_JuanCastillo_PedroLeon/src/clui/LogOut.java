@@ -18,7 +18,7 @@ public class LogOut implements CommandProcessor {
 			if(args.length == nArgs){
 				if(MyFoodora.core.getCurrentUser() != null){
 					MyFoodora.core.logOut();
-					message = "User correctly logged out.";
+					message = "User correctly logged out.\n";
 				}else{
 					message = "No user logged in.";
 				}
