@@ -3,20 +3,17 @@ package clui;
 import system.*;
 import java.util.Scanner;
 
-import exceptions.InputMismatchException;
-import exceptions.NumberOfArgumentsException;
-
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import restaurant_structure.Item;
-import restaurant_structure.Meal;
 
 public class MyFoodora {
 	protected static Core core;
@@ -37,9 +34,22 @@ public class MyFoodora {
 		this.args = new ArrayList<String>();
 		MyFoodora.listTempMeals = new HashMap<String,ArrayList<Item>>();
 		MyFoodora.listTempOrders = new ArrayList<Order>();
-		MyFoodora.core = new Core();
 		MyFoodora.stringCast = new StringCast();
 		MyFoodora.readCmdFile("src/texts/listCmd.txt");
+		
+		try{
+			FileInputStream fileIn = new FileInputStream("./ser_file/core.ser");
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			core = (Core) in.readObject();
+			in.close();
+			fileIn.close();
+		}catch(IOException e){
+			System.out.println("Core file .ser not found Exception.");
+			return;
+		}catch(ClassNotFoundException e){
+			System.out.println("Class Core not found Exception.");
+			return;
+		}
 	}
 
 	public void launcherCL() {
@@ -145,137 +155,134 @@ public class MyFoodora {
 		String[] argum;
 		argum = listToArray(arguments);
 		if(!command.equals("")){
-			
-			try{
-				
-				switch (command.toLowerCase()){
-				case "login":
-					cmdProcessor = new LogIn();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "logout":
-					cmdProcessor = new LogOut();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "registerrestaurant":
-					cmdProcessor = new RegisterRestaurant();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "registercustomer":
-					cmdProcessor = new RegisterCustomer();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "registercourier":
-					cmdProcessor = new RegisterCourier();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "adddishrestaurantmenu":
-					cmdProcessor = new AddDishRestaurantMenu();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "createmeal":
-					cmdProcessor = new CreateMeal();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "adddish2meal":
-					cmdProcessor = new AddDish2Meal();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "removeitemfrommeal":
-					cmdProcessor = new RemoveItemFromMeal();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "showmeal":
-					cmdProcessor = new ShowMeal();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "savemeal":
-					cmdProcessor = new SaveMeal();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "setspecialoffer":
-					cmdProcessor = new SetSpecialOffer();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "removefromspecialoffer":
-					cmdProcessor = new RemoveSpecialOffer();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "createorder":
-					cmdProcessor = new CreateOrder();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "additem2order":
-					cmdProcessor = new AddItem2Order();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "addmeal2order":
-					cmdProcessor = new AddMeal2Order();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "endorder":
-					cmdProcessor = new EndOrder();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "onduty":
-					cmdProcessor = new OnDuty();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "offduty":
-					cmdProcessor = new OffDuty();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "finddeliverer":
-					cmdProcessor = new FindDeliverer();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "setdeliverypolicy":
-					cmdProcessor = new SetDeliveryPolicy();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "setprofitpolicy":
-					cmdProcessor = new SetProfitPolicy();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "associatecard":
-					cmdProcessor = new AssociateCard();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "showcourierdeliveries":
-					cmdProcessor = new ShowCourierDeliveries();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "showrestauranttop":
-					cmdProcessor = new ShowRestaurantTop();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "showcustomers":
-					cmdProcessor = new ShowCustomers();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "showmenuitem":
-					cmdProcessor = new ShowMenuItem();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "showtotalprofit":
-					cmdProcessor = new ShowTotalProfit();
-					setCommandReturn(cmdProcessor.process(argum));
-					break;
-				case "showrestaurantsregistered":
-					cmdProcessor = new ShowRestaurantsRegistered();
-					setCommandReturn(cmdProcessor.process(argum));
-				case "showcouriersregistered":
-					cmdProcessor = new ShowCouriersRegistered();
-					setCommandReturn(cmdProcessor.process(argum));
-				}
-			}catch (NumberOfArgumentsException e){
-				System.out.println("Error in arguments: Wrong number of arguments for command "+command);
-			}catch (InputMismatchException e1){
-				System.out.println("Error in arguments: Wrong type of arguments for command "+command);
-			}finally{
-				System.out.println(getCommandReturn());
-				setCommandReturn("");
+			switch (command.toLowerCase()){
+			case "login":
+				cmdProcessor = new LogIn();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "logout":
+				cmdProcessor = new LogOut();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "registerrestaurant":
+				cmdProcessor = new RegisterRestaurant();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "registercustomer":
+				cmdProcessor = new RegisterCustomer();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "registercourier":
+				cmdProcessor = new RegisterCourier();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "adddishrestaurantmenu":
+				cmdProcessor = new AddDishRestaurantMenu();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "createmeal":
+				cmdProcessor = new CreateMeal();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "adddish2meal":
+				cmdProcessor = new AddDish2Meal();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "removeitemfrommeal":
+				cmdProcessor = new RemoveItemFromMeal();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "showmeal":
+				cmdProcessor = new ShowMeal();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "savemeal":
+				cmdProcessor = new SaveMeal();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "setspecialoffer":
+				cmdProcessor = new SetSpecialOffer();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "removefromspecialoffer":
+				cmdProcessor = new RemoveSpecialOffer();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "createorder":
+				cmdProcessor = new CreateOrder();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "additem2order":
+				cmdProcessor = new AddItem2Order();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "addmeal2order":
+				cmdProcessor = new AddMeal2Order();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "endorder":
+				cmdProcessor = new EndOrder();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "onduty":
+				cmdProcessor = new OnDuty();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "offduty":
+				cmdProcessor = new OffDuty();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "finddeliverer":
+				cmdProcessor = new FindDeliverer();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "setdeliverypolicy":
+				cmdProcessor = new SetDeliveryPolicy();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "setprofitpolicy":
+				cmdProcessor = new SetProfitPolicy();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "associatecard":
+				cmdProcessor = new AssociateCard();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "showcourierdeliveries":
+				cmdProcessor = new ShowCourierDeliveries();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "showrestauranttop":
+				cmdProcessor = new ShowRestaurantTop();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "showcustomers":
+				cmdProcessor = new ShowCustomers();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "showmenuitem":
+				cmdProcessor = new ShowMenuItem();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "showtotalprofit":
+				cmdProcessor = new ShowTotalProfit();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "showrestaurantsregistered":
+				cmdProcessor = new ShowRestaurantsRegistered();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "showcouriersregistered":
+				cmdProcessor = new ShowCouriersRegistered();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "initcore":
+				cmdProcessor = new InitCore();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
 			}
+			System.out.println(getCommandReturn());
+			setCommandReturn("");
 		}
 	}
 	

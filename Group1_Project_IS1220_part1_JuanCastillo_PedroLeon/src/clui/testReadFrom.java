@@ -1,7 +1,5 @@
 package clui;
 
-import java.util.Scanner;
-
 public class testReadFrom {
 	
 	public static void main (String[] args){
