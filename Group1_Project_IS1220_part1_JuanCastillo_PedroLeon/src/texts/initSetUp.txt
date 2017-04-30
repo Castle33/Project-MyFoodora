@@ -1,3 +1,4 @@
+logIn "ceo" "123456789"
 registerRestaurant "Bonheur" "1,4" "Emporter" "ilfautfermer"
 registerRestaurant "VIPS" "10,32" "spain" "batidoDeOreo"
 registerRestaurant "McDonalds" "5,3" "donald" "elmacdoessano"
@@ -12,6 +13,7 @@ registerCustomer "Paco" "Paqueras" "peon" "2,1" "jaquemate" "0695599143" "paqera
 registerCustomer "Arturo" "Garrido" "elnino" "15,14" "bcg" "0695599143" "artu@gmail.com"
 registerCustomer "Richi" "NoMeAcuerdo" "president" "25,28" "elasesino" "0695599143" "rickyrubio@gmail.com"
 registerCustomer "Pablo" "Descu" "espanol" "39,2" "bpmaster" "0695599143" "descu@gmail.com"
+logOut ""
 logIn "Emporter" "ilfautfermer"
 addDishRestaurantMenu "Potstickers" "starter" "standard" "3.50"
 addDishRestaurantMenu "Dumplings" "starter" "vegetarian" "4.80"

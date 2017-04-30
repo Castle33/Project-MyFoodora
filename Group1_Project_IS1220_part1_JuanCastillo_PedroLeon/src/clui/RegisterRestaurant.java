@@ -17,7 +17,7 @@ public class RegisterRestaurant implements CommandProcessor{
 	public String process(String[] args) {
 		try{
 			if(args.length == nArgs){
-				MyFoodora.core.registerUser(new Restaurant(args[0],args[2],args[3],MyFoodora.stringCast.string2Address(args[1])));
+				MyFoodora.core.addUser(new Restaurant(args[0],args[2],args[3],MyFoodora.stringCast.string2Address(args[1])));
 				return ("Restaurant: -" + args[2] + "- registered.");
 			}else{
 				throw new NumberOfArgumentsException();
@@ -27,6 +27,8 @@ public class RegisterRestaurant implements CommandProcessor{
 		}catch(UsernameAlreadyRegisteredException e){
 			return e.getMessage();
 		}catch(NumberOfArgumentsException e){
+			return e.getMessage();
+		}catch(AccessDeniedException e){
 			return e.getMessage();
 		}
 	}

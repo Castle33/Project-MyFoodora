@@ -19,7 +19,7 @@ public class RegisterCourier implements CommandProcessor {
 		try{
 			if(args.length == nArgs){
 				courier = new Courier(args[0],args[2],args[4],args[1],MyFoodora.stringCast.string2Address(args[3]),args[5]);
-				MyFoodora.core.registerUser(courier);
+				MyFoodora.core.addUser(courier);
 				return ("Courier: -" + courier.getUsername() + "- registered.");
 			}else{
 				throw new NumberOfArgumentsException();
@@ -29,6 +29,8 @@ public class RegisterCourier implements CommandProcessor {
 		}catch(UsernameAlreadyRegisteredException e){
 			return e.getMessage();
 		}catch(NumberOfArgumentsException e){
+			return e.getMessage();
+		}catch(AccessDeniedException e){
 			return e.getMessage();
 		}
 	}
