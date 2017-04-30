@@ -28,5 +28,6 @@ showRestaurantTop <>
 showCustomers <>
 showMenuItem <restaurantName>
 showTotalProfit <startDate> <endDate>
+showTotalProfit <endDate>
 runTest <testScenarioFile>
 help <>

@@ -52,23 +52,23 @@ saveMeal <halfMix1>
 setSpecialOffer <halfMix1>
 logOut <>
 logIn <ceo> <123456789>
-showMenuItem <Rest1>
-showMenuItem <Rest2>
-showMenuItem <Rest3>
+showMenuItem <username1>
+showMenuItem <usename2>
+showMenuItem <username3>
 logOut <>
 logIn <almeja> <fuckspeed>
-createOrder <Rest1> <order1>
+createOrder <username1> <order1>
 addItem2Order <order1> <starter1> <2>
 addMeal2Order <order1> <halfMix1> <1>
 endOrder <order1>
 logOut <>
 logIn <cobasich> <fallingInLove>
-createOrder <Rest2> <order2>
+createOrder <username2> <order2>
 addItem2Order <order2> <main2> <1>
 endOrder <order2>
 logOut <>
 logIn <thuglife> <nopassword>
-createOrder <Rest3> <order3>
+createOrder <username3> <order3>
 addMeal2Order <order3> <Vegetarian3> <3>
 endOrder <order3>
 logOut <>
