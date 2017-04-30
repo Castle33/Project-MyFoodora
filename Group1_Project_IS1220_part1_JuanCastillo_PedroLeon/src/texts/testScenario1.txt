@@ -1,5 +1,6 @@
 logIn <ceo> <123456789>
-//// Falta añadir commands para mostrar los items de la configuracion inicial
+showRestaurantsRegistered <>
+showCustomers <>
 registerRestaurant <Rest1> <1,1> <username1> <password1>
 registerRestaurant <Rest2> <2,2> <username2> <password2>
 registerRestaurant <Rest3> <3,3> <username3> <password3>

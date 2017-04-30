@@ -472,6 +472,20 @@ public class Core implements Observable ,Serializable {
 		}
 	}
 	
+	public String showCouriersRegistered() throws AccessDeniedException{
+		String list = "";
+		if(currentUser instanceof Manager){
+			for(User u : getListOfUsers().values()){
+				if(u instanceof Courier){
+					list += ((Courier)u).toString() + "\n";
+				}
+			}
+			return list;
+		}else{
+			throw new AccessDeniedException();
+		}
+	}
+	
 	/***************************************************************************************************/
 	/**
 	 * notify special offers related
