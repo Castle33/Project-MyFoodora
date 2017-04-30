@@ -264,6 +264,9 @@ public class MyFoodora {
 				case "showrestaurantsregistered":
 					cmdProcessor = new ShowRestaurantsRegistered();
 					setCommandReturn(cmdProcessor.process(argum));
+				case "showcouriersregistered":
+					cmdProcessor = new ShowCouriersRegistered();
+					setCommandReturn(cmdProcessor.process(argum));
 				}
 			}catch (NumberOfArgumentsException e){
 				System.out.println("Error in arguments: Wrong number of arguments for command "+command);
