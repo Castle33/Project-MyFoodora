@@ -170,9 +170,17 @@ public class Order implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Order [ID=" + ID + ", customer=" + customer + ", restaurant=" + restaurant + ", meals=" + meals
-				+ ", items=" + items + ", assignedCourier=" + assignedCourier + ", priceFood=" + priceFood + ", priceTotal="
-				+ priceTotal + ", date=" + date + "]";
+		String mealDisplay = "";
+		for(Meal m : meals.keySet()){
+			mealDisplay = m.getName() + "-" + meals.get(m);
+		}
+		String itemDisplay = "";
+		for(Item i : items.keySet()){
+			itemDisplay = i.getName() + "-" + items.get(i);
+		}
+		String dateDisplay = date.getTime().getDay() + "/" + date.getTime().getMonth() + "/" + date.getTime().getYear() + " " + date.getTime().getHours() + ":" + date.getTime().getMinutes() + ":" + date.getTime().getSeconds();
+		return "Order [ID=" + ID + ", customer=" + customer.getUsername() + ", restaurant=" + restaurant.getUsername() + ", meals=" + mealDisplay
+				+ ", items=" + itemDisplay + ", assignedCourier=" + assignedCourier + ", priceFood=" + priceFood + ", date=" + dateDisplay + "]";
 	}
 
 	/***************************************************************************************************/
