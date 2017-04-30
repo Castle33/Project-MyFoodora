@@ -444,6 +444,34 @@ public class Core implements Observable ,Serializable {
 		}
 	}
 	
+	public String showCustomersRegistered() throws AccessDeniedException{
+		String list = "";
+		if(currentUser instanceof Manager){
+			for(User u : getListOfUsers().values()){
+				if(u instanceof Customer){
+					list += ((Customer)u).toString();
+				}
+			}
+			return list;
+		}else{
+			throw new AccessDeniedException();
+		}
+	}
+	
+	public String showRestaurantsRegistered() throws AccessDeniedException{
+		String list = "";
+		if(currentUser instanceof Manager){
+			for(User u : getListOfUsers().values()){
+				if(u instanceof Restaurant){
+					list += ((Restaurant)u).toString();
+				}
+			}
+			return list;
+		}else{
+			throw new AccessDeniedException();
+		}
+	}
+	
 	/***************************************************************************************************/
 	/**
 	 * notify special offers related
@@ -669,11 +697,9 @@ public class Core implements Observable ,Serializable {
 	 * @throws AccessDeniedException
 	 */
 	public void unregisterCourier(User user) throws AccessDeniedException{
-		System.out.println("Unregister demand");
 		if(user instanceof Courier){
 			Courier courier = (Courier) user;
 			listOfUsers.remove(courier.getUsername(),courier);
-			System.out.println( courier + " unregistered.");
 		}else{
 			throw new AccessDeniedException();
 		}

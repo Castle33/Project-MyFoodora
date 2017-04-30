@@ -50,12 +50,12 @@ public class CoreTest {
 	@Test
 	public void testCore() {
 		assertTrue(c.getName() == "MyFoodora" && c.getServiceFee() == 3.0 && c.getMarkupPercentage() == 0.1 && c.getDeliveryCost() == 2.0);
-		assertTrue(c.getListOfUsers().get("jcastillo33").getUsername() == "jcastillo33");
-		assertTrue(c.getListOfUsers().get("pleonpita").getUsername() == "pleonpita");
+		assertTrue(c.getListOfUsers().get("ceo").getUsername() == "ceo");
+		assertTrue(c.getListOfUsers().get("deputy").getUsername() == "deputy");
 		assertTrue(c.getDeliveryPolicy() instanceof DeliveryFastest && c.gettProfitPolicy() instanceof TargetProfitDeliveryCost);
 		assertTrue(c.getListOfToNotify().isEmpty() && c.getListOfCompletedOrders().isEmpty() && c.getListOfPendingOrders().isEmpty());
-		assertTrue(c.getListOfMasterManager().get(0).getUsername() == "jcastillo33");
-		assertTrue(c.getListOfMasterManager().get(1).getUsername() == "pleonpita");
+		assertTrue(c.getListOfMasterManager().get(0).getUsername() == "ceo");
+		assertTrue(c.getListOfMasterManager().get(1).getUsername() == "deputy");
 	}
 
 	@Test
@@ -578,6 +578,7 @@ public class CoreTest {
 		c.userLogIn(m);
 		try{
 			c.setDeliveryToFastest();
+			c.logOut();
 		}
 		catch(AccessDeniedException e){
 			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
@@ -590,11 +591,48 @@ public class CoreTest {
 		c.userLogIn(m);
 		try{
 			c.setDeliveryToFairOccupation();
+			c.logOut();
 		}
 		catch(AccessDeniedException e){
 			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
 		}
 		assertTrue(c.getDeliveryPolicy() instanceof DeliveryFairOccupation);
+	}
+	
+	@Test
+	public void testShowCustomersRegistered() throws AccessDeniedException {
+		String list = null;
+		try{
+			c.registerUser(cu1);
+			c.registerUser(cu2);
+			c.registerUser(cu3);
+			c.userLogIn(m);
+			list = c.showCustomersRegistered();
+			c.logOut();
+		}catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
+		}catch(UsernameAlreadyRegisteredException e){
+			System.out.println("Customer registered already exists.");
+		}
+		assertTrue(list.equals("Customers [name=Pedro, surname=Leon, username=pleon, ID=170, address=[6,8], email=pleonpita@gmail.com, phoneNumber=0695599143]Customers [name=Juan, surname=Castillo, username=jcastillo, ID=169, address=[3,4], email=jcastillo@gmail.com, phoneNumber=630285192]Customers [name=Luis, surname=Cobas, username=luiscobas, ID=168, address=[3,4], email=lcobas@gmail.com, phoneNumber=630285192]"));
+	}
+	
+	@Test
+	public void testShowRestaurantRegistered() throws AccessDeniedException {
+		String list = null;
+		try{
+			c.registerUser(r1);
+			c.registerUser(r2);
+			c.registerUser(r3);
+			c.userLogIn(m);
+			list = c.showRestaurantsRegistered();
+			c.logOut();
+		}catch(AccessDeniedException e){
+			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
+		}catch(UsernameAlreadyRegisteredException e){
+			System.out.println("Customer registered already exists.");
+		}
+		assertTrue(list.equals("Restaurant [name=La Playa, username=LaPlayaBilbao, ID=264]Restaurant [name=TGF, username=TGFParis, ID=265]Restaurant [name=McDonals, username=mcdonalsmadrid, ID=266]"));
 	}
 
 	@Test
@@ -788,7 +826,7 @@ public class CoreTest {
 		try {
 			historyOrders = c.getHistoryOrders();
 		} catch (AccessDeniedException e) {
-			System.out.println("getHistoryOrders correctly throws exception");
+			//System.out.println("getHistoryOrders correctly throws exception");
 		} finally {
 			c.userLogIn(cu1);
 			historyOrders = c.getHistoryOrders();
@@ -852,7 +890,7 @@ public class CoreTest {
 			c.setCurrentUser(m);
 			c.updateCourierState();
 		} catch(AccessDeniedException e) {
-			System.out.println("updateCourierState correctly throws exception");
+			// System.out.println("updateCourierState correctly throws exception");
 		} finally {
 			LinkedList<Order> olist = new LinkedList<Order>();
 			olist.addFirst(o1);
@@ -894,14 +932,16 @@ public class CoreTest {
 			assertTrue(c.getListOfCompletedOrders().contains(o1));
 			assertTrue(c.getListOfCompletedOrders().contains(o2));
 			assertTrue(c.getListOfCompletedOrders().contains(o3));
+			
 		
-		System.out.println(c.getListOfUsers().get("c"));
-		System.out.println(c.getListOfUsers().get("d"));
-		System.out.println(c.getListOfUsers().get("e"));
+		assertTrue(((Courier)c.getListOfUsers().get("c")).getCurrentOrder().getID() == 21);
+		assertTrue(((Courier)c.getListOfUsers().get("d")).getCurrentOrder().getID() == 22);
+		assertTrue(((Courier)c.getListOfUsers().get("e")).getCurrentOrder().getID() == 20);
+		System.out.println(((Courier)c.getListOfUsers().get("e")).getCurrentOrder());
 		Courier temp = (Courier)c.getListOfUsers().get("e");
 		Courier temp1 = (Courier)c.getListOfUsers().get("c");
-		System.out.println(temp.getListPendingOrders()); // 90% of times contains order "o"
-		System.out.println(temp1.getListPendingOrders()); // Should be empty
+		assertTrue(temp.getListPendingOrders().getFirst().getID() == 19); // 90% of times contains order "o"
+		assertTrue(temp1.getListPendingOrders().isEmpty()); // Should be empty
 		
 	}
 

@@ -1,6 +1,7 @@
 package system;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Calendar;
 import restaurant_structure.Meal;
@@ -171,16 +172,18 @@ public class Order implements Serializable {
 	@Override
 	public String toString() {
 		String mealDisplay = "";
+		System.out.println(meals.isEmpty());
 		for(Meal m : meals.keySet()){
-			mealDisplay = m.getName() + "-" + meals.get(m);
+			mealDisplay += m.getName() + "-" + meals.get(m) + "2";
 		}
 		String itemDisplay = "";
 		for(Item i : items.keySet()){
-			itemDisplay = i.getName() + "-" + items.get(i);
+			itemDisplay += i.getName() + "-" + items.get(i);
 		}
-		String dateDisplay = date.getTime().getDay() + "/" + date.getTime().getMonth() + "/" + date.getTime().getYear() + " " + date.getTime().getHours() + ":" + date.getTime().getMinutes() + ":" + date.getTime().getSeconds();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		String dateDisplay = date.getTime().getHours() + ":" + date.getTime().getMinutes() + ":" + date.getTime().getSeconds();
 		return "Order [ID=" + ID + ", customer=" + customer.getUsername() + ", restaurant=" + restaurant.getUsername() + ", meals=" + mealDisplay
-				+ ", items=" + itemDisplay + ", assignedCourier=" + assignedCourier + ", priceFood=" + priceFood + ", date=" + dateDisplay + "]";
+				+ ", items=" + itemDisplay + ", assignedCourier=" + assignedCourier + ", priceFood=" + priceFood + ", date=" + sdf.format(date.getTime()) + " " + dateDisplay + "]";
 	}
 
 	/***************************************************************************************************/
