@@ -8,7 +8,7 @@ public class ShowRestaurantsRegistered implements CommandProcessor{
 	
 	final int nArgs = 1;
 	@Override
-	public String process(String[] args) throws NumberOfArgumentsException, InputMismatchException {
+	public String process(String[] args) {
 		
 		try {
 			if (args.length == nArgs){
