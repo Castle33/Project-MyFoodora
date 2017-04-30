@@ -18,6 +18,7 @@ public class ShowRestaurantsRegisteredTest {
 		mf.treatCmd("registerRestaurant \"Bonheur\" \"4,3\" \"Emporter\" \"ilfautfermer\"");
 		mf.treatCmd("registerRestaurant \"Dominos\" \"0,5\" \"pizza\" \"barbecueistop\"");
 		mf.treatCmd("logIn \"deputy\" \"987654321\"");
+		System.out.println(srr.process(args1));
 		assertTrue(srr.process(args1).equals("Restaurant list: Restaurant [name=Dominos, username=pizza, ID=4]\nRestaurant [name=Bonheur, username=Emporter, ID=3]\n"));
 	}
 

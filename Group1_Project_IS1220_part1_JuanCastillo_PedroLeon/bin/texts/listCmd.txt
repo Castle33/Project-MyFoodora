@@ -22,6 +22,7 @@ setDeliveryPolicy <delPolicyName>
 setProfitPolicy <ProfitPolicyName>
 associatedCard <username> <cardType>
 showCourierDeliveries <>
+showCouriersRegistered <>
 showRestaurantsRegistered <>
 showRestaurantTop <>
 showCustomers <>
