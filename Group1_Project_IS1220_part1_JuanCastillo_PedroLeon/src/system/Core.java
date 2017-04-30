@@ -463,7 +463,7 @@ public class Core implements Observable ,Serializable {
 		if(currentUser instanceof Manager){
 			for(User u : getListOfUsers().values()){
 				if(u instanceof Restaurant){
-					list += ((Restaurant)u).toString() + "\n";
+					list += "\n" + ((Restaurant)u).toString();
 				}
 			}
 			return list;
@@ -477,7 +477,7 @@ public class Core implements Observable ,Serializable {
 		if(currentUser instanceof Manager){
 			for(User u : getListOfUsers().values()){
 				if(u instanceof Courier){
-					list += ((Courier)u).toString() + "\n";
+					list += "\n" + ((Courier)u).toString();
 				}
 			}
 			return list;
