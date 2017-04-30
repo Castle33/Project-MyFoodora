@@ -9,29 +9,22 @@ import users.Restaurant;
 import users.User;
 
 /**
-* ShowRestaurantTop 0 ""
+* ShowRestaurantTop 1 ""
 * @author Juan Castillo
 *
 */
 public class ShowRestaurantTop implements CommandProcessor{
 	final int nArgs = 1;
-	HashMap<String,User> temp_listOfUsers = new HashMap<String,User>();
 	ArrayList<User> users = new ArrayList<User>();
 	ArrayList<Restaurant> rest = new ArrayList<Restaurant>();
-	String message;
+	String message = "";
 	
 	@Override
 	public String process(String[] args) {
 		try{
 			if(args.length == nArgs){
-				temp_listOfUsers = MyFoodora.core.getListOfUsers();
-				for(User u : temp_listOfUsers.values()){
-					users.add(u);
-				}
-				for(User u : users){
-					if(!(u instanceof Restaurant)){
-						users.remove(u);
-					} else {
+				for(User u : MyFoodora.core.getListOfUsers().values()){
+					if(u instanceof Restaurant){
 						rest.add((Restaurant)u);
 					}
 				}
