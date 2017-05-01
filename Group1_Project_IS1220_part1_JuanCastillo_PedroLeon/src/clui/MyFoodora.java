@@ -15,6 +15,13 @@ import java.util.HashMap;
 
 import restaurant_structure.Item;
 
+/**
+ * This class is the core of the CLUI. Is able to treat inputs from the console or from a text file,
+ * parsing them and then processing the command.
+ * 
+ * @author Juan Castillo
+ *
+ */
 public class MyFoodora {
 	protected static Core core;
 	protected static StringCast stringCast;
@@ -26,7 +33,10 @@ public class MyFoodora {
 	private CommandProcessor cmdProcessor;
 	private String commandReturn;
 	
-	
+	/**
+	 * MyFoodora constructor, reads the initial setup from serialized core if file exists
+	 * and gets the list of all commands that the user will later be able to introduce
+	 */
 	public MyFoodora() {
 		super();
 		this.name = "";
@@ -52,6 +62,10 @@ public class MyFoodora {
 		}
 	}
 
+	/**
+	 * This method launches the command line interface, is able to stop the program
+	 * when the user types <b>stop</b> and passes the input to <code>treatCmd</code>
+	 */
 	public void launcherCL() {
 		Scanner sc;
 		String input = "";
@@ -74,6 +88,10 @@ public class MyFoodora {
 		}
 	}
 	
+	/**
+	 * Treats an input string, separating the command name and its arguments
+	 * @param s : the input string to read.
+	 */
 	public void treatCmd(String s) {
 		
 		if(s.equals("help")){
@@ -111,6 +129,10 @@ public class MyFoodora {
 		}
 	}
 	
+	/**
+	 * Reads and treats in order the commands from a text file and passes them to <code>treatCmd</code>
+	 * @param filename : the name of the text file to read from
+	 */
 	public void readTestScenario(String filename){
 		File file = new File(filename);
 		Scanner sc = null;
@@ -142,6 +164,11 @@ public class MyFoodora {
 		
 	}
 	
+	/**
+	 * Checks if a string is in <code>listCmds</code>
+	 * @param name : string that wants to be checked
+	 * @return <b>TRUE</b>, if <code>name</code> is in <code>listCmds</code>, <b>FALSE</b> otherwise
+	 */
 	public boolean checkCmdExists(String name){
 		if(listCmds.contains(name)){
 			return true;
@@ -150,6 +177,11 @@ public class MyFoodora {
 		}
 	}
 	
+	/**
+	 * Process a command with its given arguments, calling the appropriate function.
+	 * @param command : string with the command name
+	 * @param arguments : an ArrayList of the arguments of the command
+	 */
 	public void processCommand(String command, ArrayList<String> arguments){
 		
 		String[] argum;
@@ -286,6 +318,10 @@ public class MyFoodora {
 		}
 	}
 	
+	/**
+	 * Converts the ArrayList listCmds to a string ready to be displayed in Console
+	 * @return an adapted string to be displayed in Console
+	 */
 	public String displayListCmd(){
 		int counter = 0;
 		int prevValue = 0;
@@ -309,9 +345,9 @@ public class MyFoodora {
 		return returnValue;
 	}
 	
-	/*
+	/**
 	 * Reads the file with the list of commands (name and arguments) and safes it to a static variable
-	 * Example: login <username> <password>
+	 * @param fileName : name of the text file to be read
 	 */
 	public static void readCmdFile(String fileName) {
 		  
@@ -349,6 +385,11 @@ public class MyFoodora {
 		  listCmds = arrayToList(tempListCmd);
 		} 
 	
+	/**
+	 * Converts an ArrayList to an array of strings
+	 * @param args : the ArrayList to convert
+	 * @return an array of strings with the converted values
+	 */
 	public static String[] listToArray(ArrayList<String> args) {
 		String[] array = new String[args.size()];
 		for(int i=0; i<array.length; i++){
@@ -357,6 +398,11 @@ public class MyFoodora {
 		return array;
 	}
 	
+	/**
+	 * Converts an array of strings to an ArrayList
+	 * @param args : the array of strings to convert
+	 * @return an ArrayList with the converted values
+	 */
 	public static ArrayList<String> arrayToList(String[] args) {
 		ArrayList<String> array = new ArrayList<String>();
 		for(int i=0; i<args.length; i++){
@@ -365,6 +411,12 @@ public class MyFoodora {
 		return array;
 	}
 	
+	/**
+	 * Search an item with a specific name in a specific meal and returns it if it is in the list
+	 * @param itemName : name of the item to be found
+	 * @param mealName : name of the meal where the item is
+	 * @return the item with the name <code>itemName</code> or <b>NULL</b> otherwise
+	 */
 	public static Item getItemByName(String itemName, String mealName){
 		Item itemFound = null;
 		for(String meal : listTempMeals.keySet()){
