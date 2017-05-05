@@ -135,6 +135,7 @@ public class Courier extends User implements Serializable{
 		this.currentOrder.setAssignedCourier(true);
 		this.currentOrder.calcDeliveryTime(this.getPosition());
 		countOfOrdersCompleted++;
+		order.getRestaurant().setCountOfOrdersCompleted(order.getRestaurant().getCountOfOrdersCompleted()+1);
 		this.onDuty = true;
 		return true;
 	}

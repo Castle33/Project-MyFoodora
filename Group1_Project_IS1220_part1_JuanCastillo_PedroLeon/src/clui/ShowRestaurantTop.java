@@ -2,7 +2,6 @@ package clui;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 
 import exceptions.NumberOfArgumentsException;
 import users.Restaurant;
@@ -31,7 +30,7 @@ public class ShowRestaurantTop implements CommandProcessor{
 				Collections.sort(rest, Restaurant.compareNumOrdersCompleted());
 				Collections.reverse(rest);
 				for(Restaurant restaurant : rest){
-					message += "\n-" + restaurant.getUsername() + "-.";
+					message += "\n-" + restaurant.getUsername() + " " + restaurant.getCountOfOrdersCompleted() + "-.";
 				}
 				return "The restaurants sorted by number of completed orders in decreasing order are:" + message;
 			}else{

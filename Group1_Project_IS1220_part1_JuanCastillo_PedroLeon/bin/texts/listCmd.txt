@@ -21,6 +21,7 @@ findDeliverer <orderName>
 setDeliveryPolicy <delPolicyName>
 setProfitPolicy <ProfitPolicyName>
 associatedCard <username> <cardType>
+showListOfOrdersCompleted <>
 showCourierDeliveries <>
 showCouriersRegistered <>
 showRestaurantsRegistered <>

@@ -9,6 +9,7 @@ import exceptions.NumberOfArgumentsException;
 import system.Core;
 
 /**
+ * initCore "coreFile.ser"
  * temporary command to create Core.ser
  * 
  * @author Pedro León
@@ -23,7 +24,7 @@ public class InitCore implements CommandProcessor {
 		try{
 			if (args.length == nArgs){
 				Core c = MyFoodora.getCore();
-				FileOutputStream fileOut = new FileOutputStream("./ser_file/core.ser");
+				FileOutputStream fileOut = new FileOutputStream(args[0].toString().toLowerCase());
 				ObjectOutputStream out = new ObjectOutputStream(fileOut);
 				out.writeObject(c);
 				out.close();

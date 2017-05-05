@@ -736,6 +736,9 @@ public class Core implements Observable ,Serializable {
 			if(!courier.getListPendingOrders().isEmpty()){
 				// Courier still has pending orders
 				courier.acceptOrder(courier.getListPendingOrders().removeFirst());
+				Restaurant restaurant = courier.getCurrentOrder().getRestaurant();
+				restaurant.setCountOfOrdersCompleted(restaurant.getCountOfOrdersCompleted() + 1);
+				listOfUsers.put(restaurant.getUsername(), restaurant);
 			} else {
 				courier.setOnDuty(false);
 			}

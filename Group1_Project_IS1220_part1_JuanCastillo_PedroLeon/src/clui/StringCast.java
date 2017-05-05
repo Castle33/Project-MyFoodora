@@ -21,6 +21,7 @@ public class StringCast {
 	
 	public Calendar string2Calendar(String input) throws InputMismatchException {
 		String[] coordinates = input.split("/");
+		
 		if(coordinates.length == 3){
 			Calendar calendar = Calendar.getInstance();
 			calendar.set(Integer.parseInt(coordinates[2]), Integer.parseInt(coordinates[1]), Integer.parseInt(coordinates[0]));

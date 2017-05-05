@@ -82,8 +82,8 @@ public class Order implements Serializable {
 	 * @return a CALENDAR value of the calculated delivery date
 	 */
 	public Calendar calcDeliveryTime(Address address){
-		int deliveryTime = (int) Math.round(customer.getAddress().calcDistance(restaurant.getAddress())/13.9);
-		int courierRestTime = (int) Math.round(address.calcDistance(restaurant.getAddress())/13.9);
+		int deliveryTime = (int) Math.round(customer.getAddress().calcDistance(restaurant.getAddress())/0.0139);
+		int courierRestTime = (int) Math.round(address.calcDistance(restaurant.getAddress())/0.0139);
 		deliveryDate = Calendar.getInstance();
 		deliveryDate.add(Calendar.SECOND, deliveryTime + courierRestTime);
 		return deliveryDate;
