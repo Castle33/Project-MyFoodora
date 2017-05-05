@@ -47,6 +47,8 @@ public class MyFoodora {
 		MyFoodora.stringCast = new StringCast();
 		MyFoodora.readCmdFile("src/texts/listCmd.txt");
 		
+		// core = new Core();
+		
 		try{
 			FileInputStream fileIn = new FileInputStream("./ser_file/core.ser");
 			ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -61,7 +63,36 @@ public class MyFoodora {
 			return;
 		}
 	}
-
+	
+	/**
+	 * MyFoodora 'constructor' for Paris Test, it initializes the core with core_Paris.ser file
+	 * instead of core.ser file as in the standard constructor
+	 */
+	public void MyFoodoraParis(){
+		this.name = "";
+		this.commandReturn = null;
+		this.args = new ArrayList<String>();
+		MyFoodora.listTempMeals = new HashMap<String,ArrayList<Item>>();
+		MyFoodora.listTempOrders = new ArrayList<Order>();
+		MyFoodora.stringCast = new StringCast();
+		MyFoodora.readCmdFile("src/texts/listCmd.txt");
+		
+		
+		try{
+			FileInputStream fileIn = new FileInputStream("./ser_file/core_Paris.ser");
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			core = (Core) in.readObject();
+			in.close();
+			fileIn.close();
+		}catch(IOException e){
+			System.out.println("Core file .ser not found Exception.");
+			return ;
+		}catch(ClassNotFoundException e){
+			System.out.println("Class Core not found Exception.");
+			return ;
+		}
+	}
+	
 	/**
 	 * This method launches the command line interface, is able to stop the program
 	 * when the user types <b>stop</b> and passes the input to <code>treatCmd</code>
@@ -306,6 +337,10 @@ public class MyFoodora {
 				break;
 			case "showcouriersregistered":
 				cmdProcessor = new ShowCouriersRegistered();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
+			case "showlistoforderscompleted":
+				cmdProcessor = new ShowListOfOrdersCompleted();
 				setCommandReturn(cmdProcessor.process(argum));
 				break;
 			case "initcore":
