@@ -754,7 +754,7 @@ public class Core implements Observable ,Serializable {
 	 * 1) Creates two main lists : currentSortedCouriers (all couriers sorted with the current delivery policy) and
 	 * 							currentCouriersOnDuty (all couriers that are currently treating an order)
 	 * 2) Enters a while loop that goes through all orders and finish once all orders are treated
-	 * Inside the main while loop there are two order while loops:
+	 * Inside the main while loop there are two other while loops:
 	 * 3) First one goes through all available couriers and ask them whether they accept the order or not
 	 * 4) The second loop happens only when no available courier accepts the order and tries to assign the order to the
 	 * 		list of pending orders of the currently on-duty couriers (that had not previously declined the order), giving
@@ -814,9 +814,7 @@ public class Core implements Observable ,Serializable {
 			/* NOTIFICATION TO CUSTOMER */
 			if(!orderAssigned){
 				System.out.println("The order with ID "+ order.getID() + " could not be addressed to a courier and has been removed from the system.");
-				System.out.println("Please notify the customer "+order.getCustomer().getName()+" by phone or email:");
-				System.out.println("Phone number: "+order.getCustomer().getPhoneNumber());
-				System.out.println("Email: "+order.getCustomer().getEmail());
+				System.out.println("Please order again in a few minutes!");
 			}
 		}
 	}
