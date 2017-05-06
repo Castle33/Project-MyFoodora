@@ -1,8 +1,15 @@
-package clui;
+package users_theards;
 
+import java.io.Serializable;
 import java.util.Calendar;
-
-public class VirtualCalendar extends Calendar {
+/**
+ * Singleton pattern applied so there only exists one virtual calendar.
+ * Main attribute is timeMult that determines how many seconds this calendar simulates for 1 real second.
+ * Main method is getVirtualDate that returns the virtual date for a multTime parameter defined.
+ * @author Pedro León
+ *
+ */
+public class VirtualCalendar implements Serializable{
 	private static VirtualCalendar instance = null;
 	private static final long serialVersionUID = -1073852164817064065L;
 	private static Calendar currentTime;
@@ -30,54 +37,6 @@ public class VirtualCalendar extends Calendar {
 		lastVirtualTime.add(Calendar.SECOND, Math.toIntExact(fakeTimeLapse/1000));
 		
 		return lastVirtualTime;
-	}
-	
-	@Override
-	public void add(int arg0, int arg1) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void computeFields() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void computeTime() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public int getGreatestMinimum(int arg0) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getLeastMaximum(int arg0) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getMaximum(int arg0) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getMinimum(int arg0) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void roll(int arg0, boolean arg1) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	/**

@@ -1,9 +1,13 @@
 package clui;
 
 import exceptions.AccessDeniedException;
-import exceptions.InputMismatchException;
 import exceptions.NumberOfArgumentsException;
-
+/**
+ * ShowCouriersRegistered ""
+ * Command to show the list of couriers registered, no input argument required
+ * @author Pedro León
+ *
+ */
 public class ShowCouriersRegistered implements CommandProcessor{
 	
 	final int nArgs = 1;

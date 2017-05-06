@@ -1,7 +1,5 @@
 package tests_clui;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 import clui.MyFoodora;

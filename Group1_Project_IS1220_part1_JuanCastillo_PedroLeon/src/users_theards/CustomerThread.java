@@ -1,8 +1,5 @@
 package users_theards;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -10,39 +7,33 @@ import java.util.HashMap;
 import java.util.concurrent.locks.Lock;
 
 import clui.MyFoodora;
-import clui.VirtualCalendar;
 import restaurant_structure.Item;
 import restaurant_structure.Meal;
-import users.Address;
 import users.User;
 import users.Customer;
 import users.Restaurant;
 
-public class CustomerThread extends Customer implements Serializable, Runnable{
+public class CustomerThread implements Serializable, Runnable{
 	private static final long serialVersionUID = -1073852164817064065L;
 	private static final double wantToOrder = 0.2;
 	private Lock myfoodora;
-	private static MyFoodora mf;
+	private MyFoodora mf;
 	private HashMap<String,Calendar> lastOrder;
-	private static final int minTimeBetweenOrders = 0; // 1 hour
 	private static VirtualCalendar vc;
 	private static ArrayList<Integer> hoursToOrder;
-	private File log;
 	
-	public CustomerThread(String name, String username, String surname, Address address, String email,String phoneNumber, String password, Lock l) {
-		super(name, username, surname, address, email, phoneNumber, password);
+	public CustomerThread(Lock l, MyFoodora myf) {
 		myfoodora = l;
-		mf = new MyFoodora();
+		mf = myf;
 		vc = VirtualCalendar.getUnique();
 		lastOrder = new HashMap<String, Calendar>();
 		hoursToOrder = new ArrayList<Integer>();
-		hoursToOrder.add(11);hoursToOrder.add(12);hoursToOrder.add(13);hoursToOrder.add(14);hoursToOrder.add(18);hoursToOrder.add(19);hoursToOrder.add(20);hoursToOrder.add(21);
+		hoursToOrder.add(11);hoursToOrder.add(12);hoursToOrder.add(16);hoursToOrder.add(17);hoursToOrder.add(18);hoursToOrder.add(19);hoursToOrder.add(20);hoursToOrder.add(21);
 		for(User u : MyFoodora.getCore().getListOfUsers().values()){
 			if(u instanceof Customer){
 				lastOrder.put(u.getUsername(), Calendar.getInstance());
 			}
 		}
-		log = new File("./src/texts/custTestParis.txt");
 	}
 
 	@Override
@@ -62,37 +53,29 @@ public class CustomerThread extends Customer implements Serializable, Runnable{
 			Customer c = pickUpACust();
 			Calendar currentTime = vc.getVirtualDate();
 			if(Math.random() < wantToOrder){
-				if(currentTime.getTimeInMillis() - lastOrder.get(c.getUsername()).getTimeInMillis() > minTimeBetweenOrders){
-					if(hoursToOrder.contains(currentTime.getTime().getHours())){
-						mf.treatCmd("logIn \"" + c.getUsername() + "\" \"" + c.getPassword() + "\"");
-						Restaurant res = pickUpARest();
-						mf.treatCmd("createOrder \"" + res.getUsername() + "\" \"Order\"");
-						if(Math.random() < 0.6){
-							Meal m = pickUpAMeal(res);
-							mf.treatCmd("addMeal2Order \"Order\" \"" + m.getName() + "\" \"1\"");
-						}else{
-							ArrayList<Item> items = pickUpItems(res);
-							for(Item i : items){
-								mf.treatCmd("addItem2Order \"Order\" \"" + i.getName() + "\" \"1\"");
-							}
+				if(hoursToOrder.contains(currentTime.getTime().getHours())){
+					mf.treatCmd("logIn \"" + c.getUsername() + "\" \"" + c.getPassword() + "\"");
+					Restaurant res = pickUpARest();
+					mf.treatCmd("createOrder \"" + res.getUsername() + "\" \"Order\"");
+					if(Math.random() < 0.6){
+						Meal m = pickUpAMeal(res);
+						mf.treatCmd("addMeal2Order \"Order\" \"" + m.getName() + "\" \"1\"");
+					}else{
+						ArrayList<Item> items = pickUpItems(res);
+						for(Item i : items){
+							mf.treatCmd("addItem2Order \"Order\" \"" + i.getName() + "\" \"1\"");
 						}
-						mf.treatCmd("endOrder \"Order\"");
-						mf.treatCmd("logOut \"\"");
-						Calendar auxTime = lastOrder.get(c.getUsername());
-						lastOrder.remove(c.getUsername());
-						auxTime.setTime(currentTime.getTime());
-						lastOrder.put(c.getUsername(),auxTime);
-						
-						PrintWriter writer = new PrintWriter(log);
-						writer.append(c.getUsername() + " orderd to " + res.getUsername() + " at " + currentTime.getTime());
-						writer.close();
 					}
+					mf.treatCmd("endOrder \"Order\"");
+					mf.treatCmd("logOut \"\"");
+					Calendar auxTime = lastOrder.get(c.getUsername());
+					lastOrder.remove(c.getUsername());
+					auxTime.setTime(currentTime.getTime());
+					lastOrder.put(c.getUsername(),auxTime);
 				}
 			}
 			
 		}catch(InterruptedException e){
-			System.out.println(e.getMessage());
-		}catch(IOException e){
 			System.out.println(e.getMessage());
 		}
 	}
