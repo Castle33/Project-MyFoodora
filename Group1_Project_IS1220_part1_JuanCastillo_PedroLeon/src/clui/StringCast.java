@@ -4,6 +4,12 @@ import users.Address;
 import java.util.Calendar;
 import exceptions.InputMismatchException;
 
+/**
+ * Class in charge of converting the inputs that come from the command line in the form of strings, to other object 
+ * forms (address, dates, dish, etc.)
+ * @author Pedro León
+ *
+ */
 public class StringCast {
 	
 	public Address string2Address(String input) throws InputMismatchException {
