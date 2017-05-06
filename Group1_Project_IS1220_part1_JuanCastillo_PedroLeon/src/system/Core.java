@@ -749,7 +749,7 @@ public class Core implements Observable ,Serializable {
 		}
 	}
 	/**
-	 * Main function of the core. It distributes all current orders to the couriers based on the current delivery policy.
+	 * Main function of the core. It distributes all current orders to the couriers, based on the current delivery policy.
 	 * Steps:
 	 * 1) Creates two main lists : currentSortedCouriers (all couriers sorted with the current delivery policy) and
 	 * 							currentCouriersOnDuty (all couriers that are currently treating an order)

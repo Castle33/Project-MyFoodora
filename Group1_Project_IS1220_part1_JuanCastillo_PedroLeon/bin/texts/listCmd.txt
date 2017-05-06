@@ -33,4 +33,4 @@ showTotalProfit <endDate>
 getParameterToTargetProfit <targetProfit> <startDate> <endDate>
 runTest <testScenarioFile>
 help <>
-initCore <>
+initCore <fileName.ser>
