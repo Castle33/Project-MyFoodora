@@ -53,7 +53,7 @@ setSpecialOffer <halfMix1>
 logOut <>
 logIn <ceo> <123456789>
 showMenuItem <username1>
-showMenuItem <usename2>
+showMenuItem <username2>
 showMenuItem <username3>
 logOut <>
 logIn <almeja> <fuckspeed>

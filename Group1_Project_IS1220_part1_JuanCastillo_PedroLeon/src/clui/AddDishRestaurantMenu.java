@@ -14,7 +14,6 @@ public class AddDishRestaurantMenu implements CommandProcessor{
 	final int nArgs = 4;
 	String dishCategory; // "Starter"/"MainDish"/"Dessert"
 	String message;
-	ItemFactory itemFactory = new ItemFactory();
 
 	/* (non-Javadoc)
 	 * @see clui.CommandProcessor#process(java.lang.String[])
@@ -26,7 +25,7 @@ public class AddDishRestaurantMenu implements CommandProcessor{
 				if(MyFoodora.core.getCurrentUser() instanceof Restaurant){
 					if(((Restaurant) MyFoodora.core.getCurrentUser()).getItemByName(args[0]) == null){
 						
-						MyFoodora.core.addItem(itemFactory.getItem(MyFoodora.stringCast.string2Dish(args[1]), args[0], MyFoodora.stringCast.string2Double(args[3]), MyFoodora.stringCast.string2DishType(args[2])));
+						MyFoodora.core.addItem(((ItemFactory)MyFoodora.getItemFactory()).getItem(MyFoodora.stringCast.string2Dish(args[1]), args[0], MyFoodora.stringCast.string2Double(args[3]), MyFoodora.stringCast.string2DishType(args[2])));
 						return "Item: -" + args[0] + "- added to " + MyFoodora.core.getCurrentUser().getName() + "'s menu.";
 					}else{
 						return "Item: -" + args[0] + "- already added to menu.";

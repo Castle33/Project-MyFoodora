@@ -36,4 +36,14 @@ public class TargetProfitDeliveryCost implements ITargetProfitPolicy ,Serializab
 		
 		return deliveryCost;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "TargetProfitDeliveryCost";
+	}
+	
+	
 }

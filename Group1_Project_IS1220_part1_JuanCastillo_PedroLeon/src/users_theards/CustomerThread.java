@@ -24,7 +24,7 @@ public class CustomerThread extends Customer implements Serializable, Runnable{
 	private Lock myfoodora;
 	private static MyFoodora mf;
 	private HashMap<String,Calendar> lastOrder;
-	private static final int minTimeBetweenOrders = 3600000; // 1 hour
+	private static final int minTimeBetweenOrders = 0; // 1 hour
 	private static VirtualCalendar vc;
 	private static ArrayList<Integer> hoursToOrder;
 	private File log;
@@ -120,16 +120,19 @@ public class CustomerThread extends Customer implements Serializable, Runnable{
 	}
 	
 	public Restaurant pickUpARest(){
-		int count = 0;
-		int position = (int) (Math.random()*7);
-		Restaurant res = null;
+		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
 		for(User u : MyFoodora.getCore().getListOfUsers().values()){
 			if(u instanceof Restaurant){
-				if (count == position){
-					res = (Restaurant) u;
-				}
-				count ++;
+				restaurants.add((Restaurant)u);
 			}
+		}
+		int position = (int) (Math.random()*restaurants.size());
+		Restaurant res = null;
+		
+		System.out.println(restaurants);
+		System.out.println(restaurants.size());
+		if(restaurants.size() > position){
+			return restaurants.get(position);
 		}
 		return res;
 	}

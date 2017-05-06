@@ -378,10 +378,13 @@ public class CoreTest {
 		 * markupPercentage = (25 - (3.0 - 2.0)*3)/177.92 = (25 - 3)/177.92 = 22/177.92 = 
 		 */
 		try{
+			System.out.println("HELOOOOOOOOO " + c.getParameterToTargetProfit(25, initDate, finDate));
 			assertTrue(Restaurant.round2dec(c.getParameterToTargetProfit(25, initDate, finDate)) == 0.6);
 			c.setTargetProfitToServiceFee();
+			System.out.println("HELOOOOOOOOO " + c.getParameterToTargetProfit(25, initDate, finDate));
 			assertTrue(Restaurant.round2dec(c.getParameterToTargetProfit(25, initDate, finDate)) == 4.4);
 			c.setTargetProfitToMarkup();
+			System.out.println("HELOOOOOOOOO " + c.getParameterToTargetProfit(25, initDate, finDate));
 			assertTrue(Restaurant.round2dec(c.getParameterToTargetProfit(25, initDate, finDate)) == 0.12);
 		}
 		catch(AccessDeniedException e){

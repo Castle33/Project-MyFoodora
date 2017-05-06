@@ -2,9 +2,7 @@ package clui;
 
 import exceptions.NumberOfArgumentsException;
 import exceptions.AccessDeniedException;
-import restaurant_structure.Item;
-import restaurant_structure.HalfMeal;
-import restaurant_structure.FullMeal;
+import restaurant_structure.MealFactory;
 /**
  * SaveMeal 1 "mealName"
  * @author Pedro León
@@ -12,7 +10,6 @@ import restaurant_structure.FullMeal;
  */
 public class SaveMeal implements CommandProcessor{
 	final int nArgs = 1;
-	Item item;
 	/* (non-Javadoc)
 	 * @see clui.CommandProcessor#process(java.lang.String[])
 	 */
@@ -22,13 +19,11 @@ public class SaveMeal implements CommandProcessor{
 			if(args.length == 1){
 				if(MyFoodora.listTempMeals.keySet().contains(args[0])){
 					if(MyFoodora.listTempMeals.get(args[0]).size() == 2){
-						HalfMeal hm = new HalfMeal(args[0], MyFoodora.listTempMeals.get(args[0]));
-						MyFoodora.core.addMeal(hm);
+						MyFoodora.core.addMeal(((MealFactory)MyFoodora.getMealFactory()).getMeal("HALFMEAL", args[0], MyFoodora.listTempMeals.get(args[0])));
 						MyFoodora.listTempMeals.remove(args[0]);
 						return "HalfMeal: " + args[0] + " saved to " + MyFoodora.core.getCurrentUser().getName() + "'s menu.";
 					}else if(MyFoodora.listTempMeals.get(args[0]).size() == 3){
-						FullMeal fm = new FullMeal(args[0], MyFoodora.listTempMeals.get(args[0]));
-						MyFoodora.core.addMeal(fm);
+						MyFoodora.core.addMeal(((MealFactory)MyFoodora.getMealFactory()).getMeal("FULLMEAL", args[0], MyFoodora.listTempMeals.get(args[0])));
 						MyFoodora.listTempMeals.remove(args[0]);
 						return "FullMeal: -" + args[0]+ "- saved to " + MyFoodora.core.getCurrentUser().getName() + "'s menu.";
 					}else{

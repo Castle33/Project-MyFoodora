@@ -13,6 +13,8 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import restaurant_structure.AbstractFactory;
+import restaurant_structure.FactoryProducer;
 import restaurant_structure.Item;
 
 /**
@@ -32,6 +34,8 @@ public class MyFoodora {
 	private static ArrayList<String> listCmds;
 	private CommandProcessor cmdProcessor;
 	private String commandReturn;
+	private static AbstractFactory itemFactory;
+	private static AbstractFactory mealFactory;
 	
 	/**
 	 * MyFoodora constructor, reads the initial setup from serialized core if file exists
@@ -46,11 +50,13 @@ public class MyFoodora {
 		MyFoodora.listTempOrders = new ArrayList<Order>();
 		MyFoodora.stringCast = new StringCast();
 		MyFoodora.readCmdFile("src/texts/listCmd.txt");
+		itemFactory = FactoryProducer.getFactory("ITEM");
+		mealFactory = FactoryProducer.getFactory("MEAL");
 		
-		// core = new Core();
+		//core = new Core();
 		
 		try{
-			FileInputStream fileIn = new FileInputStream("./ser_file/core.ser");
+			FileInputStream fileIn = new FileInputStream("./ser_file/core_Paris.ser");  // "./ser_file/core_Paris.ser" or "./ser_file/core.ser"
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			core = (Core) in.readObject();
 			in.close();
@@ -62,35 +68,7 @@ public class MyFoodora {
 			System.out.println("Class Core not found Exception.");
 			return;
 		}
-	}
-	
-	/**
-	 * MyFoodora 'constructor' for Paris Test, it initializes the core with core_Paris.ser file
-	 * instead of core.ser file as in the standard constructor
-	 */
-	public void MyFoodoraParis(){
-		this.name = "";
-		this.commandReturn = null;
-		this.args = new ArrayList<String>();
-		MyFoodora.listTempMeals = new HashMap<String,ArrayList<Item>>();
-		MyFoodora.listTempOrders = new ArrayList<Order>();
-		MyFoodora.stringCast = new StringCast();
-		MyFoodora.readCmdFile("src/texts/listCmd.txt");
 		
-		
-		try{
-			FileInputStream fileIn = new FileInputStream("./ser_file/core_Paris.ser");
-			ObjectInputStream in = new ObjectInputStream(fileIn);
-			core = (Core) in.readObject();
-			in.close();
-			fileIn.close();
-		}catch(IOException e){
-			System.out.println("Core file .ser not found Exception.");
-			return ;
-		}catch(ClassNotFoundException e){
-			System.out.println("Class Core not found Exception.");
-			return ;
-		}
 	}
 	
 	/**
@@ -107,8 +85,11 @@ public class MyFoodora {
 			
 			while(!input.equals("stop") && sc.hasNextLine()){
 				input = sc.nextLine();
-				treatCmd(input);
-				System.out.print(">");
+				if(!input.equals("stop")){
+					treatCmd(input);
+					System.out.print(">");
+					
+				}
 			}
 			System.out.println("Leaving MyFoodora\tSee you later!");
 			sc.close();
@@ -126,7 +107,10 @@ public class MyFoodora {
 	public void treatCmd(String s) {
 		
 		if(s.equals("help")){
-			System.out.println(displayListCmd());
+			String out = displayListCmd();
+			out = out.replaceAll("<", "\"");
+			out = out.replaceAll(">", "\"");
+			System.out.println(out);
 		} else {
 			String[] input = s.trim().split(" ");
 			if(!checkCmdExists(input[0])){
@@ -135,7 +119,7 @@ public class MyFoodora {
 			} else {
 				name = input[0];
 			}
-			if(input.length>1){
+			if(input.length>1 && !input[0].equals("runTest")){
 				//Split arguments by ""
 				ArrayList<String> temp_string = new ArrayList<String>();
 				for(int i = 1; i < input.length; i++){
@@ -151,7 +135,13 @@ public class MyFoodora {
 				processCommand(name, args);
 				
 			} else if (input[0].equals("runTest")){
-				readTestScenario("testScenario.txt");
+				String param = input[1].replaceAll("\"", "");
+				if(param.equals("testParis")){
+					TestParis paris = new TestParis();
+					paris.runTest();
+				}else{
+					readTestScenario(param);
+				}
 				
 			} else {
 				System.out.println("Error reading arguments: argumetns could not be found");
@@ -176,8 +166,8 @@ public class MyFoodora {
 				while(sc.hasNextLine()){
 					input = sc.nextLine();
 					if(!input.isEmpty()){
-						input.replaceAll("<", "\"");
-						input.replaceAll(">", "\"");
+						input = input.replaceAll("<", "\"");
+						input = input.replaceAll(">", "\"");
 						treatCmd(input);
 					}
 				}
@@ -185,11 +175,11 @@ public class MyFoodora {
 				
 			} catch (FileNotFoundException e) {
 				System.out.println("File not found: please enter a valid file name");
+			} finally {
+				sc.close();
 			}
 		} catch (Exception e) {
 			System.out.println("Unexpected error: Please try again in a few minutes");
-		} finally {
-			sc.close();
 		}
 		
 		
@@ -343,6 +333,10 @@ public class MyFoodora {
 				cmdProcessor = new ShowListOfOrdersCompleted();
 				setCommandReturn(cmdProcessor.process(argum));
 				break;
+			case "getparametertotargetprofit":
+				cmdProcessor = new GetParameterToTargetProfit();
+				setCommandReturn(cmdProcessor.process(argum));
+				break;
 			case "initcore":
 				cmdProcessor = new InitCore();
 				setCommandReturn(cmdProcessor.process(argum));
@@ -486,6 +480,34 @@ public class MyFoodora {
 	 */
 	public static void setCore(Core core) {
 		MyFoodora.core = core;
+	}
+
+	/**
+	 * @return the itemFactory
+	 */
+	public static AbstractFactory getItemFactory() {
+		return itemFactory;
+	}
+
+	/**
+	 * @param itemFactory the itemFactory to set
+	 */
+	public static void setItemFactory(AbstractFactory itemFactory) {
+		MyFoodora.itemFactory = itemFactory;
+	}
+
+	/**
+	 * @return the mealFactory
+	 */
+	public static AbstractFactory getMealFactory() {
+		return mealFactory;
+	}
+
+	/**
+	 * @param mealFactory the mealFactory to set
+	 */
+	public static void setMealFactory(AbstractFactory mealFactory) {
+		MyFoodora.mealFactory = mealFactory;
 	}
 	
 	

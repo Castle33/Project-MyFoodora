@@ -36,4 +36,12 @@ public class TargetProfitServiceFee implements ITargetProfitPolicy ,Serializable
 		return serviceFee;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "TargetProfitServiceFee";
+	}
+
 }

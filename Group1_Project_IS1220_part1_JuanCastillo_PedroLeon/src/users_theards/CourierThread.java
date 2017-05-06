@@ -38,7 +38,7 @@ public class CourierThread extends Courier implements Serializable, Runnable{
 			putOffDutty();
 			myfoodora.unlock();
 		}
-		mf.treatCmd("initCore \"./ser_files/core_Paris_test1.ser\"");
+		mf.treatCmd("initCore \"./ser_file/core_Paris.ser\"");
 	}
 	
 	public void putOffDutty(){

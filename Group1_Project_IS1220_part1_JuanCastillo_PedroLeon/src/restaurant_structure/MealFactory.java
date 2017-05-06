@@ -1,7 +1,5 @@
 package restaurant_structure;
 
-import java.io.Serializable;
-
 /**
  * 
  * @author Pedro León (programer)
@@ -11,12 +9,11 @@ import java.io.Serializable;
 
 import java.util.List;
 
-public class MealFactory extends AbstractFactory implements Serializable{
+public class MealFactory extends AbstractFactory {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 8621024039082677065L;
 
 	@Override
 	public Item getItem(String itemType, String name, double price, String foodType) {

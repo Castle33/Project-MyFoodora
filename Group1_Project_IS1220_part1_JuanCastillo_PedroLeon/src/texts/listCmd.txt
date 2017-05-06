@@ -30,6 +30,7 @@ showCustomers <>
 showMenuItem <restaurantName>
 showTotalProfit <startDate> <endDate>
 showTotalProfit <endDate>
+getParameterToTargetProfit <targetProfit> <startDate> <endDate>
 runTest <testScenarioFile>
 help <>
 initCore <fileName.ser>
