@@ -32,4 +32,4 @@ showTotalProfit <startDate> <endDate>
 showTotalProfit <endDate>
 runTest <testScenarioFile>
 help <>
-initCore <>
+initCore <fileName.ser>
