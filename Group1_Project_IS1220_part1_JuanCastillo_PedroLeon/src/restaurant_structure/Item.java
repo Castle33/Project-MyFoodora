@@ -67,10 +67,13 @@ public abstract class Item implements Serializable {
 	
 	/***************************************************************************************************/
 
+	/**
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
-
+	
 	public void setName(String name) {
 		this.name = name;
 	}

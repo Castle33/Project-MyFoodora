@@ -4,7 +4,7 @@ import exceptions.NumberOfArgumentsException;
 import restaurant_structure.Meal;
 import users.Restaurant;
 /**
- * ShowMeal 1 <mealName>
+ * ShowMeal 1 "mealName"
  * @author Pedro León
  *
  */

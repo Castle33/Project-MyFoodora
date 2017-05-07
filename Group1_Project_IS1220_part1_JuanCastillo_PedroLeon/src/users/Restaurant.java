@@ -180,7 +180,7 @@ public class Restaurant extends User implements Serializable{
 	 * changed added for loop to search meal in listOfSpecialMeal too
 	 * - before: for loop only for listOfMeal
 	 * - after: for loop for both listOfMeal and listOfSpecialMeal
-	 * @param the name of the meal that wants to be searched
+	 * @param mealName: the name of the meal that wants to be searched
 	 * @return the object meal if it is in the list of meals or null otherwise
 	 */
 	public Meal getMealByName(String mealName){
@@ -198,7 +198,7 @@ public class Restaurant extends User implements Serializable{
 	}
 	/**
 	 * tested: YES
-	 * @param the name of the item that wants to be searched
+	 * @param itemName: the name of the item that wants to be searched
 	 * @return the item if it is in the menu or null otherwise
 	 */
 	public Item getItemByName(String itemName){
@@ -221,7 +221,7 @@ public class Restaurant extends User implements Serializable{
 	}
 	/**
 	 * 
-	 * @param the meal that wants to be determined if special or not 
+	 * @param meal: the meal that wants to be determined if special or not 
 	 * @return TRUE if it is special and FALSE otherwise
 	 */
 	public boolean determineIfDiscountMeal(Meal meal){
@@ -234,7 +234,7 @@ public class Restaurant extends User implements Serializable{
 	}
 	/**
 	 * tested: YES
-	 * @param double number that wants to rounded to two decimals
+	 * @param n: double number that wants to rounded to two decimals
 	 * @return the parameter rounded to two decimals
 	 */
 	public static double round2dec (double n){
@@ -268,7 +268,7 @@ public class Restaurant extends User implements Serializable{
 	}
 
 	/**
-	 * @param discountFactor the discountFactor to set
+	 * @param mealDiscount the discountFactor to set
 	 */
 	public void setDiscountFactor(double mealDiscount) {
 		this.discountFactor = mealDiscount;
@@ -282,7 +282,7 @@ public class Restaurant extends User implements Serializable{
 	}
 
 	/**
-	 * @param specialDiscountFactor the specialDiscountFactor to set
+	 * @param discountFactor the specialDiscountFactor to set
 	 */
 	public void setSpecialDiscountFactor(double discountFactor) {
 		this.specialDiscountFactor = discountFactor;

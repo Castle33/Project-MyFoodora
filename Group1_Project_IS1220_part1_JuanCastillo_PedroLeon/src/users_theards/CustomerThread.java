@@ -157,7 +157,7 @@ public class CustomerThread implements Serializable, Runnable{
 	/**
 	 * for a random restaurant returns a random combination of 3 items (Starter,Main Dish and Dessert)
 	 * @param res
-	 * @return ArrayList<Item>
+	 * @return ArrayList
 	 */
 	public ArrayList<Item> pickUpItems(Restaurant res){
 		int countStarter = 0;

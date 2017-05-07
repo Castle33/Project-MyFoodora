@@ -79,6 +79,10 @@ public abstract class Meal implements Serializable{
 	 * Getter and setters
 	 */
 
+	
+	/**
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
@@ -87,7 +91,7 @@ public abstract class Meal implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 
 	public List<Item> getMealItems() {
 		return mealItems;
