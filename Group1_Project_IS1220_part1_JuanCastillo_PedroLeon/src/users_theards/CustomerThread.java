@@ -28,7 +28,7 @@ public class CustomerThread implements Serializable, Runnable{
 		vc = VirtualCalendar.getUnique();
 		lastOrder = new HashMap<String, Calendar>();
 		hoursToOrder = new ArrayList<Integer>();
-		hoursToOrder.add(11);hoursToOrder.add(12);hoursToOrder.add(16);hoursToOrder.add(17);hoursToOrder.add(18);hoursToOrder.add(19);hoursToOrder.add(20);hoursToOrder.add(21);
+		hoursToOrder.add(7);hoursToOrder.add(8);hoursToOrder.add(9);hoursToOrder.add(10);hoursToOrder.add(11);hoursToOrder.add(12);hoursToOrder.add(13);hoursToOrder.add(14);hoursToOrder.add(15);hoursToOrder.add(16);hoursToOrder.add(17);hoursToOrder.add(18);hoursToOrder.add(19);hoursToOrder.add(20);hoursToOrder.add(21);hoursToOrder.add(22);hoursToOrder.add(23);hoursToOrder.add(0);
 		for(User u : MyFoodora.getCore().getListOfUsers().values()){
 			if(u instanceof Customer){
 				lastOrder.put(u.getUsername(), Calendar.getInstance());
@@ -45,6 +45,7 @@ public class CustomerThread implements Serializable, Runnable{
 			makeAnOrder();
 			myfoodora.unlock();
 		}
+		System.out.println("*********************Customer thread ended.*********************");
 	}
 	
 	public void makeAnOrder(){
@@ -111,9 +112,6 @@ public class CustomerThread implements Serializable, Runnable{
 		}
 		int position = (int) (Math.random()*restaurants.size());
 		Restaurant res = null;
-		
-		System.out.println(restaurants);
-		System.out.println(restaurants.size());
 		if(restaurants.size() > position){
 			return restaurants.get(position);
 		}

@@ -30,7 +30,7 @@ public class ShowRestaurantTop implements CommandProcessor{
 				Collections.sort(rest, Restaurant.compareNumOrdersCompleted());
 				Collections.reverse(rest);
 				for(Restaurant restaurant : rest){
-					message += "\n-" + restaurant.getUsername() + " " + restaurant.getCountOfOrdersCompleted() + "-.";
+					message += "\nRestaurant -" + restaurant.getUsername() + "- recieved -" + restaurant.getCountOfOrdersCompleted() + "- orders.";
 				}
 				return "The restaurants sorted by number of completed orders in decreasing order are:" + message;
 			}else{

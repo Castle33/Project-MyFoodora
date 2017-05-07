@@ -121,7 +121,12 @@ public class Customer extends User implements Observer ,Serializable{
 	public void changeBeNotified(boolean b){
 		setBeNotified(b);
 	}
-	
+	/**
+	 * tested: YES
+	 * @param r
+	 * @param m
+	 * restaurant 'r' offers a new special meal 'm' 
+	 */
 	@Override
 	public void update(Restaurant r, Meal m){
 		if(beNotified){

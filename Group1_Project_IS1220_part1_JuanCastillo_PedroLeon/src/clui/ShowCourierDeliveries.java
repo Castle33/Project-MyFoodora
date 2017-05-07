@@ -41,7 +41,7 @@ public class ShowCourierDeliveries implements CommandProcessor{
 					orderedCouriers = dfo.setDeliveryPolicy(couriers, new Address(0,0));
 					Collections.reverse(orderedCouriers);
 					for(Courier cu : orderedCouriers){
-						message += "\n-" + cu.getUsername() + " " + cu.getCountOfOrdersCompleted() + "-.";
+						message += "\nCourier -" + cu.getUsername() + "- delivered -" + cu.getCountOfOrdersCompleted() + "- orders.";
 					}
 					return "List of ordered couriers:" + message;
 				}else{

@@ -30,6 +30,8 @@ public class CourierThread implements Serializable, Runnable{
 			putOffDutty();
 			myfoodora.unlock();
 		}
+		System.out.println("*********************Courier thread finished.*********************");
+		System.out.println("To verify test please introduce these commands:\nlogIn \"ceo\" \"123456789\"\nshowCourierDeliveries \"\"\nshowRestaurantTop \"\"\nshowTotalProfit \"7/5/2018\"\nlogOut \"\"\n");
 	}
 	
 	public void putOffDutty(){

@@ -34,6 +34,7 @@ public class ShowTotalProfit implements CommandProcessor{
 				Calendar cal2 = Calendar.getInstance();
 				try {
 					cal1 = stringCast.string2Calendar(Core.creationDate);
+					cal2 = stringCast.string2Calendar(args[0]);
 					return "The total profit from init date until now is: -" + Restaurant.round2dec(MyFoodora.core.computeTotalProfit(cal1, cal2)) + "-.";
 					
 				} catch (InputMismatchException e) {
