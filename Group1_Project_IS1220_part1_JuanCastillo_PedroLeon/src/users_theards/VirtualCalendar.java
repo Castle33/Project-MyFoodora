@@ -38,6 +38,17 @@ public class VirtualCalendar implements Serializable{
 		
 		return lastVirtualTime;
 	}
+	
+	public Calendar getVirtualDate(Calendar givenTime){
+		currentTime = Calendar.getInstance();
+		long currentTimeInMillis = currentTime.getTimeInMillis();
+		long lastTimeInMillis = givenTime.getTimeInMillis();
+		long timeLapse = lastTimeInMillis - currentTimeInMillis;
+		long fakeTimeLapse = timeLapse * timeMult;
+		givenTime.add(Calendar.SECOND, Math.toIntExact(fakeTimeLapse/1000));
+		
+		return givenTime;
+	}
 
 	/**
 	 * @return the lastTime

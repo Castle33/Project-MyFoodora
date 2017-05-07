@@ -8,6 +8,7 @@ import restaurant_structure.Meal;
 import restaurant_structure.Item;
 import users.Customer;
 import users.Restaurant;
+import users_theards.VirtualCalendar;
 import users.Address;
 /**
  * The class use to create an order that has the information of the customer that ordered it and the restaurant chosen
@@ -35,6 +36,7 @@ public class Order implements Serializable {
 	private Calendar date;
 	private Calendar deliveryDate;
 	private String name;
+	private VirtualCalendar vc;
 	/**
 	 * Constructor without date: sets the date to the current local time
 	 * tested: YES
@@ -50,6 +52,7 @@ public class Order implements Serializable {
 		this.deliveryDate = null;
 		meals = new HashMap<Meal,Integer>();
 		items = new HashMap<Item,Integer>();
+		vc = VirtualCalendar.getUnique();
 	}
 	/**
 	 * Constructor with date

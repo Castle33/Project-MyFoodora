@@ -31,7 +31,8 @@ public class CourierThread implements Serializable, Runnable{
 			myfoodora.unlock();
 		}
 		System.out.println("*********************Courier thread finished.*********************");
-		System.out.println("To verify test please introduce these commands:\nlogIn \"ceo\" \"123456789\"\nshowCourierDeliveries \"\"\nshowRestaurantTop \"\"\nshowTotalProfit \"7/5/2018\"\nlogOut \"\"\n\n>");
+		System.out.println("PARIS TEST SUCCESFULLY FINISHED\nNow you can go to the top of the console and observe all the orders recieved and delivered.\nOnce too many orders have been accepted we can check that some offers were refused.\nCourier's commands have indentation to distinguish them from Customer's commands.\n\nTo verify test please introduce these commands:\n\nlogIn \"ceo\" \"123456789\"\nshowCourierDeliveries \"\"\nshowRestaurantTop \"\"\nshowListOfOrdersCompleted \"\"\nshowTotalProfit \"7/5/2018\"\nlogOut \"\"\n\n");
+		System.out.print(">");
 	}
 	
 	public void putOffDutty(){
@@ -39,9 +40,12 @@ public class CourierThread implements Serializable, Runnable{
 		Courier cou = pickUpACour();
 		if(cou != null){
 			if(cou.getCurrentOrder().getDeliveryDate().before(currentTime)){
-				System.out.println("Delivery time : " + cou.getCurrentOrder().getDeliveryDate().getTime() + " - current time : " + currentTime.getTime());
+				System.out.println("\tCourier, delivery time : " + cou.getCurrentOrder().getDeliveryDate().getTime() + " - current time : " + currentTime.getTime());
+				System.out.print("\t");
 				mf.treatCmd("logIn \"" + cou.getUsername() + "\" \"" + cou.getPassword() + "\"");
+				System.out.print("\t");
 				mf.treatCmd("offDuty \"" + cou.getUsername() + "\"");
+				System.out.print("\t");
 				mf.treatCmd("logOut \"\"");
 			}
 		}

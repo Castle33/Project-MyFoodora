@@ -55,6 +55,7 @@ public class CustomerThread implements Serializable, Runnable{
 			Calendar currentTime = vc.getVirtualDate();
 			if(Math.random() < wantToOrder){
 				if(hoursToOrder.contains(currentTime.getTime().getHours())){
+					System.out.println("Customer, time: " + vc.getVirtualDate().getTime() + ". ");
 					mf.treatCmd("logIn \"" + c.getUsername() + "\" \"" + c.getPassword() + "\"");
 					Restaurant res = pickUpARest();
 					mf.treatCmd("createOrder \"" + res.getUsername() + "\" \"Order\"");

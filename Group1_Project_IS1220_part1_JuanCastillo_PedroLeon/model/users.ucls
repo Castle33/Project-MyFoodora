@@ -1,26 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.14" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
-  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="users.User" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
-    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/users/User.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="558" y="68"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="false" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="2" language="java" name="users.Restaurant" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
-    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/users/Restaurant.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="994" y="450"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="false" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <interface id="3" language="java" name="users.Observer" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+<class-diagram version="1.1.14" icons="true" automaticImage="PNG" always-add-relationships="false" 
+  generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true" 
+  router="FAN">  
+  <interface id="1" language="java" name="users.Observer" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
     file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/users/Observer.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="108" y="136"/>    
@@ -30,17 +12,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="4" language="java" name="users.Manager" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
-    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/users/Manager.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="931" y="68"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="false" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="5" language="java" name="users.Customer" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+  <class id="2" language="java" name="users.Customer" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
     file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/users/Customer.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="107" y="431"/>    
@@ -50,10 +22,39 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="users.Courier" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+  <class id="3" language="java" name="users.Courier" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
     file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/users/Courier.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="558" y="468"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="false" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="users.User" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/users/User.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="558" y="68"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="false" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="users.Manager" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/users/Manager.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="931" y="68"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="false" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="users.Restaurant" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
+    file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/users/Restaurant.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="994" y="450"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="false" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -71,20 +72,20 @@
     </display>  
   </class>  
   <generalization id="8">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="1"/>  
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="4"/>  
   </generalization>  
-  <realization id="9">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="3"/>  
-  </realization>  
+  <generalization id="9">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
   <generalization id="10">    
     <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="1"/>  
+    <end type="TARGET" refId="4"/>  
   </generalization>  
   <association id="11">    
-    <end type="SOURCE" refId="5" navigable="false" variant="ASSOCIATION">      
-      <attribute id="12" name="address">        
+    <end type="SOURCE" refId="3" navigable="false" variant="ASSOCIATION">      
+      <attribute id="12" name="position">        
         <position height="0" width="0" x="10" y="-300"/>      
       </attribute>      
       <multiplicity id="13" minimum="0" maximum="1">        
@@ -94,38 +95,38 @@
     <end type="TARGET" refId="7" navigable="true" variant="ASSOCIATION"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="14">    
-    <end type="SOURCE" refId="6" navigable="false" variant="ASSOCIATION">      
-      <attribute id="15" name="position">        
-        <position height="0" width="0" x="10" y="-300"/>      
-      </attribute>      
-      <multiplicity id="16" minimum="0" maximum="1">        
-        <position height="0" width="0" x="10" y="-300"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true" variant="ASSOCIATION"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="17">    
+  <generalization id="14">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="15">    
     <end type="SOURCE" refId="2" navigable="false" variant="ASSOCIATION">      
-      <attribute id="18" name="address">        
+      <attribute id="16" name="address">        
         <position height="0" width="0" x="10" y="-300"/>      
       </attribute>      
-      <multiplicity id="19" minimum="0" maximum="1">        
+      <multiplicity id="17" minimum="0" maximum="1">        
         <position height="0" width="0" x="10" y="-300"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="7" navigable="true" variant="ASSOCIATION"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="20">    
+  <realization id="18">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <generalization id="21">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
+  </realization>  
+  <association id="19">    
+    <end type="SOURCE" refId="6" navigable="false" variant="ASSOCIATION">      
+      <attribute id="20" name="address">        
+        <position height="0" width="0" x="10" y="-300"/>      
+      </attribute>      
+      <multiplicity id="21" minimum="0" maximum="1">        
+        <position height="0" width="0" x="10" y="-300"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
