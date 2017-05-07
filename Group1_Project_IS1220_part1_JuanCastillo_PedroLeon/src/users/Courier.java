@@ -46,7 +46,8 @@ public class Courier extends User implements Serializable{
 	}
 	
 	/***************************************************************************************************/
-	/* Two Comparators methods depending on distance to restaurant or number of orders of Class Courier */
+	/* Three Comparators methods depending on distance to restaurant, number of orders of Class Courier or
+	 * delivery time of current order */
 	/**
 	 * Comparator use to sort couriers in the Delivery Fastest Policy depending on their distance to the restaurant
 	 * @return a comparator that compares couriers based on the attribute <code>distanceToRest</code>
