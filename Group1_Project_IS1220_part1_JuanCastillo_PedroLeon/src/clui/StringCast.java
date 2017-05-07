@@ -31,6 +31,7 @@ public class StringCast {
 		if(coordinates.length == 3){
 			Calendar calendar = Calendar.getInstance();
 			calendar.set(Integer.parseInt(coordinates[2]), Integer.parseInt(coordinates[1]), Integer.parseInt(coordinates[0]));
+			calendar.add(Calendar.MONTH, -1);
 			return calendar;
 		}else{
 			throw new InputMismatchException();

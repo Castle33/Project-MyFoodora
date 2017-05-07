@@ -5,7 +5,7 @@
     file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/system/Core.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="460" y="336"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
+      sort-features="false" accessors="false" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
@@ -13,9 +13,9 @@
   <class id="2" language="java" name="users.Customer" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
     file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/users/Customer.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="907" y="415"/>    
+    <position height="-1" width="-1" x="846" y="444"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
+      sort-features="false" accessors="false" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="false"/>    
     </display>  
@@ -34,7 +34,7 @@
     project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
     file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/system/Observable.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="466" y="22"/>    
+    <position height="-1" width="-1" x="460" y="15"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      

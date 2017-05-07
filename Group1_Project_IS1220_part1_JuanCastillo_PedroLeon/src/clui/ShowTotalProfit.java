@@ -14,7 +14,6 @@ import users.Restaurant;
  *
  */
 public class ShowTotalProfit implements CommandProcessor{
-	StringCast stringCast = new StringCast();
 	
 	public String process(String[] args) {
 		try{
@@ -22,8 +21,10 @@ public class ShowTotalProfit implements CommandProcessor{
 				Calendar cal1;
 				Calendar cal2;
 				try {
-					cal1 = stringCast.string2Calendar(args[0]);
-					cal2 = stringCast.string2Calendar(args[1]);
+					cal1 = MyFoodora.stringCast.string2Calendar(args[0]);
+					cal2 = MyFoodora.stringCast.string2Calendar(args[1]);
+					System.out.println(args[0]);
+					System.out.println(cal1.getTime());
 					return "The total profit for the specified time interval is: -" + Restaurant.round2dec(MyFoodora.core.computeTotalProfit(cal1, cal2)) + "-.";
 					
 				} catch (InputMismatchException e) {
@@ -33,8 +34,8 @@ public class ShowTotalProfit implements CommandProcessor{
 				Calendar cal1 = Calendar.getInstance();
 				Calendar cal2 = Calendar.getInstance();
 				try {
-					cal1 = stringCast.string2Calendar(Core.creationDate);
-					cal2 = stringCast.string2Calendar(args[0]);
+					cal1 = MyFoodora.stringCast.string2Calendar(Core.creationDate);
+					cal2 = MyFoodora.stringCast.string2Calendar(args[0]);
 					return "The total profit from init date until now is: -" + Restaurant.round2dec(MyFoodora.core.computeTotalProfit(cal1, cal2)) + "-.";
 					
 				} catch (InputMismatchException e) {

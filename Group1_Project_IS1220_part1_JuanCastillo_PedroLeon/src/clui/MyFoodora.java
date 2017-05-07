@@ -58,6 +58,36 @@ public class MyFoodora {
 		//core = new Core();
 		
 		try{
+			FileInputStream fileIn = new FileInputStream("./ser_file/core.ser");  // "./ser_file/core_Paris.ser" or "./ser_file/core.ser"
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			core = (Core) in.readObject();
+			in.close();
+			fileIn.close();
+		}catch(IOException e){
+			System.out.println("Core file .ser not found Exception.");
+			return;
+		}catch(ClassNotFoundException e){
+			System.out.println("Class Core not found Exception.");
+			return;
+		}
+		
+	}
+	
+	public MyFoodora(String s) {
+		super();
+		this.name = "";
+		this.commandReturn = null;
+		this.args = new ArrayList<String>();
+		MyFoodora.listTempMeals = new HashMap<String,ArrayList<Item>>();
+		MyFoodora.listTempOrders = new ArrayList<Order>();
+		MyFoodora.stringCast = new StringCast();
+		MyFoodora.readCmdFile("src/texts/listCmd.txt");
+		itemFactory = FactoryProducer.getFactory("ITEM");
+		mealFactory = FactoryProducer.getFactory("MEAL");
+		
+		//core = new Core();
+		
+		try{
 			FileInputStream fileIn = new FileInputStream("./ser_file/core_Paris.ser");  // "./ser_file/core_Paris.ser" or "./ser_file/core.ser"
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			core = (Core) in.readObject();
@@ -72,6 +102,7 @@ public class MyFoodora {
 		}
 		
 	}
+	
 	
 	/**
 	 * This method launches the command line interface, is able to stop the program

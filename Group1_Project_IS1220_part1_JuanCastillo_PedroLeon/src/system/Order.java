@@ -172,7 +172,6 @@ public class Order implements Serializable {
 	@Override
 	public String toString() {
 		String mealDisplay = "";
-		System.out.println(meals.isEmpty());
 		for(Meal m : meals.keySet()){
 			mealDisplay += m.getName() + "-" + meals.get(m) + "2";
 		}

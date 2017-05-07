@@ -13,7 +13,7 @@ public class TestParis {
 	
 	public TestParis(){
 		l = new ReentrantLock();
-		mf = new MyFoodora();
+		mf = new MyFoodora("Paris");
 		tcustomer1 = new Thread(new CustomerThread(l,mf));
 		tcourier1 = new Thread(new CourierThread(l,mf));
 	}

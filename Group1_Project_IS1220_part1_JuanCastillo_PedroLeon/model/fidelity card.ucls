@@ -16,7 +16,7 @@
     project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
     file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/system/FidelityCardBasic.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="388" y="253"/>    
+    <position height="-1" width="-1" x="372" y="330"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -27,7 +27,7 @@
     project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
     file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/system/FidelityCardLottery.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="393" y="96"/>    
+    <position height="-1" width="-1" x="366" y="160"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -38,7 +38,7 @@
     project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
     file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/system/FidelityCardPoint.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="401" y="463"/>    
+    <position height="-1" width="-1" x="371" y="554"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -49,7 +49,7 @@
     project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
     file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/system/FidelityCardType.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="639" y="124"/>    
+    <position height="-1" width="-1" x="644" y="145"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -59,31 +59,35 @@
   <class id="6" language="java" name="users.Customer" project="Group1_Project_IS1220_part1_JuanCastillo_PedroLeon" 
     file="/Group1_Project_IS1220_part1_JuanCastillo_PedroLeon/src/users/Customer.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="996" y="307"/>    
+    <position height="-1" width="-1" x="1001" y="331"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
+      sort-features="false" accessors="false" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
   <realization id="7">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
-  <realization id="8">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
-  <realization id="9">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="1"/>  
   </realization>  
+  <realization id="8">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <realization id="9">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
   <association id="10">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="11" name="fidelityCard"/>      
-      <multiplicity id="12" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="6" navigable="false" variant="ASSOCIATION">      
+      <attribute id="11" name="fidelityCard">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="12" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
+    <end type="TARGET" refId="1" navigable="true" variant="ASSOCIATION"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

@@ -73,11 +73,16 @@ addMeal2Order <order3> <Vegetarian3> <3>
 endOrder <order3>
 logOut <>
 logIn <ceo> <123456789>
-showTotalProfit <01/04/2017> <31/04/2017>
-showTotalProfit	<31/04/2017>
+showTotalProfit <01/04/2017> <31/04/2018>
+showTotalProfit	<31/04/2018>
 setProfitPolicy <SERVICEFEE>
-showTotalProfit <01/04/2017> <31/04/2017>
-showTotalProfit	<31/04/2017>
+showTotalProfit <01/04/2017> <31/04/2018>
+showTotalProfit	<31/04/2018>
+getParameterToTargetProfit <20> <7/3/2017> <7/7/2017>
+setProfitPolicy <DeliveryCost>
+getParameterToTargetProfit <20> <7/3/2017> <7/7/2017>
+setProfitPolicy <Markup>
+getParameterToTargetProfit <20> <7/3/2017> <7/7/2017>
 showCourierDeliveries <>
 showRestaurantTop <>
 logOut <>

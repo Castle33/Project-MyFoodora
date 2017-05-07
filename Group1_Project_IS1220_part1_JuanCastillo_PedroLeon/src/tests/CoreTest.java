@@ -66,8 +66,7 @@ public class CoreTest {
 			c.registerUser(man);
 		}
 		catch(UsernameAlreadyRegisteredException e){
-			System.out.println(e.getMessage());
-			System.out.println("User: " + man.getUsername() + " already registered.");
+			assertTrue(e.getMessage().equals("This username already exists: try a different username"));
 		}
 		assertTrue(c.getListOfUsers().get("mbataillou").getUsername() == "mbataillou");
 	}
@@ -378,13 +377,10 @@ public class CoreTest {
 		 * markupPercentage = (25 - (3.0 - 2.0)*3)/177.92 = (25 - 3)/177.92 = 22/177.92 = 
 		 */
 		try{
-			System.out.println("HELOOOOOOOOO " + c.getParameterToTargetProfit(25, initDate, finDate));
 			assertTrue(Restaurant.round2dec(c.getParameterToTargetProfit(25, initDate, finDate)) == 0.6);
 			c.setTargetProfitToServiceFee();
-			System.out.println("HELOOOOOOOOO " + c.getParameterToTargetProfit(25, initDate, finDate));
 			assertTrue(Restaurant.round2dec(c.getParameterToTargetProfit(25, initDate, finDate)) == 4.4);
 			c.setTargetProfitToMarkup();
-			System.out.println("HELOOOOOOOOO " + c.getParameterToTargetProfit(25, initDate, finDate));
 			assertTrue(Restaurant.round2dec(c.getParameterToTargetProfit(25, initDate, finDate)) == 0.12);
 		}
 		catch(AccessDeniedException e){
@@ -629,13 +625,13 @@ public class CoreTest {
 			c.registerUser(r3);
 			c.userLogIn(m);
 			list = c.showRestaurantsRegistered();
+			assertTrue(list.equals("\nRestaurant [name=La Playa, username=LaPlayaBilbao, ID=264]\nRestaurant [name=TGF, username=TGFParis, ID=265]\nRestaurant [name=McDonals, username=mcdonalsmadrid, ID=266]"));
 			c.logOut();
 		}catch(AccessDeniedException e){
 			System.out.println("User: " + c.getCurrentUser().getUsername() + " NOT a manager.");
 		}catch(UsernameAlreadyRegisteredException e){
 			System.out.println("Customer registered already exists.");
 		}
-		assertTrue(list.equals("Restaurant [name=La Playa, username=LaPlayaBilbao, ID=264]Restaurant [name=TGF, username=TGFParis, ID=265]Restaurant [name=McDonals, username=mcdonalsmadrid, ID=266]"));
 	}
 
 	@Test
