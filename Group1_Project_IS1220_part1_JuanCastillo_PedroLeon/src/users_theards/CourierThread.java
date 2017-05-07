@@ -15,12 +15,20 @@ public class CourierThread implements Serializable, Runnable{
 	private MyFoodora mf;
 	private static VirtualCalendar vc;
 	
+	/**
+	 * class constructor receiving thread lock and common MyFoodora
+	 * @param l
+	 * @param myf
+	 */
 	public CourierThread(Lock l, MyFoodora myf) {
 		mf = myf;
 		vc = VirtualCalendar.getUnique();
 		myfoodora = l;
 	}
-
+	
+	/**
+	 * thread will execute putOffDuty until 1 virtual hour has passed
+	 */
 	@Override
 	public void run() {
 		Calendar fin = Calendar.getInstance();
@@ -35,6 +43,9 @@ public class CourierThread implements Serializable, Runnable{
 		System.out.print(">");
 	}
 	
+	/**
+	 * if random courier current order delivery date is earlier than current order then off duty
+	 */
 	public void putOffDutty(){
 		Calendar currentTime = vc.getVirtualDate();
 		Courier cou = pickUpACour();
@@ -51,6 +62,10 @@ public class CourierThread implements Serializable, Runnable{
 		}
 	}
 	
+	/**
+	 * from list of users pick up a random on dutty courier
+	 * @return Courier
+	 */
 	public Courier pickUpACour(){
 		int count = 0;
 		ArrayList<Courier> couriers = new ArrayList<Courier>();

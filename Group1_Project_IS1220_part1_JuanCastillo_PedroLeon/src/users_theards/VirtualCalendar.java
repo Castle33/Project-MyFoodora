@@ -17,9 +17,16 @@ public class VirtualCalendar implements Serializable{
 	private static Calendar lastTime = Calendar.getInstance();
 	private final static int timeMult = 120; // 4464 sec = 74.4 min = 1.24 h per real second
 	
+	/**
+	 * basic constructor
+	 */
 	private VirtualCalendar() {
 	}
 	
+	/**
+	 * singleton pattern, returns the unique instance of VirtualCalendar
+	 * @return VirtualCalendar
+	 */
 	public static VirtualCalendar getUnique(){
 		if(instance == null){
 			instance = new VirtualCalendar();
@@ -27,6 +34,14 @@ public class VirtualCalendar implements Serializable{
 		return instance;
 	}
 	
+	/**
+	 * This method returns an instance of virtual calendar as getInstance() does for Calendar class
+	 * 
+	 * in order to return current virtual time, the program needs a past couple of time-virtual time 
+	 * to calculate current couple time-virtual time. For this each time a virtual date is asked for
+	 * Virtual Calendar will save the new couple time-virtual time to lastTime-lastVirtualTime
+	 * @return Calendar
+	 */
 	public Calendar getVirtualDate(){
 		currentTime = Calendar.getInstance();
 		long currentTimeInMillis = currentTime.getTimeInMillis();
@@ -38,17 +53,9 @@ public class VirtualCalendar implements Serializable{
 		
 		return lastVirtualTime;
 	}
-	
-	public Calendar getVirtualDate(Calendar givenTime){
-		currentTime = Calendar.getInstance();
-		long currentTimeInMillis = currentTime.getTimeInMillis();
-		long lastTimeInMillis = givenTime.getTimeInMillis();
-		long timeLapse = lastTimeInMillis - currentTimeInMillis;
-		long fakeTimeLapse = timeLapse * timeMult;
-		givenTime.add(Calendar.SECOND, Math.toIntExact(fakeTimeLapse/1000));
-		
-		return givenTime;
-	}
+	/**
+	 *************************************getters/setters***************************************
+	 */
 
 	/**
 	 * @return the lastTime

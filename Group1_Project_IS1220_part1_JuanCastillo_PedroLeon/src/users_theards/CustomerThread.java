@@ -18,24 +18,25 @@ public class CustomerThread implements Serializable, Runnable{
 	private static final double wantToOrder = 0.2;
 	private Lock myfoodora;
 	private MyFoodora mf;
-	private HashMap<String,Calendar> lastOrder;
 	private static VirtualCalendar vc;
 	private static ArrayList<Integer> hoursToOrder;
 	
+	/**
+	 * class constructor receiving thread lock and common MyFoodora
+	 * @param l
+	 * @param myf
+	 */
 	public CustomerThread(Lock l, MyFoodora myf) {
 		myfoodora = l;
 		mf = myf;
 		vc = VirtualCalendar.getUnique();
-		lastOrder = new HashMap<String, Calendar>();
 		hoursToOrder = new ArrayList<Integer>();
 		hoursToOrder.add(7);hoursToOrder.add(8);hoursToOrder.add(9);hoursToOrder.add(10);hoursToOrder.add(11);hoursToOrder.add(12);hoursToOrder.add(13);hoursToOrder.add(14);hoursToOrder.add(15);hoursToOrder.add(16);hoursToOrder.add(17);hoursToOrder.add(18);hoursToOrder.add(19);hoursToOrder.add(20);hoursToOrder.add(21);hoursToOrder.add(22);hoursToOrder.add(23);hoursToOrder.add(0);
-		for(User u : MyFoodora.getCore().getListOfUsers().values()){
-			if(u instanceof Customer){
-				lastOrder.put(u.getUsername(), Calendar.getInstance());
-			}
-		}
 	}
-
+	
+	/**
+	 * thread will execute makeAnOrder until 1 virtual hour has passed
+	 */
 	@Override
 	public void run() {
 		Calendar fin = Calendar.getInstance();
@@ -48,6 +49,11 @@ public class CustomerThread implements Serializable, Runnable{
 		System.out.println("*********************Customer thread ended.*********************");
 	}
 	
+	/**
+	 * for 1 out of 5 times customer will pick up a restaurant and a meal/items
+	 * we don't take into consideration of current customer has done earlier another order
+	 * we suppose the probability of repeating one customer pick up out of 100 customers can be neglected 
+	 */
 	public void makeAnOrder(){
 		try{
 			Thread.sleep(100);
@@ -70,10 +76,6 @@ public class CustomerThread implements Serializable, Runnable{
 					}
 					mf.treatCmd("endOrder \"Order\"");
 					mf.treatCmd("logOut \"\"");
-					Calendar auxTime = lastOrder.get(c.getUsername());
-					lastOrder.remove(c.getUsername());
-					auxTime.setTime(currentTime.getTime());
-					lastOrder.put(c.getUsername(),auxTime);
 				}
 			}
 			
@@ -82,6 +84,10 @@ public class CustomerThread implements Serializable, Runnable{
 		}
 	}
 	
+	/**
+	 * returns a random customer out of list of users
+	 * @return Customer
+	 */
 	public Customer pickUpACust(){
 		int count = 0;
 		ArrayList<Customer> customers = new ArrayList<Customer>();
@@ -98,12 +104,13 @@ public class CustomerThread implements Serializable, Runnable{
 			}
 			count ++;
 		}
-		if(lastOrder.get(customer.getUsername()) == null){
-			lastOrder.put(customer.getUsername(),Calendar.getInstance());
-		}
 		return customer;
 	}
 	
+	/**
+	 * returns a random restaurant out of list of users
+	 * @return Restaurant
+	 */
 	public Restaurant pickUpARest(){
 		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
 		for(User u : MyFoodora.getCore().getListOfUsers().values()){
@@ -119,6 +126,11 @@ public class CustomerThread implements Serializable, Runnable{
 		return res;
 	}
 	
+	/**
+	 * for a random restaurant returns a random meal of its menu
+	 * @param res
+	 * @return Meal
+	 */
 	public Meal pickUpAMeal(Restaurant res){
 		int count = 0;
 		Meal meal = null;
@@ -142,6 +154,11 @@ public class CustomerThread implements Serializable, Runnable{
 		return meal;
 	}
 	
+	/**
+	 * for a random restaurant returns a random combination of 3 items (Starter,Main Dish and Dessert)
+	 * @param res
+	 * @return ArrayList<Item>
+	 */
 	public ArrayList<Item> pickUpItems(Restaurant res){
 		int countStarter = 0;
 		int positionStarter = (int) Math.random()*res.getMenu().getStarters().size();

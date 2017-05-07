@@ -176,7 +176,7 @@ public class Order implements Serializable {
 	public String toString() {
 		String mealDisplay = "";
 		for(Meal m : meals.keySet()){
-			mealDisplay += m.getName() + "-" + meals.get(m) + "2";
+			mealDisplay += m.getName() + "-" + meals.get(m);
 		}
 		String itemDisplay = "";
 		for(Item i : items.keySet()){
